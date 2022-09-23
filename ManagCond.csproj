@@ -15,7 +15,7 @@
     <AssemblyName>ManagCond</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress />
+    <Use64BitIISExpress>true</Use64BitIISExpress>
     <IISExpressSSLPort>44338</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -67,12 +67,78 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\estilos.css" />
-    <Content Include="imagenes\fondo1.png" />
+    <Content Include="assets\css\tailwind.css" />
+    <Content Include="assets\css\tailwind.output.css" />
+    <Content Include="assets\img\create-account-office-dark.jpeg" />
+    <Content Include="assets\img\create-account-office.jpeg" />
+    <Content Include="assets\img\dashboard.png" />
+    <Content Include="assets\img\forgot-password-office-dark.jpeg" />
+    <Content Include="assets\img\forgot-password-office.jpeg" />
+    <Content Include="assets\img\github.svg" />
+    <Content Include="assets\img\login-office-dark.jpeg" />
+    <Content Include="assets\img\login-office.jpeg" />
+    <Content Include="assets\img\twitter.svg" />
+    <Content Include="assets\js\charts-bars.js" />
+    <Content Include="assets\js\charts-lines.js" />
+    <Content Include="assets\js\charts-pie.js" />
+    <Content Include="assets\js\focus-trap.js" />
+    <Content Include="assets\js\init-alpine.js" />
+    <Content Include="buttons.aspx" />
+    <Content Include="cards.aspx" />
+    <Content Include="charts.aspx" />
+    <Content Include="dashboard.aspx" />
+    <Content Include="forms.aspx" />
+    <Content Include="foro.aspx" />
     <Content Include="Index.aspx" />
+    <Content Include="listados.aspx" />
+    <Content Include="modals.aspx" />
+    <Content Include="reservas.aspx" />
+    <Content Include="tables.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="buttons.aspx.cs">
+      <DependentUpon>buttons.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="buttons.aspx.designer.cs">
+      <DependentUpon>buttons.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cards.aspx.cs">
+      <DependentUpon>cards.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cards.aspx.designer.cs">
+      <DependentUpon>cards.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="charts.aspx.cs">
+      <DependentUpon>charts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="charts.aspx.designer.cs">
+      <DependentUpon>charts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="dashboard.aspx.cs">
+      <DependentUpon>dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dashboard.aspx.designer.cs">
+      <DependentUpon>dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms.aspx.cs">
+      <DependentUpon>forms.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms.aspx.designer.cs">
+      <DependentUpon>forms.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="foro.aspx.cs">
+      <DependentUpon>foro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="foro.aspx.designer.cs">
+      <DependentUpon>foro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -80,7 +146,35 @@
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="listados.aspx.cs">
+      <DependentUpon>listados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="listados.aspx.designer.cs">
+      <DependentUpon>listados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modals.aspx.cs">
+      <DependentUpon>modals.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modals.aspx.designer.cs">
+      <DependentUpon>modals.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="reservas.aspx.cs">
+      <DependentUpon>reservas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="reservas.aspx.designer.cs">
+      <DependentUpon>reservas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="tables.aspx.cs">
+      <DependentUpon>tables.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="tables.aspx.designer.cs">
+      <DependentUpon>tables.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -91,6 +185,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -107,6 +202,8 @@
           <DevelopmentServerPort>49222</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>https://localhost:44338/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>https://localhost:44338/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
