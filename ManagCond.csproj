@@ -95,6 +95,7 @@
     <Content Include="reservas.aspx" />
     <Content Include="tables.aspx" />
     <Content Include="Web.config" />
+    <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="buttons.aspx.cs">
@@ -174,6 +175,13 @@
     </Compile>
     <Compile Include="tables.aspx.designer.cs">
       <DependentUpon>tables.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
