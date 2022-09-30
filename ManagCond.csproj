@@ -95,7 +95,7 @@
     <Content Include="reservas.aspx" />
     <Content Include="tables.aspx" />
     <Content Include="Web.config" />
-    <Content Include="WebForm1.aspx" />
+    <Content Include="WebFormError.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="buttons.aspx.cs">
@@ -176,12 +176,12 @@
     <Compile Include="tables.aspx.designer.cs">
       <DependentUpon>tables.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="WebFormError.aspx.cs">
+      <DependentUpon>WebFormError.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="WebFormError.aspx.designer.cs">
+      <DependentUpon>WebFormError.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -193,7 +193,16 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{f78837a2-87f6-499b-91f0-8a410268e605}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="Dao\Dao.csproj">
+      <Project>{61ea71b9-27dc-4eed-b07f-0b6e0e611f3e}</Project>
+      <Name>Dao</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
