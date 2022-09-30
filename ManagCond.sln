@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagCond", "ManagCond.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dao", "Dao\Dao.csproj", "{61EA71B9-27DC-4EED-B07F-0B6E0E611F3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "..\Model\Model.csproj", "{F78837A2-87F6-499B-91F0-8A410268E605}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{EAF1C6C2-652F-494E-BBA9-052F042D177A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{61EA71B9-27DC-4EED-B07F-0B6E0E611F3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61EA71B9-27DC-4EED-B07F-0B6E0E611F3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61EA71B9-27DC-4EED-B07F-0B6E0E611F3E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F78837A2-87F6-499B-91F0-8A410268E605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F78837A2-87F6-499B-91F0-8A410268E605}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F78837A2-87F6-499B-91F0-8A410268E605}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F78837A2-87F6-499B-91F0-8A410268E605}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAF1C6C2-652F-494E-BBA9-052F042D177A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAF1C6C2-652F-494E-BBA9-052F042D177A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAF1C6C2-652F-494E-BBA9-052F042D177A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAF1C6C2-652F-494E-BBA9-052F042D177A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

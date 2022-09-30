@@ -194,10 +194,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Model\Model.csproj">
-      <Project>{f78837a2-87f6-499b-91f0-8a410268e605}</Project>
-      <Name>Model</Name>
-    </ProjectReference>
     <ProjectReference Include="Dao\Dao.csproj">
       <Project>{61ea71b9-27dc-4eed-b07f-0b6e0e611f3e}</Project>
       <Name>Dao</Name>
