@@ -10,7 +10,7 @@ namespace Dao
     {
         public string Conectar()
         {
-            return "Server=localhost\\SQLEXPRESS01;Database=managcond;Trusted_Connection=True;";
+            return "Server=localhost\\SQLEXPRESS;Database=managcond;Trusted_Connection=True;";
             
         }
     }
