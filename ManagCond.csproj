@@ -91,6 +91,7 @@
     <Content Include="foro.aspx" />
     <Content Include="Index.aspx" />
     <Content Include="listados.aspx" />
+    <Content Include="login.aspx" />
     <Content Include="modals.aspx" />
     <Content Include="reservas.aspx" />
     <Content Include="tables.aspx" />
@@ -154,6 +155,13 @@
     <Compile Include="listados.aspx.designer.cs">
       <DependentUpon>listados.aspx</DependentUpon>
     </Compile>
+    <Compile Include="login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="modals.aspx.cs">
       <DependentUpon>modals.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -198,6 +206,13 @@
       <Project>{61ea71b9-27dc-4eed-b07f-0b6e0e611f3e}</Project>
       <Name>Dao</Name>
     </ProjectReference>
+    <ProjectReference Include="Model\Model.csproj">
+      <Project>{eaf1c6c2-652f-494e-bba9-052f042d177a}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

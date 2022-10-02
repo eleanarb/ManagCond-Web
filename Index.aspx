@@ -34,7 +34,7 @@
             <br />
             <div class="row">
                 <div class="col-12">
-                    <asp:Button ID="ButtonAceptar" class="form-control" runat="server" OnClick="ButtonAceptar_Click" Text="Aceptar" />
+                    <asp:Button ID="ButtonAceptar" class="form-control " runat="server" OnClick="ButtonAceptar_Click" Text="Aceptar" />
                 </div>
             </div>
         </form>
