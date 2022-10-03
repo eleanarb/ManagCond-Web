@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="dashboard.aspx.cs" Inherits="ManagCond.dashboard" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Guardia.aspx.cs" Inherits="ManagCond.Guardia" %>
 <!DOCTYPE html>
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en"> 
   <head>
@@ -32,7 +32,7 @@
             <div class="py-4 text-gray-500 dark:text-gray-400">
                 <a
                     class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
-                    href="#">ManagCond
+                    href="Guardia.aspx">ManagCond
                 </a>
                 <ul class="mt-6">
                     <li class="relative px-6 py-3">
@@ -74,7 +74,7 @@
                                 viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path
-                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
+                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
                                 </path>
                             </svg>
                             <span class="ml-4">Reservas</span>
@@ -94,7 +94,7 @@
                                 viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path
-                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">       
                                 </path>
                             </svg>
                             <span class="ml-4">Listados</span>
@@ -124,7 +124,7 @@
                     <li class="relative px-6 py-3">
                         <a
                             class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                            href="foro.aspx">
+                            href="Encomiendas.aspx">
                             <svg
                                 class="w-5 h-5"
                                 aria-hidden="true"
@@ -138,7 +138,7 @@
                                     d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
                                 </path>
                             </svg>
-                            <span class="ml-4">Foro</span>
+                            <span class="ml-4">Encomiendas</span>
                         </a>
                     </li>
                 </ul>
@@ -170,7 +170,7 @@
             <div class="py-4 text-gray-500 dark:text-gray-400">
                 <a
                     class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
-                    href="#">Windmill
+                    href="Guardia.aspx">ManagCond
                 </a>
                 <ul class="mt-6">
                     <li class="relative px-6 py-3">
@@ -179,7 +179,7 @@
                             aria-hidden="true"></span>
                         <a
                             class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                            href="index.aspx">
+                            href="Guardia.aspx">
                             <svg
                                 class="w-5 h-5"
                                 aria-hidden="true"
@@ -302,7 +302,7 @@
                     <li class="relative px-6 py-3">
                         <a
                             class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                            href="tables.aspx">
+                            href="Encomienda.aspx">
                             <svg
                                 class="w-5 h-5"
                                 aria-hidden="true"
@@ -314,7 +314,7 @@
                                 stroke="currentColor">
                                 <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                             </svg>
-                            <span class="ml-4">Tables</span>
+                            <span class="ml-4">Encomienda</span>
                         </a>
                     </li>
                     <li class="relative px-6 py-3">
@@ -397,7 +397,7 @@
         </aside>
 
         <div class="flex flex-col flex-1 w-full">
-            <!-- #include file ="Template/HeaderAdministrador.html" -->
+            <!-- #include file ="Template/HeaderGuardia.html" -->
             <main class="h-full overflow-y-auto">
                 <div class="container px-6 mx-auto grid">
                     <h2

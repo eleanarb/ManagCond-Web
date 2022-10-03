@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,10 +12,93 @@ namespace Dao
 {
     public class UsuarioDao
     {
-        private static List<Usuario> alUsuarios = new List<Usuario>();
+        private static readonly List<Usuario> alUsuarios = new List<Usuario>();
+        private static readonly List<Encomienda> alEncomiendas = new List<Encomienda>();
         public static List<Usuario> GetAlUsuarios()
         {
             return alUsuarios;
+        }
+        public static List<Encomienda> GetAlEncomiendas()
+        {
+            ObtenerDatosEncomienda();
+            return alEncomiendas;
+        }
+        public static bool AgregarEncomienda(Encomienda encomienda)
+        {
+            bool estado = false;
+
+            string sCnn;
+
+            if (encomienda != null)
+            {
+                try
+                {
+                    Conexion c = new Conexion();
+                    sCnn = c.Conectar();
+                    string sSel = "insert into encomienda values('" +
+                                           encomienda.NumDpto + "','" +
+                                           encomienda.Destinatario + "','" +
+                                           encomienda.Fecha.ToString("yyyy/MM/dd") + "','" +
+                                           encomienda.Hora + "','" +
+                                           encomienda.Descripcion + "'," +
+                                           encomienda.Estado + ")";
+
+                    SqlDataAdapter da;
+                    DataTable dt = new DataTable();
+                    da = new SqlDataAdapter(sSel, sCnn);
+                    da.Fill(dt);
+
+                    ObtenerDatosEncomienda();
+
+                    Debug.WriteLine("********************   *******************cantidad de lineas" + dt.Rows.Count);
+
+                    estado = true;
+
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+
+            return estado;
+        }
+        public static void ObtenerDatosEncomienda()
+        {
+            alEncomiendas.Clear();
+
+            Conexion con = new Conexion();
+            string sCnn = con.Conectar();
+
+            string sSel = "SELECT * FROM encomienda";
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            try
+            {
+                da = new SqlDataAdapter(sSel, sCnn);
+                da.Fill(dt);
+
+                int totalFilas = dt.Rows.Count;
+                int fila = 0;
+
+                for (; fila < totalFilas; fila++)
+                {
+                    string numDpto = dt.Rows[fila][1].ToString();
+                    string Destinatario = dt.Rows[fila][2].ToString();
+                    DateTime fecha = Convert.ToDateTime(dt.Rows[fila][3]);
+                    string Hora = dt.Rows[fila][4].ToString();
+                    string Descripcion = dt.Rows[fila][5].ToString();
+                    int estado = int.Parse(dt.Rows[fila][6].ToString());
+
+                    Encomienda encomienda = new Encomienda(numDpto, Destinatario, fecha, Hora, Descripcion, estado);
+
+                    alEncomiendas.Add(encomienda);
+                }
+            }
+            catch (Exception)
+            {
+                //Label1.Text = "Error: " + ex.Message;
+            }
         }
 
         public static void ObtenerDatos()
@@ -61,7 +145,7 @@ namespace Dao
                 //Label1.Text = "Error: " + ex.Message;
             }
         }
-
+        
         public static Usuario Login(String correo, String clave)
         {
             Usuario usuario = null;

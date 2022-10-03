@@ -87,14 +87,19 @@
     <Content Include="cards.aspx" />
     <Content Include="charts.aspx" />
     <Content Include="dashboard.aspx" />
+    <Content Include="Encomiendas.aspx" />
     <Content Include="forms.aspx" />
     <Content Include="foro.aspx" />
+    <Content Include="Guardia.aspx" />
     <Content Include="Index.aspx" />
     <Content Include="listados.aspx" />
-    <Content Include="login.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="LogOut.aspx" />
     <Content Include="modals.aspx" />
     <Content Include="reservas.aspx" />
     <Content Include="tables.aspx" />
+    <Content Include="Template\HeaderAdministrador.html" />
+    <Content Include="Template\HeaderGuardia.html" />
     <Content Include="Web.config" />
     <Content Include="WebFormError.aspx" />
   </ItemGroup>
@@ -127,6 +132,13 @@
     <Compile Include="dashboard.aspx.designer.cs">
       <DependentUpon>dashboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Encomiendas.aspx.cs">
+      <DependentUpon>Encomiendas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Encomiendas.aspx.designer.cs">
+      <DependentUpon>Encomiendas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="forms.aspx.cs">
       <DependentUpon>forms.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -140,6 +152,13 @@
     </Compile>
     <Compile Include="foro.aspx.designer.cs">
       <DependentUpon>foro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Guardia.aspx.cs">
+      <DependentUpon>Guardia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Guardia.aspx.designer.cs">
+      <DependentUpon>Guardia.aspx</DependentUpon>
     </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
@@ -155,12 +174,19 @@
     <Compile Include="listados.aspx.designer.cs">
       <DependentUpon>listados.aspx</DependentUpon>
     </Compile>
-    <Compile Include="login.aspx.cs">
-      <DependentUpon>login.aspx</DependentUpon>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="login.aspx.designer.cs">
-      <DependentUpon>login.aspx</DependentUpon>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LogOut.aspx.cs">
+      <DependentUpon>LogOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LogOut.aspx.designer.cs">
+      <DependentUpon>LogOut.aspx</DependentUpon>
     </Compile>
     <Compile Include="modals.aspx.cs">
       <DependentUpon>modals.aspx</DependentUpon>

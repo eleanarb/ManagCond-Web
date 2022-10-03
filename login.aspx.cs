@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dao;
@@ -22,7 +23,6 @@ namespace ManagCond
             String clave = TextBoxClave.Text;
 
             Usuario usuario = UsuarioDao.Login(correo, clave);
-            Page.Response.Write("<script>console.log('" + correo + clave + "');</script>");
 
             if (usuario != null)
             {
@@ -30,14 +30,14 @@ namespace ManagCond
                 {
                     case 1:
                         {
-                            //Session["usuario"] = usuario;
+                            Session["usuario"] = usuario;
                             Response.Redirect("dashboard.aspx");
                             break;
                         }
                     case 2:
                         {
-                            //Session["usuario"] = usuario;
-                            Response.Redirect("foro.aspx");
+                            Session["usuario"] = usuario;
+                            Response.Redirect("Guardia.aspx");
                             break;
                         }
                 }
