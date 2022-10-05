@@ -86,20 +86,23 @@
     <Content Include="buttons.aspx" />
     <Content Include="cards.aspx" />
     <Content Include="charts.aspx" />
-    <Content Include="dashboard.aspx" />
-    <Content Include="Encomiendas.aspx" />
+    <Content Include="Administrador\dashboard.aspx" />
+    <Content Include="Guardia\AgregarEncomienda.aspx" />
+    <Content Include="Guardia\Encomiendas.aspx" />
     <Content Include="forms.aspx" />
-    <Content Include="foro.aspx" />
-    <Content Include="Guardia.aspx" />
+    <Content Include="Administrador\foro.aspx" />
+    <Content Include="Guardia\Index.aspx" />
+    <Content Include="Guardia\Template\HeaderGuardia.html" />
     <Content Include="Index.aspx" />
-    <Content Include="listados.aspx" />
+    <Content Include="Administrador\listados.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="LogOut.aspx" />
     <Content Include="modals.aspx" />
-    <Content Include="reservas.aspx" />
+    <Content Include="Administrador\reservas.aspx" />
+    <Content Include="Residente\Index.aspx" />
+    <Content Include="Residente\Template\HeaderResidente.html" />
     <Content Include="tables.aspx" />
-    <Content Include="Template\HeaderAdministrador.html" />
-    <Content Include="Template\HeaderGuardia.html" />
+    <Content Include="Administrador\Template\HeaderAdministrador.html" />
     <Content Include="Web.config" />
     <Content Include="WebFormError.aspx" />
   </ItemGroup>
@@ -125,18 +128,25 @@
     <Compile Include="charts.aspx.designer.cs">
       <DependentUpon>charts.aspx</DependentUpon>
     </Compile>
-    <Compile Include="dashboard.aspx.cs">
+    <Compile Include="Administrador\dashboard.aspx.cs">
       <DependentUpon>dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="dashboard.aspx.designer.cs">
+    <Compile Include="Administrador\dashboard.aspx.designer.cs">
       <DependentUpon>dashboard.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Encomiendas.aspx.cs">
+    <Compile Include="Guardia\AgregarEncomienda.aspx.cs">
+      <DependentUpon>AgregarEncomienda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Guardia\AgregarEncomienda.aspx.designer.cs">
+      <DependentUpon>AgregarEncomienda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Guardia\Encomiendas.aspx.cs">
       <DependentUpon>Encomiendas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Encomiendas.aspx.designer.cs">
+    <Compile Include="Guardia\Encomiendas.aspx.designer.cs">
       <DependentUpon>Encomiendas.aspx</DependentUpon>
     </Compile>
     <Compile Include="forms.aspx.cs">
@@ -146,19 +156,19 @@
     <Compile Include="forms.aspx.designer.cs">
       <DependentUpon>forms.aspx</DependentUpon>
     </Compile>
-    <Compile Include="foro.aspx.cs">
+    <Compile Include="Administrador\foro.aspx.cs">
       <DependentUpon>foro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="foro.aspx.designer.cs">
+    <Compile Include="Administrador\foro.aspx.designer.cs">
       <DependentUpon>foro.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Guardia.aspx.cs">
-      <DependentUpon>Guardia.aspx</DependentUpon>
+    <Compile Include="Guardia\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Guardia.aspx.designer.cs">
-      <DependentUpon>Guardia.aspx</DependentUpon>
+    <Compile Include="Guardia\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
@@ -167,11 +177,11 @@
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="listados.aspx.cs">
+    <Compile Include="Administrador\listados.aspx.cs">
       <DependentUpon>listados.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="listados.aspx.designer.cs">
+    <Compile Include="Administrador\listados.aspx.designer.cs">
       <DependentUpon>listados.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
@@ -196,12 +206,19 @@
       <DependentUpon>modals.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="reservas.aspx.cs">
+    <Compile Include="Administrador\reservas.aspx.cs">
       <DependentUpon>reservas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="reservas.aspx.designer.cs">
+    <Compile Include="Administrador\reservas.aspx.designer.cs">
       <DependentUpon>reservas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Residente\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Residente\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
     <Compile Include="tables.aspx.cs">
       <DependentUpon>tables.aspx</DependentUpon>
@@ -240,6 +257,7 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

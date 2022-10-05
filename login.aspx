@@ -1,5 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="ManagCond.login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="ManagCond.Login" %>
+
 <!DOCTYPE html>
+
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
 <head>
     <meta charset="UTF-8" />

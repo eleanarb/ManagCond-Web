@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Dao;
 using Model;
+using Dao;
 
 namespace ManagCond
 {
-    public partial class login : System.Web.UI.Page
+    public partial class Login : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,13 +30,19 @@ namespace ManagCond
                     case 1:
                         {
                             Session["usuario"] = usuario;
-                            Response.Redirect("dashboard.aspx");
+                            Response.Redirect("Administrador/dashboard.aspx");
                             break;
                         }
                     case 2:
                         {
                             Session["usuario"] = usuario;
-                            Response.Redirect("Guardia.aspx");
+                            Response.Redirect("Guardia/Index.aspx");
+                            break;
+                        }
+                    case 3:
+                        {
+                            Session["usuario"] = usuario;
+                            Response.Redirect("Residente/Index.aspx");
                             break;
                         }
                 }
@@ -46,6 +51,7 @@ namespace ManagCond
             {
                 Response.Redirect("WebFormError.aspx");
             }
+
         }
     }
 }

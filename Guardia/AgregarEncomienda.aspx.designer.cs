@@ -7,21 +7,21 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace ManagCond
+namespace ManagCond.Guardia
 {
 
 
-    public partial class Encomiendas
+    public partial class AgregarEncomienda
     {
 
         /// <summary>
-        /// Control AgregarEncomienda.
+        /// Control RepeaterImage.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm AgregarEncomienda;
+        protected global::System.Web.UI.WebControls.Repeater RepeaterImage;
 
         /// <summary>
         /// Control DropDownList.

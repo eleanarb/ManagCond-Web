@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace ManagCond
+namespace ManagCond.Residente
 {
 
 
-    public partial class Guardia
+    public partial class Index
     {
     }
 }
