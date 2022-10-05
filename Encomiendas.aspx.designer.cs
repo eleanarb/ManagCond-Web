@@ -15,13 +15,13 @@ namespace ManagCond
     {
 
         /// <summary>
-        /// Control login.
+        /// Control AgregarEncomienda.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm login;
+        protected global::System.Web.UI.HtmlControls.HtmlForm AgregarEncomienda;
 
         /// <summary>
         /// Control DropDownList.
@@ -78,21 +78,30 @@ namespace ManagCond
         protected global::System.Web.UI.WebControls.TextBox TextBoxEstado;
 
         /// <summary>
-        /// Control Prueba.
+        /// Control ImagenEncomienda.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Prueba;
+        protected global::System.Web.UI.WebControls.Image ImagenEncomienda;
 
         /// <summary>
-        /// Control Button2.
+        /// Control FileUploadEncomienda.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.FileUpload FileUploadEncomienda;
+
+        /// <summary>
+        /// Control ButtonAgregar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonAgregar;
     }
 }

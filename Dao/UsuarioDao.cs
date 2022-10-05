@@ -38,9 +38,10 @@ namespace Dao
                     string sSel = "insert into encomienda values('" +
                                            encomienda.NumDpto + "','" +
                                            encomienda.Destinatario + "','" +
-                                           encomienda.Fecha.ToString("yyyy/MM/dd") + "','" +
+                                           encomienda.Fecha + "','" +
                                            encomienda.Hora + "','" +
-                                           encomienda.Descripcion + "'," +
+                                           encomienda.Descripcion + "','" +
+                                           encomienda.Imagen + "'," +
                                            encomienda.Estado + ")";
 
                     SqlDataAdapter da;
@@ -86,11 +87,12 @@ namespace Dao
                     string numDpto = dt.Rows[fila][1].ToString();
                     string Destinatario = dt.Rows[fila][2].ToString();
                     DateTime fecha = Convert.ToDateTime(dt.Rows[fila][3]);
-                    string Hora = dt.Rows[fila][4].ToString();
+                    TimeSpan Hora = TimeSpan.Parse(dt.Rows[fila][4].ToString());
                     string Descripcion = dt.Rows[fila][5].ToString();
-                    int estado = int.Parse(dt.Rows[fila][6].ToString());
+                    string imagen = dt.Rows[fila][6].ToString();
+                    int estado = int.Parse(dt.Rows[fila][7].ToString());
 
-                    Encomienda encomienda = new Encomienda(numDpto, Destinatario, fecha, Hora, Descripcion, estado);
+                    Encomienda encomienda = new Encomienda(numDpto, Destinatario, fecha, Hora, Descripcion, imagen,estado);
 
                     alEncomiendas.Add(encomienda);
                 }
