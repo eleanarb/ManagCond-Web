@@ -1,7 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Encomiendas.aspx.cs" Inherits="ManagCond.Encomiendas" %>
 <%@ Import Namespace="Model" %>
 <%@ Import Namespace="Dao" %>
+
 <!DOCTYPE html>
+
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en"> 
   <head>
       <meta charset="UTF-8" />

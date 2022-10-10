@@ -92,6 +92,7 @@
     <Content Include="forms.aspx" />
     <Content Include="Administrador\foro.aspx" />
     <Content Include="Guardia\Index.aspx" />
+    <Content Include="Guardia\Listado.aspx" />
     <Content Include="Guardia\Template\HeaderGuardia.html" />
     <Content Include="Index.aspx" />
     <Content Include="Administrador\listados.aspx" />
@@ -169,6 +170,13 @@
     </Compile>
     <Compile Include="Guardia\Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Guardia\Listado.aspx.cs">
+      <DependentUpon>Listado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Guardia\Listado.aspx.designer.cs">
+      <DependentUpon>Listado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>

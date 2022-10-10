@@ -19,7 +19,7 @@ namespace ManagCond.Guardia
             if (!IsPostBack)
             {
                 LlenarDropDownList();
-                //consultarImagenes();
+                ConsultarImagenes();
                 TextBoxFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
                 TextBoxHora.Text = DateTime.Now.ToString("HH:mm");
             }
@@ -100,15 +100,17 @@ namespace ManagCond.Guardia
             g.DrawImage(imagenOriginal, 0, 0, nuevoAncho, nuevoAlto);
             return nuevaImagenRedimencionada;
         }
-        protected void consultarImagenes()
+        protected void ConsultarImagenes()
         {
             String cadenaConexion = "Server=localhost\\SQLEXPRESS;Database=managcond;Trusted_Connection=True;";
 
             SqlConnection conexionSQL = new SqlConnection(cadenaConexion);
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "SELECT numDpto,imagen FROM encomienda ORDER BY id ASC";
-            cmd.CommandType = CommandType.Text;
-            cmd.Connection = conexionSQL;
+            SqlCommand cmd = new SqlCommand
+            {
+                CommandText = "SELECT numDpto,imagen FROM encomienda ORDER BY id ASC",
+                CommandType = CommandType.Text,
+                Connection = conexionSQL
+            };
             conexionSQL.Open();
 
             DataTable imagenesBD = new DataTable();

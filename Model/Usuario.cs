@@ -12,7 +12,7 @@ namespace Model
         private int idCond;
         private string nombres;
         private string apellidos;
-        private string fechaNac;
+        private DateTime fechaNac;
         private string numDpto;
         private string correo;
         private string clave;
@@ -22,7 +22,7 @@ namespace Model
         private int tipoUsuario; //1 Administrador, 2 Guardia, 3 Residente.
         private int activo; //1 activo, 0 inactivo.
 
-        public Usuario(string rut, int idCond, string nombres, string apellidos, string fechaNac, string numDpto, string correo, string clave, string telefono, int cargo, int propietario, int tipoUsuario, int activo)
+        public Usuario(string rut, int idCond, string nombres, string apellidos, DateTime fechaNac, string numDpto, string correo, string clave, string telefono, int cargo, int propietario, int tipoUsuario, int activo)
         {
             this.rut = rut;
             this.idCond = idCond;
@@ -43,7 +43,7 @@ namespace Model
         public int IdCond { get => idCond; set => idCond = value; }
         public string Nombres { get => nombres; set => nombres = value; }
         public string Apellidos { get => apellidos; set => apellidos = value; }
-        public string FechaNac { get => fechaNac; set => fechaNac = value; }
+        public DateTime FechaNac { get => fechaNac; set => fechaNac = value; }
         public string NumDpto { get => numDpto; set => numDpto = value; }
         public string Correo { get => correo; set => correo = value; }
         public string Clave { get => clave; set => clave = value; }
