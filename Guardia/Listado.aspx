@@ -371,39 +371,25 @@
                                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                                         <th class="px-4 py-3">Rut</th>
                                         <th class="px-4 py-3">Departamento</th>
-                                        <th class="px-4 py-3">Propietario</th>
+                                        <th class="px-4 py-3">Nombre</th>
                                         <th class="px-4 py-3">Fecha nacimiento</th>
                                         <th class="px-4 py-3">Número de Contacto</th>
                                         <th class="px-4 py-3">Correo</th>
-                                        <th class="px-4 py-3">Estacionamiento</th>
-                                        <th class="px-4 py-3">Estacionamiento</th>
-                                        <th class="px-4 py-3">Estacionamiento</th>
-                                        <th class="px-4 py-3">Estacionamiento</th>
-                                        <th class="px-4 py-3">Estacionamiento</th>
-                                        <th class="px-4 py-3">Estacionamiento</th>
-                                        <th class="px-4 py-3">Estacionamiento</th>
                                     </tr>
                                 </thead>
                                 <tbody
                                     class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                                     <%
-                                        foreach (Usuario obj in UsuarioDao.GetAlUsuarios())
+                                        foreach (Usuario obj in UsuarioDao.GetAlResidente())
                                         {
                                     %>
                                     <tr class="text-gray-700 dark:text-gray-400">
                                         <td class="px-4 py-3"><%= obj.Rut %> </td>
-                                        <td class="px-4 py-3"><%= obj.IdCond %> </td>
-                                        <td class="px-4 py-3"><%= obj.Nombres %> </td>
-                                        <td class="px-4 py-3"><%= obj.Apellidos %> </td>
-                                        <td class="px-4 py-3"><%= obj.FechaNac.ToString("dd/MM/yyyy") %> </td>
                                         <td class="px-4 py-3"><%= obj.NumDpto %> </td>
-                                        <td class="px-4 py-3"><%= obj.Correo %> </td>
-                                        <td class="px-4 py-3"><%= obj.Clave %> </td>
+                                        <td class="px-4 py-3"><%= obj.Nombres %> <%= obj.Apellidos %></td>
+                                        <td class="px-4 py-3"><%= obj.FechaNac.ToString("dd/MM/yyyy") %> </td>
                                         <td class="px-4 py-3"><%= obj.Telefono %> </td>
-                                        <td class="px-4 py-3"><%= obj.Cargo %> </td>
-                                        <td class="px-4 py-3"><%= obj.Propietario %> </td>
-                                        <td class="px-4 py-3"><%= obj.TipoUsuario %> </td>
-                                        <td class="px-4 py-3"><%= obj.Activo %> </td>
+                                        <td class="px-4 py-3"><%= obj.Correo %> </td>
                                     </tr>
                                     <%
                                         }

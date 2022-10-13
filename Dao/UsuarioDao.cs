@@ -17,6 +17,7 @@ namespace Dao
         private static readonly List<Usuario> alResidente = new List<Usuario>();
         public static List<Usuario> GetAlUsuarios()
         {
+            ObtenerDatos();
             return alUsuarios;
         }
         public static List<Encomienda> GetAlEncomiendas()
@@ -26,6 +27,7 @@ namespace Dao
         }
         public static List<Usuario> GetAlResidente()
         {
+            ObtenerDatosResidente();
             return alResidente;
         }
         public static void ObtenerDatosResidente()
