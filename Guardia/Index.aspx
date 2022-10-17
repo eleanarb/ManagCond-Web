@@ -352,7 +352,6 @@
                 </ul>
             </div>
         </aside>
-
         <div class="flex flex-col flex-1 w-full">
             <!-- #include file ="Template/HeaderGuardia.html" -->
             <main class="h-full overflow-y-auto">

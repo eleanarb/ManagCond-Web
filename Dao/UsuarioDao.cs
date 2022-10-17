@@ -26,6 +26,7 @@ namespace Dao
         }
         public static List<Usuario> GetAlResidente()
         {
+            ObtenerDatosResidente();
             return alResidente;
         }
         public static void ObtenerDatosResidente()

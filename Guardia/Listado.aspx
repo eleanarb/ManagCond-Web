@@ -375,6 +375,10 @@
                                         <th class="px-4 py-3">Fecha nacimiento</th>
                                         <th class="px-4 py-3">Número de Contacto</th>
                                         <th class="px-4 py-3">Correo</th>
+                                        <th class="px-4 py-3">Rut Propietario</th>
+                                        <th class="px-4 py-3">Nombre Propietario</th>
+                                        <th class="px-4 py-3">Correo Propietario</th>
+                                        <th class="px-4 py-3">Telefono Propietario</th>
                                     </tr>
                                 </thead>
                                 <tbody
@@ -390,6 +394,10 @@
                                         <td class="px-4 py-3"><%= obj.FechaNac.ToString("dd/MM/yyyy") %> </td>
                                         <td class="px-4 py-3"><%= obj.Telefono %> </td>
                                         <td class="px-4 py-3"><%= obj.Correo %> </td>
+                                        <td class="px-4 py-3"><%= obj.RutPropietario %> </td>
+                                        <td class="px-4 py-3"><%= obj.NombrePropietario %> </td>
+                                        <td class="px-4 py-3"><%= obj.CorreoPropietario %> </td>
+                                        <td class="px-4 py-3"><%= obj.TelefonoPropietario %> </td>
                                     </tr>
                                     <%
                                         }

@@ -19,9 +19,7 @@ namespace ManagCond.Guardia
             if (!IsPostBack)
             {
                 LlenarDropDownList();
-                ConsultarImagenes();
-                TextBoxFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
-                TextBoxHora.Text = DateTime.Now.ToString("HH:mm");
+                //ConsultarImagenes();
             }
             if (Session["usuario"] == null)
             {
@@ -53,9 +51,8 @@ namespace ManagCond.Guardia
 
             if (UsuarioDao.AgregarEncomienda(numDpto, destinatario, descripcion, bImagenThumbnail.ToString()))
             {
-                //LabelMensaje.Text = "Bien usuario agregado";
                 Limpiar();
-
+                Response.Redirect("Encomiendas.aspx");
             }
             else
             {
@@ -68,10 +65,7 @@ namespace ManagCond.Guardia
         {
             DropDownList.SelectedIndex = 0;
             TextBoxDestinatario.Text = "";
-            TextBoxFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
-            TextBoxHora.Text = DateTime.Now.ToString("HH:mm");
             TextBoxDescripcion.Text = "";
-            TextBoxEstado.Text = "";
         }
         public void LlenarDropDownList()
         {
@@ -97,26 +91,26 @@ namespace ManagCond.Guardia
             g.DrawImage(imagenOriginal, 0, 0, nuevoAncho, nuevoAlto);
             return nuevaImagenRedimencionada;
         }
-        protected void ConsultarImagenes()
-        {
-            String cadenaConexion = "Server=localhost\\SQLEXPRESS01;Database=managcond;Trusted_Connection=True;";
+        //protected void ConsultarImagenes()
+        //{
+        //    String cadenaConexion = "Server=localhost\\SQLEXPRESS;Database=managcond;Trusted_Connection=True;";
 
-            SqlConnection conexionSQL = new SqlConnection(cadenaConexion);
-            SqlCommand cmd = new SqlCommand
-            {
-                CommandText = "SELECT numDpto,imagen FROM encomienda ORDER BY id ASC",
-                CommandType = CommandType.Text,
-                Connection = conexionSQL
-            };
-            conexionSQL.Open();
+        //    SqlConnection conexionSQL = new SqlConnection(cadenaConexion);
+        //    SqlCommand cmd = new SqlCommand
+        //    {
+        //        CommandText = "SELECT numDpto,imagen FROM encomienda ORDER BY id ASC",
+        //        CommandType = CommandType.Text,
+        //        Connection = conexionSQL
+        //    };
+        //    conexionSQL.Open();
 
-            DataTable imagenesBD = new DataTable();
-            imagenesBD.Load(cmd.ExecuteReader());
+        //    DataTable imagenesBD = new DataTable();
+        //    imagenesBD.Load(cmd.ExecuteReader());
 
-            RepeaterImage.DataSource = imagenesBD;
-            RepeaterImage.DataBind();
-            conexionSQL.Close();
+        //    RepeaterImage.DataSource = imagenesBD;
+        //    RepeaterImage.DataBind();
+        //    conexionSQL.Close();
 
-        }
+        //}
     }
 }

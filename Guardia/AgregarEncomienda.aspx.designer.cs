@@ -15,15 +15,6 @@ namespace ManagCond.Guardia
     {
 
         /// <summary>
-        /// Control RepeaterImage.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater RepeaterImage;
-
-        /// <summary>
         /// Control DropDownList.
         /// </summary>
         /// <remarks>
@@ -42,24 +33,6 @@ namespace ManagCond.Guardia
         protected global::System.Web.UI.WebControls.TextBox TextBoxDestinatario;
 
         /// <summary>
-        /// Control TextBoxFecha.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxFecha;
-
-        /// <summary>
-        /// Control TextBoxHora.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxHora;
-
-        /// <summary>
         /// Control TextBoxDescripcion.
         /// </summary>
         /// <remarks>
@@ -67,15 +40,6 @@ namespace ManagCond.Guardia
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxDescripcion;
-
-        /// <summary>
-        /// Control TextBoxEstado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxEstado;
 
         /// <summary>
         /// Control ImagenEncomienda.
