@@ -47,18 +47,15 @@ namespace ManagCond.Guardia
 
             String numDpto = DropDownList.Text;
             String destinatario = TextBoxDestinatario.Text;
-            String fecha = DateTime.Now.ToString("dd/MM/yyyy");
-            String hora = DateTime.Now.ToString("HH:mm");
             String descripcion = TextBoxDescripcion.Text;
-            String estado = TextBoxEstado.Text;
 
-            Encomienda encomienda = new Encomienda(numDpto, destinatario, Convert.ToDateTime(fecha), TimeSpan.Parse(hora), descripcion, bImagenThumbnail.ToString(), int.Parse(estado));
 
-            if (UsuarioDao.AgregarEncomienda(encomienda))
+
+            if (UsuarioDao.AgregarEncomienda(numDpto, destinatario, descripcion, bImagenThumbnail.ToString()))
             {
                 //LabelMensaje.Text = "Bien usuario agregado";
                 Limpiar();
-               
+
             }
             else
             {
@@ -102,7 +99,7 @@ namespace ManagCond.Guardia
         }
         protected void ConsultarImagenes()
         {
-            String cadenaConexion = "Server=localhost\\SQLEXPRESS;Database=managcond;Trusted_Connection=True;";
+            String cadenaConexion = "Server=localhost\\SQLEXPRESS01;Database=managcond;Trusted_Connection=True;";
 
             SqlConnection conexionSQL = new SqlConnection(cadenaConexion);
             SqlCommand cmd = new SqlCommand

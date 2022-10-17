@@ -17,7 +17,6 @@ namespace Dao
         private static readonly List<Usuario> alResidente = new List<Usuario>();
         public static List<Usuario> GetAlUsuarios()
         {
-            ObtenerDatos();
             return alUsuarios;
         }
         public static List<Encomienda> GetAlEncomiendas()
@@ -27,7 +26,6 @@ namespace Dao
         }
         public static List<Usuario> GetAlResidente()
         {
-            ObtenerDatosResidente();
             return alResidente;
         }
         public static void ObtenerDatosResidente()
@@ -60,11 +58,14 @@ namespace Dao
                     String clave = dt.Rows[fila][7].ToString();
                     String telefono = dt.Rows[fila][8].ToString();
                     int cargo = int.Parse(dt.Rows[fila][9].ToString());
-                    int propietario = int.Parse(dt.Rows[fila][10].ToString());
-                    int tipoUsuario = int.Parse(dt.Rows[fila][11].ToString());
-                    int activo = int.Parse(dt.Rows[fila][12].ToString());
+                    String rutPropietario = dt.Rows[fila][10].ToString();
+                    String nombrePropietario = dt.Rows[fila][11].ToString();
+                    String correoPropietario = dt.Rows[fila][12].ToString();
+                    String telefonoPropietario = dt.Rows[fila][13].ToString();
+                    int tipoUsuario = int.Parse(dt.Rows[fila][14].ToString());
+                    int activo = int.Parse(dt.Rows[fila][15].ToString());
 
-                    Usuario usuario = new Usuario(rut, idCond, nombres, apellidos, fechaNac, numDpto, correo, clave, telefono, cargo, propietario, tipoUsuario, activo);
+                    Usuario usuario = new Usuario(rut, idCond, nombres, apellidos, fechaNac, numDpto, correo, clave, telefono, cargo, rutPropietario, nombrePropietario, correoPropietario, telefonoPropietario, tipoUsuario, activo);
 
                     alResidente.Add(usuario);
                 }
@@ -74,26 +75,19 @@ namespace Dao
                 //Label1.Text = "Error: " + ex.Message;
             }
         }
-        public static bool AgregarEncomienda(Encomienda encomienda)
+        public static bool AgregarEncomienda(string numDpto, string destinatario, string descripcion, string imagen)
         {
             bool estado = false;
 
             string sCnn;
 
-            if (encomienda != null)
+            if (numDpto != null && destinatario != null)
             {
                 try
                 {
                     Conexion c = new Conexion();
                     sCnn = c.Conectar();
-                    string sSel = "insert into encomienda values('" +
-                                           encomienda.NumDpto + "','" +
-                                           encomienda.Destinatario + "','" +
-                                           encomienda.Fecha + "','" +
-                                           encomienda.Hora + "','" +
-                                           encomienda.Descripcion + "','" +
-                                           encomienda.Imagen + "'," +
-                                           encomienda.Estado + ")";
+                    string sSel = "EXEC sp_agregar_encomienda @numDpto = '" + numDpto + "', @destinatario = '" + destinatario + "', @descripcion = '" + descripcion + "', @imagen= '" + imagen + "'";
 
                     SqlDataAdapter da;
                     DataTable dt = new DataTable();
@@ -101,8 +95,6 @@ namespace Dao
                     da.Fill(dt);
 
                     ObtenerDatosEncomienda();
-
-                    Debug.WriteLine("********************   *******************cantidad de lineas" + dt.Rows.Count);
 
                     estado = true;
 
@@ -135,6 +127,7 @@ namespace Dao
 
                 for (; fila < totalFilas; fila++)
                 {
+                    int id = int.Parse(dt.Rows[fila][0].ToString());
                     string numDpto = dt.Rows[fila][1].ToString();
                     string Destinatario = dt.Rows[fila][2].ToString();
                     DateTime fecha = Convert.ToDateTime(dt.Rows[fila][3]);
@@ -143,7 +136,7 @@ namespace Dao
                     string imagen = dt.Rows[fila][6].ToString();
                     int estado = int.Parse(dt.Rows[fila][7].ToString());
 
-                    Encomienda encomienda = new Encomienda(numDpto, Destinatario, fecha, Hora, Descripcion, imagen,estado);
+                    Encomienda encomienda = new Encomienda(id, numDpto, Destinatario, fecha, Hora, Descripcion, imagen, estado);
 
                     alEncomiendas.Add(encomienda);
                 }
@@ -184,11 +177,14 @@ namespace Dao
                     String clave = dt.Rows[fila][7].ToString();
                     String telefono = dt.Rows[fila][8].ToString();
                     int cargo = int.Parse(dt.Rows[fila][9].ToString());
-                    int propietario = int.Parse(dt.Rows[fila][10].ToString());
-                    int tipoUsuario = int.Parse(dt.Rows[fila][11].ToString());
-                    int activo = int.Parse(dt.Rows[fila][12].ToString());
+                    String rutPropietario = dt.Rows[fila][10].ToString();
+                    String nombrePropietario = dt.Rows[fila][11].ToString();
+                    String correoPropietario = dt.Rows[fila][12].ToString();
+                    String telefonoPropietario = dt.Rows[fila][13].ToString();
+                    int tipoUsuario = int.Parse(dt.Rows[fila][14].ToString());
+                    int activo = int.Parse(dt.Rows[fila][15].ToString());
 
-                    Usuario usuario = new Usuario(rut, idCond, nombres, apellidos, fechaNac, numDpto, correo, clave, telefono, cargo, propietario, tipoUsuario, activo);
+                    Usuario usuario = new Usuario(rut, idCond, nombres, apellidos, fechaNac, numDpto, correo, clave, telefono, cargo, rutPropietario, nombrePropietario, correoPropietario, telefonoPropietario, tipoUsuario, activo);
 
                     alUsuarios.Add(usuario);
                 }
@@ -198,7 +194,7 @@ namespace Dao
                 //Label1.Text = "Error: " + ex.Message;
             }
         }
-        
+
         public static Usuario Login(String correo, String clave)
         {
             Usuario usuario = null;
@@ -223,12 +219,15 @@ namespace Dao
                 string numDpto = dt.Rows[0][5].ToString();
                 string telefono = dt.Rows[0][8].ToString();
                 int cargo = Convert.ToInt32(dt.Rows[0][9]);
-                int propietario = Convert.ToInt32(dt.Rows[0][10]);
-                int tipoUsuario = Convert.ToInt32(dt.Rows[0][11]);
-                int activo = Convert.ToInt32(dt.Rows[0][12]);
+                string rutPropietario = dt.Rows[0][10].ToString();
+                string nombrePropietario = dt.Rows[0][11].ToString();
+                string correoPropietario = dt.Rows[0][12].ToString();
+                string telefonoPropietario = dt.Rows[0][13].ToString();
+                int tipoUsuario = Convert.ToInt32(dt.Rows[0][14]);
+                int activo = Convert.ToInt32(dt.Rows[0][15]);
 
 
-                usuario = new Usuario(rut, idCond, nombres, apellidos, fechaNac, numDpto, correo, clave, telefono, cargo, propietario, tipoUsuario, activo);
+                usuario = new Usuario(rut, idCond, nombres, apellidos, fechaNac, numDpto, correo, clave, telefono, cargo, rutPropietario, nombrePropietario, correoPropietario, telefonoPropietario, tipoUsuario, activo);
             }
             catch (Exception)
             {
@@ -236,6 +235,5 @@ namespace Dao
             }
             return usuario;
         }
-
     }
 }

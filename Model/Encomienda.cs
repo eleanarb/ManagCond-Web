@@ -8,6 +8,7 @@ namespace Model
 {
     public class Encomienda
     {
+        private int id;
         private string numDpto;
         private string destinatario;
         private DateTime fecha;
@@ -16,17 +17,19 @@ namespace Model
         private string imagen;
         private int estado;
 
-        public Encomienda(string numDpto, string destinatario, DateTime fecha, TimeSpan hora, string descripcion, string imagen,int estado)
+        public Encomienda(int id, string numDpto, string destinatario, DateTime fecha, TimeSpan hora, string descripcion, string imagen, int estado)
         {
-            this.numDpto = numDpto;
-            this.destinatario = destinatario;
-            this.fecha = fecha;
-            this.hora = hora;
-            this.descripcion = descripcion;
-            this.imagen = imagen;
-            this.estado = estado;
+            this.Id = id;
+            this.NumDpto = numDpto;
+            this.Destinatario = destinatario;
+            this.Fecha = fecha;
+            this.Hora = hora;
+            this.Descripcion = descripcion;
+            this.Imagen = imagen;
+            this.Estado = estado;
         }
 
+        public int Id { get => id; set => id = value; }
         public string NumDpto { get => numDpto; set => numDpto = value; }
         public string Destinatario { get => destinatario; set => destinatario = value; }
         public DateTime Fecha { get => fecha; set => fecha = value; }
@@ -34,11 +37,5 @@ namespace Model
         public string Descripcion { get => descripcion; set => descripcion = value; }
         public string Imagen { get => imagen; set => imagen = value; }
         public int Estado { get => estado; set => estado = value; }
-
-        override
-        public string ToString()
-        {
-            return numDpto + "," + destinatario + "," + fecha + "," + hora + "," + descripcion + "," + imagen+ "," + estado;
-        }
     }
 }
