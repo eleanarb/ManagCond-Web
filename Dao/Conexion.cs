@@ -11,12 +11,11 @@ namespace Dao
     {
         public string Conectar()
         {
-            return "Server=localhost\\SQLEXPRESS01;Database=managcond;Trusted_Connection=True;";
-            
+            return "Server=tcp:managcondserver.database.windows.net,1433;Initial Catalog=managcond;Persist Security Info=False;User ID=Administrador;Password=Tallo2820@#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";   
         }
         public static SqlConnection Open()
         {
-            SqlConnection Conn = new SqlConnection("Server=localhost\\SQLEXPRESS01;Database=managcond;Trusted_Connection=True;");
+            SqlConnection Conn = new SqlConnection("Server=tcp:managcondserver.database.windows.net,1433;Initial Catalog=managcond;Persist Security Info=False;User ID=Administrador;Password=Tallo2820@#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             Conn.Open();
             return Conn;
         }

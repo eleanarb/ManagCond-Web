@@ -24,6 +24,11 @@ namespace Dao
             ObtenerDatosEncomienda();
             return alEncomiendas;
         }
+        public static List<Encomienda> GetAlEncomiendasASC()
+        {
+            ObtenerDatosEncomiendaASC();
+            return alEncomiendas;
+        }
         public static List<Usuario> GetAlResidente()
         {
             ObtenerDatosResidente();
@@ -116,6 +121,45 @@ namespace Dao
             string sCnn = con.Conectar();
 
             string sSel = "SELECT * FROM encomienda";
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            try
+            {
+                da = new SqlDataAdapter(sSel, sCnn);
+                da.Fill(dt);
+
+                int totalFilas = dt.Rows.Count;
+                int fila = 0;
+
+                for (; fila < totalFilas; fila++)
+                {
+                    int id = int.Parse(dt.Rows[fila][0].ToString());
+                    string numDpto = dt.Rows[fila][1].ToString();
+                    string Destinatario = dt.Rows[fila][2].ToString();
+                    DateTime fecha = Convert.ToDateTime(dt.Rows[fila][3]);
+                    TimeSpan Hora = TimeSpan.Parse(dt.Rows[fila][4].ToString());
+                    string Descripcion = dt.Rows[fila][5].ToString();
+                    string imagen = dt.Rows[fila][6].ToString();
+                    int estado = int.Parse(dt.Rows[fila][7].ToString());
+
+                    Encomienda encomienda = new Encomienda(id, numDpto, Destinatario, fecha, Hora, Descripcion, imagen, estado);
+
+                    alEncomiendas.Add(encomienda);
+                }
+            }
+            catch (Exception)
+            {
+                //Label1.Text = "Error: " + ex.Message;
+            }
+        }
+        public static void ObtenerDatosEncomiendaASC()
+        {
+            alEncomiendas.Clear();
+
+            Conexion con = new Conexion();
+            string sCnn = con.Conectar();
+
+            string sSel = "SELECT TOP 10 * FROM encomienda ORDER BY fecha ASC";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try

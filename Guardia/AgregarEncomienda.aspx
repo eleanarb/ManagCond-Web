@@ -356,17 +356,6 @@
     <!-- #include file ="Template/HeaderGuardia.html" -->
     <main class="h-full pb-16 overflow-y-auto">
         <div class="container grid px-6 mx-auto">
-<%--            <div class="container grid px-6 mx-auto">
-                        <br />
-                        <asp:Repeater ID="RepeaterImage" runat="server"></asp:Repeater>
-                        <ItemTemplate>
-                            <div>
-                            <img class="object-cover" src="data:image/jpg;base64,<%# Convert.ToBase64String((byte[])DataBinder.Eval(Container.RouteData, "imagen")) %>"/>
-                            <%#DataBinder.Eval(Container.Items, "numDpto") %>
-                            <br />
-                            </div>
-                        </ItemTemplate>
-                    </div>--%>
             <h2
                 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Agregar Encomienda
             </h2>
@@ -386,7 +375,7 @@
                         <asp:TextBox ID="TextBoxDescripcion" class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" runat="server"></asp:TextBox>
                     </label>
                     <span class="text-gray-700 dark:text-gray-400">Subir imagen</span><br />
-                    <asp:Image ID="ImagenEncomienda" Width="200" runat="server" />
+                    <%--<asp:Image ID="ImagenEncomienda" Width="200" runat="server" />--%>
                     <asp:FileUpload ID="FileUploadEncomienda" accept=".jpg" runat="server" />
                     <br />
                     <br />

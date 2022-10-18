@@ -18,12 +18,13 @@ namespace ManagCond.Guardia
             }
             else
             {
-                if (!Session["tipoUsuario"].Equals(2)){
+                if (!Session["tipoUsuario"].Equals(2))
+                {
                     Response.Redirect("../Login.aspx");
                 }
                 else
                 {
-                    int tipoUsuario = (int) Session["tipoUsuario"];
+                    int tipoUsuario = (int)Session["tipoUsuario"];
 
                     Usuario usuario = null;
                     usuario = (Usuario)Session["usuario"];

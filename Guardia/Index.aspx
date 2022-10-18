@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="ManagCond.Guardia.Index" %>
-<%@ using Model;%>
+<%@ Import Namespace="Model" %>
+<%@ Import Namespace="Dao" %>
+
 <!DOCTYPE html>
 
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en"> 
@@ -29,8 +31,8 @@
         class="flex h-screen bg-gray-50 dark:bg-gray-900"
         :class="{ 'overflow-hidden': isSideMenuOpen }">
         <!-- Desktop sidebar -->
-        <%@ usuario Usuario = null;%>
-        <%@ usuario = (Usuario)Session["usuario"]; %>
+
+
         <aside
             class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
             <div class="py-4 text-gray-500 dark:text-gray-400">
@@ -441,224 +443,38 @@
                     <!-- New Table -->
                     <div class="w-full overflow-hidden rounded-lg shadow-xs">
                         <div class="w-full overflow-x-auto">
+                            <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Ultimas encomiendas</h2>
                             <table class="w-full whitespace-no-wrap">
                                 <thead>
                                     <tr
                                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                                         <th class="px-4 py-3">Departamento</th>
-                                        <th class="px-4 py-3">Gasto Común</th>
-                                        <th class="px-4 py-3">Estado</th>
+                                        <th class="px-4 py-3">Destinatario</th>
                                         <th class="px-4 py-3">Fecha</th>
+                                        <th class="px-4 py-3">Hora</th>
+                                        <th class="px-4 py-3">Descripcion</th>
+                                        <th class="px-4 py-3">Imagen</th>
+                                        <th class="px-4 py-3">Estado</th>
                                     </tr>
                                 </thead>
                                 <tbody
                                     class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                                    <%
+                                        foreach (Encomienda obj in UsuarioDao.GetAlEncomiendasASC())
+                                        {
+                                    %>
                                     <tr class="text-gray-700 dark:text-gray-400">
-                                        <td class="px-4 py-3">
-                                            <div class="flex items-center text-sm">
-
-                                                <div>
-                                                    <p class="font-semibold">Departamento 102</p>
-                                                    <p class="text-xs text-gray-600 dark:text-gray-400">
-                                                        Ana Luque 
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-4 py-3 text-sm">$ 83.450
-                                        </td>
-                                        <td class="px-4 py-3 text-xs">
-                                            <span
-                                                class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">Pagado
-                                            </span>
-                                        </td>
-                                        <td class="px-4 py-3 text-sm">12/09/2022
-                                        </td>
+                                        <td class="px-4 py-3"><%= obj.NumDpto %> </td>
+                                        <td class="px-4 py-3"><%= obj.Destinatario %> </td>
+                                        <td class="px-4 py-3"><%= obj.Fecha.ToString("dd/MM/yyyy") %> </td>
+                                        <td class="px-4 py-3"><%= obj.Hora.ToString("hh':'mm''") %> </td>
+                                        <td class="px-4 py-3"><%= obj.Descripcion %> </td>
+                                        <td class="px-4 py-3"><%= obj.Imagen %> </td>
+                                        <td class="px-4 py-3"><%= obj.Estado %> </td>
                                     </tr>
-
-                                    <tr class="text-gray-700 dark:text-gray-400">
-                                        <td class="px-4 py-3">
-                                            <div class="flex items-center text-sm">
-
-                                                <div>
-                                                    <p class="font-semibold">Departamento 102</p>
-                                                    <p class="text-xs text-gray-600 dark:text-gray-400">
-                                                        Ana Luque 
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-4 py-3 text-sm">$ 83.450
-                                        </td>
-                                        <td class="px-4 py-3 text-xs">
-                                            <span
-                                                class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">Pagado
-                                            </span>
-                                        </td>
-                                        <td class="px-4 py-3 text-sm">12/09/2022
-                                        </td>
-                                    </tr>
-
-                                    <tr class="text-gray-700 dark:text-gray-400">
-                                        <td class="px-4 py-3">
-                                            <div class="flex items-center text-sm">
-                                                <div>
-                                                    <p class="font-semibold">Sarah Curry</p>
-                                                    <p class="text-xs text-gray-600 dark:text-gray-400">
-                                                        Designer
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-4 py-3 text-sm">$ 86.00
-                                        </td>
-                                        <td class="px-4 py-3 text-xs">
-                                            <span
-                                                class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">Pendiente
-                                            </span>
-                                        </td>
-                                        <td class="px-4 py-3 text-sm">6/10/2020
-                                        </td>
-                                    </tr>
-
-                                    <tr class="text-gray-700 dark:text-gray-400">
-                                        <td class="px-4 py-3">
-                                            <div class="flex items-center text-sm">
-
-                                                <div>
-                                                    <p class="font-semibold">Rulia Joberts</p>
-                                                    <p class="text-xs text-gray-600 dark:text-gray-400">
-                                                        Actress
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-4 py-3 text-sm">$ 1276.45
-                                        </td>
-                                        <td class="px-4 py-3 text-xs">
-                                            <span
-                                                class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">Pagado
-                                            </span>
-                                        </td>
-                                        <td class="px-4 py-3 text-sm">6/10/2020
-                                        </td>
-                                    </tr>
-
-                                    <tr class="text-gray-700 dark:text-gray-400">
-                                        <td class="px-4 py-3">
-                                            <div class="flex items-center text-sm">
-
-                                                <div>
-                                                    <p class="font-semibold">Wenzel Dashington</p>
-                                                    <p class="text-xs text-gray-600 dark:text-gray-400">
-                                                        Actor
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-4 py-3 text-sm">$ 863.45
-                                        </td>
-                                        <td class="px-4 py-3 text-xs">
-                                            <span
-                                                class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">Pagado
-                                            </span>
-                                        </td>
-                                        <td class="px-4 py-3 text-sm">6/10/2020
-                                        </td>
-                                    </tr>
-
-                                    <tr class="text-gray-700 dark:text-gray-400">
-                                        <td class="px-4 py-3">
-                                            <div class="flex items-center text-sm">
-
-                                                <div>
-                                                    <p class="font-semibold">Dave Li</p>
-                                                    <p class="text-xs text-gray-600 dark:text-gray-400">
-                                                        Influencer
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-4 py-3 text-sm">$ 863.45
-                                        </td>
-                                        <td class="px-4 py-3 text-xs">
-                                            <span
-                                                class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">Pendiente
-                                            </span>
-                                        </td>
-                                        <td class="px-4 py-3 text-sm">6/10/2020
-                                        </td>
-                                    </tr>
-
-                                    <tr class="text-gray-700 dark:text-gray-400">
-                                        <td class="px-4 py-3">
-                                            <div class="flex items-center text-sm">
-
-                                                <div>
-                                                    <p class="font-semibold">Dave Li</p>
-                                                    <p class="text-xs text-gray-600 dark:text-gray-400">
-                                                        Influencer
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-4 py-3 text-sm">$ 863.45
-                                        </td>
-                                        <td class="px-4 py-3 text-xs">
-                                            <span
-                                                class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">Pendiente
-                                            </span>
-                                        </td>
-                                        <td class="px-4 py-3 text-sm">6/10/2020
-                                        </td>
-                                    </tr>
-
-                                    <tr class="text-gray-700 dark:text-gray-400">
-                                        <td class="px-4 py-3">
-                                            <div class="flex items-center text-sm">
-
-                                                <div>
-                                                    <p class="font-semibold">Dave Li</p>
-                                                    <p class="text-xs text-gray-600 dark:text-gray-400">
-                                                        Influencer
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-4 py-3 text-sm">$ 863.45
-                                        </td>
-                                        <td class="px-4 py-3 text-xs">
-                                            <span
-                                                class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">Pendiente
-                                            </span>
-                                        </td>
-                                        <td class="px-4 py-3 text-sm">6/10/2020
-                                        </td>
-                                    </tr>
-
-                                    <tr class="text-gray-700 dark:text-gray-400">
-                                        <td class="px-4 py-3">
-                                            <div class="flex items-center text-sm">
-
-                                                <div>
-                                                    <p class="font-semibold">Dave Li</p>
-                                                    <p class="text-xs text-gray-600 dark:text-gray-400">
-                                                        Influencer
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-4 py-3 text-sm">$ 863.45
-                                        </td>
-                                        <td class="px-4 py-3 text-xs">
-                                            <span
-                                                class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700">Vencido
-                                            </span>
-                                        </td>
-                                        <td class="px-4 py-3 text-sm">6/10/2020
-                                        </td>
-                                    </tr>
-
+                                    <%
+                                        }
+                                    %>
                                 </tbody>
                             </table>
                         </div>

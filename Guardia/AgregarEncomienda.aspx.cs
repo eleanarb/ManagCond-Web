@@ -19,7 +19,6 @@ namespace ManagCond.Guardia
             if (!IsPostBack)
             {
                 LlenarDropDownList();
-                //ConsultarImagenes();
             }
             if (Session["usuario"] == null)
             {
@@ -44,37 +43,40 @@ namespace ManagCond.Guardia
 
         protected void ButtonAgregar_Click(object sender, EventArgs e)
         {
-            //Obtener datos imagen
-            int tamano = FileUploadEncomienda.PostedFile.ContentLength;
-            byte[] imagenOriginal = new byte[tamano];
-            FileUploadEncomienda.PostedFile.InputStream.Read(imagenOriginal, 0, tamano);
-            Bitmap imagenOriginalBinaria = new Bitmap(FileUploadEncomienda.PostedFile.InputStream);
-            //Crear imagen Thumbnail
-            System.Drawing.Image imtThumbnail;
-            int tamanoThumbnail = 50;
-            imtThumbnail = RedimencionarImagen(imagenOriginalBinaria, tamanoThumbnail);
-            ImageConverter convertidor = new ImageConverter();
-            byte[] bImagenThumbnail = (byte[])convertidor.ConvertTo(imtThumbnail, typeof(byte[]));
-            string imagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(bImagenThumbnail);
+            
 
-
+            String montaje = FileUploadEncomienda.FileName;
             String numDpto = DropDownList.Text;
             String destinatario = TextBoxDestinatario.Text;
             String descripcion = TextBoxDescripcion.Text;
 
+            string pathToCheck = HttpContext.Current.Server.MapPath("\\img\\" + montaje);
+            string tempfileName = "";
+            if (System.IO.File.Exists(pathToCheck))
+            {
+                int counter = 1;
+                while (System.IO.File.Exists(pathToCheck))
+                {
 
+                    tempfileName = "(" + counter.ToString() + ") " + montaje;
+                    pathToCheck = HttpContext.Current.Server.MapPath("\\img\\" + tempfileName);
+                    counter++;
+                }
 
-            if (UsuarioDao.AgregarEncomienda(numDpto, destinatario, descripcion, bImagenThumbnail.ToString()))
+                montaje = tempfileName;
+            }
+
+            if (UsuarioDao.AgregarEncomienda(numDpto, destinatario, descripcion, montaje))
             {
                 Limpiar();
+                //FileUploadEncomienda.SaveAs(HttpContext.Current.Server.MapPath("\\img\\" + montaje));
                 Response.Redirect("Encomiendas.aspx");
             }
             else
             {
+                Response.Redirect("Encomienda.aspx");
                 //LabelMensaje.Text = "Error, usuario no agregado";
             }
-
-            ImagenEncomienda.ImageUrl = imagenDataURL64;
         }
         public void Limpiar()
         {
@@ -96,36 +98,5 @@ namespace ManagCond.Guardia
             DropDownList.Items.Insert(0, new ListItem("Seleccione departamento", "0"));
 
         }
-        public System.Drawing.Image RedimencionarImagen(System.Drawing.Image imagenOriginal, int Alto)
-        {
-            var radio = (double)Alto / imagenOriginal.Height;
-            var nuevoAncho = (int)(imagenOriginal.Width * radio);
-            var nuevoAlto = (int)(imagenOriginal.Height * radio);
-            var nuevaImagenRedimencionada = new Bitmap(nuevoAncho, nuevoAlto);
-            var g = Graphics.FromImage(nuevaImagenRedimencionada);
-            g.DrawImage(imagenOriginal, 0, 0, nuevoAncho, nuevoAlto);
-            return nuevaImagenRedimencionada;
-        }
-        //protected void ConsultarImagenes()
-        //{
-        //    String cadenaConexion = "Server=localhost\\SQLEXPRESS;Database=managcond;Trusted_Connection=True;";
-
-        //    SqlConnection conexionSQL = new SqlConnection(cadenaConexion);
-        //    SqlCommand cmd = new SqlCommand
-        //    {
-        //        CommandText = "SELECT numDpto,imagen FROM encomienda ORDER BY id ASC",
-        //        CommandType = CommandType.Text,
-        //        Connection = conexionSQL
-        //    };
-        //    conexionSQL.Open();
-
-        //    DataTable imagenesBD = new DataTable();
-        //    imagenesBD.Load(cmd.ExecuteReader());
-
-        //    RepeaterImage.DataSource = imagenesBD;
-        //    RepeaterImage.DataBind();
-        //    conexionSQL.Close();
-
-        //}
     }
 }
