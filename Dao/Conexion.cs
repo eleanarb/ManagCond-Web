@@ -11,12 +11,12 @@ namespace Dao
     {
         public string Conectar()
         {
-            return "Server=localhost\\SQLEXPRESS;Database=managcond;Trusted_Connection=True;";
+            return "Server=localhost\\SQLEXPRESS01;Database=managcond;Trusted_Connection=True;";
             
         }
         public static SqlConnection Open()
         {
-            SqlConnection Conn = new SqlConnection("Server=localhost\\SQLEXPRESS;Database=managcond;Trusted_Connection=True;");
+            SqlConnection Conn = new SqlConnection("Server=localhost\\SQLEXPRESS01;Database=managcond;Trusted_Connection=True;");
             Conn.Open();
             return Conn;
         }

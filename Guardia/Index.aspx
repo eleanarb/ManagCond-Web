@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="ManagCond.Guardia.Index" %>
-
+<%@ using Model;%>
 <!DOCTYPE html>
 
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en"> 
@@ -29,6 +29,8 @@
         class="flex h-screen bg-gray-50 dark:bg-gray-900"
         :class="{ 'overflow-hidden': isSideMenuOpen }">
         <!-- Desktop sidebar -->
+        <%@ usuario Usuario = null;%>
+        <%@ usuario = (Usuario)Session["usuario"]; %>
         <aside
             class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
             <div class="py-4 text-gray-500 dark:text-gray-400">
@@ -206,7 +208,7 @@
             <div class="py-4 text-gray-500 dark:text-gray-400">
                 <a
                     class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
-                    href="Index.aspx">ManagCond
+                    href="Index.aspx">ManagCond 
                 </a>
                 <ul class="mt-6">
                     <li class="relative px-6 py-3">

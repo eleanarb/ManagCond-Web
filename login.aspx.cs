@@ -18,6 +18,7 @@ namespace ManagCond
 
         protected void ButtonAceptar_Click(object sender, EventArgs e)
         {
+            
             String correo = TextBoxUsuario.Text;
             String clave = TextBoxClave.Text;
 
@@ -30,18 +31,23 @@ namespace ManagCond
                     case 1:
                         {
                             Session["usuario"] = usuario;
+                            Session["tipoUsuario"] = 1;                            
+
                             Response.Redirect("Administrador/dashboard.aspx");
                             break;
                         }
                     case 2:
                         {
                             Session["usuario"] = usuario;
+                            Session["tipoUsuario"] = 2;
                             Response.Redirect("Guardia/Index.aspx");
                             break;
                         }
                     case 3:
                         {
                             Session["usuario"] = usuario;
+                            Session["tipoUsuario"] = 1;
+                            Session["deptoResidente"] = usuario.NumDpto;
                             Response.Redirect("Residente/Index.aspx");
                             break;
                         }
