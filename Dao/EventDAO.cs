@@ -17,7 +17,7 @@ using System.Data.SqlClient;
 public class EventDAO
 {
 	//change the connection string as per your database connection.
-    private static string connectionString = "Server = localhost\\SQLEXPRESS01; Database = managcond; Trusted_Connection = True;";
+    private static string connectionString = "Server=tcp:managcondserver.database.windows.net,1433;Initial Catalog=managcond;Persist Security Info=False;User ID=Administrador;Password=Tallo2820@#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
     //this method retrieves all events within range start-end
     public static List<CalendarEvent> getEvents(DateTime start, DateTime end, int idCond)
