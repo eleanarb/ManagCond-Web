@@ -41,9 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CondominioDao.cs" />
     <Compile Include="Conexion.cs" />
+    <Compile Include="EncomiendaDao.cs" />
+    <Compile Include="EventDAO.cs" />
+    <Compile Include="GastosComunesDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReservaDao.cs" />
+    <Compile Include="ResidenteDao.cs" />
     <Compile Include="UsuarioDao.cs" />
+    <Compile Include="VisitaDao.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">

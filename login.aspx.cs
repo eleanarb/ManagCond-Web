@@ -31,7 +31,8 @@ namespace ManagCond
                     case 1:
                         {
                             Session["usuario"] = usuario;
-                            Session["tipoUsuario"] = 1;                            
+                            Session["tipoUsuario"] = 1;
+                            Session["idCondominio"] = usuario.IdCond;
 
                             Response.Redirect("Administrador/dashboard.aspx");
                             break;
@@ -40,14 +41,16 @@ namespace ManagCond
                         {
                             Session["usuario"] = usuario;
                             Session["tipoUsuario"] = 2;
+                            Session["idCond"] = usuario.IdCond;
                             Response.Redirect("Guardia/Index.aspx");
                             break;
                         }
                     case 3:
                         {
                             Session["usuario"] = usuario;
-                            Session["tipoUsuario"] = 1;
-                            Session["deptoResidente"] = usuario.NumDpto;
+                            Session["tipoUsuario"] = 3;
+                            Session["idCond"] = usuario.IdCond;
+                            Session["numDpto"] = usuario.NumDpto;
                             Response.Redirect("Residente/Index.aspx");
                             break;
                         }

@@ -26,8 +26,7 @@ namespace ManagCond.Guardia
                 {
                     int tipoUsuario = (int)Session["tipoUsuario"];
 
-                    Usuario usuario = null;
-                    usuario = (Usuario)Session["usuario"];
+                    Usuario usuario = (Usuario)Session["usuario"];
 
                 }
             }

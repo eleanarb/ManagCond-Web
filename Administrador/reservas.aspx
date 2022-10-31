@@ -1,4 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="reservas.aspx.cs" Inherits="ManagCond.reservas" %>
+<%@ Import Namespace="Model" %>
+<%@ Import Namespace="Dao" %>
 
 <!DOCTYPE html>
 
@@ -17,6 +19,7 @@
       defer
     ></script>
     <script src="../assets/js/init-alpine.js"></script>
+      <script src="../assets/js/focus-trap.js" defer></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"
@@ -25,10 +28,46 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
       defer
     ></script>
+    
     <script src="../assets/js/charts-lines.js" defer></script>
     <script src="../assets/js/charts-pie.js" defer></script>
+
+      <script src="../assets/js/reservaScript.js" defer></script>
+    <script src="../assets/js/reserva.js" defer></script>
+
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
+    />
+
+    <!-- Demo styles -->
+    <style>
+      
+
+      .swiper {
+        width: 100%;
+        height: 100%;
+      }
+
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;;
+      }
+
+      .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    </style>
   </head>
   <body>
+      <% 
+          int idCondominio = 0;
+          idCondominio = (int)Session["idCondominio"];
+      %>
     <div
       class="flex h-screen bg-gray-50 dark:bg-gray-900"
       :class="{ 'overflow-hidden': isSideMenuOpen }"
@@ -695,68 +734,50 @@
                 <div class="container px-6 mx-auto grid">
 
                     <h2
-              class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
-            >
-              Reservas Solicitadas
-            </h2>
+                        class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Reservas Solicitadas
+                    </h2>
+                    
+                        <div class="swiper mySwiper" id="reservas-pendientes">
+                            <div class="swiper-wrapper">
 
-                    <div class="grid gap-6 mb-8 md:grid-cols-2">
-                        <div class="min-w-0 p-4 text-white bg-purple-600 rounded-lg shadow-xs">
-                            <h4 class="mb-4 font-semibold">QUINCHO II 
-                            </h4>
-                            <p>
-                                Departamento 510 - Maya Pizurro
-                            </p>
-                            <p>
-                                16 Sep 2022 / 14:00 - 20:000
-                            </p>
-                            <br />
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <button
-                  class="px-4 py-2 text-sm font-semibold leading-tight text-green-700 transition-colors duration-150 bg-green-100 border border-transparent rounded-lg active:bg-green-200 hover:bg-green-200 focus:outline-none focus:shadow-outline-white"
-                >
-                  APROBAR
-                </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <%
+                                        foreach (Reserva obj1 in ReservaDao.GetAlReservasPendientes(idCondominio))
+                                        {
+                                            int idReserva = obj1.Id;
+                                    %>
 
-                            <button
-                  class="px-4 py-2 text-sm font-semibold leading-tight text-red-700 transition-colors duration-150 bg-red-100 border border-transparent rounded-lg active:bg-red-200 hover:bg-red-200 focus:outline-none focus:shadow-outline-white"
-                >
-                  RECHAZAR
-                </button>
-
+                                    <div class="swiper-slide">
+                                        <div
+                                            class="max-w-2xl px-4 py-3 mb-8 bg-white rounded-lg shadow-md bg-purple-600 dark:bg-purple-700">
+                                            <h2 class="text-white dark:text-gray-100"><strong><%=obj1.EspacioComun %></strong></h2>
+                                            <i class="text-white dark:text-gray-00">Dpto <%=obj1.NumDpto%> - <%=obj1.Solicitante %> </i>
+                                            <br />
+                                            <p class="mb-4 text-white dark:text-gray-100">
+                                                <%=obj1.Fecha %> | <%=obj1.RangoHorario %>
+                                            </p>
+                                            <button data-id="<%=idReserva%>"
+                                                @click="openModal"
+                                                class="btnReservaP px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                                              >
+                                                Open Modal
+                                           </button>
+                                        </div>
+                                    </div>
+                                    <%} %>
+                            </div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-pagination"></div>
                         </div>
-
-                        <div class="min-w-0 p-4 text-white bg-purple-600 rounded-lg shadow-xs">
-                            <h4 class="mb-4 font-semibold">QUINCHO II 
-                            </h4>
-                            <p>
-                                Departamento 510 - Maya Pizurro
-                            </p>
-                            <p>
-                                16 Sep 2022 / 14:00 - 20:000
-                            </p>
-                            <br />
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <button
-                  class="px-4 py-2 text-sm font-semibold leading-tight text-green-700 transition-colors duration-150 bg-green-100 border border-transparent rounded-lg active:bg-green-200 hover:bg-green-200 focus:outline-none focus:shadow-outline-white"
-                >
-                  APROBAR
-                </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                            <button
-                  class="px-4 py-2 text-sm font-semibold leading-tight text-red-700 transition-colors duration-150 bg-red-100 border border-transparent rounded-lg active:bg-red-200 hover:bg-red-200 focus:outline-none focus:shadow-outline-white"
-                >
-                  RECHAZAR
-                </button>
-
-                        </div>
-                    </div>
+                        	
+                        
+     
+                    
+                        
 
                     <h2
-              class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
-            >
-              Historial de Reservas
-            </h2>
+                        class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Historial de Reservas
+                    </h2>
 
                     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
               <div class="w-full overflow-x-auto">
@@ -774,50 +795,24 @@
 
                     </tr>
                   </thead>
-                  <tbody
+                    
+
+                    <tbody
                     class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
                   >
-                    <tr class="text-gray-700 dark:text-gray-400">
-                      <td class="px-4 py-3">
-                        <div class="flex items-center text-sm">
-        
-                          <div>
-                            <p class="font-semibold">701</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="px-4 py-3">
-                        <div class="flex items-center text-sm">
-        
-                          <div>
-                            <p class="font-semibold">Matías Valencia</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="px-4 py-3 text-sm">
-                        GIMNASIO
-                      </td>
-                       <td class="px-4 py-3 text-sm">
-                        07/09/22
-                      </td>
-                        <td class="px-4 py-3 text-sm">
-                        10:00 - 11:30
-                      </td>
-                      <td class="px-4 py-3 text-xs">
-                        <span
-                          class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
-                        >
-                          AROBADO
-                        </span>
-                      </td>                      
-                    </tr>
+                    <%
+
+                      foreach (Reserva obj in ReservaDao.GetAlReservasAnteriores(idCondominio))
+                       {
+                                
+                    %>
 
                     <tr class="text-gray-700 dark:text-gray-400">
                       <td class="px-4 py-3">
                         <div class="flex items-center text-sm">
         
                           <div>
-                            <p class="font-semibold">702</p>
+                            <p class="font-semibold"><%=obj.NumDpto %></p>
                           </div>
                         </div>
                       </td>
@@ -825,167 +820,46 @@
                         <div class="flex items-center text-sm">
         
                           <div>
-                            <p class="font-semibold">Daniela Hurtado</p>
+                            <p class="font-semibold"><%=obj.Solicitante %></p>
                           </div>
                         </div>
                       </td>
                       <td class="px-4 py-3 text-sm">
-                        GIMNASIO
+                        <%=obj.EspacioComun %>
                       </td>
                        <td class="px-4 py-3 text-sm">
-                        07/09/22
+                        <%=obj.Fecha %>
                       </td>
                         <td class="px-4 py-3 text-sm">
-                        10:00 - 11:30
+                        <%=obj.RangoHorario %>
                       </td>
-                      <td class="px-4 py-3 text-xs">
-                        <span
-                          class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600"
-                        >
-                          RECHAZADO
-                        </span>
-                      </td>                     
-                    </tr>
-                      <tr class="text-gray-700 dark:text-gray-400">
-                      <td class="px-4 py-3">
-                        <div class="flex items-center text-sm">
-        
-                          <div>
-                            <p class="font-semibold">701</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="px-4 py-3">
-                        <div class="flex items-center text-sm">
-        
-                          <div>
-                            <p class="font-semibold">Matías Valencia</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="px-4 py-3 text-sm">
-                        GIMNASIO
-                      </td>
-                       <td class="px-4 py-3 text-sm">
-                        07/09/22
-                      </td>
-                        <td class="px-4 py-3 text-sm">
-                        10:00 - 11:30
-                      </td>
-                      <td class="px-4 py-3 text-xs">
-                        <span
-                          class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
-                        >
-                          AROBADO
-                        </span>
-                      </td>                      
-                    </tr>
+                       <td class="px-4 py-3 text-xs">
+                            <%if (obj.Estado == 2)
+                                { %>
+                            <span
+                                class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">Aprobado
+                            </span>
 
-                    <tr class="text-gray-700 dark:text-gray-400">
-                      <td class="px-4 py-3">
-                        <div class="flex items-center text-sm">
-        
-                          <div>
-                            <p class="font-semibold">702</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="px-4 py-3">
-                        <div class="flex items-center text-sm">
-        
-                          <div>
-                            <p class="font-semibold">Daniela Hurtado</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="px-4 py-3 text-sm">
-                        GIMNASIO
-                      </td>
-                       <td class="px-4 py-3 text-sm">
-                        07/09/22
-                      </td>
-                        <td class="px-4 py-3 text-sm">
-                        10:00 - 11:30
-                      </td>
-                      <td class="px-4 py-3 text-xs">
-                        <span
-                          class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600"
-                        >
-                          RECHAZADO
-                        </span>
-                      </td>                     
-                    </tr>
-                      <tr class="text-gray-700 dark:text-gray-400">
-                      <td class="px-4 py-3">
-                        <div class="flex items-center text-sm">
-        
-                          <div>
-                            <p class="font-semibold">701</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="px-4 py-3">
-                        <div class="flex items-center text-sm">
-        
-                          <div>
-                            <p class="font-semibold">Matías Valencia</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="px-4 py-3 text-sm">
-                        GIMNASIO
-                      </td>
-                       <td class="px-4 py-3 text-sm">
-                        07/09/22
-                      </td>
-                        <td class="px-4 py-3 text-sm">
-                        10:00 - 11:30
-                      </td>
-                      <td class="px-4 py-3 text-xs">
-                        <span
-                          class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
-                        >
-                          AROBADO
-                        </span>
-                      </td>                      
-                    </tr>
+                            <%}
+                                                else if (obj.Estado == 1)
+                                                { %>
+                            <span
+                                class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700">Pendiente
+                            </span>
 
-                    <tr class="text-gray-700 dark:text-gray-400">
-                      <td class="px-4 py-3">
-                        <div class="flex items-center text-sm">
-        
-                          <div>
-                            <p class="font-semibold">702</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="px-4 py-3">
-                        <div class="flex items-center text-sm">
-        
-                          <div>
-                            <p class="font-semibold">Daniela Hurtado</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="px-4 py-3 text-sm">
-                        GIMNASIO
-                      </td>
-                       <td class="px-4 py-3 text-sm">
-                        07/09/22
-                      </td>
-                        <td class="px-4 py-3 text-sm">
-                        10:00 - 11:30
-                      </td>
-                      <td class="px-4 py-3 text-xs">
-                        <span
-                          class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600"
-                        >
-                          RECHAZADO
-                        </span>
-                      </td>                     
+                            <%}
+                                                else if (obj.Estado == 3)
+                                                { %>
+                            <span
+                                class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">Rechazado
+                            </span>
+                        </td>       
+                        <%} %>
                     </tr>
-      
-
+                    <%
+                                            
+                       }
+                    %>
                     
                   </tbody>
                 </table>
@@ -1091,5 +965,109 @@
                 </div>
             </main>
         </div>
+
+
+    <!-- Modal backdrop. This what you want to place close to the closing body tag -->
+    <div
+      x-show="isModalOpen"
+      x-transition:enter="transition ease-out duration-150"
+      x-transition:enter-start="opacity-0"
+      x-transition:enter-end="opacity-100"
+      x-transition:leave="transition ease-in duration-150"
+      x-transition:leave-start="opacity-100"
+      x-transition:leave-end="opacity-0"
+      class="fixed inset-0 z-30 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center"
+    >
+      <!-- Modal -->
+      <div
+        x-show="isModalOpen"
+        x-transition:enter="transition ease-out duration-150"
+        x-transition:enter-start="opacity-0 transform translate-y-1/2"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-150"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0  transform translate-y-1/2"
+        @click.away="closeModal"
+        @keydown.escape="closeModal"
+        class="w-full px-6 py-4 overflow-hidden bg-white rounded-t-lg dark:bg-gray-800 sm:rounded-lg sm:m-4 sm:max-w-xl"
+        role="dialog"
+        id="modal"
+      >
+        <!-- Remove header if you don't want a close icon. Use modal body to place modal tile. -->
+        <header class="flex justify-end">
+          <button
+            class="inline-flex items-center justify-center w-6 h-6 text-gray-400 transition-colors duration-150 rounded dark:hover:text-gray-200 hover: hover:text-gray-700"
+            aria-label="close"
+            @click="closeModal"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              role="img"
+              aria-hidden="true"
+            >
+              <path
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+                fill-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
+        </header>
+        <!-- Modal body -->
+          <form id="reserva" runat="server">
+        <div class="mt-4 mb-6">
+            <asp:TextBox ID="idReserva" class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" runat="server"></asp:TextBox>
+            
+          <!-- Modal title -->
+          <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-300" id="titulo">
+            titulo-evento
+          </p>
+          <!-- Modal description -->
+          <p class="text-sm text-gray-700 dark:text-gray-400" id="depto">
+            depto
+          </p>
+          <p class="text-sm text-gray-700 dark:text-gray-400" id="fecha">
+            fecha
+          </p>
+        </div>
+        <footer
+          class="flex flex-col items-center justify-end px-6 py-3 -mx-6 -mb-4 space-y-4 sm:space-y-0 sm:space-x-6 sm:flex-row bg-gray-50 dark:bg-gray-800"
+        >
+          <asp:Button ID="ButtonAprobar" class="form-control w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" runat="server" OnClick="ButtonAprobar_Click" Text="Aprobar" />
+         
+        </footer>
+              </form>
+      </div>
+    </div>
+    <!-- End of modal backdrop -->
+
+        </div>
 </body>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            slidesPerGroup: 3,
+            loop: true,
+            loopFillGroupWithBlank: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+    </script>
+
+
+
 </html>

@@ -1,9 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AgregarEncomienda.aspx.cs" Inherits="ManagCond.Guardia.AgregarEncomienda" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AgregarVisita.aspx.cs" Inherits="ManagCond.Residente.AgregarVisita" %>
+<%@ Import Namespace="Model" %>
+<%@ Import Namespace="Dao" %>
 
 <!DOCTYPE html>
 
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
-  <head>
+<head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>ManagCond</title>
@@ -25,7 +27,7 @@
       <script src="../assets/js/charts-pie.js" defer></script>
   </head>
 <body>
-         <div
+    <div
         class="flex h-screen bg-gray-50 dark:bg-gray-900"
         :class="{ 'overflow-hidden': isSideMenuOpen }">
         <!-- Desktop sidebar -->
@@ -62,7 +64,7 @@
                     <li class="relative px-6 py-3">
                         <a
                             class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                            href="#.aspx">
+                            href="#GastosComunes.aspx">
                             <svg
                                 class="w-5 h-5"
                                 aria-hidden="true"
@@ -82,7 +84,7 @@
                     <li class="relative px-6 py-3">
                         <a
                             class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                            href="Listado.aspx">
+                            href="GastosComunes.aspx">
                             <svg
                                 class="w-5 h-5"
                                 aria-hidden="true"
@@ -96,34 +98,10 @@
                                     d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">       
                                 </path>
                             </svg>
-                            <span class="ml-4">Listado</span>
+                            <span class="ml-4">Gastos Comunes</span>
                         </a>
                     </li>
                     <li class="relative px-6 py-3">
-                        <a
-                            class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                            href="#.aspx">
-                            <svg
-                                class="w-5 h-5"
-                                aria-hidden="true"
-                                fill="none"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path
-                                    d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z">
-                                </path>
-                                <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
-                            </svg>
-                            <span class="ml-4">Visitas</span>
-                        </a>
-                    </li>
-                    <li class="relative px-6 py-3">
-                        <span
-                            class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-                            aria-hidden="true"></span>
                         <button
                            class="inline-flex items-center justify-between w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
                             @click="togglePagesMenu"
@@ -139,10 +117,11 @@
                                     viewBox="0 0 24 24"
                                     stroke="currentColor">
                                     <path
-                                        d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z">
+                                        d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z">
                                     </path>
+                                     <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
                                 </svg>
-                                <span class="ml-4">Encomiendas</span>
+                                <span class="ml-4">Visitas</span>
                             </span>
                             <svg
                                 class="w-4 h-4"
@@ -168,21 +147,41 @@
                                 aria-label="submenu">
                                 <li
                                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                                    <a class="w-full" href="AgregarEncomienda.aspx">Agregar encomienda</a>
+                                    <a class="w-full" href="AgregarVisita.aspx">Agregar Visita</a>
                                 </li>
                                 <li
                                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                                    <a class="w-full" href="Encomiendas.aspx">Endomiendas</a>
+                                    <a class="w-full" href="Visitas.aspx">Historial de Visitas</a>
                                 </li>
                             </ul>
                         </template>
+                    </li>
+                   <li class="relative px-6 py-3">
+                        <a
+                            class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                            href="Encomienda.aspx">
+                            <svg
+                                class="w-5 h-5"
+                                aria-hidden="true"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path
+                                        d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z">
+                                    </path>
+                            </svg>
+                            <span class="ml-4">Encomienda</span>
+                        </a>
                     </li>
                 </ul>
             </div>
         </aside>
         <!-- Mobile sidebar -->
         <!-- Backdrop -->
-           <div
+        <div
             x-show="isSideMenuOpen"
             x-transition:enter="transition ease-in-out duration-150"
             x-transition:enter-start="opacity-0"
@@ -254,7 +253,7 @@
                     <li class="relative px-6 py-3">
                         <a
                             class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                            href="Listado.aspx">
+                            href="GastosComunes.aspx">
                             <svg
                                 class="w-5 h-5"
                                 aria-hidden="true"
@@ -265,39 +264,15 @@
                                 viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path
-                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">       
+                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
                                 </path>
                             </svg>
-                            <span class="ml-4">Listado</span>
+                            <span class="ml-4">Gastos Comunes</span>
                         </a>
                     </li>
                     <li class="relative px-6 py-3">
-                        <a
-                            class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                            href="#.aspx">
-                            <svg
-                                class="w-5 h-5"
-                                aria-hidden="true"
-                                fill="none"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path
-                                    d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z">
-                                </path>
-                                <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
-                            </svg>
-                            <span class="ml-4">Visitas</span>
-                        </a>
-                    </li>
-                    <li class="relative px-6 py-3">
-                        <span
-                            class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-                            aria-hidden="true"></span>
                         <button
-                            class="inline-flex items-center justify-between w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                           class="inline-flex items-center justify-between w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
                             @click="togglePagesMenu"
                             aria-haspopup="true">
                             <span class="inline-flex items-center">
@@ -311,10 +286,11 @@
                                     viewBox="0 0 24 24"
                                     stroke="currentColor">
                                     <path
-                                        d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z">
+                                        d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z">
                                     </path>
+                                     <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
                                 </svg>
-                                <span class="ml-4">Encomiendas</span>
+                                <span class="ml-4">Visitas</span>
                             </span>
                             <svg
                                 class="w-4 h-4"
@@ -340,43 +316,63 @@
                                 aria-label="submenu">
                                 <li
                                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                                    <a class="w-full" href="AgregarEncomienda.aspx">Agregar encomienda</a>
+                                    <a class="w-full" href="AgregarVisita.aspx">Agregar Visita</a>
                                 </li>
                                 <li
                                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                                    <a class="w-full" href="Encomiendas.aspx">Endomiendas</a>
+                                    <a class="w-full" href="Visitas.aspx">Historial de Visitas</a>
                                 </li>
                             </ul>
                         </template>
                     </li>
+                   <li class="relative px-6 py-3">
+                        <a
+                            class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                            href="Encomienda.aspx">
+                            <svg
+                                class="w-5 h-5"
+                                aria-hidden="true"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path
+                                        d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z">
+                                    </path>
+                            </svg>
+                            <span class="ml-4">Encomienda</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </aside>
-    <div class="flex flex-col flex-1 w-full">
-    <!-- #include file ="Template/HeaderGuardia.html" -->
-    <main class="h-full pb-16 overflow-y-auto">
+        <div class="flex flex-col flex-1 w-full">
+            <!-- #include file ="Template/HeaderResidente.html" -->
+           <main class="h-full pb-16 overflow-y-auto">
         <div class="container grid px-6 mx-auto">
             <h2
-                class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Agregar Encomienda
+                class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Agregar Visita
             </h2>
-            <form id="AgregarEncomienda" runat="server">
+            <form id="AgregarVisita" runat="server">
                 <div class="w-full">
-                    <label class="block text-sm">
-                        <span class="text-gray-700 dark:text-gray-400">Numero departamento</span><br />
-                        <asp:DropDownList ID="DropDownList" runat="server">
-                        </asp:DropDownList>
+                    <label class="block mt-4 text-sm">
+                        <span class="text-gray-700 dark:text-gray-400">Rut</span>
+                        <asp:TextBox ID="TextBoxRut" class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" runat="server"></asp:TextBox>
                     </label>
                     <label class="block mt-4 text-sm">
-                        <span class="text-gray-700 dark:text-gray-400">Destinatario</span>
-                        <asp:TextBox ID="TextBoxDestinatario" class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" runat="server"></asp:TextBox>
+                        <span class="text-gray-700 dark:text-gray-400">Nombres</span>
+                        <asp:TextBox ID="TextBoxNombres" class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" runat="server"></asp:TextBox>
                     </label>
                     <label class="block mt-4 text-sm">
-                        <span class="text-gray-700 dark:text-gray-400">Descripcion</span>
-                        <asp:TextBox ID="TextBoxDescripcion" class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" runat="server"></asp:TextBox>
+                        <span class="text-gray-700 dark:text-gray-400">Apellidos</span>
+                        <asp:TextBox ID="TextBoxApellidos" class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" runat="server"></asp:TextBox>
                     </label>
-                    <span class="text-gray-700 dark:text-gray-400">Subir imagen</span><br />
-                    <%--<asp:Image ID="ImagenEncomienda" Width="200" runat="server" />--%>
-                    <asp:FileUpload ID="FileUploadEncomienda" accept=".jpg" runat="server" />
+                    <label class="block mt-4 text-sm">
+                        <span class="text-gray-700 dark:text-gray-400">Patente</span>
+                        <asp:TextBox ID="TextBoxPatente" class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" runat="server"></asp:TextBox>
+                    </label>
                     <br />
                     <br />
                     <asp:Button ID="ButtonAgregar" class="px-4 py-2 text-sm font-semibold leading-tight text-green-700 transition-colors duration-150 bg-green-100 border border-transparent rounded-lg active:bg-green-200 hover:bg-green-200 focus:outline-none focus:shadow-outline-white" runat="server" OnClick="ButtonAgregar_Click" Text="Agregar" />
@@ -384,6 +380,8 @@
             </form>
         </div>
     </main>
-   </div>
+        </div>
+    </div>
 </body>
 </html>
+

@@ -7,48 +7,48 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace ManagCond.Guardia
+namespace ManagCond.Residente
 {
 
 
-    public partial class AgregarEncomienda
+    public partial class AgregarVisita
     {
 
         /// <summary>
-        /// Control DropDownList.
+        /// Control TextBoxRut.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxRut;
 
         /// <summary>
-        /// Control TextBoxDestinatario.
+        /// Control TextBoxNombres.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxDestinatario;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxNombres;
 
         /// <summary>
-        /// Control TextBoxDescripcion.
+        /// Control TextBoxApellidos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxDescripcion;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxApellidos;
 
         /// <summary>
-        /// Control FileUploadEncomienda.
+        /// Control TextBoxPatente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUploadEncomienda;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxPatente;
 
         /// <summary>
         /// Control ButtonAgregar.
