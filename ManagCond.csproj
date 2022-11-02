@@ -77,6 +77,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Administrador\Calendario.aspx" />
+    <Content Include="Administrador\Encomiendas.aspx" />
+    <Content Include="Administrador\Visitas.aspx" />
     <Content Include="assets\css\custom-theme\images\ui-icons_0073ea_256x240.png" />
     <Content Include="assets\css\custom-theme\images\ui-icons_454545_256x240.png" />
     <Content Include="assets\css\custom-theme\images\ui-icons_666666_256x240.png" />
@@ -123,6 +125,8 @@
     <Content Include="assets\js\jquery-ui-1.9.2.custom.min.js" />
     <Content Include="assets\js\jquery-ui-timepicker-addon-0.6.2.min.js" />
     <Content Include="assets\js\jquery.qtip-1.0.0-rc3.min.js" />
+    <Content Include="assets\js\listado.js" />
+    <Content Include="assets\js\listadoScript.js" />
     <Content Include="assets\js\reserva.js" />
     <Content Include="assets\js\reservaScript.js" />
     <Content Include="buttons.aspx" />
@@ -131,11 +135,14 @@
     <Content Include="Administrador\dashboard.aspx" />
     <Content Include="Guardia\EditarEncomienda.aspx" />
     <Content Include="Guardia\EditarVisita.aspx" />
+    <Content Include="Guardia\EditarVisitaR.aspx" />
     <Content Include="Guardia\Encomiendas.aspx" />
     <Content Include="forms.aspx" />
     <Content Include="Administrador\foro.aspx" />
     <Content Include="Guardia\Index.aspx" />
     <Content Include="Guardia\Listado.aspx" />
+    <Content Include="Guardia\Reservas.aspx" />
+    <Content Include="Guardia\Template\AsideGuardia.html" />
     <Content Include="Guardia\Template\HeaderGuardia.html" />
     <Content Include="Guardia\Visitas.aspx" />
     <Content Include="Index.aspx" />
@@ -162,6 +169,20 @@
     </Compile>
     <Compile Include="Administrador\Calendario.aspx.designer.cs">
       <DependentUpon>Calendario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Encomiendas.aspx.cs">
+      <DependentUpon>Encomiendas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Encomiendas.aspx.designer.cs">
+      <DependentUpon>Encomiendas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Visitas.aspx.cs">
+      <DependentUpon>Visitas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Visitas.aspx.designer.cs">
+      <DependentUpon>Visitas.aspx</DependentUpon>
     </Compile>
     <Compile Include="buttons.aspx.cs">
       <DependentUpon>buttons.aspx</DependentUpon>
@@ -205,6 +226,13 @@
     <Compile Include="Guardia\EditarVisita.aspx.designer.cs">
       <DependentUpon>EditarVisita.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Guardia\EditarVisitaR.aspx.cs">
+      <DependentUpon>EditarVisitaR.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Guardia\EditarVisitaR.aspx.designer.cs">
+      <DependentUpon>EditarVisitaR.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Guardia\Encomiendas.aspx.cs">
       <DependentUpon>Encomiendas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -239,6 +267,13 @@
     </Compile>
     <Compile Include="Guardia\Listado.aspx.designer.cs">
       <DependentUpon>Listado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Guardia\Reservas.aspx.cs">
+      <DependentUpon>Reservas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Guardia\Reservas.aspx.designer.cs">
+      <DependentUpon>Reservas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Guardia\Visitas.aspx.cs">
       <DependentUpon>Visitas.aspx</DependentUpon>

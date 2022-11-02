@@ -32,7 +32,7 @@
                     <!-- CTA -->
                     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
                         <div class="w-full overflow-x-auto">
-                            <table class="w-full whitespace-no-wrap">
+                            <table class="table-auto">
                                 <thead>
                                     <tr
                                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
@@ -188,20 +188,20 @@
                                 <tbody
                                     class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                                     <%
-                                        foreach (Encomienda obj in EncomiendaDao.GetAlEncomiendasHistorial(usuario.IdCond))
+                                        foreach (Encomienda obj1 in EncomiendaDao.GetAlEncomiendasHistorial(usuario.IdCond))
                                         {
-                                           string url = obj.Imagen == ""? "../assets/img/notImage.jpg" :  urlSA + containerSA + "/" + obj.Fecha.ToString("yyyy") + "/" + obj.Fecha.ToString("MM") + "/" + obj.IdNumDpto + "/" + obj.Imagen + tokenSAS;
+                                           string url = obj1.Imagen == ""? "../assets/img/notImage.jpg" :  urlSA + containerSA + "/" + obj1.Fecha.ToString("yyyy") + "/" + obj1.Fecha.ToString("MM") + "/" + obj1.IdNumDpto + "/" + obj1.Imagen + tokenSAS;
                                     %>
                                     <tr class="text-gray-700 dark:text-gray-400">
-                                        <td class="px-4 py-3"><%= obj.NumDpto %> </td>
+                                        <td class="px-4 py-3"><%= obj1.NumDpto %> </td>
                                         <td class="px-4 py-3"><%= usuario.Nombres %> <%= usuario.Apellidos %> </td>
-                                        <td class="px-4 py-3"><%= obj.Destinatario %> </td>
-                                        <td class="px-4 py-3"><%= obj.Fecha.ToString("dd/MM/yyyy") %> </td>
-                                        <td class="px-4 py-3"><%= obj.Hora.ToString("hh':'mm''") %> </td>
-                                        <td class="px-4 py-3"><%= obj.Descripcion %> </td>
+                                        <td class="px-4 py-3"><%= obj1.Destinatario %> </td>
+                                        <td class="px-4 py-3"><%= obj1.Fecha.ToString("dd/MM/yyyy") %> </td>
+                                        <td class="px-4 py-3"><%= obj1.Hora.ToString("hh':'mm''") %> </td>
+                                        <td class="px-4 py-3"><%= obj1.Descripcion %> </td>
                                         <td class="px-4 py-3"><img id="img" src="<%=url%>" alt="" style="width:100px; height:100px"/></td>
-                                        <td class="px-4 py-3 text-xs"><span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"><%= obj.Estado %></span></td>
-                                        <td class="px-4 py-3 text-xs"><a href="EditarEncomienda.aspx?id=<%= obj.Id %>">Editar</a></td>
+                                        <td class="px-4 py-3 text-xs"><span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"><%= obj1.Estado %></span></td>
+                                        <td class="px-4 py-3 text-xs"><a href="EditarEncomienda.aspx?id=<%= obj1.Id %>">Editar</a></td>
                                     </tr>
                                     <%
                                         }

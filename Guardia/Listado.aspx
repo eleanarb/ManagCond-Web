@@ -17,6 +17,7 @@
           src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
           defer></script>
       <script src="../assets/js/init-alpine.js"></script>
+      <script src="../assets/js/listado.js"></script>
   </head>
 <body>
     <div
@@ -33,7 +34,7 @@
                     <!-- CTA -->
                     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
                         <div class="w-full overflow-x-auto">
-                            <table class="w-full whitespace-no-wrap">
+                            <table id="listadoR" class="w-full whitespace-no-wrap">
                                 <thead>
                                     <tr
                                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
@@ -55,12 +56,13 @@
                                     <%
                                         foreach (Residente obj in ResidenteDao.GetAlResidente())
                                         {
+                                            String idResidente = obj.RutResidente;
                                     %>
                                     <tr class="text-gray-700 dark:text-gray-400">
                                         <td class="px-4 py-3"><%= obj.NumDpto %> </td>
                                         <td class="px-4 py-3"><%= obj.NombresResidente %> <%= obj.ApellidosResidente %></td>
                                         <td class="px-4 py-3"><%= obj.Estacinamiento %> </td>
-                                        <td class="px-4 py-3"> <button id="buttonList"" @click="openModal" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"> Open Modal</button> </td>
+                                        <td class="px-4 py-3"> <button id="buttonList" @click="openModal" class="buttonList px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"> Open Modal</button> </td>
                                         <td class="px-4 py-3"><%= obj.RutResidente %></td>
                                         <td class="px-4 py-3"><%= obj.TelefonoResidente %> </td>
                                         <td class="px-4 py-3"><%= obj.CorreoResidente %> </td>
@@ -221,9 +223,15 @@
             Mas Informacion
           </p>
           <!-- Modal description -->
-              <form id="EditarEncomienda" runat="server">
-              <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-               </form>
+            <form id="listadoResidente" runat="server">
+                <asp:TextBox ID="rutR" runat="server" class="text-gray-700 dark:text-gray-200"></asp:TextBox>
+                <asp:TextBox ID="telefonoR" runat="server" class="text-gray-700 dark:text-gray-200"></asp:TextBox>
+                <asp:TextBox ID="correoR" runat="server"></asp:TextBox>
+                <asp:TextBox ID="rutP" runat="server"></asp:TextBox>
+                <asp:TextBox ID="nombreP" runat="server"></asp:TextBox>
+                <asp:TextBox ID="telefonoP" runat="server"></asp:TextBox>
+                <asp:TextBox ID="correoP" runat="server"></asp:TextBox>
+            </form>
         </div>
         <footer
           class="flex flex-col items-center justify-end px-6 py-3 -mx-6 -mb-4 space-y-4 sm:space-y-0 sm:space-x-6 sm:flex-row bg-gray-50 dark:bg-gray-800"
