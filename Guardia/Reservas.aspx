@@ -41,7 +41,6 @@
                                         <th class="px-4 py-3">Fecha</th>
                                         <th class="px-4 py-3">Hora</th>
                                         <th class="px-4 py-3">Estado</th>
-                                        <th class="px-4 py-3">Editar</th>
                                     </tr>
                                 </thead>
                                 <tbody
@@ -60,16 +59,11 @@
                                         <td class="px-4 py-3"><%= obj.Fecha.ToString("dd/MM/yyyy")%></td>
                                         <td class="px-4 py-3"><%= obj.RangoHorario %> </td>
                                         <td class="px-4 py-3 text-xs">
-                                        <%if (obj.Estado == 1)
-                                            { %><span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700">Pendiente</span><%}
+                                        <%if (obj.Estado == 4)
+                                            { %><span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700">Finalizado</span><%}
                                           else
-                                         {
-                                          if (obj.Estado == 2)
-                                          { %><span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">Aprobado</span><%}
-                                          else
-                                          {%><span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">Rechazado</span><%}}%>
+                                         {%><span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">Aprobado</span><%}%>
                                         </td>
-                                        <td class="px-4 py-3 text-xs"><a href="EditarEncomienda.aspx?id=<%= obj.Estado %>">Editar</a></td>
                                     </tr>
                                     <%
                                         }

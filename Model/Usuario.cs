@@ -13,7 +13,7 @@ namespace Model
         private string nombres;
         private string apellidos;
         private DateTime fechaNac;
-        private string numDpto;
+        public string numDpto;
         private string correo;
         private string clave;
         private string telefono;

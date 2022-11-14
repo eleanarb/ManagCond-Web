@@ -17,10 +17,6 @@ namespace ManagCond.Residente
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-
-            }
             if (Session["usuario"] == null)
             {
                 Response.Redirect("../Login.aspx");
@@ -30,14 +26,6 @@ namespace ManagCond.Residente
                 if (!Session["tipoUsuario"].Equals(3))
                 {
                     Response.Redirect("../Login.aspx");
-                }
-                else
-                {
-                    int tipoUsuario = (int)Session["tipoUsuario"];
-
-                    Usuario usuario = null;
-                    usuario = (Usuario)Session["usuario"];
-
                 }
             }
         }

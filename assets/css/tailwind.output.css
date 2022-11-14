@@ -615,6 +615,7 @@ img, video {
     background-color: rgba(222,247,236,var(--bg-opacity))
 }
 
+
 .bg-teal-100 {
     --bg-opacity: 1;
     background-color: #d5f5f6;
@@ -2062,6 +2063,10 @@ img, video {
 
     .md\:grid-cols-2 {
         grid-template-columns: repeat(2,minmax(0,1fr))
+    }
+
+    .md\:grid-cols-3 {
+        grid-template-columns: repeat(3,minmax(0,1fr))
     }
 }
 

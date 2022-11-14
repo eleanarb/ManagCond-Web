@@ -32,8 +32,7 @@
     <script src="../assets/js/charts-lines.js" defer></script>
     <script src="../assets/js/charts-pie.js" defer></script>
 
-      <script src="../assets/js/reservaScript.js" defer></script>
-    <script src="../assets/js/reserva.js" defer></script>
+     
 
 
     <link
@@ -739,31 +738,41 @@
                     
                         <div class="swiper mySwiper" id="reservas-pendientes">
                             <div class="swiper-wrapper">
-
+                                
                                     <%
+                                        int totalReservasP = 0;
+                                        totalReservasP = ReservaDao.ObtenerTotalReservasPendientes(idCondominio);
+
+                                        if(totalReservasP == 0)
+                                        { %>
+                                        
+                                        <div class="flex-1 p-6"><div class="text-center py-24 text-gray-500 dark:text-slate-400"><p>Estás al día, no hay reservas pendientes!</p></div></div>  
+                                       <% }else{
+                                        
                                         foreach (Reserva obj1 in ReservaDao.GetAlReservasPendientes(idCondominio))
                                         {
                                             int idReserva = obj1.Id;
+                                            string fecha = obj1.Fecha.ToString("ddd dd  MMMM  yyyy");
                                     %>
 
                                     <div class="swiper-slide">
                                         <div
-                                            class="max-w-2xl px-4 py-3 mb-8 bg-white rounded-lg shadow-md bg-purple-600 dark:bg-purple-700">
-                                            <h2 class="text-white dark:text-gray-100"><strong><%=obj1.EspacioComun %></strong></h2>
-                                            <i class="text-white dark:text-gray-00">Dpto <%=obj1.NumDpto%> - <%=obj1.Solicitante %> </i>
+                                            class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+                                            <h2 class="font-semibold text-gray-700 dark:text-gray-200"><strong><%=obj1.EspacioComun %></strong></h2>
+                                            <i class="mb-4 text-gray-600 dark:text-gray-400">Dpto <%=obj1.NumDpto%> - <%=obj1.Solicitante %> </i>
                                             <br />
-                                            <p class="mb-4 text-white dark:text-gray-100">
-                                                <%=obj1.Fecha %> | <%=obj1.RangoHorario %>
-                                            </p>
+                                            <p class="mb-4 text-gray-600 dark:text-gray-400"><%=fecha %> <br />
+                                                <%=obj1.RangoHorario %></p>
+
                                             <button data-id="<%=idReserva%>"
                                                 @click="openModal"
                                                 class="btnReservaP px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                                               >
-                                                Open Modal
+                                                Modificar
                                            </button>
-                                        </div>
+                                        </div>                                           
                                     </div>
-                                    <%} %>
+                                    <%} }%>
                             </div>
                             <div class="swiper-button-next"></div>
                             <div class="swiper-button-prev"></div>
@@ -837,7 +846,7 @@
                             <%if (obj.Estado == 2)
                                 { %>
                             <span
-                                class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">Aprobado
+                                class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-700">Aprobado
                             </span>
 
                             <%}
@@ -1018,8 +1027,7 @@
         <!-- Modal body -->
           <form id="reserva" runat="server">
         <div class="mt-4 mb-6">
-            <asp:TextBox ID="idReserva" class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" runat="server"></asp:TextBox>
-            
+            <input type="hidden" id="idReserva" name="TextBoxId" value="0" runat="server">     
           <!-- Modal title -->
           <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-300" id="titulo">
             titulo-evento
@@ -1035,7 +1043,8 @@
         <footer
           class="flex flex-col items-center justify-end px-6 py-3 -mx-6 -mb-4 space-y-4 sm:space-y-0 sm:space-x-6 sm:flex-row bg-gray-50 dark:bg-gray-800"
         >
-          <asp:Button ID="ButtonAprobar" class="form-control w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" runat="server" OnClick="ButtonAprobar_Click" Text="Aprobar" />
+          <asp:Button ID="ButtonAprobar" class="form-control w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-teal-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-teal-600 hover:bg-teal-600 focus:outline-none focus:shadow-outline-green" runat="server" OnClick="ButtonAprobar_Click" Text="Aprobar" />
+          <asp:Button ID="ButtonRechazar" class="form-control w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-red" runat="server" OnClick="ButtonRechazar_Click" Text="Rechazar" />
          
         </footer>
               </form>
@@ -1066,6 +1075,28 @@
                 prevEl: ".swiper-button-prev",
             },
         });
+    </script>
+
+    <script>
+        let editar = document.querySelectorAll(".btnReservaP")
+
+          editar.forEach((boton) => {
+              boton.addEventListener("click", (event) => {
+                  event.preventDefault()
+                  var reserva = event.target.parentElement
+
+                  espacioComun = reserva.querySelector('h2').textContent
+                  depto = reserva.querySelector('i').textContent
+                  fecha =  reserva.querySelector('p').textContent
+                  id =  reserva.querySelector('.btnReservaP').getAttribute('data-id')
+
+                  document.querySelector('#titulo').innerText = espacioComun;
+                  document.querySelector('#depto').innerText = depto;
+                  document.querySelector('#fecha').innerText = fecha;
+                  document.querySelector('#idReserva').value = id;
+                  
+              })
+          })
     </script>
 
 

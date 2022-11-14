@@ -19,8 +19,9 @@ namespace Model
         private string estado;
         private int idCond;
         private int idNumDpto;
+        private string recepcion;
 
-        public Encomienda(int id, string numDpto, string destinatario, DateTime fecha, TimeSpan hora, string descripcion, string imagen, string estado, int idCond, int idNumDpto)
+        public Encomienda(int id, string numDpto, string destinatario, DateTime fecha, TimeSpan hora, string descripcion, string imagen, string estado, int idCond, int idNumDpto, string recepcion)
         {
             this.id = id;
             this.numDpto = numDpto;
@@ -32,6 +33,7 @@ namespace Model
             this.estado = estado;
             this.idCond = idCond;
             this.idNumDpto = idNumDpto;
+            this.recepcion = recepcion;
         }
 
         public int Id { get => id; set => id = value; }
@@ -44,5 +46,6 @@ namespace Model
         public string Estado { get => estado; set => estado = value; }
         public int IdCond { get => idCond; set => idCond = value; }
         public int IdNumDpto { get => idNumDpto; set => idNumDpto = value; }
+        public string Recepcion { get => recepcion; set => recepcion = value; }
     }
 }

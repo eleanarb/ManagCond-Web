@@ -43,10 +43,16 @@
   <ItemGroup>
     <Compile Include="CondominioDao.cs" />
     <Compile Include="Conexion.cs" />
+    <Compile Include="EgresosDao.cs" />
     <Compile Include="EncomiendaDao.cs" />
     <Compile Include="EventDAO.cs" />
+    <Compile Include="ForoDao.cs" />
     <Compile Include="GastosComunesDao.cs" />
+    <Compile Include="IngresosDao.cs" />
+    <Compile Include="LiquidacionesDao.cs" />
+    <Compile Include="OtrosGastosDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProveedorDao.cs" />
     <Compile Include="ReservaDao.cs" />
     <Compile Include="ResidenteDao.cs" />
     <Compile Include="UsuarioDao.cs" />

@@ -76,8 +76,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Administrador\AgregarContrato.aspx" />
+    <Content Include="Administrador\AgregarEgreso.aspx" />
+    <Content Include="Administrador\AgregarIngreso.aspx" />
+    <Content Include="Administrador\AgregarLiquidacion.aspx" />
+    <Content Include="Administrador\AgregarOtroGasto.aspx" />
+    <Content Include="Administrador\AgregarProveedor.aspx" />
+    <Content Include="Administrador\AgregarTrabajador.aspx" />
     <Content Include="Administrador\Calendario.aspx" />
+    <Content Include="Administrador\EditarOtroGasto.aspx" />
+    <Content Include="Administrador\EditarProveedor.aspx" />
+    <Content Include="Administrador\Egresos.aspx" />
     <Content Include="Administrador\Encomiendas.aspx" />
+    <Content Include="Administrador\GastosComunes.aspx" />
+    <Content Include="Administrador\GestionProveedores.aspx" />
+    <Content Include="Administrador\Ingresos.aspx" />
+    <Content Include="Administrador\Liquidaciones.aspx" />
+    <Content Include="Administrador\otrosGastos.aspx" />
+    <Content Include="Administrador\perfil.aspx" />
+    <Content Include="Administrador\publicacionForo.aspx" />
+    <Content Include="Administrador\gestionCargos.aspx" />
     <Content Include="Administrador\Visitas.aspx" />
     <Content Include="assets\css\custom-theme\images\ui-icons_0073ea_256x240.png" />
     <Content Include="assets\css\custom-theme\images\ui-icons_454545_256x240.png" />
@@ -127,8 +145,6 @@
     <Content Include="assets\js\jquery.qtip-1.0.0-rc3.min.js" />
     <Content Include="assets\js\listado.js" />
     <Content Include="assets\js\listadoScript.js" />
-    <Content Include="assets\js\reserva.js" />
-    <Content Include="assets\js\reservaScript.js" />
     <Content Include="buttons.aspx" />
     <Content Include="cards.aspx" />
     <Content Include="charts.aspx" />
@@ -151,10 +167,15 @@
     <Content Include="LogOut.aspx" />
     <Content Include="modals.aspx" />
     <Content Include="Administrador\reservas.aspx" />
+    <Content Include="Residente\AgregarReserva.aspx" />
     <Content Include="Residente\AgregarVisita.aspx" />
+    <Content Include="Residente\EditarReserva.aspx" />
+    <Content Include="Residente\EditarVisita.aspx" />
+    <Content Include="Residente\EditarVisitaR.aspx" />
     <Content Include="Residente\Encomienda.aspx" />
     <Content Include="Residente\GastosComunes.aspx" />
     <Content Include="Residente\Index.aspx" />
+    <Content Include="Residente\Reservas.aspx" />
     <Content Include="Residente\Template\HeaderResidente.html" />
     <Content Include="Residente\Visitas.aspx" />
     <Content Include="tables.aspx" />
@@ -163,6 +184,55 @@
     <Content Include="WebFormError.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administrador\AgregarContrato.aspx.cs">
+      <DependentUpon>AgregarContrato.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\AgregarContrato.aspx.designer.cs">
+      <DependentUpon>AgregarContrato.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\AgregarEgreso.aspx.cs">
+      <DependentUpon>AgregarEgreso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\AgregarEgreso.aspx.designer.cs">
+      <DependentUpon>AgregarEgreso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\AgregarIngreso.aspx.cs">
+      <DependentUpon>AgregarIngreso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\AgregarIngreso.aspx.designer.cs">
+      <DependentUpon>AgregarIngreso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\AgregarLiquidacion.aspx.cs">
+      <DependentUpon>AgregarLiquidacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\AgregarLiquidacion.aspx.designer.cs">
+      <DependentUpon>AgregarLiquidacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\AgregarOtroGasto.aspx.cs">
+      <DependentUpon>AgregarOtroGasto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\AgregarOtroGasto.aspx.designer.cs">
+      <DependentUpon>AgregarOtroGasto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\AgregarProveedor.aspx.cs">
+      <DependentUpon>AgregarProveedor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\AgregarProveedor.aspx.designer.cs">
+      <DependentUpon>AgregarProveedor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\AgregarTrabajador.aspx.cs">
+      <DependentUpon>AgregarTrabajador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\AgregarTrabajador.aspx.designer.cs">
+      <DependentUpon>AgregarTrabajador.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Administrador\Calendario.aspx.cs">
       <DependentUpon>Calendario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -170,12 +240,89 @@
     <Compile Include="Administrador\Calendario.aspx.designer.cs">
       <DependentUpon>Calendario.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administrador\EditarOtroGasto.aspx.cs">
+      <DependentUpon>EditarOtroGasto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\EditarOtroGasto.aspx.designer.cs">
+      <DependentUpon>EditarOtroGasto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\EditarProveedor.aspx.cs">
+      <DependentUpon>EditarProveedor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\EditarProveedor.aspx.designer.cs">
+      <DependentUpon>EditarProveedor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Egresos.aspx.cs">
+      <DependentUpon>Egresos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Egresos.aspx.designer.cs">
+      <DependentUpon>Egresos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Administrador\Encomiendas.aspx.cs">
       <DependentUpon>Encomiendas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Administrador\Encomiendas.aspx.designer.cs">
       <DependentUpon>Encomiendas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\GastosComunes.aspx.cs">
+      <DependentUpon>GastosComunes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\GastosComunes.aspx.designer.cs">
+      <DependentUpon>GastosComunes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\GestionProveedores.aspx.cs">
+      <DependentUpon>GestionProveedores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\GestionProveedores.aspx.designer.cs">
+      <DependentUpon>GestionProveedores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Ingresos.aspx.cs">
+      <DependentUpon>Ingresos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Ingresos.aspx.designer.cs">
+      <DependentUpon>Ingresos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Liquidaciones.aspx.cs">
+      <DependentUpon>Liquidaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Liquidaciones.aspx.designer.cs">
+      <DependentUpon>Liquidaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\otrosGastos.aspx.cs">
+      <DependentUpon>otrosGastos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\otrosGastos.aspx.designer.cs">
+      <DependentUpon>otrosGastos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\perfil.aspx.cs">
+      <DependentUpon>perfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\perfil.aspx.designer.cs">
+      <DependentUpon>perfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\publicacionForo.aspx.cs">
+      <DependentUpon>publicacionForo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\publicacionForo.aspx.designer.cs">
+      <DependentUpon>publicacionForo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\gestionCargos.aspx.cs">
+      <DependentUpon>gestionCargos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\gestionCargos.aspx.designer.cs">
+      <DependentUpon>gestionCargos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrador\Visitas.aspx.cs">
       <DependentUpon>Visitas.aspx</DependentUpon>
@@ -325,12 +472,40 @@
     <Compile Include="Administrador\reservas.aspx.designer.cs">
       <DependentUpon>reservas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Residente\AgregarReserva.aspx.cs">
+      <DependentUpon>AgregarReserva.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Residente\AgregarReserva.aspx.designer.cs">
+      <DependentUpon>AgregarReserva.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Residente\AgregarVisita.aspx.cs">
       <DependentUpon>AgregarVisita.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Residente\AgregarVisita.aspx.designer.cs">
       <DependentUpon>AgregarVisita.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Residente\EditarReserva.aspx.cs">
+      <DependentUpon>EditarReserva.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Residente\EditarReserva.aspx.designer.cs">
+      <DependentUpon>EditarReserva.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Residente\EditarVisita.aspx.cs">
+      <DependentUpon>EditarVisita.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Residente\EditarVisita.aspx.designer.cs">
+      <DependentUpon>EditarVisita.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Residente\EditarVisitaR.aspx.cs">
+      <DependentUpon>EditarVisitaR.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Residente\EditarVisitaR.aspx.designer.cs">
+      <DependentUpon>EditarVisitaR.aspx</DependentUpon>
     </Compile>
     <Compile Include="Residente\Encomienda.aspx.cs">
       <DependentUpon>Encomienda.aspx</DependentUpon>
@@ -352,6 +527,13 @@
     </Compile>
     <Compile Include="Residente\Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Residente\Reservas.aspx.cs">
+      <DependentUpon>Reservas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Residente\Reservas.aspx.designer.cs">
+      <DependentUpon>Reservas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Residente\Visitas.aspx.cs">
       <DependentUpon>Visitas.aspx</DependentUpon>

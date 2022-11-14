@@ -48,12 +48,6 @@ namespace ManagCond.Guardia
                 {
                     Response.Redirect("../Login.aspx");
                 }
-                else
-                {
-                    int tipoUsuario = (int)Session["tipoUsuario"];
-
-                    Usuario usuario = (Usuario)Session["usuario"];
-                }
             }
         }
         protected void ButtonAceptar_Click(object sender, EventArgs e)
@@ -81,7 +75,7 @@ namespace ManagCond.Guardia
         {
             int idCond = int.Parse(Session["idCond"].ToString());
 
-            SqlCommand cmd = new SqlCommand("Select id , numDpto from departamento where id_Cond = " + idCond + "", Conexion.Open());
+            SqlCommand cmd = new SqlCommand("Select id , numDpto from departamento where id_Cond = " + idCond + " and not numDpto = 'No aplica'", Conexion.Open());
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);
@@ -94,7 +88,7 @@ namespace ManagCond.Guardia
         }
         public void LlenarDropDownListEstado()
         {
-            SqlCommand cmd = new SqlCommand("SELECT * from estadoVisita", Conexion.Open());
+            SqlCommand cmd = new SqlCommand("SELECT * from estadoVisita where id between 1 and 3", Conexion.Open());
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);

@@ -29,13 +29,6 @@ namespace ManagCond.Guardia
                 {
                     Response.Redirect("../Login.aspx");
                 }
-                else
-                {
-                    int tipoUsuario = (int)Session["tipoUsuario"];
-
-                    Usuario usuario = (Usuario)Session["usuario"];
-
-                }
             }
         }
     }

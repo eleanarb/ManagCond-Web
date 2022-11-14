@@ -31,6 +31,27 @@
             <form id="AgregarVisita" runat="server">
                 <div class="w-full">
                     <label class="block text-sm">
+                        <span class="text-gray-700 dark:text-gray-200">Numero departamento</span><br />
+                        <asp:DropDownList  class="mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-multiselect focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownList" runat="server" disabled="true">
+                        </asp:DropDownList>
+                    </label>
+                    <label class="block mt-4 text-sm">
+                        <span class="text-gray-700 dark:text-gray-400">Rut</span>
+                        <asp:TextBox ID="TextBoxRut" class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" runat="server" disabled="true"></asp:TextBox>
+                    </label>
+                    <label class="block mt-4 text-sm">
+                        <span class="text-gray-700 dark:text-gray-400">Nombres</span>
+                        <asp:TextBox ID="TextBoxNombres" class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" runat="server" disabled="true"></asp:TextBox>
+                    </label>
+                    <label class="block mt-4 text-sm">
+                        <span class="text-gray-700 dark:text-gray-400">Apellidos</span>
+                        <asp:TextBox ID="TextBoxApellidos" class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" runat="server" disabled="true"></asp:TextBox>
+                    </label>
+                    <label class="block mt-4 text-sm">
+                        <span class="text-gray-700 dark:text-gray-400">Patente</span>
+                        <asp:TextBox ID="TextBoxPatente" class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" runat="server" disabled="true"></asp:TextBox>
+                    </label>
+                    <label class="block text-sm">
                         <span class="text-gray-700 dark:text-gray-200">Estado</span><br />
                         <asp:DropDownList class="mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-multiselect focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownListEstado" runat="server">
                         </asp:DropDownList>

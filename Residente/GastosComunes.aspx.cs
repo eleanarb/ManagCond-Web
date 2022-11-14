@@ -22,14 +22,6 @@ namespace ManagCond.Residente
                 {
                     Response.Redirect("../Login.aspx");
                 }
-                else
-                {
-                    int tipoUsuario = (int)Session["tipoUsuario"];
-
-                    Usuario usuario = null;
-                    usuario = (Usuario)Session["usuario"];
-
-                }
             }
         }
     }

@@ -40,9 +40,8 @@
                  %> 
             <main class="h-full overflow-y-auto">
                 <div class="container px-6 mx-auto grid">
-                    <h2
-                        class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Condominio <%=condominio.Nombre %>
-                    </h2>
+                    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Guardia <%=usuario.Nombres %> <%=usuario.Apellidos %></h2>
+                    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Condominio <%=condominio.Nombre %></h2>
                     <!-- CTA -->
                     <!-- Cards -->
                     <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
@@ -119,57 +118,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Charts -->
-                    <h2
-                        class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Gráficos
-                    </h2>
-                    <div class="grid gap-6 mb-8 md:grid-cols-2">
-                        <div
-                            class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-                            <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">Distribución de Gastos
-                            </h4>
-                            <canvas id="pie"></canvas>
-                            <div
-                                class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
-                                <!-- Chart legend -->
-                                <div class="flex items-center">
-                                    <span
-                                        class="inline-block w-3 h-3 mr-1 bg-blue-500 rounded-full"></span>
-                                    <span>Mantención</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <span
-                                        class="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
-                                    <span>Administrativos</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <span
-                                        class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
-                                    <span>Básicos</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-                            <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">Ingresos y Egresos
-                            </h4>
-                            <canvas id="line"></canvas>
-                            <div
-                                class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
-                                <!-- Chart legend -->
-                                <div class="flex items-center">
-                                    <span
-                                        class="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
-                                    <span>Ingresos</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <span
-                                        class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
-                                    <span>Egresos</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
                 <div class="container grid px-6 mx-auto">
                     <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Ultimas encomiendas</h2>
@@ -203,8 +152,8 @@
                                             string url = obj.Imagen == ""? "../assets/img/notImage.jpg" :  urlSA + containerSA + "/" + obj.Fecha.ToString("yyyy") + "/" + obj.Fecha.ToString("MM") + "/" + obj.IdNumDpto + "/" + obj.Imagen + tokenSAS;
                                     %>
                                     <tr class="text-gray-700 dark:text-gray-400">
-                                        <td class="px-4 py-3"><%= obj.NumDpto %> </td>
-                                        <td class="px-4 py-3"><%= usuario.Nombres %> <%= usuario.Apellidos %> </td>
+                                        <td class="px-4 py-3"><%= obj.IdNumDpto %> </td>
+                                        <td class="px-4 py-3"><%= obj.Recepcion %></td>
                                         <td class="px-4 py-3"><%= obj.Destinatario %> </td>
                                         <td class="px-4 py-3"><%= obj.Fecha.ToString("dd/MM/yyyy") %> </td>
                                         <td class="px-4 py-3"><%= obj.Hora.ToString("hh':'mm''") %> </td>
@@ -296,7 +245,6 @@
                                         <th class="px-4 py-3">Fecha</th>
                                         <th class="px-4 py-3">Hora</th>
                                         <th class="px-4 py-3">Estado</th>
-                                        <th class="px-4 py-3">Editar</th>
                                     </tr>
                                 </thead>
                                 <tbody
@@ -322,7 +270,6 @@
                                           else
                                           {%><span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">Rechazado</span><%}}%>
                                         </td>
-                                        <td class="px-4 py-3 text-xs"><a href="EditarEncomienda.aspx?id=<%= obj.Estado %>">Editar</a></td>
                                     </tr>
                                     <%
                                         }

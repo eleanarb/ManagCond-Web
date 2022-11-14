@@ -19,10 +19,29 @@ namespace ManagCond
         protected void ButtonAprobar_Click(object sender, EventArgs e)
         {
 
-            int id = int.Parse(idReserva.Text);
+            int id = int.Parse(idReserva.Value);
 
 
             if (ReservaDao.AprobarReserva(id))
+            {
+                Response.Redirect("reservas.aspx");
+            }
+            else
+            {
+                string script = String.Format(@"<script type='text/javascript'>alert('No se puede aprobar la reserva, la fecha está ocupada' );</script>");
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, false);
+                Response.Redirect("reservas.aspx");
+            }
+
+        }
+
+        protected void ButtonRechazar_Click(object sender, EventArgs e)
+        {
+
+            int id = int.Parse(idReserva.Value);
+
+
+            if (ReservaDao.RechazarReserva(id))
             {
                 Response.Redirect("reservas.aspx");
             }

@@ -40,7 +40,6 @@ namespace ManagCond.Guardia
                 DropDownList.SelectedIndex = index;
                 TextBoxDestinatario.Text = encomienda.Destinatario;
                 TextBoxDescripcion.Text = encomienda.Descripcion;
-                //FileUploadEncomienda.Value = encomienda.Imagen;
                 DropDownListEstado.SelectedValue = encomienda.Estado;
             }
             if (Session["usuario"] == null)
@@ -53,12 +52,6 @@ namespace ManagCond.Guardia
                 {
                     Response.Redirect("../Login.aspx");
                 }
-                else
-                {
-                    int tipoUsuario = (int)Session["tipoUsuario"];
-
-                    Usuario usuario = (Usuario)Session["usuario"];
-                }
             }
         }
         protected void ButtonAceptar_Click(object sender, EventArgs e)
@@ -68,16 +61,37 @@ namespace ManagCond.Guardia
             String numDpto = DropDownList.SelectedValue;
             String destinatario = TextBoxDestinatario.Text;
             String descripcion = TextBoxDescripcion.Text;
-            String fileName = DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + numDpto + "/" + FileUploadEncomienda.Value;
-            String fileNameBD = FileUploadEncomienda.Value;
+
+            string fileNameBD = "";
+            string fileName = "";
             Stream filestream = FileUploadEncomienda.PostedFile.InputStream;
+            if (FileUploadEncomienda.Value != "")
+            {
+                fileName = DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + numDpto + "/" + FileUploadEncomienda.Value;
+                fileNameBD = FileUploadEncomienda.Value;
+                filestream = FileUploadEncomienda.PostedFile.InputStream;
+            }
+            if (FileUploadEncomienda.Value == "")
+            {
+                string idF = Request.QueryString["id"];
+                int idCondF = int.Parse(Session["idCond"].ToString());
+                Encomienda encomienda = EncomiendaDao.BuscarEncomienda(int.Parse(idF), idCondF);
+                fileNameBD = encomienda.Imagen;
+            }
+
+
             String estado = DropDownListEstado.Text.ToLower();
             estado = estado.Equals("pendiente") ? "1" : "2";
 
             if (EncomiendaDao.ModificarEncomienda(idE, idCond, numDpto, destinatario, descripcion, fileNameBD, estado))
             {
-                _ = UploadBlop(fileName, filestream);
+                if (FileUploadEncomienda.Value != "")
+                {
+                    _ = UploadBlop(fileName, filestream);
+                    Response.Redirect("Encomiendas.aspx");
+                }
                 Response.Redirect("Encomiendas.aspx");
+
             }
             else
             {

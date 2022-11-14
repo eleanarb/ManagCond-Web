@@ -13,23 +13,22 @@ namespace Dao
     public class GastosComunesDao
     {
         private static readonly List<GastosComunes> alGastosComunes = new List<GastosComunes>();
-
+        private static readonly Conexion con = new Conexion();
+        private static readonly string conBD = con.Conectar();
+        //Administrador
         public static List<GastosComunes> GetAlGastosComunes(int idCondominio)
         {
             ObtenerDatosGastosComunes(idCondominio);
             return alGastosComunes;
         }
-
-        public static GastosComunes ObtenerDatosGastosComunes(int idCondominio)
+        public static int ObtenerTotalGastoComunes()
         {
-            alGastosComunes.Clear();
-
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            GastosComunes gastosComunes = null;
+            int totalRespuestas = 0;
 
-            string sSel = "select * from gastosComunes INNER JOIN estadoGastosComunes on gastosComunes.estado = estadoGastosComunes.id where gastoscomunes.id_Cond = '" + idCondominio + "' ";
+            string sSel = "SELECT count(*) FROM gastosComunes";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -42,31 +41,57 @@ namespace Dao
 
                 for (; fila < totalFilas; fila++)
                 {
+                    totalRespuestas = int.Parse(dt.Rows[fila][0].ToString());
 
-                    int id = int.Parse(dt.Rows[fila][0].ToString());
-                    String numDpto = dt.Rows[fila][1].ToString();
-                    DateTime fechaEmision = Convert.ToDateTime(dt.Rows[fila][2]);
-                    DateTime fechaVencimiento = Convert.ToDateTime(dt.Rows[fila][3]);
-                    int gastoComun = int.Parse(dt.Rows[fila][4].ToString());
-                    int fondoReserva = int.Parse(dt.Rows[fila][5].ToString());
-                    int seguro = int.Parse(dt.Rows[fila][6].ToString());
-                    int multas = int.Parse(dt.Rows[fila][7].ToString());
-                    int moraPeriodo = int.Parse(dt.Rows[fila][8].ToString());
-                    int varios = int.Parse(dt.Rows[fila][9].ToString());
-                    int idCond = int.Parse(dt.Rows[fila][10].ToString());
-                    String estado = dt.Rows[fila][13].ToString();
-
-                    gastosComunes = new GastosComunes(id, numDpto, fechaEmision, fechaVencimiento, gastoComun, fondoReserva, seguro, multas, moraPeriodo, varios
-                        , idCond, estado);
-
-                    alGastosComunes.Add(gastosComunes);
                 }
             }
             catch (Exception)
             {
                 //Label1.Text = "Error: " + ex.Message;
             }
-            return gastosComunes;
+            return totalRespuestas;
+        }
+        public static void ObtenerDatosGastosComunes(int idCond)
+        {
+            alGastosComunes.Clear();
+            string strSql = String.Format("SELECT gc.id, gc.idDpto, D.numDpto, gc.mesCobro, gc.añoCobro, gc.fechaEmision, gc.fechaVencimiento, gc.gastoComun, gc.fondoReserva, gc.multas, gc.diasAtraso, gc.moraPeriodo, gc.varios, gc.id_Cond, gc.estado, gc.fechaPago from gastosComunes gc INNER JOIN estadoGastosComunes egc on gc.estado = egc.id INNER JOIN departamento d ON d.id = gc.idDpto where gc.id_Cond = {0}", idCond);
+
+            using (SqlConnection con = new SqlConnection(conBD))
+            {
+                SqlCommand cmd = new SqlCommand(strSql, con) { CommandType = CommandType.Text };
+                con.Open();
+                SqlDataReader sdr = cmd.ExecuteReader();
+
+                while (sdr.Read())
+                {
+                    int id = int.Parse(sdr["id"].ToString());
+                    int idDpto = int.Parse(sdr["idDpto"].ToString());
+                    string numDpto = sdr["numDpto"].ToString();
+                    int mesCobro = int.Parse(sdr["mesCobro"].ToString());
+                    int añoCobro = int.Parse(sdr["añoCobro"].ToString());
+                    DateTime fechaEmision = DateTime.Parse(sdr["fechaEmision"].ToString());
+                    DateTime fechaVencimiento = DateTime.Parse(sdr["fechaVencimiento"].ToString());
+                    int gastoComun = int.Parse(sdr["gastoComun"].ToString());
+                    int fondoReserva = int.Parse(sdr["fondoReserva"].ToString());
+                    int multas = int.Parse(sdr["multas"].ToString());
+                    int diasAtraso = int.Parse(sdr["diasAtraso"].ToString());
+                    int moraPeriodo = int.Parse(sdr["moraPeriodo"].ToString());
+                    int varios = int.Parse(sdr["varios"].ToString());
+                    int estado = int.Parse(sdr["estado"].ToString());
+                    DateTime fechaPago = DateTime.Parse(sdr["fechaPago"].ToString());
+
+                    if(fechaPago== null)
+                    {
+                        fechaPago = DateTime.Parse("0000-00-00");
+                    }
+
+
+                    GastosComunes gastosComunes = new GastosComunes(id, idDpto, numDpto, mesCobro, añoCobro, fechaEmision, fechaVencimiento, gastoComun, fondoReserva, multas, 0, 0, varios, idCond, estado, fechaPago);
+
+                    alGastosComunes.Add(gastosComunes);
+                }
+                con.Close();
+            }
         }
 
         //Residente
@@ -103,9 +128,9 @@ namespace Dao
                     int varios = int.Parse(dt.Rows[fila][9].ToString());
                     string estado = dt.Rows[fila][10].ToString();
 
-                    GastosComunes gastoscomunes = new GastosComunes(id, numDptoQ, fechaEmision, fechaVencimiento, gastoComun, fondoReserva, seguro, multas, moraPeriodo, varios, id_Cond, estado);
+                    //GastosComunes gastoscomunes = new GastosComunes(id, numDptoQ, fechaEmision, fechaVencimiento, gastoComun, fondoReserva, seguro, multas, moraPeriodo, varios, id_Cond, estado);
 
-                    alGastosComunes.Add(gastoscomunes);
+                    //alGastosComunes.Add(gastoscomunes);
                 }
             }
             catch (Exception)
@@ -147,9 +172,9 @@ namespace Dao
                     int varios = int.Parse(dt.Rows[fila][9].ToString());
                     string estado = dt.Rows[fila][10].ToString();
 
-                    GastosComunes gastoscomunes = new GastosComunes(id, numDptoQ, fechaEmision, fechaVencimiento, gastoComun, fondoReserva, seguro, multas, moraPeriodo, varios, id_Cond, estado);
+                    //GastosComunes gastoscomunes = new GastosComunes(id, numDptoQ, fechaEmision, fechaVencimiento, gastoComun, fondoReserva, seguro, multas, moraPeriodo, varios, id_Cond, estado);
 
-                    alGastosComunes.Add(gastoscomunes);
+                    //alGastosComunes.Add(gastoscomunes);
                 }
             }
             catch (Exception)
@@ -191,9 +216,9 @@ namespace Dao
                     int varios = int.Parse(dt.Rows[fila][9].ToString());
                     string estado = dt.Rows[fila][10].ToString();
 
-                    GastosComunes gastoscomunes = new GastosComunes(id, numDptoQ, fechaEmision, fechaVencimiento, gastoComun, fondoReserva, seguro, multas, moraPeriodo, varios, id_Cond, estado);
+                    //GastosComunes gastoscomunes = new GastosComunes(id, numDptoQ, fechaEmision, fechaVencimiento, gastoComun, fondoReserva, seguro, multas, moraPeriodo, varios, id_Cond, estado);
 
-                    alGastosComunes.Add(gastoscomunes);
+                    //alGastosComunes.Add(gastoscomunes);
                 }
             }
             catch (Exception)

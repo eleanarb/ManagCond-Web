@@ -563,6 +563,7 @@
                                     int totalReservasP = 0;
                                     totalReservasP = ReservaDao.ObtenerTotalReservasPendientes(idCondominio);
 
+
                                  %>
 
                                 <p
@@ -592,7 +593,7 @@
 
                                         foreach (GastosComunes obj in GastosComunesDao.GetAlGastosComunes(idCondominio))
                                         {
-                                            int total = obj.GastoComun + obj.FondoReserva + obj.Seguro + obj.Multas + obj.MoraPeriodo + obj.Varios;
+                                            int total = obj.GastoComun + obj.FondoReserva + obj.Multas + obj.MoraPeriodo + obj.Varios;
 
                                     %>
                                     <tr class="text-gray-700 dark:text-gray-400">
@@ -607,19 +608,19 @@
                                         <td class="px-4 py-3 text-sm">$<%=total.ToString("N",new CultureInfo("en-US"))%>
                                         </td>
                                         <td class="px-4 py-3 text-xs">
-                                            <%if (obj.Estado.Equals("Pagado")){ %>
+                                            <%if (obj.Estado==2){ %>
                                             <span
                                                 class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"><%=obj.Estado %>
                                             </span>
 
-                                            <%}else if (obj.Estado.Equals("Pendiente"))
+                                            <%}else if (obj.Estado==1)
                                                 { %>
                                             <span
                                                 class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700"><%=obj.Estado %>
                                             </span>
 
                                             <%}
-                                                else if (obj.Estado.Equals("Vencido"))
+                                                else if (obj.Estado==3)
                                                 { %>
                                             <span
                                                 class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"><%=obj.Estado %>

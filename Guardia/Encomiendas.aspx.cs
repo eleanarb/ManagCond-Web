@@ -29,12 +29,6 @@ namespace ManagCond
                 {
                     Response.Redirect("../Login.aspx");
                 }
-                else
-                {
-                    int tipoUsuario = (int)Session["tipoUsuario"];
-
-                    Usuario usuario = (Usuario)Session["usuario"];
-                }
             }
         }
         protected void ButtonAgregar_Click(object sender, EventArgs e)
@@ -61,7 +55,10 @@ namespace ManagCond
             string fileName = DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + numDpto + "/" + fileNameBD;
             Stream filestream = FileUploadEncomienda.PostedFile.InputStream;
 
-            if (EncomiendaDao.AgregarEncomienda(numDpto, destinatario, descripcion, fileNameBD, idCond))
+            Usuario usuario = (Usuario)Session["usuario"];
+            string recepcion = usuario.Nombres + " " + usuario.Apellidos;
+
+            if (EncomiendaDao.AgregarEncomienda(numDpto, destinatario, descripcion, fileNameBD, idCond, recepcion))
             {
                 _ = UploadBlop(fileName, filestream);
                 Response.Redirect("Encomiendas.aspx");
@@ -111,6 +108,19 @@ namespace ManagCond
             DropDownList.DataBind();
             DropDownList.Items.Insert(0, new ListItem("Seleccione departamento", "0"));
 
+        }
+
+        protected void ButtonEliminar_Click(object sender, EventArgs e)
+        {
+            int id = int.Parse(TextBoxIdEliminar.Value);
+            if (EncomiendaDao.EliminaEncomienda(id))
+            {
+                Response.Redirect("Encomiendas.aspx");
+            }
+            else
+            {
+                Response.Redirect("Encomiendas.aspx");
+            }
         }
     }
 }

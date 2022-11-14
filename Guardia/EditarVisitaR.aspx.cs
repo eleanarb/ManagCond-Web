@@ -18,12 +18,24 @@ namespace ManagCond.Guardia
         {
             if (!IsPostBack)
             {
+                LlenarDropDownList();
                 LlenarDropDownListEstado();
 
                 id = Request.QueryString["id"];
                 int idCond = int.Parse(Session["idCond"].ToString());
                 Visita visita = VisitaDao.BuscarVisita(int.Parse(id), idCond);
-              
+                int index = 0;
+                foreach (ListItem item in DropDownList.Items)
+                {
+                    if (item.Value == visita.IdNumDpto.ToString()) break;
+                    index++;
+                }
+
+                DropDownList.SelectedIndex = index;
+                TextBoxRut.Text = visita.Rut;
+                TextBoxNombres.Text = visita.Nombres;
+                TextBoxApellidos.Text = visita.Apellidos;
+                TextBoxPatente.Text = visita.Patente;
                 DropDownListEstado.SelectedValue = visita.Estado;
             }
             if (Session["usuario"] == null)
@@ -36,23 +48,17 @@ namespace ManagCond.Guardia
                 {
                     Response.Redirect("../Login.aspx");
                 }
-                else
-                {
-                    int tipoUsuario = (int)Session["tipoUsuario"];
-
-                    Usuario usuario = (Usuario)Session["usuario"];
-                }
             }
         }
         protected void ButtonAceptar_Click(object sender, EventArgs e)
         {
             id = Request.QueryString["id"];
             int idCond = int.Parse(Session["idCond"].ToString());
-            String numDpto = "1";
-            String rut = "1";
-            String nombres = "1";
-            String apellidos = "1";
-            String patente = "1";
+            String numDpto = DropDownList.SelectedValue;
+            String rut = TextBoxRut.Text;
+            String nombres = TextBoxNombres.Text;
+            String apellidos = TextBoxApellidos.Text;
+            String patente = TextBoxPatente.Text;
             String estado = DropDownListEstado.SelectedValue;
 
 
@@ -64,6 +70,21 @@ namespace ManagCond.Guardia
             {
                 Response.Redirect("Visita.aspx");
             }
+        }
+        public void LlenarDropDownList()
+        {
+            int idCond = int.Parse(Session["idCond"].ToString());
+
+            SqlCommand cmd = new SqlCommand("Select id , numDpto from departamento where id_Cond = " + idCond + "", Conexion.Open());
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            DropDownList.DataSource = ds;
+            DropDownList.DataTextField = "numDpto";
+            DropDownList.DataValueField = "id";
+            DropDownList.DataBind();
+
         }
         public void LlenarDropDownListEstado()
         {
