@@ -26,6 +26,17 @@ namespace ManagCond.Administrador
                 TextBoxTlf.Value = usuario.Telefono;
                 TextBoxNac.Text = usuario.FechaNac.ToString("yyyy-MM-dd");
             }
+            if (Session["usuario"] == null)
+            {
+                Response.Redirect("../Login.aspx");
+            }
+            else
+            {
+                if (!Session["tipoUsuario"].Equals(1))
+                {
+                    Response.Redirect("../Login.aspx");
+                }
+            }
 
         }
 

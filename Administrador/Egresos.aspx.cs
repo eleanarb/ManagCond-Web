@@ -20,6 +20,17 @@ namespace ManagCond.Administrador
                 LlenarDropDownProveedor();
                 LlenarDropDownCategoria();
             }
+            if (Session["usuario"] == null)
+            {
+                Response.Redirect("../Login.aspx");
+            }
+            else
+            {
+                if (!Session["tipoUsuario"].Equals(1))
+                {
+                    Response.Redirect("../Login.aspx");
+                }
+            }
         }
 
         protected void ButtonModificar_Click(object sender, EventArgs e)

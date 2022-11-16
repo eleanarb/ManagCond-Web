@@ -33,6 +33,17 @@ namespace ManagCond.Administrador
                 TextBoxDesc.Value = otroGasto.Descripcion;
 
             }
+            if (Session["usuario"] == null)
+            {
+                Response.Redirect("../Login.aspx");
+            }
+            else
+            {
+                if (!Session["tipoUsuario"].Equals(1))
+                {
+                    Response.Redirect("../Login.aspx");
+                }
+            }
         }
 
         protected void ButtonModificar_Click(object sender, EventArgs e)

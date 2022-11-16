@@ -15,6 +15,13 @@ namespace ManagCond
             {
                 Response.Redirect("../Login.aspx");
             }
+            else
+            {
+                if (!Session["tipoUsuario"].Equals(1))
+                {
+                    Response.Redirect("../Login.aspx");
+                }
+            }
         }
     }
 }

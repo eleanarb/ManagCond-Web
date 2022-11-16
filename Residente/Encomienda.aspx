@@ -182,6 +182,7 @@
                                        <tr
                                            class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                                            <th class="px-4 py-3">Departamento</th>
+                                           <th class="px-4 py-3">Recepcion</th>
                                            <th class="px-4 py-3">Destinatario</th>
                                            <th class="px-4 py-3">Fecha</th>
                                            <th class="px-4 py-3">Hora</th>
@@ -199,6 +200,7 @@
                                        %>
                                        <tr class="text-gray-700 dark:text-gray-400">
                                            <td class="px-4 py-3"><%= obj.NumDpto %> </td>
+                                           <td class="px-4 py-3"><%= obj.Recepcion %> </td>
                                            <td class="px-4 py-3"><%= obj.Destinatario %> </td>
                                            <td class="px-4 py-3"><%= obj.Fecha.ToString("dd/MM/yyyy") %> </td>
                                            <td class="px-4 py-3"><%= obj.Hora.ToString("hh':'mm''") %> </td>

@@ -10,6 +10,17 @@ namespace ManagCond.Administrador
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usuario"] == null)
+            {
+                Response.Redirect("../Login.aspx");
+            }
+            else
+            {
+                if (!Session["tipoUsuario"].Equals(1))
+                {
+                    Response.Redirect("../Login.aspx");
+                }
+            }
         }
 
         [System.Web.Services.WebMethod(true)]

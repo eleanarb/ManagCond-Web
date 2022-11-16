@@ -96,6 +96,7 @@
     <Content Include="Administrador\perfil.aspx" />
     <Content Include="Administrador\publicacionForo.aspx" />
     <Content Include="Administrador\gestionCargos.aspx" />
+    <Content Include="Administrador\Template\AsideAdministrador.html" />
     <Content Include="Administrador\Visitas.aspx" />
     <Content Include="assets\css\custom-theme\images\ui-icons_0073ea_256x240.png" />
     <Content Include="assets\css\custom-theme\images\ui-icons_454545_256x240.png" />
@@ -155,8 +156,10 @@
     <Content Include="Guardia\Encomiendas.aspx" />
     <Content Include="forms.aspx" />
     <Content Include="Administrador\foro.aspx" />
+    <Content Include="Guardia\Foro.aspx" />
     <Content Include="Guardia\Index.aspx" />
     <Content Include="Guardia\Listado.aspx" />
+    <Content Include="Guardia\publicacionForo.aspx" />
     <Content Include="Guardia\Reservas.aspx" />
     <Content Include="Guardia\Template\AsideGuardia.html" />
     <Content Include="Guardia\Template\HeaderGuardia.html" />
@@ -173,9 +176,12 @@
     <Content Include="Residente\EditarVisita.aspx" />
     <Content Include="Residente\EditarVisitaR.aspx" />
     <Content Include="Residente\Encomienda.aspx" />
+    <Content Include="Residente\Foro.aspx" />
     <Content Include="Residente\GastosComunes.aspx" />
     <Content Include="Residente\Index.aspx" />
+    <Content Include="Residente\publicacionForo.aspx" />
     <Content Include="Residente\Reservas.aspx" />
+    <Content Include="Residente\Template\AsideResidente.html" />
     <Content Include="Residente\Template\HeaderResidente.html" />
     <Content Include="Residente\Visitas.aspx" />
     <Content Include="tables.aspx" />
@@ -401,6 +407,13 @@
     <Compile Include="Administrador\foro.aspx.designer.cs">
       <DependentUpon>foro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Guardia\Foro.aspx.cs">
+      <DependentUpon>Foro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Guardia\Foro.aspx.designer.cs">
+      <DependentUpon>Foro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Guardia\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -414,6 +427,13 @@
     </Compile>
     <Compile Include="Guardia\Listado.aspx.designer.cs">
       <DependentUpon>Listado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Guardia\publicacionForo.aspx.cs">
+      <DependentUpon>publicacionForo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Guardia\publicacionForo.aspx.designer.cs">
+      <DependentUpon>publicacionForo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Guardia\Reservas.aspx.cs">
       <DependentUpon>Reservas.aspx</DependentUpon>
@@ -514,6 +534,13 @@
     <Compile Include="Residente\Encomienda.aspx.designer.cs">
       <DependentUpon>Encomienda.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Residente\Foro.aspx.cs">
+      <DependentUpon>Foro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Residente\Foro.aspx.designer.cs">
+      <DependentUpon>Foro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Residente\GastosComunes.aspx.cs">
       <DependentUpon>GastosComunes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -527,6 +554,13 @@
     </Compile>
     <Compile Include="Residente\Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Residente\publicacionForo.aspx.cs">
+      <DependentUpon>publicacionForo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Residente\publicacionForo.aspx.designer.cs">
+      <DependentUpon>publicacionForo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Residente\Reservas.aspx.cs">
       <DependentUpon>Reservas.aspx</DependentUpon>

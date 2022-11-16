@@ -54,7 +54,7 @@ namespace Dao
         public static void ObtenerDatosGastosComunes(int idCond)
         {
             alGastosComunes.Clear();
-            string strSql = String.Format("SELECT gc.id, gc.idDpto, D.numDpto, gc.mesCobro, gc.añoCobro, gc.fechaEmision, gc.fechaVencimiento, gc.gastoComun, gc.fondoReserva, gc.multas, gc.diasAtraso, gc.moraPeriodo, gc.varios, gc.id_Cond, gc.estado, gc.fechaPago from gastosComunes gc INNER JOIN estadoGastosComunes egc on gc.estado = egc.id INNER JOIN departamento d ON d.id = gc.idDpto where gc.id_Cond = {0}", idCond);
+            string strSql = String.Format("SELECT gc.id, gc.idDpto, D.numDpto, gc.mesCobro, gc.añoCobro, gc.fechaEmision, gc.fechaVencimiento, gc.gastoComun, gc.fondoReserva, gc.multas, gc.diasAtraso, gc.moraPeriodo, gc.varios, gc.id_Cond, gc.estado, gc.fechaPago, gc.totalPagar from gastosComunes gc INNER JOIN estadoGastosComunes egc on gc.estado = egc.id INNER JOIN departamento d ON d.id = gc.idDpto where gc.id_Cond = {0}", idCond);
 
             using (SqlConnection con = new SqlConnection(conBD))
             {
@@ -79,19 +79,44 @@ namespace Dao
                     int varios = int.Parse(sdr["varios"].ToString());
                     int estado = int.Parse(sdr["estado"].ToString());
                     DateTime fechaPago = DateTime.Parse(sdr["fechaPago"].ToString());
+                    int totalPagar = int.Parse(sdr["totalPagar"].ToString());
 
-                    if(fechaPago== null)
-                    {
-                        fechaPago = DateTime.Parse("0000-00-00");
-                    }
-
-
-                    GastosComunes gastosComunes = new GastosComunes(id, idDpto, numDpto, mesCobro, añoCobro, fechaEmision, fechaVencimiento, gastoComun, fondoReserva, multas, 0, 0, varios, idCond, estado, fechaPago);
+                    GastosComunes gastosComunes = new GastosComunes(id, idDpto, numDpto, mesCobro, añoCobro, fechaEmision, fechaVencimiento, gastoComun, fondoReserva, multas, diasAtraso, moraPeriodo, varios, idCond, estado, fechaPago, totalPagar);
 
                     alGastosComunes.Add(gastosComunes);
                 }
                 con.Close();
             }
+        }
+        public static bool GenerarGastoComun(int mes, int año, int idCond)
+        {
+            bool estado = false;
+
+            string sCnn;
+
+            if (mes != 0 && año != 0 && idCond != 0)
+            {
+                try
+                {
+                    Conexion c = new Conexion();
+                    sCnn = c.Conectar();
+                    string sSel = "EXEC sp_generar_gastosComunes @mes = " + mes + ", @año = " + año + ",@idCond = " + idCond + "";
+
+                    SqlDataAdapter da;
+                    DataTable dt = new DataTable();
+                    da = new SqlDataAdapter(sSel, sCnn);
+                    da.Fill(dt);
+
+                    estado = true;
+
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+
+            return estado;
         }
 
         //Residente

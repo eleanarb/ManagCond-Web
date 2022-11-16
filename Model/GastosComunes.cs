@@ -24,8 +24,9 @@ namespace Model
         private int idCond;
         private int estado;
         private DateTime fechaPago;
+        private int totalPagar;
 
-        public GastosComunes(int id, int idDpto, string numDpto, int mesCobro, int añoCobro, DateTime fechaEmision, DateTime fechaVencimiento, int gastoComun, int fondoReserva, int multas, int diasAtraso, int moraPeriodo, int varios, int idCond, int estado, DateTime fechaPago)
+        public GastosComunes(int id, int idDpto, string numDpto, int mesCobro, int añoCobro, DateTime fechaEmision, DateTime fechaVencimiento, int gastoComun, int fondoReserva, int multas, int diasAtraso, int moraPeriodo, int varios, int idCond, int estado, DateTime fechaPago, int totalPagar)
         {
             this.id = id;
             this.idDpto = idDpto;
@@ -43,6 +44,7 @@ namespace Model
             this.idCond = idCond;
             this.estado = estado;
             this.fechaPago = fechaPago;
+            this.totalPagar = totalPagar;
         }
 
         public int Id { get => id; set => id = value; }
@@ -61,5 +63,6 @@ namespace Model
         public int IdCond { get => idCond; set => idCond = value; }
         public int Estado { get => estado; set => estado = value; }
         public DateTime FechaPago { get => fechaPago; set => fechaPago = value; }
+        public int TotalPagar { get => totalPagar; set => totalPagar = value; }
     }
 }

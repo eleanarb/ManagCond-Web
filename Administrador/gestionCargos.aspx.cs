@@ -15,6 +15,17 @@ namespace ManagCond.Administrador
         {
             int id = int.Parse(ButtonModificar.Attributes["data-id"].ToString());
             Session["idTipoCargo"] = id;
+            if (Session["usuario"] == null)
+            {
+                Response.Redirect("../Login.aspx");
+            }
+            else
+            {
+                if (!Session["tipoUsuario"].Equals(1))
+                {
+                    Response.Redirect("../Login.aspx");
+                }
+            }
         }
 
         protected void ButtonAgregar_Click(object sender, EventArgs e)

@@ -39,6 +39,17 @@ namespace ManagCond.Administrador
                 DropDownListPago.SelectedValue = proveedor.TipoPago;
 
             }
+            if (Session["usuario"] == null)
+            {
+                Response.Redirect("../Login.aspx");
+            }
+            else
+            {
+                if (!Session["tipoUsuario"].Equals(1))
+                {
+                    Response.Redirect("../Login.aspx");
+                }
+            }
         }
 
 

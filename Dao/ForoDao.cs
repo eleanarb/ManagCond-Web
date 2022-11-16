@@ -233,7 +233,7 @@ namespace Dao
                 {
                     Conexion c = new Conexion();
                     sCnn = c.Conectar();
-                    string sSel = "EXECUTE sp_agregar_publicarForo @mensaje = " + mensaje + ", @rut = '" + rut + "', @categoria = '" + categoria + "', @idCond = '" + idCond + "', @imagen= NULL ";
+                    string sSel = "EXECUTE sp_agregar_publicarForo @mensaje = '" + mensaje + "', @rut = '" + rut + "', @categoria = '" + categoria + "', @idCond = '" + idCond + "', @imagen= NULL ";
 
                     SqlDataAdapter da;
                     DataTable dt = new DataTable();

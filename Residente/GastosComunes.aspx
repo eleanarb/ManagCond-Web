@@ -72,7 +72,6 @@
                                         <td class="px-4 py-3"><%= obj.FechaVencimiento.ToString("dd/MM/yyyy") %> </td>
                                         <td class="px-4 py-3"><%= obj.GastoComun %> </td>
                                         <td class="px-4 py-3"><%= obj.FondoReserva %> </td>
-                                        <td class="px-4 py-3"><%= obj.Seguro %> </td>
                                         <td class="px-4 py-3"><%= obj.Multas %> </td>
                                         <td class="px-4 py-3"><%= obj.MoraPeriodo %> </td>
                                         <td class="px-4 py-3"><%= obj.Varios %> </td>
@@ -206,7 +205,6 @@
                                         <td class="px-4 py-3"><%= obj.FechaVencimiento.ToString("dd/MM/yyyy") %> </td>
                                         <td class="px-4 py-3"><%= obj.GastoComun %> </td>
                                         <td class="px-4 py-3"><%= obj.FondoReserva %> </td>
-                                        <td class="px-4 py-3"><%= obj.Seguro %> </td>
                                         <td class="px-4 py-3"><%= obj.Multas %> </td>
                                         <td class="px-4 py-3"><%= obj.MoraPeriodo %> </td>
                                         <td class="px-4 py-3"><%= obj.Varios %> </td>
@@ -253,7 +251,6 @@
                                         <td class="px-4 py-3"><%= obj.FechaVencimiento.ToString("dd/MM/yyyy") %> </td>
                                         <td class="px-4 py-3"><%= obj.GastoComun %> </td>
                                         <td class="px-4 py-3"><%= obj.FondoReserva %> </td>
-                                        <td class="px-4 py-3"><%= obj.Seguro %> </td>
                                         <td class="px-4 py-3"><%= obj.Multas %> </td>
                                         <td class="px-4 py-3"><%= obj.MoraPeriodo %> </td>
                                         <td class="px-4 py-3"><%= obj.Varios %> </td>

@@ -1,17 +1,17 @@
-﻿using Dao;
-using Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Model;
+using Dao;
+using System.Data.SqlClient;
+using System.Data;
 
-namespace ManagCond
+namespace ManagCond.Guardia
 {
-    public partial class foro : System.Web.UI.Page
+    public partial class Foro : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,7 +26,7 @@ namespace ManagCond
             }
             else
             {
-                if (!Session["tipoUsuario"].Equals(1))
+                if (!Session["tipoUsuario"].Equals(2))
                 {
                     Response.Redirect("../Login.aspx");
                 }
@@ -38,7 +38,7 @@ namespace ManagCond
             Usuario usuario = new Usuario();
             usuario = (Usuario)Session["usuario"];
 
-            string mensaje = TextBoxMensaje.Value;            
+            string mensaje = TextBoxMensaje.Value;
             string rut = usuario.Rut;
             string imagen = "";
             int idCond = usuario.IdCond;

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="foro.aspx.cs" Inherits="ManagCond.foro" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Foro.aspx.cs" Inherits="ManagCond.Guardia.Foro" %>
 <%@ Import Namespace="Model" %>
 <%@ Import Namespace="Dao" %>
 
@@ -26,9 +26,9 @@
       class="flex h-screen bg-gray-50 dark:bg-gray-900"
       :class="{ 'overflow-hidden': isSideMenuOpen}"
     >
-        <!-- #include file ="Template/AsideAdministrador.html" -->
+        <!-- #include file ="Template/AsideGuardia.html" -->
         <div class="flex flex-col flex-1 w-full">
-            <!-- #include file ="Template/HeaderAdministrador.html" -->
+            <!-- #include file ="Template/HeaderGuardia.html" -->
         <main class="h-full pb-16 overflow-y-auto">
             <form id="foro" runat="server">
                 <div class="container grid px-6 mx-auto">
@@ -59,7 +59,7 @@
 
                         <% 
                             int idCondominio = 0;
-                            idCondominio = (int)Session["idCondominio"];
+                            idCondominio = (int)Session["idCond"];
                             foreach (Foro obj in ForoDao.GetAlPublicacionesForo(idCondominio))
                             {
                                 int idPublicacion = obj.Id;

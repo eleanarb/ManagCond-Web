@@ -43,7 +43,36 @@
                 <form runat="server">
                     <div class="container grid px-6 mx-auto">
                         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">GastosComunes</h2>
-                        <a class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="#.aspx">Generar Gasto Comun</a>
+                        <div class="grid grid-cols-6">
+                                <div class="">
+                                    <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListBuscar" runat="server">
+                                        <asp:ListItem Selected="True" Value="0">Seleccione Depto</asp:ListItem>
+
+                                    </asp:DropDownList>
+                                </div>
+
+                                <div class="">
+                                    <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownList1" runat="server">
+                                        <asp:ListItem Selected="True" Value="0">Seleccione Mes</asp:ListItem>
+
+                                    </asp:DropDownList>
+                                </div>
+
+                                <div class="">
+                                    <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownList2" runat="server">
+                                        <asp:ListItem Selected="True" Value="0">Seleccione Año</asp:ListItem>
+
+                                    </asp:DropDownList>
+                                </div>                                
+
+                               <div></div>
+                                    <div class="col-end-4 ">
+                                    </div>
+                                    <div class="col-end-4 ">
+                                        <asp:Button ID="ButtonAgregar" class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" runat="server" OnClick="ButtonAgregar_Click" Text="Agregar" />
+                                    </div>
+                            </div>
+                        <br>
                        <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -54,18 +83,16 @@
                                             <label for="checkbox-all-search" class="sr-only">Nombre</label>
                                         </div>
                                     </th>
-                                    <th scope="col" class="py-3 px-6">Unidad</th>
                                     <th scope="col" class="py-3 px-6">Mes De Cobro</th>
-                                    <th scope="col" class="py-3 px-6">Fecha Emision</th>
-                                    <th scope="col" class="py-3 px-6">Fecha Vencimiento</th>
+                                    <th scope="col" class="py-3 px-6">Unidad</th>
                                     <th scope="col" class="py-3 px-6">Gasto Comun</th>
                                     <th scope="col" class="py-3 px-6">Fondo Reserva</th>
                                     <th scope="col" class="py-3 px-6">Multas</th>
-                                    <th scope="col" class="py-3 px-6">Dias Atraso</th>
-                                    <th scope="col" class="py-3 px-6">Mora Periodo</th>
                                     <th scope="col" class="py-3 px-6">Varios</th>
+                                    <th scope="col" class="py-3 px-6">Fecha Vancimiento</th>
+                                    <th scope="col" class="py-3 px-6">Total a pagar</th>
                                     <th scope="col" class="py-3 px-6">Estado</th>
-                                    <th scope="col" class="py-3 px-6">Fecha De Pago</th>
+                                    <th scope="col" class="py-3 px-6">Acciones</th>
                                 </tr>
                             </thead>
 
@@ -97,18 +124,15 @@
                                             <label for="checkbox-table-search-1" class="sr-only">Nombre</label>
                                         </div>
                                     </td>
-                                    <td class="py-4 px-6"><%=obj.NumDpto %></td>
                                     <td class="py-4 px-6"><%=obj.MesCobro %></td>
-                                    <td class="py-4 px-6"><%=obj.FechaEmision.ToString("dd/MM/yyyy") %></td>
+                                    <td class="py-4 px-6"><%=obj.NumDpto %></td>
+                                    <td class="py-4 px-6">$<%=obj.GastoComun.ToString("N0") %></td>
+                                    <td class="py-4 px-6">$<%=obj.FondoReserva.ToString("N0") %></td>
+                                    <td class="py-4 px-6">$<%=obj.Multas.ToString("N0") %></td>
+                                    <td class="py-4 px-6">$<%=obj.Varios.ToString("N0")%></td>
                                     <td class="py-4 px-6"><%=obj.FechaVencimiento.ToString("dd/MM/yyyy") %></td>
-                                    <td class="py-4 px-6">$<%=obj.GastoComun %></td>
-                                    <td class="py-4 px-6"><%=obj.FondoReserva %>
-                                    <td class="py-4 px-6"><%=obj.Multas %>
-                                    <td class="py-4 px-6"><%=obj.DiasAtraso %></td>
-                                    <td class="py-4 px-6"><%=obj.MoraPeriodo %></td>
-                                    <td class="py-4 px-6"><%=obj.Varios %></td>
+                                    <td class="py-4 px-6">$<%=obj.TotalPagar.ToString("N0") %></td>
                                     <td class="py-4 px-6"><%=obj.Estado %></td>
-                                    <td class="py-4 px-6"><%=obj.FechaPago %></td>
                                     <td class="py-4 px-6">
                                         <button type="button" data-id="<%=obj.Id %>" @click="openModal" class="btnEditar block w-full px-4 py-2 mt-4 text-sm text-center font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">Editar</button>
                                         <a href="EliminarIngreso.aspx?id=<%=obj.Id %>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Elimnar</a>

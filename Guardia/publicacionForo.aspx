@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="publicacionForo.aspx.cs" Inherits="ManagCond.Administrador.RespuestaForo" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="publicacionForo.aspx.cs" Inherits="ManagCond.Guardia.publicacionForo" %>
 <%@ Import Namespace="Model" %>
 <%@ Import Namespace="Dao" %>
 <!DOCTYPE html>
@@ -25,9 +25,9 @@
       class="flex h-screen bg-gray-50 dark:bg-gray-900"
       :class="{ 'overflow-hidden': isSideMenuOpen}"
     >
-              <!-- #include file ="Template/AsideAdministrador.html" -->
+         <!-- #include file ="Template/AsideGuardia.html" -->
         <div class="flex flex-col flex-1 w-full">
-            <!-- #include file ="Template/HeaderAdministrador.html" -->
+            <!-- #include file ="Template/HeaderGuardia.html" -->
         <main class="h-full pb-16 overflow-y-auto">
             
           <div class="container grid px-6 mx-auto">

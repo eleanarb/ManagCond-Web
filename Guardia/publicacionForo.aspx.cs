@@ -7,9 +7,9 @@ using System.Web.UI.WebControls;
 using Model;
 using Dao;
 
-namespace ManagCond.Administrador
+namespace ManagCond.Guardia
 {
-    public partial class GastosComunes : System.Web.UI.Page
+    public partial class publicacionForo : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -19,25 +19,31 @@ namespace ManagCond.Administrador
             }
             else
             {
-                if (!Session["tipoUsuario"].Equals(1))
+                if (!Session["tipoUsuario"].Equals(2))
                 {
                     Response.Redirect("../Login.aspx");
                 }
             }
         }
+
         protected void ButtonAgregar_Click(object sender, EventArgs e)
         {
-            int mes = int.Parse(DateTime.Now.ToString("MM"));
-            int año = int.Parse(DateTime.Now.ToString("yyyy"));
-            int idCond = int.Parse(Session["idCondominio"].ToString());
+            int idForo = int.Parse(Request.QueryString["id"]);
 
-            if (GastosComunesDao.GenerarGastoComun(mes, año, idCond))
+            Usuario usuario = new Usuario();
+            usuario = (Usuario)Session["usuario"];
+            string rut = usuario.Rut;
+
+            string mensaje = TextBoxMensaje.Value;
+            string imagen = "";
+
+            if (ForoDao.AgregarRespuestaForo(idForo, mensaje, rut, imagen))
             {
-                Response.Redirect("GastosComunes.aspx");
+                Response.Redirect("publicacionForo.aspx?id=" + idForo);
             }
             else
             {
-                Response.Redirect("GastosComune.aspx");
+                Response.Redirect("f.aspx");
             }
         }
     }
