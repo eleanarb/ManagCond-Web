@@ -4,7 +4,7 @@
 
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
   <head>
-    <meta charset="UTF-8" />
+      <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ManagCond</title>
     <link
@@ -29,6 +29,12 @@
     
     <script src="../assets/js/charts-lines.js" defer></script>
     <script src="../assets/js/charts-pie.js" defer></script>
+
+      <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
+
+      <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
+
+      <script src="https://unpkg.com/flowbite@1.5.3/dist/datepicker.js"></script>
   </head>
   <body>
       <% 
@@ -706,7 +712,7 @@
                               <div class="grid gap-6 mb-8 md:grid-cols-2">
                                   <div>
                                       <label for="DropDownListDepto" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Departamento</label>
-                                        <asp:DropDownList class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownListDepto" runat="server">
+                                        <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListDepto" runat="server">
                                         </asp:DropDownList>
                                   </div>
                               </div>
@@ -714,7 +720,7 @@
                               <div class="grid gap-6 mb-8 md:grid-cols-2">
                                   <div>
                                       <label for="DropDownListCargo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cargo</label>
-                                        <asp:DropDownList class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownListCargo" runat="server">
+                                        <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListCargo" runat="server">
                                         </asp:DropDownList>
                                   </div>
 
@@ -722,7 +728,7 @@
                                       <label class="block text-sm">
                                           <span class="text-gray-700 dark:text-gray-400">Cantidad</span>
                                           <input type="text" runat="server" id="TextBoxCantidad"
-                                              class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                               required />
                                       </label>
                                   </div>
@@ -732,7 +738,7 @@
                                   <div class="grid gap-6 mb-8 md:grid-cols-2">
                                       <div>
                                           <label for="DropDownListMes" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mes</label>
-                                          <asp:DropDownList class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownListMes" runat="server">
+                                          <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListMes" runat="server">
                                               <asp:ListItem Selected="True" Value="0">Seleccione Mes:</asp:ListItem>
                                               <asp:ListItem  Value="01">Enero</asp:ListItem>
                                               <asp:ListItem  Value="02">Febrero</asp:ListItem>
@@ -750,7 +756,7 @@
                                       </div>
                                       <div>
                                           <label for="DropDownListAño" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Año</label>
-                                          <asp:DropDownList class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownListAño" runat="server">
+                                          <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListAño" runat="server">
                                               <asp:ListItem Selected="True" Value="0">Seleccione año:</asp:ListItem>
                                               <asp:ListItem  Value="2019">2019</asp:ListItem>
                                               <asp:ListItem  Value="2020">2020</asp:ListItem>
@@ -767,7 +773,7 @@
                                       <label class="block text-sm">
                                           <span class="text-gray-700 dark:text-gray-400">Descripcion</span>
                                           <input type="text" runat="server" id="TextBoxDesc"
-                                              class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                               required />
                                          </label>
                                   </div>

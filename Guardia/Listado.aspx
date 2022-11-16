@@ -41,7 +41,6 @@
                                         <th class="px-4 py-3">Departamento</th>
                                         <th class="px-4 py-3">Nombre</th>
                                         <th class="px-4 py-3">Estacionamiento</th>
-                                        <th class="px-4 py-3">Mas Info</th>
                                         <th class="px-4 py-3">Rut Residente</th>
                                         <th class="px-4 py-3">Telefono Residente</th>
                                         <th class="px-4 py-3">Correo Residente</th>
@@ -62,7 +61,6 @@
                                         <td class="px-4 py-3"><%= obj.NumDpto %> </td>
                                         <td class="px-4 py-3"><%= obj.NombresResidente %> <%= obj.ApellidosResidente %></td>
                                         <td class="px-4 py-3"><%= obj.Estacinamiento %> </td>
-                                        <td class="px-4 py-3"> <button id="buttonList" @click="openModal" class="buttonList px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"> Open Modal</button> </td>
                                         <td class="px-4 py-3"><%= obj.RutResidente %></td>
                                         <td class="px-4 py-3"><%= obj.TelefonoResidente %> </td>
                                         <td class="px-4 py-3"><%= obj.CorreoResidente %> </td>

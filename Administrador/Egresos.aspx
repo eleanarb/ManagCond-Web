@@ -727,9 +727,7 @@
                                     </div>
                                 </div>
                                 <div></div>
-                                    <div class="col-end-4  ">
-                                        <a class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="GestionProveedores.aspx">Categorias</a>
-                                    </div>
+                                <div></div>
                                     <div class="col-end-4 ">
                                         <a class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="GestionProveedores.aspx">Proveedores</a>
                                     </div>
@@ -777,7 +775,7 @@
                                 {
                             %>
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">                                    
-                                    <th colspan="5" scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">No hay egresos registrados 
+                                    <th colspan="8" scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">No hay egresos registrados 
                                     </th>
                                 </tr>
                                 <%

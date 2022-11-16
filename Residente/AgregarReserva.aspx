@@ -35,7 +35,7 @@
                                 <div>
                                     <label class="block text-sm">
                                         <span class="text-gray-700 dark:text-gray-200">Numero departamento</span><br />
-                                        <asp:DropDownList class="mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-multiselect focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownListDpto" runat="server" disabled="true">
+                                        <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListDpto" runat="server" disabled="true">
                                         </asp:DropDownList>
                                     </label>
                                 </div>
@@ -54,14 +54,14 @@
                                 <div>
                             <label class="block text-sm">
                                 <span class="text-gray-700 dark:text-gray-200">Espacio Comun</span><br />
-                                <asp:DropDownList class="mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-multiselect focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownListEspaciComun" runat="server" OnSelectedIndexChanged="EspacioSeleccionado" AutoPostBack="True">
+                                <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListEspaciComun" runat="server" OnSelectedIndexChanged="EspacioSeleccionado" AutoPostBack="True">
                                 </asp:DropDownList>
                             </label>
                                     </div>
                                     <div>
                             <label class="block text-sm">
                                 <span class="text-gray-700 dark:text-gray-200">Rango Horario</span><br />
-                                <asp:DropDownList class="mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-multiselect focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownRangoHorario" runat="server">
+                                <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownRangoHorario" runat="server">
                                 </asp:DropDownList>
                             </label>
                                         </div>
@@ -69,7 +69,7 @@
                          <div class="grid gap-6 mb-8 md:grid-cols-2">
                             <label class="block mt-4 text-sm">
                                 <span class="text-gray-700 dark:text-gray-400">Solicitante</span>
-                                <asp:TextBox ID="TextBoxSolicitante" class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="TextBoxSolicitante" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500t" runat="server"></asp:TextBox>
                             </label>
                         </div>
                             <br />

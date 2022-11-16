@@ -370,7 +370,7 @@
                   <div class="w-full">
                       <label class="block text-sm">
                           <span class="text-gray-700 dark:text-gray-200">Numero departamento</span><br />
-                          <asp:DropDownList class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownList" runat="server">
+                          <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownList" runat="server">
                           </asp:DropDownList>
                       </label>
                       <label class="block mt-4 text-sm">

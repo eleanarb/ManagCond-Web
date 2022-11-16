@@ -457,26 +457,26 @@
                         <div id="calendar"></div>
 
                         <div id="updatedialog" style="font: 70% 'Trebuchet MS', sans-serif; margin: 50px;"
-                            title="Update or Delete Event">
+                            title="Actualizar o eliminar evento">
                             <table cellpadding="0" class="style1">
                                 <tr>
-                                    <td class="alignRight">name:</td>
+                                    <td class="alignRight">Título:</td>
                                     <td class="alignLeft">
-                                        <input id="eventName" type="text" /><br />
+                                        <input id="eventName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500t" type="text" /><br />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="alignRight">description:</td>
+                                    <td class="alignRight">Descripción:</td>
                                     <td class="alignLeft">
-                                        <textarea id="eventDesc" cols="30" rows="3"></textarea></td>
+                                        <textarea id="eventDesc" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500t" cols="30" rows="3"></textarea></td>
                                 </tr>
                                 <tr>
-                                    <td class="alignRight">start:</td>
+                                    <td class="alignRight">Inicio:</td>
                                     <td class="alignLeft">
                                         <span id="eventStart"></span></td>
                                 </tr>
                                 <tr>
-                                    <td class="alignRight">end: </td>
+                                    <td class="alignRight">Fin: </td>
                                     <td class="alignLeft">
                                         <span id="eventEnd"></span>
                                         <input type="hidden" id="eventId" /></td>
@@ -486,23 +486,23 @@
                         <div id="addDialog" style="font: 70% 'Trebuchet MS', sans-serif; margin: 50px;" title="Add Event">
                             <table cellpadding="0" class="style1">
                                 <tr>
-                                    <td class="alignRight">name:</td>
+                                    <td class="alignRight">Título:</td>
                                     <td class="alignLeft">
-                                        <input id="addEventName" type="text" size="50" /><br />
+                                        <input id="addEventName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500t" type="text" size="80" /><br />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="alignRight">description:</td>
+                                    <td class="alignRight">Descripción:</td>
                                     <td class="alignLeft">
-                                        <textarea id="addEventDesc" cols="30" rows="3"></textarea></td>
+                                        <textarea id="addEventDesc" cols="30" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500t" rows="3"></textarea></td>
                                 </tr>
                                 <tr>
-                                    <td class="alignRight">start:</td>
+                                    <td class="alignRight">Inicio:</td>
                                     <td class="alignLeft">
                                         <span id="addEventStartDate"></span></td>
                                 </tr>
                                 <tr>
-                                    <td class="alignRight">end:</td>
+                                    <td class="alignRight">Fin:</td>
                                     <td class="alignLeft">
                                         <span id="addEventEndDate"></span></td>
                                 </tr>
