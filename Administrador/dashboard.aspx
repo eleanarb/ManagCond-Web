@@ -168,7 +168,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="px-4 py-3 text-sm">$<%=total.ToString("N",new CultureInfo("en-US"))%>
+                                        <td class="px-4 py-3 text-sm">$<%=total.ToString("N0")%>
                                         </td>
                                         <td class="px-4 py-3 text-xs">
                                             <%if (obj.Estado==2){ %>
@@ -179,7 +179,7 @@
                                             <%}else if (obj.Estado==1)
                                                 { %>
                                             <span
-                                                class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700"><%=obj.Estado %>
+                                                class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700">Pendiente
                                             </span>
 
                                             <%}

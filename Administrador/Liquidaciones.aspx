@@ -131,18 +131,18 @@
                                             <label for="checkbox-table-search-1" class="sr-only">Nombre</label>
                                         </div>
                                     </td>
-                                    <td class="py-4 px-6"><%=obj.Fecha.ToString("dd/MM/yyyy") %></td>
+                                    <td class="py-4 px-6"><%=obj.Fecha.ToString("dd/MM/yyyy")%></td>
                                     <td class="py-4 px-6"><%=obj.RutTrabajador %></td>
-                                    <td class="py-4 px-6">$<%=obj.OtrosIngresos %></td>
-                                    <td class="py-4 px-6"><%=obj.TotalRemuneracion %>
-                                    <td class="py-4 px-6"><%=obj.TotalHaberes %>
-                                    <td class="py-4 px-6"><%=obj.CotizacionPrevisional %></td>
-                                    <td class="py-4 px-6"><%=obj.CotizacionSalud %></td>
-                                    <td class="py-4 px-6"><%=obj.TotalDescuentosPrevisionales %></td>
-                                    <td class="py-4 px-6"><%=obj.OtrosDescuentos %></td>
-                                    <td class="py-4 px-6"><%=obj.DiasNoTrabajados %></td>
-                                    <td class="py-4 px-6"><%=obj.DescuentosDiasNoTrabajados %></td>
-                                    <td class="py-4 px-6"><%=obj.SaldoLiquido %></td>
+                                    <td class="py-4 px-6">$<%=obj.OtrosIngresos.ToString("N0")%></td>
+                                    <td class="py-4 px-6">$<%=obj.TotalRemuneracion.ToString("N0")%>
+                                    <td class="py-4 px-6">$<%=obj.TotalHaberes.ToString("N0") %>
+                                    <td class="py-4 px-6">$<%=obj.CotizacionPrevisional.ToString("N0")%></td>
+                                    <td class="py-4 px-6">$<%=obj.CotizacionSalud.ToString("N0")%></td>
+                                    <td class="py-4 px-6">$<%=obj.TotalDescuentosPrevisionales.ToString("N0")%></td>
+                                    <td class="py-4 px-6">$<%=obj.OtrosDescuentos.ToString("N0")%></td>
+                                    <td class="py-4 px-6">$<%=obj.DiasNoTrabajados.ToString("N0")%></td>
+                                    <td class="py-4 px-6">$<%=obj.DescuentosDiasNoTrabajados.ToString("N0")%></td>
+                                    <td class="py-4 px-6">$<%=obj.SaldoLiquido.ToString("N0")%></td>
                                     <td class="py-4 px-6">
                                         <button type="button" data-id="<%=obj.Id %>" @click="openModal" class="btnEditar block w-full px-4 py-2 mt-4 text-sm text-center font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">Editar</button>
                                         <a href="EliminarIngreso.aspx?id=<%=obj.Id %>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Elimnar</a>
