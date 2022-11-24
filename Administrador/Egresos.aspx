@@ -139,9 +139,17 @@
                                     
                                 </tr>
                                 <%
+                                    string urlSA = ConfigurationManager.AppSettings["urlSA"].ToString();
+                                    string tokenSAS = ConfigurationManager.AppSettings["tokenArchivosSAS"].ToString();
+                                    string containerSA = ConfigurationManager.AppSettings["containerArchivosSA"].ToString();
+
                                     foreach (Egresos obj1 in EgresosDao.GetAlObtenerEgresos(obj.id))
                                     {
                                         string fecha = obj1.Fecha.ToString("dd-MM-yyyy");
+                                        string año = obj1.Fecha.ToString("yyyy");
+                                        string mes = obj1.Fecha.ToString("MM");
+                                        string url = urlSA + containerSA + "/" + año + "/" + mes + "/" + obj1.DocumentoCobro  + tokenSAS;
+                                        string url2 = urlSA + containerSA + "/" + año + "/" + mes + "/" + obj1.Comprobante  + tokenSAS;
                                     %>
 
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -156,10 +164,14 @@
                                     </td>
                                     <td class="py-4 px-6"><%=obj1.Estado %>
                                     </td>
-                                    <td class="py-4 px-6">cobro
-                                    </td>
-                                    <td class="py-4 px-6">pago
-                                    </td>
+                                    <td class="py-4 px-6"><%if (obj1.DocumentoCobro == "")
+                                                              {%><a class="font-medium text-blue-600 dark:text-blue-500 hover:underline">No Tiene Documento</a><%}
+                                                                             else
+                                                                             { %> <a href="<%=url %>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Documento</a><%} %></td>
+                                    <td class="py-4 px-6"><%if (obj1.Comprobante == "")
+                                                              {%><a class="font-medium text-blue-600 dark:text-blue-500 hover:underline">No Tiene Documento</a><%}
+                                                                             else
+                                                                             { %> <a href="<%=url2 %>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Documento</a><%} %></td>
                                     <td class="py-4 px-6 md:grid-cols-2">
                                         <div class="editar ">
                                          <button type="button" data-id="<%=obj1.id %>" @click="openModal"

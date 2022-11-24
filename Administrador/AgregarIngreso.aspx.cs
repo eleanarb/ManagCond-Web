@@ -39,15 +39,28 @@ namespace ManagCond.Administrador
             int año = int.Parse(DropDownListAño.SelectedValue);
             DateTime fecha = DateTime.Parse(inputFecha.Value);
             string fecha2 = fecha.ToString("yyyy-MM-dd");
-            string fileNameBD = FileUploadDocumento.Value;
-            string fileName = año + "/" + mes + "/" + fileNameBD;
-            Stream filestream = FileUploadDocumento.PostedFile.InputStream;
 
+            string fileNameBD = "";
+            string fileName = "";
+            Stream filestream = FileUploadDocumento.PostedFile.InputStream;
+            if (FileUploadDocumento.Value != "")
+            {
+                fileNameBD = FileUploadDocumento.Value;
+                fileName = año + "/" + mes + "/" + fileNameBD;
+                filestream = FileUploadDocumento.PostedFile.InputStream;
+            }
 
             if (IngresosDao.AgregarIngreso(nombre, comentario, monto, mes, año, fecha2, fileNameBD, idCond))
             {
-                _ = UploadBlop(fileName, filestream);
-                Response.Redirect("Ingresos.aspx");
+                if (FileUploadDocumento.Value != "")
+                {
+                    _ = UploadBlop(fileName, filestream);
+                    Response.Redirect("Ingresos.aspx");
+                }
+                if (FileUploadDocumento.Value == "")
+                {
+                    Response.Redirect("Ingresos.aspx");
+                }
             }
             else
             {

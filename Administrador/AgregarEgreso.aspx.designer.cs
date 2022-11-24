@@ -69,6 +69,24 @@ namespace ManagCond.Administrador
         protected global::System.Web.UI.HtmlControls.HtmlInputText TextBoxDescModal;
 
         /// <summary>
+        /// Control FileUploadCobro.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputFile FileUploadCobro;
+
+        /// <summary>
+        /// Control FileUploadComprobante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputFile FileUploadComprobante;
+
+        /// <summary>
         /// Control ButtonAgregar.
         /// </summary>
         /// <remarks>

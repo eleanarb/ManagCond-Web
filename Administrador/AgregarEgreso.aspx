@@ -105,7 +105,20 @@
                       </label>
                                   </div>
                               </div>
-
+                                   <div class="grid gap-6 mb-8 md:grid-cols-2">
+                                                                   <div>
+                                    <span class="text-gray-700 dark:text-gray-400">Documento de cobro</span>
+                                    <label class="block text-sm">
+                                        <input id="FileUploadCobro" accept="image/*,.pdf,.xlsx,.docx" type="file" runat="server" name="oFile">
+                                    </label>
+                                </div>
+                                                                   <div>
+                                    <span class="text-gray-700 dark:text-gray-400">Documento de pago</span>
+                                    <label class="block text-sm">
+                                        <input id="FileUploadComprobante" accept="image/*,.pdf,.xlsx,.docx" type="file" runat="server" name="oFile">
+                                    </label>
+                                </div>
+</div>
                               <div class="grid gap-6 mb-8 md:grid-cols-4">
                                   
                                   <div class="col-end-7 col-span-2">

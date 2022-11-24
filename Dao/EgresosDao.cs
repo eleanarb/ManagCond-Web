@@ -145,7 +145,7 @@ namespace Dao
             }
         }
 
-        public static bool AgregarEgreso(int idProveedor, string descripcion, int idCategoria, string fecha, int monto, int estado, int idCond)
+        public static bool AgregarEgreso(int idProveedor, string descripcion, int idCategoria, string fecha, int monto, int estado, string documentoCobro, string comprobante, int idCond)
         {
             bool e = false;
 
@@ -154,7 +154,7 @@ namespace Dao
                 Conexion c = new Conexion();
                 string sCnn = c.Conectar();
 
-                string sSel = "EXEC sp_agregar_egreso @idProveedor= " + idProveedor + ", @descripcion = '" + descripcion + "', @idCategoria= '" + idCategoria + "', @fecha= '" + fecha + "', @monto = '" + monto + "', @estado= " + estado + ", @idCond= " + idCond + "";
+                string sSel = "EXEC sp_agregar_egreso @idProveedor= " + idProveedor + ", @descripcion = '" + descripcion + "', @idCategoria= '" + idCategoria + "', @fecha= '" + fecha + "', @monto = '" + monto + "', @estado= " + estado + ", @documentoCobro = '"+ documentoCobro + "', @comprobante= '"+ comprobante + "' , @idCond = " + idCond + "";
 
                 SqlDataAdapter da;
                 DataTable dt = new DataTable();
