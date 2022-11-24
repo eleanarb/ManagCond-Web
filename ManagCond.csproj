@@ -122,6 +122,7 @@
     <Content Include="assets\css\tailwind.output.css" />
     <Content Include="assets\fullcalendar\fullcalendar.css" />
     <Content Include="assets\fullcalendar\fullcalendar.min.js" />
+    <Content Include="assets\img\add.png" />
     <Content Include="assets\img\create-account-office-dark.jpeg" />
     <Content Include="assets\img\create-account-office.jpeg" />
     <Content Include="assets\img\dashboard.png" />
@@ -130,6 +131,7 @@
     <Content Include="assets\img\github.svg" />
     <Content Include="assets\img\login-office-dark.jpeg" />
     <Content Include="assets\img\login-office.jpeg" />
+    <Content Include="assets\img\notImage.jpg" />
     <Content Include="assets\img\twitter.svg" />
     <Content Include="assets\js\calendarscript.js" />
     <Content Include="assets\js\charts-bars.js" />

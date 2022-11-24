@@ -191,7 +191,7 @@
                                         </td>
                                         <%} %>
 
-                                        <td class="px-4 py-3 text-sm"><%=obj.FechaEmision %>
+                                        <td class="px-4 py-3 text-sm"><%=obj.FechaEmision.ToString("dd-MM-yyyyy") %>
                                         </td>
                                     </tr>
                                     <%

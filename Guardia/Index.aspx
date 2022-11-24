@@ -134,7 +134,7 @@
                                             string url = obj.Imagen == ""? "../assets/img/notImage.jpg" :  urlSA + containerSA + "/" + obj.Fecha.ToString("yyyy") + "/" + obj.Fecha.ToString("MM") + "/" + obj.IdNumDpto + "/" + obj.Imagen + tokenSAS;
                                     %>
                                     <tr class="text-gray-700 dark:text-gray-400">
-                                        <td class="px-4 py-3"><%= obj.IdNumDpto %> </td>
+                                        <td class="px-4 py-3"><%= obj.NumDpto %> </td>
                                         <td class="px-4 py-3"><%= obj.Recepcion %></td>
                                         <td class="px-4 py-3"><%= obj.Destinatario %> </td>
                                         <td class="px-4 py-3"><%= obj.Fecha.ToString("dd/MM/yyyy") %> </td>

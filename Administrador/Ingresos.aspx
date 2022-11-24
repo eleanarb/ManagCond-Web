@@ -123,7 +123,7 @@
                                     </td>
                                     <td class="py-4 px-6"><%=obj.Nombre %></td>
                                     <td class="py-4 px-6"><%=obj.Comentario %></td>
-                                    <td class="py-4 px-6">$<%=obj.Monto.ToString("N0") %></td>
+                                    <td class="py-4 px-6">$<%=obj.Monto %></td>
                                     <td class="py-4 px-6"><%=obj.Mes %> - <%=obj.Año %></td>
                                     <td class="py-4 px-6"><%=obj.Fecha.ToString("dd/MM/yyyy") %>
                                     </td>
