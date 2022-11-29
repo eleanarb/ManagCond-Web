@@ -13,12 +13,16 @@ namespace ManagCond
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                Session.Abandon();
+                Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
+            }
         }
 
         protected void ButtonAceptar_Click(object sender, EventArgs e)
         {
-            
+
             String correo = TextBoxUsuario.Text;
             String clave = TextBoxClave.Text;
 
