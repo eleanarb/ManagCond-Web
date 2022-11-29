@@ -41,10 +41,11 @@ namespace ManagCond
 
             int resul = 0;
             resul = UsuarioDao.BuscarUsuario(correo);
+            Usuario usuario = UsuarioDao.ObtenerDatosUsuarioCorreo(correo);
 
             if (resul > 0)
             {
-                Notificacion(correo);
+                Notificacion(correo, usuario.Nombres);
                 Session["mensaje"] = "1";
                 Response.Redirect("RecuperarClave.aspx");
             }
@@ -57,13 +58,13 @@ namespace ManagCond
 
         }
 
-        protected void Notificacion(string EmailDestino)
+        protected void Notificacion(string EmailDestino, string nombre)
         {
             string EmailOrigen = "managcond@outlook.com";
             string Contraseña = "Trompeta45@";
             string fecha = DateTime.Now.ToString("dd MMMM");
 
-            string body = @"<h2>Recuperar contraseña</h2><p>Estimado/a, :</p><p> El " + fecha + " solicitó el restablecimiento de la contraseña de su cuenta registrada en ManagCond. Para completar el proceso, haz clic en el siguiente enlace.</p><a href = 'https://managcond.azurewebsites.net/CambiarClave.aspx?correo=" + EmailDestino + "' > Restablecer </a><p> Si no realizaste esta modificación o si cree que alguien ha accedido a su cuenta sin autorización, visita <a href = 'https://managcond.azurewebsites.net/CambiarClave.aspx?correo=" + EmailDestino + "' > ManagCond </a> para restablecer su contraseña inmediatamente</p><p> Si necesita ayuda adicional, comunícate con Soporte técnico de ManagCond.</p><p> Atentamente,</p><p> Soporte técnico de ManagCond </p><br><div style = 'text-align: center;'><img style='width: 100px' src = 'https://managcondstorage.blob.core.windows.net/fotos/2022/11/3/logo.png?sp=r&st=2022-10-29T04:27:40Z&se=2023-01-31T12:27:40Z&spr=https&sv=2021-06-08&sr=c&sig=D9P23%2FM2m24SojVnKloNP3KCNGM5j%2B1NiTTVZqsHd6I%3D' /> </div> ";
+            string body = @"<h2>Recuperar contraseña</h2><p>Estimado/a,  " + nombre + ":</p><p> El " + fecha + " solicitó el restablecimiento de la contraseña de su cuenta registrada en ManagCond. Para completar el proceso, haz clic en el siguiente enlace.</p><a href = 'https://managcond.azurewebsites.net/CambiarClave.aspx?correo=" + EmailDestino + "' > Restablecer </a><p> Si no realizaste esta modificación o si cree que alguien ha accedido a su cuenta sin autorización, visita <a href = 'https://managcond.azurewebsites.net/CambiarClave.aspx?correo=" + EmailDestino + "' > ManagCond </a> para restablecer su contraseña inmediatamente</p><p> Si necesita ayuda adicional, comunícate con Soporte técnico de ManagCond.</p><p> Atentamente,</p><p> Soporte técnico de ManagCond </p><br><div style = 'text-align: center;'><img style='width: 100px' src = 'https://managcondstorage.blob.core.windows.net/fotos/2022/11/3/logo.png?sp=r&st=2022-10-29T04:27:40Z&se=2023-01-31T12:27:40Z&spr=https&sv=2021-06-08&sr=c&sig=D9P23%2FM2m24SojVnKloNP3KCNGM5j%2B1NiTTVZqsHd6I%3D' /> </div> ";
 
             SmtpClient oSmtpCliente = new SmtpClient("smtp.office365.com")
             {
