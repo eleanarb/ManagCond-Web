@@ -7,56 +7,74 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace ManagCond.Administrador
+namespace ManagCond
 {
 
 
-    public partial class GastosComunes
+    public partial class CambiarClave
     {
 
         /// <summary>
-        /// Control DropDownListBuscar.
+        /// Control login.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListBuscar;
+        protected global::System.Web.UI.HtmlControls.HtmlForm login;
 
         /// <summary>
-        /// Control DropDownList1.
+        /// Control TextBoxClave1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword TextBoxClave1;
 
         /// <summary>
-        /// Control DropDownList2.
+        /// Control TextBoxClave2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList2;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword TextBoxClave2;
 
         /// <summary>
-        /// Control ButtonGenerarPdf.
+        /// Control TextBoxClave3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonGenerarPdf;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword TextBoxClave3;
 
         /// <summary>
-        /// Control ButtonAgregar.
+        /// Control ButtonClave.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonAgregar;
+        protected global::System.Web.UI.WebControls.Button ButtonClave;
+
+        /// <summary>
+        /// Control mensajeExitoso.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mensajeExitoso;
+
+        /// <summary>
+        /// Control mensajeError.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mensajeError;
     }
 }

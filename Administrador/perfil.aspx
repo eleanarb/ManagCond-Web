@@ -14,14 +14,19 @@
     <link rel="stylesheet" href="../assets/css/tailwind.output.css" />
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="../assets/js/init-alpine.js"></script>
+      <script src="../assets/js/jquery.rut.js"></script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
-<script src="https://cdn.tailwindcss.com"></script>
+
 
     <!-- You need focus-trap.js to make the modal accessible -->
     <script src="../assets/js/focus-trap.js" defer></script>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
   </head>
   <body>
     <div
@@ -108,14 +113,14 @@
                                   <div>
                                       <label class="block text-sm">
                                           <span class="text-gray-700 dark:text-gray-400">Nombre</span>
-                                          <asp:TextBox ID="TextBoxNombres" class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" runat="server" disabled></asp:TextBox>
+                                          <asp:TextBox ID="TextBoxNombres" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500t" runat="server" disabled></asp:TextBox>
                                       </label>
                                   </div>
 
                                   <div>
                                       <label class="block text-sm">
                                           <span class="text-gray-700 dark:text-gray-400">Apellido</span>
-                                          <asp:TextBox ID="TextBoxApellidos" class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" runat="server" disabled></asp:TextBox>
+                                          <asp:TextBox ID="TextBoxApellidos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500t" runat="server" disabled></asp:TextBox>
                                       </label>
                                   </div>
                               </div>
@@ -124,16 +129,16 @@
                                   <div>
                                       <label class="block text-sm">
                                           <span class="text-gray-700 dark:text-gray-400">Rut</span>
-                                          <input type="text" runat="server" id="TextBoxRutt"
-                                              class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                                              required />
+                                          <input type="text" runat="server" id="TextBoxRut" disabled
+                                              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500tt"
+                                               />
                                           </label>
                                   </div>
 
                                   <div>
                                       <label class="block text-sm">
                                           <span class="text-gray-700 dark:text-gray-400">Fecha Nac</span>
-                                          <asp:TextBox ID="TextBoxNac" class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" runat="server" disabled></asp:TextBox>
+                                          <asp:TextBox ID="TextBoxNac" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500tt" runat="server" disabled></asp:TextBox>
                                       </label>
                                   </div>
                               </div>
@@ -142,16 +147,17 @@
                                   <div>
                                       <label class="block text-sm">
                                           <span class="text-gray-700 dark:text-gray-400">Correo</span>
-                                          <asp:TextBox ID="TextBoxCorreo" class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" runat="server"></asp:TextBox>
+                                          <asp:TextBox ID="TextBoxCorreo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500t" runat="server"></asp:TextBox>
                                       </label>
+                                      <span id="messageEmail" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                   </div>
 
                                   <div>
                                       <label class="block text-sm">
                                           <span class="text-gray-700 dark:text-gray-400">Telefono</span>
                                           <input type="text" runat="server" id="TextBoxTlf"
-                                              class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                                              required />
+                                              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500t"
+                                               />
                                          </label>
                                   </div>
                               </div>
@@ -175,9 +181,9 @@
                                   <div>
                                       <label class="block text-sm">
                                           <span class="text-gray-700 dark:text-gray-400">Contraseña Actual</span>
-                                          <input type="text" runat="server" id="TextBoxClave1"
-                                              class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                                              required />
+                                          <input type="password" runat="server" id="TextBoxClave1"
+                                              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500t"
+                                               />
                                           </label>
                                   </div>
                               </div>
@@ -186,19 +192,20 @@
                                   <div>
                                       <label class="block text-sm">
                                           <span class="text-gray-700 dark:text-gray-400">Nueva Contraseña</span>
-                                          <input type="text" runat="server" id="TexBoxClave2"
-                                              class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                                              required />
+                                          <input type="password" runat="server" id="TextBoxClave2" 
+                                              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500t"
+                                               />
                                           </label>
                                   </div>
 
                                   <div>
                                       <label class="block text-sm">
                                           <span class="text-gray-700 dark:text-gray-400">Confirma Contraseña</span>
-                                          <input type="text" runat="server" id="TextBoxClave3"
-                                              class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                                              required />
+                                          <input type="password" runat="server" id="TextBoxClave3" onChange="checkPasswordMatch();"
+                                              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500t"
+                                               />
                                       </label>
+                                      <span id='message' class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                   </div>
                               </div>
 
@@ -218,12 +225,41 @@
                       </div>
                   </div>
 
-
-
+                  <%--mensaje error--%>
+                  <div>
+                      <div runat="server" visible="false"  id="mensajeError" class="flex p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+                          <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                          <span class="sr-only">Info</span>
+                          <div>
+                              <span class="font-medium">Error al guardar los cambios </span>
+                          </div>
+                      </div>
+                  </div>
+                  <%--mensaje error Correo--%>
+                  <div>
+                      <div runat="server" visible="false"  id="mensajeErrorCorreo" class="flex p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+                          <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                          <span class="sr-only">Info</span>
+                          <div>
+                              <span class="font-medium">El correo ingresado ya existe </span>
+                          </div>
+                      </div>
+                  </div>
+                  <%--mensaje exitoso--%>
+                  <div runat="server" visible="false"  id="mensajeExitoso" class="flex p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
+                      <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                      <span class="sr-only">Info</span>
+                      <div>
+                          <span class="font-medium">Los cambios se han guardado exitosamente</span>
+                      </div>
+                  </div>
               </form>
-          </div>
-            
+          </div>            
         </main>
+
       </div>
     </div>
 
@@ -231,13 +267,35 @@
 
     <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
       <script>
-          $('#TextBoxTlf').mask('(+56) 0 0000 0000');
-          $('#TextBoxRutt').mask({
-              mask: '9{1,2}.9{3}.9{3}-(K|k|9)',
-              casing: 'upper',
-              clearIncomplete: true,
-              numericInput: true,
-              positionCaretOnClick: 'none'
+          $('#TextBoxTlf').mask('(+56) 9 0000 0000');
+
+
+          $(function () {
+              $("#TextBoxRut").rut().on('rutValido', function (e, rut, dv) {
+                  alert("El rut " + rut + "-" + dv + " es correcto");
+              }, { minimumLength: 7 });
+          })
+
+          $(function () {
+              $("#TextBoxRut").rut();
+          });
+      </script>
+
+      <script>
+          var email = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+
+          $('#TextBoxClave2, #TextBoxClave3').on('keyup', function () {
+              if ($('#TextBoxClave2').val() == $('#TextBoxClave3').val()) {
+                  $('#message').html('Coinciden').css('color', 'green');
+              } else
+                  $('#message').html('No coinciden').css('color', 'red');
+          });
+          $('#TextBoxCorreo').on('keyup', function () {
+              if (!email.test($('#TextBoxCorreo').val())) {
+                  $('#messageEmail').html('Ingrese un correo válido').css('color', 'red');
+
+              } else
+                  $('#messageEmail').html('').css('color', 'green');
           });
       </script>
 

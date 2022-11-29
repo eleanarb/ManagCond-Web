@@ -56,6 +56,7 @@ namespace ManagCond.Administrador
             string numCuenta = TextBoxNumCuenta.Text;
             string medioPago = DropDownListPago.SelectedValue;
             string tipoCuneta = DropDownListCuenta.SelectedValue;
+
             if (LiquidacionesDao.AgregarContrato(rutTrabajador, sueldoBase, horasSemanales, diasSemanales, idTipoContrato, fechaNacInicio2, asignacionMovilizacion, asignacionColacion, valorHoraAdicional, afp, previsionSalud, nombreDireccion, idComuna, nombreCuenta, rut, banco, numCuenta, medioPago, tipoCuneta))
             {
                 Response.Redirect("Liquidaciones.aspx");

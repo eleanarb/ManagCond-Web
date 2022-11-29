@@ -33,13 +33,13 @@ namespace ManagCond.Administrador
         protected global::System.Web.UI.WebControls.TextBox TextBoxApellidos;
 
         /// <summary>
-        /// Control TextBoxRutt.
+        /// Control TextBoxRut.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText TextBoxRutt;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText TextBoxRut;
 
         /// <summary>
         /// Control TextBoxNac.
@@ -84,16 +84,16 @@ namespace ManagCond.Administrador
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText TextBoxClave1;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword TextBoxClave1;
 
         /// <summary>
-        /// Control TexBoxClave2.
+        /// Control TextBoxClave2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText TexBoxClave2;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword TextBoxClave2;
 
         /// <summary>
         /// Control TextBoxClave3.
@@ -102,7 +102,7 @@ namespace ManagCond.Administrador
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText TextBoxClave3;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword TextBoxClave3;
 
         /// <summary>
         /// Control ButtonClave.
@@ -112,5 +112,32 @@ namespace ManagCond.Administrador
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonClave;
+
+        /// <summary>
+        /// Control mensajeError.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mensajeError;
+
+        /// <summary>
+        /// Control mensajeErrorCorreo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mensajeErrorCorreo;
+
+        /// <summary>
+        /// Control mensajeExitoso.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mensajeExitoso;
     }
 }

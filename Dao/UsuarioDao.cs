@@ -28,7 +28,7 @@ namespace Dao
 
             int totalResidentes = 0;
 
-            string sSel = "SELECT count(*) FROM usuario where tipoUsuario = 3 and id_cond = '" +idCondominio + "' ";
+            string sSel = "SELECT count(*) FROM usuario where tipoUsuario = 3 and id_cond = '" + idCondominio + "' ";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -42,9 +42,8 @@ namespace Dao
                 for (; fila < totalFilas; fila++)
                 {
 
-
                     totalResidentes = int.Parse(dt.Rows[fila][0].ToString());
-                   
+
                 }
             }
             catch (Exception)
@@ -53,7 +52,7 @@ namespace Dao
             }
             return totalResidentes;
         }
-       
+
         public static void ObtenerDatos()
         {
             alUsuarios.Clear();
@@ -111,6 +110,55 @@ namespace Dao
             string sCnn = con.Conectar();
 
             string sSel = "SELECT * FROM usuario where rut = '" + rutU + "'";
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            try
+            {
+                da = new SqlDataAdapter(sSel, sCnn);
+                da.Fill(dt);
+
+                int totalFilas = dt.Rows.Count;
+                int fila = 0;
+
+                for (; fila < totalFilas; fila++)
+                {
+                    String rut = dt.Rows[fila][0].ToString();
+                    int idCond = int.Parse(dt.Rows[fila][1].ToString());
+                    String nombres = dt.Rows[fila][2].ToString();
+                    String apellidos = dt.Rows[fila][3].ToString();
+                    DateTime fechaNac = Convert.ToDateTime(dt.Rows[fila][4]);
+                    String numDpto = dt.Rows[fila][5].ToString();
+                    String correo = dt.Rows[fila][6].ToString();
+                    String clave = dt.Rows[fila][7].ToString();
+                    String telefono = dt.Rows[fila][8].ToString();
+                    int cargo = int.Parse(dt.Rows[fila][9].ToString());
+                    String rutPropietario = dt.Rows[fila][10].ToString();
+                    String nombrePropietario = dt.Rows[fila][11].ToString();
+                    String correoPropietario = dt.Rows[fila][12].ToString();
+                    String telefonoPropietario = dt.Rows[fila][13].ToString();
+                    int tipoUsuario = int.Parse(dt.Rows[fila][14].ToString());
+                    int activo = int.Parse(dt.Rows[fila][15].ToString());
+
+                    usuario = new Usuario(rut, idCond, nombres, apellidos, fechaNac, numDpto, correo, clave, telefono, cargo, rutPropietario, nombrePropietario, correoPropietario, telefonoPropietario, tipoUsuario, activo);
+
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return usuario;
+        }
+
+        public static Usuario ObtenerDatosUsuarioCorreo(string correoU)
+        {
+            alUsuarios.Clear();
+            Usuario usuario = null;
+
+            Conexion con = new Conexion();
+            string sCnn = con.Conectar();
+
+            string sSel = "SELECT * FROM usuario where correo = '" + correoU + "'";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -223,7 +271,103 @@ namespace Dao
             return estado;
         }
 
+        public static int VerificarClave(string rut, string clave)
+        {
+            alUsuarios.Clear();
 
+            Conexion con = new Conexion();
+            string sCnn = con.Conectar();
 
+            int resultado = 0;
+
+            string sSel = "SELECT count(*) FROM usuario where rut = '" + rut + "' and clave = '" + clave + "' ";
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            try
+            {
+                da = new SqlDataAdapter(sSel, sCnn);
+                da.Fill(dt);
+
+                int totalFilas = dt.Rows.Count;
+                int fila = 0;
+
+                for (; fila < totalFilas; fila++)
+                {
+
+                    resultado = int.Parse(dt.Rows[fila][0].ToString());
+
+                }
+            }
+            catch (Exception)
+            {
+                //Label1.Text = "Error: " + ex.Message;
+            }
+            return resultado;
+        }
+
+        public static bool ActualizarClave(string rut, string claveA, string claveN)
+        {
+            bool estado = false;
+
+            string sCnn;
+
+            if (rut != null && claveA != null && claveN != null)
+            {
+                try
+                {
+                    Conexion c = new Conexion();
+                    sCnn = c.Conectar();
+                    string sSel = "EXECUTE sp_actualizar_clave @rut = '" + rut + "', @claveA = '" + claveA + "', @claveN = '" + claveN + "'  ";
+
+                    SqlDataAdapter da;
+                    DataTable dt = new DataTable();
+                    da = new SqlDataAdapter(sSel, sCnn);
+                    da.Fill(dt);
+
+                    estado = true;
+
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+
+            return estado;
+        }
+
+        public static int BuscarUsuario(string correo)
+        {
+            alUsuarios.Clear();
+
+            Conexion con = new Conexion();
+            string sCnn = con.Conectar();
+
+            int resultado = 0;
+
+            string sSel = "SELECT count(*) FROM usuario where correo = '" + correo + "' ";
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            try
+            {
+                da = new SqlDataAdapter(sSel, sCnn);
+                da.Fill(dt);
+
+                int totalFilas = dt.Rows.Count;
+                int fila = 0;
+
+                for (; fila < totalFilas; fila++)
+                {
+
+                    resultado = int.Parse(dt.Rows[fila][0].ToString());
+
+                }
+            }
+            catch (Exception)
+            {
+                //Label1.Text = "Error: " + ex.Message;
+            }
+            return resultado;
+        }
     }
 }

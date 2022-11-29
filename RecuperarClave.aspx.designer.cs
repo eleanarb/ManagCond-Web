@@ -7,56 +7,56 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace ManagCond.Administrador
+namespace ManagCond
 {
 
 
-    public partial class GastosComunes
+    public partial class RecuperarClave
     {
 
         /// <summary>
-        /// Control DropDownListBuscar.
+        /// Control login.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListBuscar;
+        protected global::System.Web.UI.HtmlControls.HtmlForm login;
 
         /// <summary>
-        /// Control DropDownList1.
+        /// Control TextBoxUsuario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxUsuario;
 
         /// <summary>
-        /// Control DropDownList2.
+        /// Control ButtonAceptar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList2;
+        protected global::System.Web.UI.WebControls.Button ButtonAceptar;
 
         /// <summary>
-        /// Control ButtonGenerarPdf.
+        /// Control mensajeExitoso.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonGenerarPdf;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mensajeExitoso;
 
         /// <summary>
-        /// Control ButtonAgregar.
+        /// Control mensajeError.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonAgregar;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mensajeError;
     }
 }
