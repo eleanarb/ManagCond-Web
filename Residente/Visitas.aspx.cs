@@ -34,14 +34,16 @@ namespace ManagCond.Residente
 
         protected void ButtonAgregar_Click(object sender, EventArgs e)
         {
-            String numDpto = DropDownList.SelectedValue;
-            String rut = TextBoxRut.Text;
-            String nombres = TextBoxNombres.Text;
-            String apellidos = TextBoxApellidos.Text;
-            String patente = TextBoxPatente.Text;
+            string numDpto = DropDownList.SelectedValue;
+            string rut = TextBoxRut.Text;
+            string nombres = TextBoxNombres.Text;
+            string apellidos = TextBoxApellidos.Text;
+            DateTime fecha = DateTime.Parse(TextBoxFecha.Value);
+            string fecha2 = fecha.ToString("yyyy-MM-dd");
+            string patente = TextBoxPatente.Text;
             int idCond = int.Parse(Session["idCond"].ToString());
 
-            if (VisitaDao.AgregarVisitaR(numDpto, rut, nombres, apellidos, patente, idCond))
+            if (VisitaDao.AgregarVisitaR(numDpto, rut, nombres, apellidos, fecha2, patente, idCond))
             {
                 Response.Redirect("Visitas.aspx");
             }

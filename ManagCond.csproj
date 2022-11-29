@@ -184,7 +184,6 @@
     <Content Include="Administrador\reservas.aspx" />
     <Content Include="RecuperarClave.aspx" />
     <Content Include="Residente\AgregarReserva.aspx" />
-    <Content Include="Residente\AgregarVisita.aspx" />
     <Content Include="Residente\EditarReserva.aspx" />
     <Content Include="Residente\EditarVisita.aspx" />
     <Content Include="Residente\EditarVisitaR.aspx" />
@@ -525,13 +524,6 @@
     </Compile>
     <Compile Include="Residente\AgregarReserva.aspx.designer.cs">
       <DependentUpon>AgregarReserva.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Residente\AgregarVisita.aspx.cs">
-      <DependentUpon>AgregarVisita.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Residente\AgregarVisita.aspx.designer.cs">
-      <DependentUpon>AgregarVisita.aspx</DependentUpon>
     </Compile>
     <Compile Include="Residente\EditarReserva.aspx.cs">
       <DependentUpon>EditarReserva.aspx</DependentUpon>

@@ -205,14 +205,17 @@ namespace Dao
             try
             {
                 Conexion c = new Conexion();
-                string sCnn = c.Conectar();
+                SqlConnection sCnn = new SqlConnection(c.Conectar());
 
-                string sSel = "SELECT * FROM usuario WHERE correo = '" + correo + "' and clave = '" + clave + "' ";
+                SqlCommand sSel = new SqlCommand("SELECT * FROM usuario WHERE correo = @correo and clave = @clave", sCnn);
+                sSel.Parameters.AddWithValue("@correo", correo);
+                sSel.Parameters.AddWithValue("@clave", clave);
+
 
                 SqlDataAdapter da;
                 DataTable dt = new DataTable();
 
-                da = new SqlDataAdapter(sSel, sCnn);
+                da = new SqlDataAdapter(sSel);
                 da.Fill(dt);
 
                 string rut = dt.Rows[0][0].ToString();

@@ -136,7 +136,7 @@ namespace Dao
             }
             return alVisitas;
         }
-        public static bool AgregarVisitaR(string numDpto, string rut, string nombres, string apellidos, string patente, int idCond)
+        public static bool AgregarVisitaR(string numDpto, string rut, string nombres, string apellidos, string fecha, string patente, int idCond)
         {
             bool estado = false;
 
@@ -148,7 +148,7 @@ namespace Dao
                 {
                     Conexion c = new Conexion();
                     sCnn = c.Conectar();
-                    string sSel = "EXECUTE sp_agregar_visitas @numDpto = " + numDpto + ", @rut = '" + rut + "', @nombres = '" + nombres + "', @apellidos= '" + apellidos + "' , @patente= '" + patente + "' , @idCond= " + idCond + ", @estado=4";
+                    string sSel = "EXECUTE sp_agregar_visitasR @numDpto = " + numDpto + ", @rut = '" + rut + "', @nombres = '" + nombres + "', @apellidos= '" + apellidos + "',@fecha= '"+ fecha +"', @patente= '" + patente + "' , @idCond= " + idCond + ", @estado=4";
 
                     SqlDataAdapter da;
                     DataTable dt = new DataTable();
