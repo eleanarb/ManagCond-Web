@@ -73,7 +73,7 @@ namespace ManagCond
             string Contraseña = "Trompeta45@";
             string fecha = DateTime.Now.ToString("dd MMMM");
 
-            DateTime expires = DateTime.Now + TimeSpan.FromHours(3);
+            DateTime expires = DateTime.Now + TimeSpan.FromHours(8);
             string hash = MakeExpiryHash(expires);
             string link = string.Format("https://managcond.azurewebsites.net/CambiarClave.aspx?correo=" + EmailDestino + "&exp={0}&k={1}", expires.ToString("s"), hash);
 
