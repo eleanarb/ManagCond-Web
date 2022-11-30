@@ -30,22 +30,8 @@ namespace ManagCond
             else
             {
                 Response.Redirect("invalido.aspx");
-            }
-
-
-            mensajeError.Visible = false;
-            mensajeExitoso.Visible = false;
-            string mensaje = (string)Session["mensaje"];
-            if (mensaje == "1")
-            {
-                mensajeExitoso.Visible = true;
-                mensajeError.Visible = false;
-            }
-            else if (mensaje == "2")
-            {
-                mensajeError.Visible = true;
-                mensajeExitoso.Visible = false;
-            }
+            }           
+            
 
             if (!IsPostBack)
             {
@@ -80,19 +66,19 @@ namespace ManagCond
                             string nombre = usuario.Nombres;
                             Notificacion(EmailDestino, nombre);
                             Session["mensaje"] = "1";
-                            Response.Redirect("CambiarClave.aspx");
+                            Response.Redirect("Login.aspx");
 
                         }
                         else
                         {
                             Session["mensaje"] = "2";
-                            Response.Redirect("CambiarClave.aspx?correo=" + correo + "");
+                            Response.Redirect("Login.aspx");
                         }
                     }
                     else
                     {
                         Session["mensaje"] = "2";
-                        Response.Redirect("CambiarClave.aspx?correo=" + correo + "");
+                        Response.Redirect("Login.aspx");
                     }
                 }           
 

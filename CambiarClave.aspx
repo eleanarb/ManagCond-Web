@@ -55,36 +55,6 @@
                                     <asp:Button ID="ButtonClave" class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" runat="server" OnClick="ButtonClave_Click" Text="Guardar Cambios" />
                                 </div>
                             </div>
-                            <%--mensaje exitoso--%>
-                            <div runat="server" visible="false" id="mensajeExitoso" class="flex p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
-                                <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                                <span class="sr-only">Info</span>
-                                <div>
-                                    <span class="font-medium">Se ha restablecido la contraseña <a
-                                        class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
-                                        href="Login.aspx"> Iniciar Sesión
-                                    </a></span>
-                                </div>
-
-                                
-                            </div>
-                            <%--mensaje error--%>
-                            <div>
-                                <div runat="server" visible="false" id="mensajeError" class="flex p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
-                                    <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                                    <span class="sr-only">Info</span>
-                                    <div>
-                                        <span class="font-medium">Error al restablecer la contraseña <a
-                                            class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
-                                            href="Login.aspx"> Iniciar Sesión
-                                        </a></span>
-                                    </div>
-                                
-                            
-                                </div>
-                            </div>
                         </div>
                     </form>
                 
