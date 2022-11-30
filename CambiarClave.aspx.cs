@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -13,8 +14,25 @@ namespace ManagCond
 {
     public partial class CambiarClave : System.Web.UI.Page
     {
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            DateTime expires = DateTime.Parse(Request.Params["exp"]);
+            string hash = MakeExpiryHash(expires);
+            if (Request.Params["k"] == hash)
+            {
+                if (expires < DateTime.UtcNow)
+                {
+                    Response.Redirect("vencio.aspx");
+                }
+            }
+            else
+            {
+                Response.Redirect("invalido.aspx");
+            }
+
+
             mensajeError.Visible = false;
             mensajeExitoso.Visible = false;
             string mensaje = (string)Session["mensaje"];
@@ -38,7 +56,6 @@ namespace ManagCond
         protected void ButtonClave_Click(object sender, EventArgs e)
         {
             string correo = Request.QueryString["correo"];
-            string clave1 = TextBoxClave1.Value;
             string clave2 = TextBoxClave2.Value;
             string clave3 = TextBoxClave3.Value;
 
@@ -52,14 +69,10 @@ namespace ManagCond
             {
                 string rut = usuario.Rut;
 
-                int resul = 0;
-                resul = UsuarioDao.VerificarClave(rut, clave1);
 
-                if (resul > 0)
-                {
                     if (clave2.Equals(clave3))
                     {
-                        if (UsuarioDao.ActualizarClave(rut, clave1, clave3))
+                        if (UsuarioDao.CambiarClave(rut, clave3))
                         {
                             Usuario usuarioN = UsuarioDao.ObtenerDatosUsuario(rut);
                             Session["usuario"] = usuarioN;
@@ -81,15 +94,16 @@ namespace ManagCond
                         Session["mensaje"] = "2";
                         Response.Redirect("CambiarClave.aspx?correo=" + correo + "");
                     }
-                }
-                else
-                {
-                    Session["mensaje"] = "2";
-                    Response.Redirect("CambiarClave.aspx?correo=" + correo + "");
-                }
+                }           
 
-            }
 
+        }
+        public static string MakeExpiryHash(DateTime expiry)
+        {
+            const string salt = "3256";
+            byte[] bytes = Encoding.UTF8.GetBytes(salt + expiry.ToString("s"));
+            using (var sha = System.Security.Cryptography.SHA1.Create())
+                return string.Concat(sha.ComputeHash(bytes).Select(b => b.ToString("x2"))).Substring(8);
         }
 
         protected void Notificacion(string EmailDestino, string nombre)

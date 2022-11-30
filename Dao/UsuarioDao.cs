@@ -308,6 +308,37 @@ namespace Dao
             return resultado;
         }
 
+        public static bool CambiarClave(string rut, string claveN)
+        {
+            bool estado = false;
+
+            string sCnn;
+
+            if (rut != null && claveN != null)
+            {
+                try
+                {
+                    Conexion c = new Conexion();
+                    sCnn = c.Conectar();
+                    string sSel = "EXECUTE sp_cambiar_clave @rut = '" + rut + "', @claveN = '" + claveN + "'  ";
+
+                    SqlDataAdapter da;
+                    DataTable dt = new DataTable();
+                    da = new SqlDataAdapter(sSel, sCnn);
+                    da.Fill(dt);
+
+                    estado = true;
+
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+
+            return estado;
+        }
+
         public static bool ActualizarClave(string rut, string claveA, string claveN)
         {
             bool estado = false;
