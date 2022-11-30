@@ -16,8 +16,6 @@ namespace ManagCond
 {
     public partial class CambiarClave : System.Web.UI.Page
     {
-        string correo = "";
-
         protected void Page_Load(object sender, EventArgs e)
         {
             DateTime expires = DateTime.Parse(Request.Params["exp"]);
@@ -37,8 +35,7 @@ namespace ManagCond
 
             if (!IsPostBack)
             {
-                Session["mensaje"] = "0";
-                correo = Decrypt(HttpUtility.UrlDecode(Request.QueryString["correo"]));
+                Session["mensaje"] = "0";             
             }
         }
 
@@ -67,7 +64,7 @@ namespace ManagCond
 
         protected void ButtonClave_Click(object sender, EventArgs e)
         {
-            
+            string correo = Decrypt(HttpUtility.UrlDecode(Request.QueryString["correo"]));
             string clave2 = TextBoxClave2.Value;
             string clave3 = TextBoxClave3.Value;
 
