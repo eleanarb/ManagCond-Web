@@ -49,7 +49,7 @@ namespace ManagCond
             if (resul > 0)
             {
                 string emailDestino = HttpUtility.UrlEncode(Encrypt(correo));
-                Notificacion(emailDestino, usuario.Nombres);
+                Notificacion(emailDestino, usuario.Nombres, correo);
                 Session["mensaje"] = "1";
                 Response.Redirect("RecuperarClave.aspx");
             }
@@ -92,7 +92,7 @@ namespace ManagCond
                 return string.Concat(sha.ComputeHash(bytes).Select(b => b.ToString("x2"))).Substring(8);
         }
 
-        protected void Notificacion(string EmailDestino, string nombre)
+        protected void Notificacion(string EmailDestino, string nombre, string EmailSinEncriptar)
         {
             string EmailOrigen = "managcond@outlook.com";
             string Contraseña = "Trompeta45@";
@@ -112,7 +112,7 @@ namespace ManagCond
                 Credentials = new NetworkCredential(EmailOrigen, Contraseña)
             };
 
-            MailMessage oMailMessage = new MailMessage(EmailOrigen, EmailDestino, "Recuperar contraseña", body)
+            MailMessage oMailMessage = new MailMessage(EmailOrigen, EmailSinEncriptar, "Recuperar contraseña", body)
             {
                 IsBodyHtml = true
             };
