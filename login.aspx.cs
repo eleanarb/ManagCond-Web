@@ -13,8 +13,25 @@ namespace ManagCond
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            mensajeExitoso.Visible = false;
+            mensajeError.Visible = false;
+            string mensaje = (string)Session["mensaje"];
+
+            if (mensaje == "1")
+            {
+                mensajeExitoso.Visible = true;
+                mensajeError.Visible = false;
+            }
+            else if (mensaje == "2")
+            {
+                mensajeError.Visible = true;
+                mensajeExitoso.Visible = false;
+            }
+
+
             if (!IsPostBack)
             {
+                Session["mensaje"] = "0";
                 Session.Abandon();
                 Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
             }
