@@ -14,15 +14,15 @@ namespace Dao
         private static readonly List<Ingreso> alIngresos = new List<Ingreso>();
         private static readonly Conexion con = new Conexion();
         private static readonly string conBD = con.Conectar();
-        public static List<Ingreso> GetAlIngresos(int idCond)
+        public static List<Ingreso> GetAlIngresos(int mes, int año, int idCond)
         {
-            ObtenerDatosIngresos(idCond);
+            ObtenerDatosIngresos(mes, año,idCond);
             return alIngresos;
         }
-        public static void ObtenerDatosIngresos(int idCond)
+        public static void ObtenerDatosIngresos(int mes, int año,int idCond)
         {
             alIngresos.Clear();
-            string strSql = String.Format("SELECT * FROM ingresos where idCond= {0} ORDER BY fecha DESC", idCond);
+            string strSql = String.Format("SELECT * FROM ingresos where MONTH(fecha) = {0} AND YEAR(fecha) = {1} AND idCond = {2} ORDER BY fecha DESC", mes, año,idCond);
 
             using (SqlConnection con = new SqlConnection(conBD))
             {
@@ -36,26 +36,26 @@ namespace Dao
                     string nombre = sdr["nombre"].ToString();
                     string comentario = sdr["comentario"].ToString();
                     int monto = int.Parse(sdr["monto"].ToString());
-                    int mes = int.Parse(sdr["mes"].ToString());
-                    int año = int.Parse(sdr["año"].ToString());
+                    int mesI = int.Parse(sdr["mes"].ToString());
+                    int añoI = int.Parse(sdr["año"].ToString());
                     DateTime fecha = DateTime.Parse(sdr["fecha"].ToString());
                     string documento = sdr["documento"].ToString();
 
-                    Ingreso ingreso = new Ingreso(id, nombre, comentario, monto, mes, año,fecha, documento, idCond);
+                    Ingreso ingreso = new Ingreso(id, nombre, comentario, monto, mesI, añoI, fecha, documento, idCond);
 
                     alIngresos.Add(ingreso);
                 }
                 con.Close();
             }
         }
-        public static int ObtenerTotalIngresos(int idCondominio)
+        public static int ObtenerTotalIngresos(int mes, int año, int idCond)
         {
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
             int totalRespuestas = 0;
 
-            string sSel = "SELECT count(*) FROM ingresos WHERE idCond ='" + idCondominio + "' ";
+            string sSel = "SELECT count(*) FROM ingresos where MONTH(fecha) = " + mes + " AND YEAR(fecha) = " + año + " AND idCond = " + idCond + " ";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -98,9 +98,6 @@ namespace Dao
                     da.Fill(dt);
 
                     estado = true;
-
-                    ObtenerTotalIngresos(idCond);
-
                 }
                 catch (Exception)
                 {
@@ -128,8 +125,6 @@ namespace Dao
 
 
                 estado = true;
-
-                ObtenerTotalIngresos(idCond);
             }
             catch (Exception)
             {

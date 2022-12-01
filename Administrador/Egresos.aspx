@@ -21,7 +21,6 @@
       <script src="https://unpkg.com/flowbite@1.5.3/dist/datepicker.js"></script>
   </head>
   <body>
-
     <div
       class="flex h-screen bg-gray-50 dark:bg-gray-900"
       :class="{ 'overflow-hidden': isSideMenuOpen }"
@@ -31,184 +30,181 @@
             <!-- #include file ="Template/HeaderAdministrador.html" -->
             <main class="h-full overflow-y-auto"> 
                 <form runat="server">
-                <div class="container grid px-6 mx-auto">
-                    <%
-                        DateTime fechaActual = System.DateTime.Now;
-                        string mesActual = fechaActual.ToString("MMMM");
-                        string añoActual = fechaActual.ToString("yyyy");
+                    <div class="container grid px-6 mx-auto">
+                        <%
+                            DateTime fechaActual = System.DateTime.Now;
+                            string mesActual = fechaActual.ToString("MMMM");
+                            string añoActual = fechaActual.ToString("yyyy");
                         %>
-                    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Egresos de <%=mesActual %>-<%=añoActual %></h2>
-                    
-                    <br />
-                    <div class="">           
-                        <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800 ">
-                            <div class="grid grid-cols-2 items-center">
-                                <div class="grid grid-cols-2">
-                                    <div class="">
-                                        <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListMes" runat="server" OnSelectedIndexChanged="Mes_SelectedIndexChanged" AutoPostBack="true">
-                                            <asp:ListItem Value="01">Enero</asp:ListItem>
-                                            <asp:ListItem Value="02">Febrero</asp:ListItem>
-                                            <asp:ListItem Value="03">Marzo</asp:ListItem>
-                                            <asp:ListItem Value="04">Abril</asp:ListItem>
-                                            <asp:ListItem Value="05">Mayo</asp:ListItem>
-                                            <asp:ListItem Value="06">Junio</asp:ListItem>
-                                            <asp:ListItem Value="07">Julio</asp:ListItem>
-                                            <asp:ListItem Value="08">Agosto</asp:ListItem>
-                                            <asp:ListItem Value="09">Septiembre</asp:ListItem>
-                                            <asp:ListItem Value="10">Octubre</asp:ListItem>
-                                            <asp:ListItem Value="11">Noviembre</asp:ListItem>
-                                            <asp:ListItem Value="12">Diciembre</asp:ListItem>
-                                        </asp:DropDownList>
+                        <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Egresos de <%=mesActual %>-<%=añoActual %></h2>
+                        <br />
+                        <div class="">
+                            <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800 ">
+                                <div class="grid grid-cols-2 items-center">
+                                    <div class="grid grid-cols-2">
+                                        <div class="">
+                                            <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListMes" runat="server" OnSelectedIndexChanged="Mes_SelectedIndexChanged" AutoPostBack="true">
+                                                <asp:ListItem Value="01">Enero</asp:ListItem>
+                                                <asp:ListItem Value="02">Febrero</asp:ListItem>
+                                                <asp:ListItem Value="03">Marzo</asp:ListItem>
+                                                <asp:ListItem Value="04">Abril</asp:ListItem>
+                                                <asp:ListItem Value="05">Mayo</asp:ListItem>
+                                                <asp:ListItem Value="06">Junio</asp:ListItem>
+                                                <asp:ListItem Value="07">Julio</asp:ListItem>
+                                                <asp:ListItem Value="08">Agosto</asp:ListItem>
+                                                <asp:ListItem Value="09">Septiembre</asp:ListItem>
+                                                <asp:ListItem Value="10">Octubre</asp:ListItem>
+                                                <asp:ListItem Value="11">Noviembre</asp:ListItem>
+                                                <asp:ListItem Value="12">Diciembre</asp:ListItem>
+                                            </asp:DropDownList>
+                                        </div>
+                                        <div class="">
+                                            <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListAño" runat="server" OnSelectedIndexChanged="Año_SelectedIndexChanged" AutoPostBack="true">
+                                                <asp:ListItem Value="2019">2019</asp:ListItem>
+                                                <asp:ListItem Value="2020">2020</asp:ListItem>
+                                                <asp:ListItem Value="2022">2022</asp:ListItem>
+                                                <asp:ListItem Value="2023">2023</asp:ListItem>
+                                                <asp:ListItem Value="2024">2024</asp:ListItem>
+                                                <asp:ListItem Value="2025">2025</asp:ListItem>
+                                                <asp:ListItem Value="2026">2026</asp:ListItem>
+                                            </asp:DropDownList>
+                                        </div>
                                     </div>
-                                    <div class="">
-                                        <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListAño" runat="server" OnSelectedIndexChanged="Año_SelectedIndexChanged" AutoPostBack="true">
-                                            <asp:ListItem Value="2019">2019</asp:ListItem>
-                                            <asp:ListItem Value="2020">2020</asp:ListItem>
-                                            <asp:ListItem Value="2022">2022</asp:ListItem>
-                                            <asp:ListItem Value="2023">2023</asp:ListItem>
-                                            <asp:ListItem Value="2024">2024</asp:ListItem>
-                                            <asp:ListItem Value="2025">2025</asp:ListItem>
-                                            <asp:ListItem Value="2026">2026</asp:ListItem>
-                                        </asp:DropDownList>
+                                    <div class="grid grid-cols-4">
+                                        <div></div>
+                                        <div></div>
+                                        <div class="">
+                                            <a class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="GestionProveedores.aspx">Proveedores</a>
+                                        </div>
+                                        <div class="">
+                                            <a class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="AgregarEgreso.aspx">Agregar Egreso</a>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
+                            <br />
+                            <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
 
-                                <div class="grid grid-cols-4">
-                                    <div></div>
-                                    <div></div>
-                                    <div class="">
-                                        <a class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="GestionProveedores.aspx">Proveedores</a>
-                                    </div>
-                                    <div class="">
-                                        <a class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="AgregarEgreso.aspx">Agregar Egreso</a>
-                                    </div>
-                                </div>
+                                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                        <tr>
+                                            <th scope="col" class="py-3 px-6">Proveedor
+                                            </th>
+                                            <th scope="col" class="py-3 px-6">Descripcion
+                                            </th>
+                                            <th scope="col" class="py-3 px-6">Monto
+                                            </th>
+                                            <th scope="col" class="py-3 px-6">Fecha
+                                            </th>
+                                            <th scope="col" class="py-3 px-6">Estado
+                                            </th>
+                                            <th scope="col" class="py-3 px-6">Doc Cobro
+                                            </th>
+                                            <th scope="col" class="py-3 px-6">Doc Pago
+                                            </th>
+                                            <th scope="col" class="py-3 px-6">Acciones
+                                            </th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <% 
+                                            int idCondominio = 0;
+                                            int mesActualN = 0;
+                                            int añoActualN = 0;
+
+                                            idCondominio = (int)Session["idCondominio"];
+                                            mesActualN = (int)Session["mes"];
+                                            añoActualN = (int)Session["año"];
+
+                                            int totalCategorias = 0;
+                                            totalCategorias = EgresosDao.ObtenerTotalCategoriaEgresos(idCondominio, mesActualN, añoActualN);
+
+                                            if (totalCategorias == 0)
+                                            {
+                                        %>
+                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th colspan="8" scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">No hay egresos registrados 
+                                            </th>
+                                        </tr>
+                                        <%
+                                            }
+                                            else
+                                            {
+
+                                                foreach (CategoriaEgresos obj in EgresosDao.GetAlObtenerCategoriasEgresos(idCondominio, mesActualN, añoActualN))
+                                                {
+
+                                        %>
+
+                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 h-1">
+                                            <td colspan="8" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white bg-gray-100 dark:bg-gray-900 dark:text-gray-400"><%=obj.Descrpcion %>
+                                            </td>
+
+                                        </tr>
+                                        <%
+                                            string urlSA = ConfigurationManager.AppSettings["urlSA"].ToString();
+                                            string tokenSAS = ConfigurationManager.AppSettings["tokenArchivosSAS"].ToString();
+                                            string containerSA = ConfigurationManager.AppSettings["containerArchivosSA"].ToString();
+
+                                            foreach (Egresos obj1 in EgresosDao.GetAlObtenerEgresos(obj.id, idCondominio, mesActualN, añoActualN))
+                                            {
+                                                string fecha = obj1.Fecha.ToString("dd-MM-yyyy");
+                                                string año = obj1.Fecha.ToString("yyyy");
+                                                string mes = obj1.Fecha.ToString("MM");
+                                                string url = urlSA + containerSA + "/" + año + "/" + mes + "/" + obj1.DocumentoCobro + tokenSAS;
+                                                string url2 = urlSA + containerSA + "/" + año + "/" + mes + "/" + obj1.Comprobante + tokenSAS;
+                                        %>
+
+                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+
+                                            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white" data-id="<%=obj1.IdProveedor %>" data-categoria="<%=obj.id%>" id="idProveedor"><%=obj1.Proveedor %>
+                                            </th>
+                                            <td class="py-4 px-6"><%=obj1.Descripcion %>
+                                            </td>
+                                            <td class="py-4 px-6">$<%=obj1.Monto %>
+                                            </td>
+                                            <td class="py-4 px-6"><%=fecha %>
+                                            </td>
+                                            <td class="py-4 px-6"><%=obj1.Estado %>
+                                            </td>
+                                            <td class="py-4 px-6"><%if (obj1.DocumentoCobro == "")
+                                                                      {%><a class="font-medium text-blue-600 dark:text-blue-500 hover:underline">No Tiene Documento</a><%}
+                                                                                               else
+                                                                                               { %> <a href="<%=url %>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Documento</a><%} %></td>
+                                            <td class="py-4 px-6"><%if (obj1.Comprobante == "")
+                                                                      {%><a class="font-medium text-blue-600 dark:text-blue-500 hover:underline">No Tiene Documento</a><%}
+                                                                                               else
+                                                                                               { %> <a href="<%=url2 %>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Documento</a><%} %></td>
+                                            <td class="py-4 px-6 md:grid-cols-2">
+                                                <div class="editar ">
+                                                    <button type="button" data-id="<%=obj1.id %>" @click="openModal"
+                                                        class="btnEditar text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                                    </button>
+
+
+
+                                                    <button type="button" data-id="<%=obj1.id %>" data-modal-toggle="popup-modal" class="btnEliminar text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                                    </button>
+
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                        <%}
+                                                }
+                                            }%>
+                                    </tbody>
+                                </table>
 
                             </div>
                         </div>
-                        <br />
-                    <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
-                        
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                <tr>
-                                    <th scope="col" class="py-3 px-6">Proveedor
-                                    </th>
-                                    <th scope="col" class="py-3 px-6">Descripcion
-                                    </th>
-                                    <th scope="col" class="py-3 px-6">Monto
-                                    </th>
-                                    <th scope="col" class="py-3 px-6">Fecha
-                                    </th>
-                                     <th scope="col" class="py-3 px-6">Estado
-                                    </th>
-                                     <th scope="col" class="py-3 px-6">Doc Cobro
-                                    </th>
-                                    <th scope="col" class="py-3 px-6">Doc Pago
-                                    </th>
-                                    <th scope="col" class="py-3 px-6">Acciones
-                                    </th>
-                                </tr>
-                            </thead>
-                           
-                            <tbody>
-                            <% 
-                                int idCondominio = 0;
-                                int mesActualN = 0;
-                                int añoActualN = 0;
-
-                                idCondominio = (int)Session["idCondominio"];
-                                mesActualN = (int)Session["mes"];
-                                añoActualN = (int)Session["año"];
-
-                                int totalCategorias = 0;
-                                totalCategorias = EgresosDao.ObtenerTotalCategoriaEgresos(idCondominio, mesActualN, añoActualN);
-
-                                if (totalCategorias == 0)
-                                {
-                            %>
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">                                    
-                                    <th colspan="8" scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">No hay egresos registrados 
-                                    </th>
-                                </tr>
-                                <%
-                                    }
-                                    else
-                                    {
-
-                                        foreach (CategoriaEgresos obj in EgresosDao.GetAlObtenerCategoriasEgresos(idCondominio, mesActualN, añoActualN))
-                                        {
-
-                                %>
-
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 h-1">
-                                    <td  colspan="8" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white bg-gray-100 dark:bg-gray-900 dark:text-gray-400"><%=obj.Descrpcion %>
-                                    </td>
-                                    
-                                </tr>
-                                <%
-                                    string urlSA = ConfigurationManager.AppSettings["urlSA"].ToString();
-                                    string tokenSAS = ConfigurationManager.AppSettings["tokenArchivosSAS"].ToString();
-                                    string containerSA = ConfigurationManager.AppSettings["containerArchivosSA"].ToString();
-
-                                    foreach (Egresos obj1 in EgresosDao.GetAlObtenerEgresos(obj.id, idCondominio, mesActualN, añoActualN))
-                                    {
-                                        string fecha = obj1.Fecha.ToString("dd-MM-yyyy");
-                                        string año = obj1.Fecha.ToString("yyyy");
-                                        string mes = obj1.Fecha.ToString("MM");
-                                        string url = urlSA + containerSA + "/" + año + "/" + mes + "/" + obj1.DocumentoCobro  + tokenSAS;
-                                        string url2 = urlSA + containerSA + "/" + año + "/" + mes + "/" + obj1.Comprobante  + tokenSAS;
-                                    %>
-
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                 
-                                    <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white" data-id="<%=obj1.IdProveedor %>" data-categoria="<%=obj.id%>" id="idProveedor"><%=obj1.Proveedor %>
-                                    </th>
-                                    <td class="py-4 px-6"><%=obj1.Descripcion %>
-                                    </td>
-                                    <td class="py-4 px-6">$<%=obj1.Monto %>
-                                    </td>
-                                    <td class="py-4 px-6"><%=fecha %>
-                                    </td>
-                                    <td class="py-4 px-6"><%=obj1.Estado %>
-                                    </td>
-                                    <td class="py-4 px-6"><%if (obj1.DocumentoCobro == "")
-                                                              {%><a class="font-medium text-blue-600 dark:text-blue-500 hover:underline">No Tiene Documento</a><%}
-                                                                             else
-                                                                             { %> <a href="<%=url %>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Documento</a><%} %></td>
-                                    <td class="py-4 px-6"><%if (obj1.Comprobante == "")
-                                                              {%><a class="font-medium text-blue-600 dark:text-blue-500 hover:underline">No Tiene Documento</a><%}
-                                                                             else
-                                                                             { %> <a href="<%=url2 %>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Documento</a><%} %></td>
-                                    <td class="py-4 px-6 md:grid-cols-2">
-                                        <div class="editar ">
-                                         <button type="button" data-id="<%=obj1.id %>" @click="openModal"
-                                              class="btnEditar text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-                                        </button>
-
-
-
-                                        <button type="button" data-id="<%=obj1.id %>" data-modal-toggle="popup-modal" class="btnEliminar text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                                        </button>
-
-                                        </div>
-                                        
-                                    </td>
-                                </tr>
-
-                                <%}
-                                        }
-                                    }%>
-                            </tbody>
-                        </table>
-
                     </div>
-                </div>
-                </div>
                     <br />
-
                       <!-- Modal backdrop. This what you want to place close to the closing body tag -->
     <div
       x-show="isModalOpen"

@@ -109,7 +109,7 @@ namespace Dao
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            string sSel = "SELECT * FROM usuario where rut = '" + rutU + "'" + rut;
+            string sSel = "SELECT * FROM usuario where rut = '" + rutU + "'";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try

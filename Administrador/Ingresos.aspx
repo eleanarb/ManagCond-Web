@@ -29,29 +29,53 @@
             <main class="h-full overflow-y-auto">
                 <form runat="server">
                 <div class="container grid px-6 mx-auto">
-                    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Ingresos de Noviembre</h2>
-                    <div class="">
-                            <div class="grid grid-cols-5">
+                    <%
+                        DateTime fechaActual = System.DateTime.Now;
+                        string mesActual = fechaActual.ToString("MMMM");
+                        string añoActual = fechaActual.ToString("yyyy");
+                    %>
+                    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Ingresos de <%=mesActual %>-<%=añoActual %></h2>
+                    <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800 ">
+                        <div class="grid grid-cols-2 items-center">
+                            <div class="grid grid-cols-2">
                                 <div class="">
-                                    <asp:DropDownList class="block p-2.5 w-100 z-20 rounded-md text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-multiselect focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownListBuscar" runat="server">
-                                        <asp:ListItem Selected="True" Value="0"> Todas las categorías </asp:ListItem>
+                                    <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListMesF" runat="server" OnSelectedIndexChanged="Mes_SelectedIndexChanged" AutoPostBack="true">
+                                        <asp:ListItem Value="01">Enero</asp:ListItem>
+                                        <asp:ListItem Value="02">Febrero</asp:ListItem>
+                                        <asp:ListItem Value="03">Marzo</asp:ListItem>
+                                        <asp:ListItem Value="04">Abril</asp:ListItem>
+                                        <asp:ListItem Value="05">Mayo</asp:ListItem>
+                                        <asp:ListItem Value="06">Junio</asp:ListItem>
+                                        <asp:ListItem Value="07">Julio</asp:ListItem>
+                                        <asp:ListItem Value="08">Agosto</asp:ListItem>
+                                        <asp:ListItem Value="09">Septiembre</asp:ListItem>
+                                        <asp:ListItem Value="10">Octubre</asp:ListItem>
+                                        <asp:ListItem Value="11">Noviembre</asp:ListItem>
+                                        <asp:ListItem Value="12">Diciembre</asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
                                 <div class="">
-                                    <asp:DropDownList class="block p-2.5 w-100 z-20 rounded-md text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-multiselect focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownList1" runat="server">
-                                        <asp:ListItem Selected="True" Value="0"> Todas las categorías </asp:ListItem>
+                                    <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListAñoF" runat="server" OnSelectedIndexChanged="Año_SelectedIndexChanged" AutoPostBack="true">
+                                        <asp:ListItem Value="2019">2019</asp:ListItem>
+                                        <asp:ListItem Value="2020">2020</asp:ListItem>
+                                        <asp:ListItem Value="2022">2022</asp:ListItem>
+                                        <asp:ListItem Value="2023">2023</asp:ListItem>
+                                        <asp:ListItem Value="2024">2024</asp:ListItem>
+                                        <asp:ListItem Value="2025">2025</asp:ListItem>
+                                        <asp:ListItem Value="2026">2026</asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
-                                <div class="">
-                                    <asp:DropDownList class="block p-2.5 w-100 z-20 rounded-md text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-multiselect focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownList2" runat="server">
-                                        <asp:ListItem Selected="True" Value="0"> Todas las categorías </asp:ListItem>
-                                    </asp:DropDownList>
-                                </div>
+                            </div>
+                            <div class="grid grid-cols-4">
                                 <div></div>
-                                <div class="col-end-4 ">
+                                <div></div>
+                                <div class="">
+                                </div>
+                                <div class="">
                                     <a class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="AgregarIngreso.aspx">Agregar Ingreso</a>
                                 </div>
                             </div>
+                        </div>
                     </div>
                     <br />
                     <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
@@ -73,14 +97,18 @@
                                     <th scope="col" class="py-3 px-6">Acciones</th>
                                 </tr>
                             </thead>
-
                             <tbody>
                                 <% 
                                     int idCondominio = 0;
+                                    int mesActualN = 0;
+                                    int añoActualN = 0;
+
                                     idCondominio = (int)Session["idCondominio"];
+                                    mesActualN = (int)Session["mes"];
+                                    añoActualN = (int)Session["año"];
 
                                     int totalIngresos = 0;
-                                    totalIngresos = IngresosDao.ObtenerTotalIngresos(idCondominio);
+                                    totalIngresos = IngresosDao.ObtenerTotalIngresos(mesActualN,añoActualN,idCondominio);
 
                                     if (totalIngresos == 0)
                                     {
@@ -97,7 +125,7 @@
                                         string tokenSAS = ConfigurationManager.AppSettings["tokenArchivosSAS"].ToString();
                                         string containerSA = ConfigurationManager.AppSettings["containerArchivosSA"].ToString();
 
-                                        foreach (Ingreso obj in IngresosDao.GetAlIngresos(idCondominio))
+                                        foreach (Ingreso obj in IngresosDao.GetAlIngresos(mesActualN,añoActualN,idCondominio))
                                         {
                                             string url = urlSA + containerSA + "/" + obj.Año + "/" + obj.Mes + "/" + obj.Documento + tokenSAS;
                                 %>
@@ -337,6 +365,7 @@
 
         })
     </script>
+
     <script>
         let eliminar = document.querySelectorAll(".btnEliminar")
 
@@ -347,13 +376,10 @@
 
                 let idE = filaE.querySelector('.btnEliminar').getAttribute('data-id')
                 document.querySelector('#TextBoxIdEliminar').value = idE;
-
-
             })
-
         })
     </script>
 
-           <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
 </body>
 </html>

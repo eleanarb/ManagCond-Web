@@ -17,9 +17,6 @@ namespace ManagCond.Administrador
             DateTime fechaActual = System.DateTime.Now;
             int mesActual = int.Parse(fechaActual.ToString("MM"));
             int añoActual = fechaActual.Year;
-
-            
-
             if (!IsPostBack)
             {
                 LlenarDropDownProveedor();
@@ -69,10 +66,7 @@ namespace ManagCond.Administrador
             {
                 Response.Redirect("f.aspx");
             }
-
-
         }
-
         protected void ButtonEliminar_Click(object sender, EventArgs e)
         {
             int id = int.Parse(TextBoxIdEliminar.Value);
@@ -83,8 +77,6 @@ namespace ManagCond.Administrador
             else
             {
             }
-
-
         }
 
         public void LlenarDropDownProveedor()
@@ -104,7 +96,6 @@ namespace ManagCond.Administrador
             DropDownListProveedor.Items.Insert(0, new ListItem("Seleccione proveedor", "0"));
 
         }
-
         public void LlenarDropDownCategoria()
         {
             int idCondominio = 0;
@@ -122,13 +113,11 @@ namespace ManagCond.Administrador
             DropDownListCategoria.Items.Insert(0, new ListItem("Seleccione categoría", "0"));
 
         }
-
         protected void Mes_SelectedIndexChanged(object sender, EventArgs e)
         {
             Session["mes"] = int.Parse(DropDownListMes.SelectedValue);
             Session["año"] = int.Parse(DropDownListAño.SelectedValue);
         }
-
         protected void Año_SelectedIndexChanged(object sender, EventArgs e)
         {
             Session["mes"] = int.Parse(DropDownListMes.SelectedValue);
