@@ -13,19 +13,19 @@ namespace Dao
     {
         private static readonly List<Residente> alResidente = new List<Residente>();
 
-        public static List<Residente> GetAlResidente()
+        public static List<Residente> GetAlResidente(int idCond)
         {
-            ObtenerDatosResidente();
+            ObtenerDatosResidente(idCond);
             return alResidente;
         }
-        public static void ObtenerDatosResidente()
+        public static void ObtenerDatosResidente(int idCond)
         {
             alResidente.Clear();
 
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            string sSel = "SELECT D.numDpto, U.nombres, U.apellidos, D.numEstac as 'Estacionamiento', U.rut, U.telefono, U.correo, U.rutPropietario, U.nombrePropietario, U.telefonoPropietario, U.correoPropietario, U.id_cond  FROM usuario U JOIN departamento D ON U.numDpto = D.id WHERE U.tipoUsuario = 3 ORDER BY U.numDpto ASC";
+            string sSel = "SELECT D.numDpto, U.nombres, U.apellidos, D.numEstac as 'Estacionamiento', U.rut, U.telefono, U.correo, U.rutPropietario, U.nombrePropietario, U.telefonoPropietario, U.correoPropietario, U.id_cond  FROM usuario U JOIN departamento D ON U.numDpto = D.id WHERE U.tipoUsuario = 3 and U.id_Cond = "+ idCond +" ORDER BY U.numDpto ASC";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -49,7 +49,6 @@ namespace Dao
                     String nombrePropietario = dt.Rows[fila][8].ToString();
                     String telefonoPropietario = dt.Rows[fila][9].ToString();
                     String correoPropietario = dt.Rows[fila][10].ToString();
-                    int idCond = int.Parse(dt.Rows[fila][11].ToString());
 
                     Residente residente = new Residente(rutResidente, nombresResidente, apellidosResidente, numDpto, estacinamiento, telefonoResidente, correoResidente, rutPropietario, nombrePropietario, telefonoPropietario, correoPropietario, idCond);
 
@@ -62,7 +61,7 @@ namespace Dao
             }
         }
 
-        public static int ObtenerTotalResidentes(int idCondominio)
+        public static int ObtenerTotalResidentes(int idCond)
         {
             alResidente.Clear();
 
@@ -71,7 +70,7 @@ namespace Dao
 
             int totalResidentes = 0;
 
-            string sSel = "SELECT count(*) FROM usuario where tipoUsuario = 3 and id_cond = '" + idCondominio + "' ";
+            string sSel = "SELECT count(*) FROM usuario where tipoUsuario = 3 and id_cond = '" + idCond + "' ";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try

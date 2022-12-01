@@ -48,7 +48,7 @@
                                 <tbody
                                     class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                                     <%
-                                         Usuario usuario = (Usuario)Session["usuario"];
+                                        Usuario usuario = (Usuario)Session["usuario"];
                                         string urlSA = ConfigurationManager.AppSettings["urlSA"].ToString();
                                         string tokenSAS = ConfigurationManager.AppSettings["tokenSAS"].ToString();
                                         string containerSA = ConfigurationManager.AppSettings["containerSA"].ToString();

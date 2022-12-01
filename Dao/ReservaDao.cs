@@ -13,18 +13,18 @@ namespace Dao
         private static readonly string conBD = con.Conectar();
         private static string connectionString = "Server=tcp:managcondserver.database.windows.net,1433;Initial Catalog=managcond;Persist Security Info=False;User ID=Administrador;Password=Tallo2820@#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
-        public static List<Reserva> GetAlReservasPendientes(int idCondominio)
+        public static List<Reserva> GetAlReservasPendientes(int idCond)
         {
-            ObtenerReservasPendientes(idCondominio);
+            ObtenerReservasPendientes(idCond);
             return alReservas;
         }
-        public static List<Reserva> GetAlReservasAnteriores(int idCondominio)
+        public static List<Reserva> GetAlReservasAnteriores(int idCond)
         {
-            ObtenerReservasAnteriores(idCondominio);
+            ObtenerReservasAnteriores(idCond);
             return alReservas;
         }
 
-        public static int ObtenerTotalReservasPendientes(int idCondominio)
+        public static int ObtenerTotalReservasPendientes(int idCond)
         {
             alReservas.Clear();
 
@@ -33,7 +33,7 @@ namespace Dao
 
             int totalReservas = 0;
 
-            string sSel = "select count(*) from reservasEspacios where estado = 1 and id_cond = '" + idCondominio + "' ";
+            string sSel = "select count(*) from reservasEspacios where estado = 1 and id_cond = '" + idCond + "' ";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -57,14 +57,14 @@ namespace Dao
             return totalReservas;
         }
 
-        public static void ObtenerReservasPendientes(int idCondominio)
+        public static void ObtenerReservasPendientes(int idCond)
         {
             alReservas.Clear();
 
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            string sSel = "SELECT * FROM reservasEspacios INNER JOIN espaciosComunes ON reservasEspacios.espacioComun = espaciosComunes.id where reservasEspacios.estado = 1 and reservasEspacios.id_Cond = '" + idCondominio + "' ";
+            string sSel = "SELECT * FROM reservasEspacios INNER JOIN espaciosComunes ON reservasEspacios.espacioComun = espaciosComunes.id where reservasEspacios.estado = 1 and reservasEspacios.id_Cond = '" + idCond + "' ";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -83,7 +83,6 @@ namespace Dao
                     String rangoHorario = dt.Rows[fila][3].ToString();
                     String solicitante = dt.Rows[fila][5].ToString();
                     int estado = int.Parse(dt.Rows[fila][6].ToString());
-                    int idCond = int.Parse(dt.Rows[fila][7].ToString());
                     string espacioComun = dt.Rows[fila][9].ToString();
 
                     Reserva reserva = new Reserva(id, numDpto, fecha, rangoHorario, espacioComun, solicitante, estado, idCond);
@@ -97,14 +96,14 @@ namespace Dao
             }
         }
 
-        public static void ObtenerReservasAnteriores(int idCondominio)
+        public static void ObtenerReservasAnteriores(int idCond)
         {
             alReservas.Clear();
 
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            string sSel = "SELECT * FROM reservasEspacios INNER JOIN espaciosComunes ON reservasEspacios.espacioComun = espaciosComunes.id where reservasEspacios.estado = 2 or reservasEspacios.estado = 3 and reservasEspacios.id_Cond = '" + idCondominio + "' ";
+            string sSel = "SELECT * FROM reservasEspacios INNER JOIN espaciosComunes ON reservasEspacios.espacioComun = espaciosComunes.id where (reservasEspacios.estado = 2 or reservasEspacios.estado = 3) and reservasEspacios.id_Cond = '" + idCond + "' ";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -123,7 +122,6 @@ namespace Dao
                     String rangoHorario = dt.Rows[fila][3].ToString();
                     String solicitante = dt.Rows[fila][5].ToString();
                     int estado = int.Parse(dt.Rows[fila][6].ToString());
-                    int idCond = int.Parse(dt.Rows[fila][7].ToString());
                     string espacioComun = dt.Rows[fila][9].ToString();
 
 
@@ -206,24 +204,24 @@ namespace Dao
             return estado;
         }
         //Guardia
-        public static List<Reserva> GetAlReservasAnterioresG(int idCondominio)
+        public static List<Reserva> GetAlReservasAnterioresG(int idCond)
         {
-            ObtenerReservasAnterioresG(idCondominio);
+            ObtenerReservasAnterioresG(idCond);
             return alReservas;
         }
-        public static List<Reserva> GetAlReservasTOPG(int idCondominio)
+        public static List<Reserva> GetAlReservasTOPG(int idCond)
         {
-            ObtenerReservasTOPG(idCondominio);
+            ObtenerReservasTOPG(idCond);
             return alReservas;
         }
-        public static void ObtenerReservasAnterioresG(int idCondominio)
+        public static void ObtenerReservasAnterioresG(int idCond)
         {
             alReservas.Clear();
 
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            string sSel = "SELECT * FROM reservasEspacios INNER JOIN espaciosComunes ON reservasEspacios.espacioComun = espaciosComunes.id where reservasEspacios.estado = 2 or reservasEspacios.estado = 4 and reservasEspacios.id_Cond = " + idCondominio + "";
+            string sSel = "SELECT * FROM reservasEspacios INNER JOIN espaciosComunes ON reservasEspacios.espacioComun = espaciosComunes.id where (reservasEspacios.estado = 2 or reservasEspacios.estado = 4) and reservasEspacios.id_Cond = " + idCond + "";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -242,7 +240,6 @@ namespace Dao
                     String rangoHorario = dt.Rows[fila][3].ToString();
                     String solicitante = dt.Rows[fila][5].ToString();
                     int estado = int.Parse(dt.Rows[fila][6].ToString());
-                    int idCond = int.Parse(dt.Rows[fila][7].ToString());
                     string espacioComun = dt.Rows[fila][9].ToString();
 
                     Reserva reserva = new Reserva(id, numDpto, fecha, rangoHorario, espacioComun, solicitante, estado, idCond);
@@ -255,14 +252,14 @@ namespace Dao
                 //Label1.Text = "Error: " + ex.Message;
             }
         }
-        public static void ObtenerReservasTOPG(int idCondominio)
+        public static void ObtenerReservasTOPG(int idCond)
         {
             alReservas.Clear();
 
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            string sSel = "SELECT TOP 10 * FROM reservasEspacios INNER JOIN espaciosComunes ON reservasEspacios.espacioComun = espaciosComunes.id where reservasEspacios.estado = 2 and reservasEspacios.id_Cond = " + idCondominio + "";
+            string sSel = "SELECT TOP 10 * FROM reservasEspacios INNER JOIN espaciosComunes ON reservasEspacios.espacioComun = espaciosComunes.id where reservasEspacios.estado = 2 and reservasEspacios.id_Cond = " + idCond + "";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -281,7 +278,6 @@ namespace Dao
                     string rangoHorario = dt.Rows[fila][3].ToString();
                     string solicitante = dt.Rows[fila][5].ToString();
                     int estado = int.Parse(dt.Rows[fila][6].ToString());
-                    int idCond = int.Parse(dt.Rows[fila][7].ToString());
                     string espacioComun = dt.Rows[fila][9].ToString();
 
                     Reserva reserva = new Reserva(id, numDpto, fecha, rangoHorario, espacioComun, solicitante, estado, idCond);
@@ -295,9 +291,9 @@ namespace Dao
             }
         }
         //Residente
-        public static List<Reserva> GetAlReservasTOPR(string numDpto, int idCondominio)
+        public static List<Reserva> GetAlReservasTOPR(string numDpto, int idCond)
         {
-            ObtenerReservasTOPR(numDpto, idCondominio);
+            ObtenerReservasTOPR(numDpto, idCond);
             return alReservas;
         }
         public static List<Reserva> GetAlReservasR(string numDpto, int idCond)
@@ -310,14 +306,14 @@ namespace Dao
             ObtenerReservasRP(numDpto, idCond);
             return alReservas;
         }
-        public static void ObtenerReservasTOPR(string numDpto, int idCondominio)
+        public static void ObtenerReservasTOPR(string numDpto, int idCond)
         {
             alReservas.Clear();
 
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            string sSel = "SELECT TOP 10 * FROM reservasEspacios INNER JOIN espaciosComunes ON reservasEspacios.espacioComun = espaciosComunes.id where reservasEspacios.numDpto = " + numDpto + " and reservasEspacios.id_Cond = " + idCondominio + "";
+            string sSel = "SELECT TOP 10 * FROM reservasEspacios INNER JOIN espaciosComunes ON reservasEspacios.espacioComun = espaciosComunes.id where reservasEspacios.numDpto = " + numDpto + " and reservasEspacios.id_Cond = " + idCond + "";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -336,7 +332,6 @@ namespace Dao
                     string rangoHorario = dt.Rows[fila][3].ToString();
                     string solicitante = dt.Rows[fila][5].ToString();
                     int estado = int.Parse(dt.Rows[fila][6].ToString());
-                    int idCond = int.Parse(dt.Rows[fila][7].ToString());
                     string espacioComun = dt.Rows[fila][9].ToString();
 
                     Reserva reserva = new Reserva(id, numDptoN, fecha, rangoHorario, espacioComun, solicitante, estado, idCond);
@@ -382,7 +377,7 @@ namespace Dao
         public static void ObtenerReservasR(string numDpto, int idCond)
         {
             alReservas.Clear();
-            string strSql = String.Format("SELECT R.id, D.numDpto as 'numDpto', R.solicitante, E.nombre as 'espacioComun' ,R.fecha, R.rangoFecha, R.estado FROM reservasEspacios R JOIN departamento D ON R.numDpto = D.id JOIN espaciosComunes E ON E.id = R.espacioComun WHERE R.numDpto = {0} AND E.id_Cond = {1} AND R.estado = 1 or R.estado = 2 ORDER BY fecha DESC", numDpto, idCond);
+            string strSql = String.Format("SELECT R.id, D.numDpto as 'numDpto', R.solicitante, E.nombre as 'espacioComun' ,R.fecha, R.rangoFecha, R.estado FROM reservasEspacios R JOIN departamento D ON R.numDpto = D.id JOIN espaciosComunes E ON E.id = R.espacioComun WHERE R.numDpto = {0} AND E.id_Cond = {1} AND (R.estado = 1 or R.estado = 2) ORDER BY fecha DESC", numDpto, idCond);
 
             using (SqlConnection con = new SqlConnection(conBD))
             {
@@ -410,7 +405,7 @@ namespace Dao
         public static void ObtenerReservasRP(string numDpto, int idCond)
         {
             alReservas.Clear();
-            string strSql = String.Format("SELECT R.id, D.numDpto as 'numDpto', R.solicitante, E.nombre as 'espacioComun' ,R.fecha, R.rangoFecha, R.estado FROM reservasEspacios R JOIN departamento D ON R.numDpto = D.id JOIN espaciosComunes E ON E.id = R.espacioComun WHERE R.numDpto = {0} AND E.id_Cond = {1} AND R.estado = 3 or R.estado = 4 ORDER BY fecha DESC", numDpto, idCond);
+            string strSql = String.Format("SELECT R.id, D.numDpto as 'numDpto', R.solicitante, E.nombre as 'espacioComun' ,R.fecha, R.rangoFecha, R.estado FROM reservasEspacios R JOIN departamento D ON R.numDpto = D.id JOIN espaciosComunes E ON E.id = R.espacioComun WHERE R.numDpto = {0} AND E.id_Cond = {1} AND (R.estado = 3 or R.estado = 4) ORDER BY fecha DESC", numDpto, idCond);
 
             using (SqlConnection con = new SqlConnection(conBD))
             {

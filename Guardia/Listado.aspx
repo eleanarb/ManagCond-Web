@@ -53,7 +53,9 @@
                                 <tbody
                                     class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                                     <%
-                                        foreach (Residente obj in ResidenteDao.GetAlResidente())
+                                        int idCond = (int)Session["idCond"];
+
+                                        foreach (Residente obj in ResidenteDao.GetAlResidente(idCond))
                                         {
                                             String idResidente = obj.RutResidente;
                                     %>

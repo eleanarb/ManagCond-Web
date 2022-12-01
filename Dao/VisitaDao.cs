@@ -249,7 +249,7 @@ namespace Dao
         public static void ObtenerDatosVisita(int idCond)
         {
             alVisitas.Clear();
-            string strSql = String.Format("SELECT V.id, D.numDpto as 'numDpto', V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.numDpto as idNumDpto FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id where V.id_Cond = {0} and V.estado = 1 or V.estado = 4 ORDER BY fecha DESC,hora DESC", idCond);
+            string strSql = String.Format("SELECT V.id, D.numDpto as 'numDpto', V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.numDpto as idNumDpto FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id where V.id_Cond = {0} and (V.estado = 1 or V.estado = 4) ORDER BY fecha DESC,hora DESC", idCond);
 
             using (SqlConnection con = new SqlConnection(conBD))
             {
@@ -280,7 +280,7 @@ namespace Dao
         public static void ObtenerDatosVisitaHistorial(int idCond)
         {
             alVisitas.Clear();
-            string strSql = String.Format("SELECT V.id, D.numDpto, V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.numDpto AS idNumDpto FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id where V.id_Cond = {0} and V.estado = 2 or V.estado = 3 ORDER BY fecha DESC, hora DESC", idCond);
+            string strSql = String.Format("SELECT V.id, D.numDpto, V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.numDpto AS idNumDpto FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id where V.id_Cond = {0} and (V.estado = 2 or V.estado = 3) ORDER BY fecha DESC, hora DESC", idCond);
 
             using (SqlConnection con = new SqlConnection(conBD))
             {
