@@ -6,36 +6,18 @@
 
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ManagCond</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../assets/css/tailwind.output.css" />
-    <script
-      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
-      defer
-    ></script>
-    <script src="../assets/js/init-alpine.js"></script>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>ManagCond</title>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+      <link rel="stylesheet" href="../assets/css/tailwind.output.css" />
+      <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+      <script src="../assets/js/init-alpine.js"></script>
       <script src="../assets/js/focus-trap.js" defer></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"
-    />
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
-      defer
-    ></script>
-    
-    <script src="../assets/js/charts-lines.js" defer></script>
-    <script src="../assets/js/charts-pie.js" defer></script>
-    
-<link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
-
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
       <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
-
+      <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
       <script src="https://unpkg.com/flowbite@1.5.3/dist/datepicker.js"></script>
   </head>
   <body>
@@ -52,13 +34,32 @@
                 <div class="container grid px-6 mx-auto">
                     <%
                         DateTime fechaActual = System.DateTime.Now;
-                         string mesActual = fechaActual.ToString("MMMM");
+                        string mesActual = fechaActual.ToString("MMMM");
+                        string añoActual = fechaActual.ToString("yyyy");
                         %>
-                    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Egresos de <%=mesActual %></h2>
+                    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Egresos de <%=mesActual %>-<%=añoActual %></h2>
+                    <div class="">
+                        <div class="grid grid-cols-5">
+                            <div class="">
+                                <asp:DropDownList class="block p-2.5 w-100 z-20 rounded-md text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-multiselect focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownListBuscar" runat="server">
+                                    <asp:ListItem Selected="True" Value="0"> Todas las categorías </asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
+                            <div class="">
+                                <asp:DropDownList class="block p-2.5 w-100 z-20 rounded-md text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-multiselect focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownList1" runat="server">
+                                    <asp:ListItem Selected="True" Value="0"> Todas las categorías </asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
+                            <div class="">
+                                <asp:DropDownList class="block p-2.5 w-100 z-20 rounded-md text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-multiselect focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownList2" runat="server">
+                                    <asp:ListItem Selected="True" Value="0"> Todas las categorías </asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <br />
                     <div class="">                         
-                        
-                        
-                       
                             <div class="grid grid-cols-7 items-center">
                                 <div class="col-span-3">
                                     <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Search</label>
@@ -79,9 +80,6 @@
                                     <div class="col-end-4 ">
                                         <a class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="AgregarEgreso.aspx">Agregar Egreso</a>
                                     </div>
-                       
-
-
                         </div>
                         <br />
                     <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
@@ -143,7 +141,7 @@
                                     string tokenSAS = ConfigurationManager.AppSettings["tokenArchivosSAS"].ToString();
                                     string containerSA = ConfigurationManager.AppSettings["containerArchivosSA"].ToString();
 
-                                    foreach (Egresos obj1 in EgresosDao.GetAlObtenerEgresos(obj.id))
+                                    foreach (Egresos obj1 in EgresosDao.GetAlObtenerEgresos(obj.id, idCondominio))
                                     {
                                         string fecha = obj1.Fecha.ToString("dd-MM-yyyy");
                                         string año = obj1.Fecha.ToString("yyyy");
@@ -339,50 +337,45 @@
             </main>
             </div>
         </div>
-    
+      <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
 
-            <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+      <script>
+          let editar = document.querySelectorAll(".btnEditar")
 
-           <script>
-               let editar = document.querySelectorAll(".btnEditar")
+          editar.forEach((boton) => {
+              boton.addEventListener("click", (event) => {
+                  event.preventDefault()
+                  var fila = event.target.parentElement.parentElement.parentElement.parentElement
+                  let descripcion = fila.children[1].innerHTML
 
-               editar.forEach((boton) => {
-                   boton.addEventListener("click", (event) => {
-                       event.preventDefault()
-                       var fila = event.target.parentElement.parentElement.parentElement.parentElement      
-                       let descripcion = fila.children[1].innerHTML
+                  let monto = fila.children[2].innerHTML
+                  let monto2 = monto.slice(1)
 
-                       let monto = fila.children[2].innerHTML
-                       let monto2 = monto.slice(1)
+                  let id = fila.querySelector('.btnEditar').getAttribute('data-id')
+                  let fecha = fila.children[3].innerHTML
+                  let fecha2 = fecha.slice(0, -37)
 
-                       let id = fila.querySelector('.btnEditar').getAttribute('data-id')
-                       let fecha = fila.children[3].innerHTML
-                       let fecha2 = fecha.slice(0, -37)                       
+                  let idProveedor = fila.querySelector('#idProveedor').getAttribute('data-id')
+                  let selectProveedor = document.getElementById("DropDownListProveedor")
+                  selectProveedor.value = idProveedor
 
-                       let idProveedor = fila.querySelector('#idProveedor').getAttribute('data-id')
-                       let selectProveedor = document.getElementById("DropDownListProveedor")
-                       selectProveedor.value = idProveedor
+                  let categoria = fila.querySelector('#idProveedor').getAttribute('data-categoria')
+                  let selectCategoria = document.getElementById("DropDownListCategoria")
+                  selectCategoria.value = categoria
 
-                       let categoria = fila.querySelector('#idProveedor').getAttribute('data-categoria')
-                       let selectCategoria = document.getElementById("DropDownListCategoria")
-                       selectCategoria.value = categoria
+                  let estado = fila.children[4].innerHTML
+                  let estado2 = estado.slice(0, -37)
+                  let selectEstado = document.getElementById("DropDownListEstado")
+                  selectEstado.value = estado2
 
-                       let estado = fila.children[4].innerHTML
-                       let estado2 = estado.slice(0, -37)                       
-                       let selectEstado = document.getElementById("DropDownListEstado")
-                       selectEstado.value = estado2
-                       
-                       document.querySelector('#TextBoxDescModal').value = descripcion;
-                       document.querySelector('#TextBoxMontoModal').value = monto2;
-                       document.querySelector('#TextBoxFechaModal').value = fecha2;
-                       document.querySelector('#TextBoxId').value = id;
-                       document.querySelector('#ButtonModificar').setAttribute('data-id', id)
-
-
-                   })
-
-               })
-           </script>
+                  document.querySelector('#TextBoxDescModal').value = descripcion;
+                  document.querySelector('#TextBoxMontoModal').value = monto2;
+                  document.querySelector('#TextBoxFechaModal').value = fecha2;
+                  document.querySelector('#TextBoxId').value = id;
+                  document.querySelector('#ButtonModificar').setAttribute('data-id', id)
+              })
+          })
+      </script>
 
       <script>
           let eliminar = document.querySelectorAll(".btnEliminar")
@@ -392,7 +385,7 @@
                   eventE.preventDefault()
                   var filaE = eventE.target.parentElement.parentElement.parentElement
 
-                  let idE = filaE.querySelector('.btnEliminar').getAttribute('data-id')                  
+                  let idE = filaE.querySelector('.btnEliminar').getAttribute('data-id')
                   document.querySelector('#TextBoxIdEliminar').value = idE;
 
 
@@ -400,11 +393,5 @@
 
           })
       </script>
-
-
 </body>
-
-
-
-
 </html>

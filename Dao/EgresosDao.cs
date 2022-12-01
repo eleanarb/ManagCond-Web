@@ -14,26 +14,26 @@ namespace Dao
         private static readonly List<Egresos> alEgresos = new List<Egresos>();
         private static readonly List<CategoriaEgresos> alCategoriaEgresos = new List<CategoriaEgresos>();
 
-        public static List<Egresos> GetAlObtenerEgresos(int idCondominio)
+        public static List<Egresos> GetAlObtenerEgresos(int idCategoria, int idCond)
         {
-            ObtenerEgresos(idCondominio);
+            ObtenerEgresos(idCategoria, idCond);
             return alEgresos;
         }
 
-        public static List<CategoriaEgresos> GetAlObtenerCategoriasEgresos(int idCondominio)
+        public static List<CategoriaEgresos> GetAlObtenerCategoriasEgresos(int idCond)
         {
-            ObtenerCategoriasEgresos(idCondominio);
+            ObtenerCategoriasEgresos(idCond);
             return alCategoriaEgresos;
         }
 
-        public static int ObtenerTotalCategoriaEgresos(int idCondominio)
+        public static int ObtenerTotalCategoriaEgresos(int idCond)
         {
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
             int totalRespuestas = 0;
 
-            string sSel = "SELECT count(*) FROM categoriaEgresos where idCond ='" + idCondominio + "' ";
+            string sSel = "SELECT count(*) FROM categoriaEgresos ce inner join egresos e ON e.idCategoria = ce.id where MONTH(e.fecha) = MONTH(GETDATE()) AND YEAR(e.fecha) = YEAR(GETDATE()) AND ce.idCond = "+ idCond + "";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -57,14 +57,14 @@ namespace Dao
             return totalRespuestas;
         }
 
-        public static void ObtenerEgresos(int idCategoria)
+        public static void ObtenerEgresos(int idCategoria, int idCond)
         {
             alEgresos.Clear();
 
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            string sSel = "SELECT e.id, p.id, p.nombre, e.descripcion, ce.descripcion, e.fecha, e.monto, e.estado, e.documentoCobro, e.comprobante, e.idCond FROM egresos e INNER JOIN proveedores p ON e.idProveedor = p.id INNER JOIN categoriaEgresos ce ON e.idCategoria = ce.id WHERE ce.id = '" + idCategoria + "' ";
+            string sSel = "SELECT e.id, p.id, p.nombre, e.descripcion, ce.descripcion, e.fecha, e.monto, e.estado, e.documentoCobro, e.comprobante, e.idCond FROM egresos e INNER JOIN proveedores p ON e.idProveedor = p.id INNER JOIN categoriaEgresos ce ON e.idCategoria = ce.id WHERE ce.id = '" + idCategoria + "' AND e.idCond = "+ idCond +" AND MONTH(fecha) = MONTH(GETDATE()) AND YEAR(fecha) = YEAR(GETDATE())";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -87,7 +87,6 @@ namespace Dao
                     int estado = int.Parse(dt.Rows[fila][7].ToString());
                     String documentoCobro = dt.Rows[fila][8].ToString();
                     String comprobante = dt.Rows[fila][9].ToString();
-                    int idCond = int.Parse(dt.Rows[fila][10].ToString());
                     string estado2 = "";
 
                     if(estado == 1)
