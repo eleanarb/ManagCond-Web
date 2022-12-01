@@ -14,11 +14,20 @@ namespace ManagCond.Administrador
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            DateTime fechaActual = System.DateTime.Now;
+            int mesActual = int.Parse(fechaActual.ToString("MM"));
+            int añoActual = fechaActual.Year;
+
+            
 
             if (!IsPostBack)
             {
                 LlenarDropDownProveedor();
                 LlenarDropDownCategoria();
+                DropDownListMes.SelectedValue = mesActual.ToString();
+                DropDownListAño.SelectedValue = añoActual.ToString();
+                Session["mes"] = int.Parse(mesActual.ToString());
+                Session["año"] = int.Parse(añoActual.ToString());
             }
             if (Session["usuario"] == null)
             {
@@ -112,6 +121,18 @@ namespace ManagCond.Administrador
             DropDownListCategoria.DataBind();
             DropDownListCategoria.Items.Insert(0, new ListItem("Seleccione categoría", "0"));
 
+        }
+
+        protected void Mes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Session["mes"] = int.Parse(DropDownListMes.SelectedValue);
+            Session["año"] = int.Parse(DropDownListAño.SelectedValue);
+        }
+
+        protected void Año_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Session["mes"] = int.Parse(DropDownListMes.SelectedValue);
+            Session["año"] = int.Parse(DropDownListAño.SelectedValue);
         }
     }
 }

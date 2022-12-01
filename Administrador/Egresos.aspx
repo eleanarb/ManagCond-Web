@@ -38,48 +38,53 @@
                         string añoActual = fechaActual.ToString("yyyy");
                         %>
                     <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Egresos de <%=mesActual %>-<%=añoActual %></h2>
-                    <div class="">
-                        <div class="grid grid-cols-5">
-                            <div class="">
-                                <asp:DropDownList class="block p-2.5 w-100 z-20 rounded-md text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-multiselect focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownListBuscar" runat="server">
-                                    <asp:ListItem Selected="True" Value="0"> Todas las categorías </asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                            <div class="">
-                                <asp:DropDownList class="block p-2.5 w-100 z-20 rounded-md text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-multiselect focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownList1" runat="server">
-                                    <asp:ListItem Selected="True" Value="0"> Todas las categorías </asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                            <div class="">
-                                <asp:DropDownList class="block p-2.5 w-100 z-20 rounded-md text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-multiselect focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownList2" runat="server">
-                                    <asp:ListItem Selected="True" Value="0"> Todas las categorías </asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                            <div></div>
-                        </div>
-                    </div>
+                    
                     <br />
-                    <div class="">                         
-                            <div class="grid grid-cols-7 items-center">
-                                <div class="col-span-3">
-                                    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Search</label>
-                                    <div class="relative">
-                                        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                                        </div>
-                                        <input type="search" id="default-search" class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos...">
-                                        <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2">Search</button>
+                    <div class="">           
+                        <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800 ">
+                            <div class="grid grid-cols-2 items-center">
+                                <div class="grid grid-cols-2">
+                                    <div class="">
+                                        <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListMes" runat="server" OnSelectedIndexChanged="Mes_SelectedIndexChanged" AutoPostBack="true">
+                                            <asp:ListItem Value="01">Enero</asp:ListItem>
+                                            <asp:ListItem Value="02">Febrero</asp:ListItem>
+                                            <asp:ListItem Value="03">Marzo</asp:ListItem>
+                                            <asp:ListItem Value="04">Abril</asp:ListItem>
+                                            <asp:ListItem Value="05">Mayo</asp:ListItem>
+                                            <asp:ListItem Value="06">Junio</asp:ListItem>
+                                            <asp:ListItem Value="07">Julio</asp:ListItem>
+                                            <asp:ListItem Value="08">Agosto</asp:ListItem>
+                                            <asp:ListItem Value="09">Septiembre</asp:ListItem>
+                                            <asp:ListItem Value="10">Octubre</asp:ListItem>
+                                            <asp:ListItem Value="11">Noviembre</asp:ListItem>
+                                            <asp:ListItem Value="12">Diciembre</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+                                    <div class="">
+                                        <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListAño" runat="server" OnSelectedIndexChanged="Año_SelectedIndexChanged" AutoPostBack="true">
+                                            <asp:ListItem Value="2019">2019</asp:ListItem>
+                                            <asp:ListItem Value="2020">2020</asp:ListItem>
+                                            <asp:ListItem Value="2022">2022</asp:ListItem>
+                                            <asp:ListItem Value="2023">2023</asp:ListItem>
+                                            <asp:ListItem Value="2024">2024</asp:ListItem>
+                                            <asp:ListItem Value="2025">2025</asp:ListItem>
+                                            <asp:ListItem Value="2026">2026</asp:ListItem>
+                                        </asp:DropDownList>
                                     </div>
                                 </div>
-                                <div></div>
-                                <div></div>
-                                    <div class="col-end-4 ">
+
+                                <div class="grid grid-cols-4">
+                                    <div></div>
+                                    <div></div>
+                                    <div class="">
                                         <a class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="GestionProveedores.aspx">Proveedores</a>
                                     </div>
-                                    <div class="col-end-4 ">
+                                    <div class="">
                                         <a class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="AgregarEgreso.aspx">Agregar Egreso</a>
                                     </div>
+                                </div>
+
+                            </div>
                         </div>
                         <br />
                     <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
@@ -109,10 +114,15 @@
                             <tbody>
                             <% 
                                 int idCondominio = 0;
+                                int mesActualN = 0;
+                                int añoActualN = 0;
+
                                 idCondominio = (int)Session["idCondominio"];
+                                mesActualN = (int)Session["mes"];
+                                añoActualN = (int)Session["año"];
 
                                 int totalCategorias = 0;
-                                totalCategorias = EgresosDao.ObtenerTotalCategoriaEgresos(idCondominio);
+                                totalCategorias = EgresosDao.ObtenerTotalCategoriaEgresos(idCondominio, mesActualN, añoActualN);
 
                                 if (totalCategorias == 0)
                                 {
@@ -126,7 +136,7 @@
                                     else
                                     {
 
-                                        foreach (CategoriaEgresos obj in EgresosDao.GetAlObtenerCategoriasEgresos(idCondominio))
+                                        foreach (CategoriaEgresos obj in EgresosDao.GetAlObtenerCategoriasEgresos(idCondominio, mesActualN, añoActualN))
                                         {
 
                                 %>
@@ -141,7 +151,7 @@
                                     string tokenSAS = ConfigurationManager.AppSettings["tokenArchivosSAS"].ToString();
                                     string containerSA = ConfigurationManager.AppSettings["containerArchivosSA"].ToString();
 
-                                    foreach (Egresos obj1 in EgresosDao.GetAlObtenerEgresos(obj.id, idCondominio))
+                                    foreach (Egresos obj1 in EgresosDao.GetAlObtenerEgresos(obj.id, idCondominio, mesActualN, añoActualN))
                                     {
                                         string fecha = obj1.Fecha.ToString("dd-MM-yyyy");
                                         string año = obj1.Fecha.ToString("yyyy");
@@ -297,7 +307,7 @@
                   <div>
                       <label for="DropDownListEstado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Estado</label>
                       <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListEstado" runat="server">
-                          <asp:ListItem Selected="True" Value="0">Seleccione Estado:</asp:ListItem>
+                          <asp:ListItem  Value="0">Seleccione Estado:</asp:ListItem>
                           <asp:ListItem Value="Pagado">Pagado</asp:ListItem>
                           <asp:ListItem Value="Pendiente">Pendiente</asp:ListItem>
                       </asp:DropDownList>

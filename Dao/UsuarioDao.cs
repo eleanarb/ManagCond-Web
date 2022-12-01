@@ -100,7 +100,7 @@ namespace Dao
                 //Label1.Text = "Error: " + ex.Message;
             }
         }
-
+        
         public static Usuario ObtenerDatosUsuario(string rutU)
         {
             alUsuarios.Clear();
@@ -109,7 +109,7 @@ namespace Dao
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            string sSel = "SELECT * FROM usuario where rut = '" + rutU + "'";
+            string sSel = "SELECT * FROM usuario where rut = '" + rutU + "'" + rut;
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
