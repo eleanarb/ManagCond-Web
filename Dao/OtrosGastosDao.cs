@@ -14,9 +14,9 @@ namespace Dao
         private static readonly List<OtrosGastos> alOtrosGastos = new List<OtrosGastos>();
         private static readonly List<TipoGastos> alTipoGastos = new List<TipoGastos>();
 
-        public static List<OtrosGastos> GetAlOtrosGastosCondominio(int mes, int año, int idCond)
+        public static List<OtrosGastos> GetAlOtrosGastosCondominio(int mes, int año, int idCond, string depto)
         {
-            ObtenerOtrosGastosCondominio(mes, año, idCond);
+            ObtenerOtrosGastosCondominio(mes, año, idCond, depto);
             return alOtrosGastos;
         }
 
@@ -26,14 +26,14 @@ namespace Dao
             return alTipoGastos;
         }
 
-        public static void ObtenerOtrosGastosCondominio(int mes, int año, int idCond)
+        public static void ObtenerOtrosGastosCondominio(int mes, int año, int idCond, string deptoB)
         {
             alOtrosGastos.Clear();
 
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            string sSel = "SELECT og.id, og.mes, og.año, og.idGasto, og.cantidad, og.total, og.idDpto, og.descripcion, d.numDpto, tp.monto, tp.nombre FROM otrosGastos og INNER JOIN departamento d ON og.idDpto = d.id INNER JOIN condominio c ON d.id_cond = c.id INNER JOIN tipoGastos tp ON og.idGasto = tp.id WHERE mes = "+ mes +" AND año = "+ año +" AND c.id = "+ idCond + "";
+            string sSel = "SELECT og.id, og.mes, og.año, og.idGasto, og.cantidad, og.total, og.idDpto, og.descripcion, d.numDpto, tp.monto, tp.nombre FROM otrosGastos og INNER JOIN departamento d ON og.idDpto = d.id INNER JOIN condominio c ON d.id_cond = c.id INNER JOIN tipoGastos tp ON og.idGasto = tp.id WHERE mes = "+ mes +" AND año = "+ año +" AND c.id = "+ idCond + " "+deptoB+"  ";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -151,14 +151,14 @@ namespace Dao
             return otroGasto;
         }
 
-        public static int ObtenerTotalOtrosGastosCondominio(int mes, int año, int idCond)
+        public static int ObtenerTotalOtrosGastosCondominio(int mes, int año, int idCond, string deptoB)
         {
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
             int totalRespuestas = 0;
 
-            string sSel = "SELECT count(*) FROM otrosGastos og INNER JOIN departamento d ON og.idDpto = d.id INNER JOIN condominio c ON d.id_cond = c.id INNER JOIN tipoGastos tp ON og.idGasto = tp.id WHERE mes = " + mes + " AND año = " + año + " AND c.id = " + idCond + "";
+            string sSel = "SELECT count(*) FROM otrosGastos og INNER JOIN departamento d ON og.idDpto = d.id INNER JOIN condominio c ON d.id_cond = c.id INNER JOIN tipoGastos tp ON og.idGasto = tp.id WHERE mes = " + mes + " AND año = " + año + " AND c.id = " + idCond + "" + deptoB + " ";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try

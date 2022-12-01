@@ -68,7 +68,8 @@ namespace ManagCond.Administrador
         }
         public void LlenarDropDownListRutTrabajador()
         {
-            SqlCommand cmd = new SqlCommand("Select rut ,CONCAT(rut,' ',nombres,' ',apellidos) AS trabajador from usuario where not tipoUsuario = 3", Conexion.Open());
+            int idCondominio = (int)Session["idCondominio"];
+            SqlCommand cmd = new SqlCommand("Select rut ,CONCAT(rut,' ',nombres,' ',apellidos) AS trabajador from usuario where not tipoUsuario = 3 and id_cond = " + idCondominio + " ", Conexion.Open());
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);

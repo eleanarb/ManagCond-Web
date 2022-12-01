@@ -55,7 +55,7 @@ namespace ManagCond.Administrador
         }
         public void LlenarDropDownListCargo()
         {
-            SqlCommand cmd = new SqlCommand("Select id , descripcion from cargo", Conexion.Open());
+            SqlCommand cmd = new SqlCommand("Select id , descripcion from cargo WHERE NOT id = 4", Conexion.Open());
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);

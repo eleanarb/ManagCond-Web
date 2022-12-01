@@ -42,27 +42,44 @@
             <main class="h-full overflow-y-auto">
                 <form runat="server">
                     <div class="container grid px-6 mx-auto">
-                         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Liquidaciones de Noviembre</h2>
+                        <%DateTime fechaActual = System.DateTime.Now;
+                            string mesActual = fechaActual.ToString("MMMM");
+                            string añoActual = fechaActual.ToString("yyyy");%>
+                         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Liquidaciones de <%=mesActual %>-<%=añoActual %></h2>
 
+                        <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800 ">
                         <div class="grid grid-cols-6 text-center">
                             <div class="">
-                                    <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListBuscar" runat="server">
-                                        <asp:ListItem Selected="True" Value="0">Seleccione Trabajador</asp:ListItem>
-
+                                    <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListRut" runat="server" OnSelectedIndexChanged="Rut_SelectedIndexChanged" AutoPostBack="true">
                                     </asp:DropDownList>
                                 </div>
 
                                 <div class="">
-                                    <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownList1" runat="server">
-                                        <asp:ListItem Selected="True" Value="0">Seleccione Mes</asp:ListItem>
-
+                                    <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListMesF" runat="server" OnSelectedIndexChanged="Mes_SelectedIndexChanged" AutoPostBack="true">
+                                        <asp:ListItem Value="01">Enero</asp:ListItem>
+                                        <asp:ListItem Value="02">Febrero</asp:ListItem>
+                                        <asp:ListItem Value="03">Marzo</asp:ListItem>
+                                        <asp:ListItem Value="04">Abril</asp:ListItem>
+                                        <asp:ListItem Value="05">Mayo</asp:ListItem>
+                                        <asp:ListItem Value="06">Junio</asp:ListItem>
+                                        <asp:ListItem Value="07">Julio</asp:ListItem>
+                                        <asp:ListItem Value="08">Agosto</asp:ListItem>
+                                        <asp:ListItem Value="09">Septiembre</asp:ListItem>
+                                        <asp:ListItem Value="10">Octubre</asp:ListItem>
+                                        <asp:ListItem Value="11">Noviembre</asp:ListItem>
+                                        <asp:ListItem Value="12">Diciembre</asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
 
                                 <div class="">
-                                    <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownList2" runat="server">
-                                        <asp:ListItem Selected="True" Value="0">Seleccione Año</asp:ListItem>
-
+                                    <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListAñoF" runat="server" OnSelectedIndexChanged="Año_SelectedIndexChanged" AutoPostBack="true">
+                                        <asp:ListItem Value="2019">2019</asp:ListItem>
+                                        <asp:ListItem Value="2020">2020</asp:ListItem>
+                                        <asp:ListItem Value="2022">2022</asp:ListItem>
+                                        <asp:ListItem Value="2023">2023</asp:ListItem>
+                                        <asp:ListItem Value="2024">2024</asp:ListItem>
+                                        <asp:ListItem Value="2025">2025</asp:ListItem>
+                                        <asp:ListItem Value="2026">2026</asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
 
@@ -75,7 +92,7 @@
                             <div>
                                 <a class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="AgregarLiquidacion.aspx">Agregar Liquidacion</a>
                             </div>
-                            
+                            </div>
                         </div>
                         <br />
                              <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
@@ -106,8 +123,18 @@
 
                             <tbody>
                                 <%
+                                    int idCondominio = 0;
+                                    int mesActualN = 0;
+                                    int añoActualN = 0;
+                                    string rut = "";
+
+                                    idCondominio = (int)Session["idCondominio"];
+                                    mesActualN = (int)Session["mes"];
+                                    añoActualN = (int)Session["año"];
+                                    rut = (String)Session["rut"];
+
                                     int totalLiquidaciones = 0;
-                                    totalLiquidaciones = LiquidacionesDao.ObtenerTotalLiquidaciones();
+                                    totalLiquidaciones = LiquidacionesDao.ObtenerTotalLiquidaciones(mesActualN, añoActualN, idCondominio, rut);
 
                                     if (totalLiquidaciones == 0)
                                     {
@@ -121,7 +148,7 @@
                                     else
                                     {
 
-                                        foreach (Liquidacion obj in LiquidacionesDao.GetAlLiquidaciones())
+                                        foreach (Liquidacion obj in LiquidacionesDao.GetAlLiquidaciones(mesActualN, añoActualN, idCondominio, rut))
                                         {
                                 %>
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">

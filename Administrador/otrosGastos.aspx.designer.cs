@@ -24,13 +24,13 @@ namespace ManagCond.Administrador
         protected global::System.Web.UI.HtmlControls.HtmlForm form;
 
         /// <summary>
-        /// Control DropDownListBuscar.
+        /// Control DropDownListDepto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListBuscar;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListDepto;
 
         /// <summary>
         /// Control DropDownListMesF.

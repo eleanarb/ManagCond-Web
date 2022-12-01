@@ -14,19 +14,19 @@ namespace Dao
         private static readonly List<Liquidacion> alLiquidaciones = new List<Liquidacion>();
         private static readonly Conexion con = new Conexion();
         private static readonly string conBD = con.Conectar();
-        public static List<Liquidacion> GetAlLiquidaciones()
+        public static List<Liquidacion> GetAlLiquidaciones(int mes, int año, int idCond, string trabajador)
         {
-            ObtenerDatosLiquidaciones();
+            ObtenerDatosLiquidaciones(mes, año, idCond, trabajador);
             return alLiquidaciones;
         }
-        public static int ObtenerTotalLiquidaciones()
+        public static int ObtenerTotalLiquidaciones(int mes, int año, int idCond, string trabajador)
         {
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
             int totalRespuestas = 0;
 
-            string sSel = "SELECT count(*) FROM liquidacion";
+            string sSel = "SELECT count(*) FROM liquidacion L INNER JOIN contrato C ON L.idContrato = C.id INNER JOIN usuario u ON u.rut = c.rutTrabajador WHERE u.id_cond = " + idCond + " AND MONTH(l.fecha) = " + mes + " AND YEAR(l.fecha) = " + año + " " + trabajador + " ";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -49,10 +49,10 @@ namespace Dao
             }
             return totalRespuestas;
         }
-        public static void ObtenerDatosLiquidaciones()
+        public static void ObtenerDatosLiquidaciones(int mes, int año, int idCond, string trabajador)
         {
             alLiquidaciones.Clear();
-            string strSql = String.Format("SELECT L.id, L.fecha, C.rutTrabajador, L.otrosIngresos, L.totalRemuneracion, L.totalHaberes, L.cotizacionPrevisional, L.cotizacionSalud, L.totalDescuentoPrevisionales, L.otrosDescuentos, L.diasNoTrabajados, L.descuentosDiasNoTrabajados, L.saldoLiquido from liquidacion L JOIN contrato C ON L.idContrato = C.id");
+            string strSql = String.Format("SELECT L.id, L.fecha, C.rutTrabajador, L.otrosIngresos, L.totalRemuneracion, L.totalHaberes, L.cotizacionPrevisional, L.cotizacionSalud, L.totalDescuentoPrevisionales, L.otrosDescuentos, L.diasNoTrabajados, L.descuentosDiasNoTrabajados, L.saldoLiquido from liquidacion L INNER JOIN contrato C ON L.idContrato = C.id INNER JOIN usuario u ON u.rut = c.rutTrabajador WHERE u.id_cond = "+ idCond + " AND MONTH(l.fecha) = " + mes + " AND YEAR(l.fecha) = " + año + " " + trabajador + " ");
 
             using (SqlConnection con = new SqlConnection(conBD))
             {

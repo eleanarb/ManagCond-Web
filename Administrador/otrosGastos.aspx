@@ -36,11 +36,10 @@
                         %>
                     <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Cargos de Periodo <%=mesActual %>-<%=añoActual %></h2>
                         <div class="">
-                            <div class="grid grid-cols-6">
+                             <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800 ">
+                            <div class="grid grid-cols-6 items-center">
                                 <div class="">
-                                    <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListBuscar" runat="server">
-                                        <asp:ListItem Selected="True" Value="0">Seleccione Depto</asp:ListItem>
-
+                                    <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListDepto" runat="server" OnSelectedIndexChanged="Depto_SelectedIndexChanged" AutoPostBack="true">
                                     </asp:DropDownList>
                                 </div>
                                 <div class="">
@@ -78,6 +77,7 @@
                                     <a class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="AgregarOtroGasto.aspx">Agregar Gasto</a>
                                 </div>
                             </div>
+                                 </div>
                         </div>
                         <br />
                         <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
@@ -112,12 +112,15 @@
                                         int idCondominio = 0;
                                         int mesActualN = 0;
                                         int añoActualN = 0;
+                                        string depto = "";
 
                                         idCondominio = (int)Session["idCondominio"];
                                         mesActualN = (int)Session["mes"];
                                         añoActualN = (int)Session["año"];
+                                        depto = (String)Session["depto"];
+
                                         int totalOtrosGastos = 0;
-                                        totalOtrosGastos = OtrosGastosDao.ObtenerTotalOtrosGastosCondominio(mesActualN, añoActualN, idCondominio);
+                                        totalOtrosGastos = OtrosGastosDao.ObtenerTotalOtrosGastosCondominio(mesActualN, añoActualN, idCondominio, depto);
 
                                         if (totalOtrosGastos == 0)
                                         {
@@ -131,7 +134,7 @@
                                         else
                                         {
 
-                                            foreach (OtrosGastos obj in OtrosGastosDao.GetAlOtrosGastosCondominio(mesActualN, añoActualN,idCondominio))
+                                            foreach (OtrosGastos obj in OtrosGastosDao.GetAlOtrosGastosCondominio(mesActualN, añoActualN, idCondominio, depto))
                                             {
                                     %>
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">

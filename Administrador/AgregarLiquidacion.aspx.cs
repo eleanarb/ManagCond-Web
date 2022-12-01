@@ -51,7 +51,8 @@ namespace ManagCond.Administrador
         }
         public void LlenarDropDownListRut()
         {
-            SqlCommand cmd = new SqlCommand("Select c.rutTrabajador, CONCAT(c.rutTrabajador, ' - ', u.nombres, ' ', u.apellidos) nombre from contrato c inner join usuario u on c.rutTrabajador = u.rut", Conexion.Open());
+            int idCondominio = (int)Session["idCondominio"];
+            SqlCommand cmd = new SqlCommand("Select c.rutTrabajador, CONCAT(c.rutTrabajador, ' - ', u.nombres, ' ', u.apellidos) nombre from contrato c inner join usuario u on c.rutTrabajador = u.rut where u.id_cond = " + idCondominio+" ", Conexion.Open());
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);
