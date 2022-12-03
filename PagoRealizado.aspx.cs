@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using Khipu.Api;
 using Khipu.Client;
 using Khipu.Model;
+using Newtonsoft.Json;
 
 namespace ManagCond
 {
@@ -16,8 +17,15 @@ namespace ManagCond
         {
             Configuration.ReceiverId = 432730;
             Configuration.Secret = "21e14d913cd4ee4bd3176fb1808130c6b7c23ca9";
+
+            
+
             string notificationToken = HttpContext.Current.Request.Form["notification_token"];
             string apiVersion = HttpContext.Current.Request.Form["api_version"];
+
+            string json = JsonConvert.SerializeObject(apiVersion, Formatting.Indented);
+            Console.WriteLine(json);
+
             double amount = 100;
 
 
