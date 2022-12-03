@@ -16,9 +16,10 @@ namespace ManagCond
         {
             Configuration.ReceiverId = 432730;
             Configuration.Secret = "21e14d913cd4ee4bd3176fb1808130c6b7c23ca9";
-            string notificationToken = HttpUtility.UrlEncode(HttpContext.Current.Request.Form["notification_token"]);
-            string apiVersion = HttpUtility.UrlEncode(HttpContext.Current.Request.Form["api_version"]);
+            string notificationToken = HttpContext.Current.Request.Form["notification_token"];
+            string apiVersion = HttpContext.Current.Request.Form["api_version"];
             double amount = 100;
+
 
             if (apiVersion.Equals("1.3"))
             {
