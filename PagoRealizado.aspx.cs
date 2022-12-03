@@ -34,8 +34,8 @@ namespace ManagCond
                     else
                     {
                     }
-                    Page.Response.Write("<script>console.log('"+response.NotificationToken+"');</script>");
-                    TextBoxNombre.Value = response.NotificationToken;
+                    Page.Response.Write("<script>console.log('"+response.Status+"');</script>");
+                    TextBoxNombre.Value = response.Status;
                 }
                 catch (ApiException ev)
                 {
