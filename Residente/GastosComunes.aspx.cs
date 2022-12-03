@@ -24,5 +24,9 @@ namespace ManagCond.Residente
                 }
             }
         }
+        protected void ButtonAgregar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../PagarGastosComunes.aspx");
+        }
     }
 }

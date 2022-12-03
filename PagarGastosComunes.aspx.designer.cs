@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace ManagCond.Residente
+namespace ManagCond
 {
 
 
-    public partial class GastosComunes
+    public partial class PagarGastosComunes
     {
 
         /// <summary>

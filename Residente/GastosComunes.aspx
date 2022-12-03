@@ -9,22 +9,12 @@
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>ManagCond</title>
-      <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
       <link rel="stylesheet" href="../assets/css/tailwind.output.css" />
-      <script
-          src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
-          defer></script>
+      <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
       <script src="../assets/js/init-alpine.js"></script>
-      <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
-      <script
-          src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
-          defer></script>
-      <script src="../assets/js/charts-lines.js" defer></script>
-      <script src="../assets/js/charts-pie.js" defer></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
 </head>
 <body>
           <div
@@ -38,6 +28,9 @@
                     <h1
                         class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Gastos comunes por pagar
                     </h1>
+                    <form id="form1" runat="server">
+                        <asp:Button ID="ButtonAgregar" class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" runat="server" OnClick="ButtonAgregar_Click" Text="Agregar" />
+                    </form>
                     <!-- CTA -->
                     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
                         <div class="w-full overflow-x-auto">

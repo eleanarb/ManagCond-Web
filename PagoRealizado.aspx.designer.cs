@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace ManagCond.Residente
+namespace ManagCond
 {
 
 
-    public partial class GastosComunes
+    public partial class PagoRealizado
     {
 
         /// <summary>
@@ -22,14 +22,5 @@ namespace ManagCond.Residente
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-
-        /// <summary>
-        /// Control ButtonAgregar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonAgregar;
     }
 }

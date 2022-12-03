@@ -25,7 +25,11 @@ namespace Dao
             ObtenerCategoriasEgresos(idCond, mes, año);
             return alCategoriaEgresos;
         }
-
+        public static List<CategoriaEgresos> GetAlObtenerCategoriasEgresosT(int idCond)
+        {
+            ObtenerCategoriasEgresosT(idCond);
+            return alCategoriaEgresos;
+        }
         public static int ObtenerTotalCategoriaEgresos(int idCond, int mes, int año)
         {
             Conexion con = new Conexion();
@@ -56,7 +60,36 @@ namespace Dao
             }
             return totalRespuestas;
         }
+        public static int ObtenerTotalCategoriaEgresosT(int idCond)
+        {
+            Conexion con = new Conexion();
+            string sCnn = con.Conectar();
 
+            int totalRespuestas = 0;
+
+            string sSel = "SELECT COUNT(*) FROM categoriaEgresos  WHERE idCond = " + idCond + "";
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            try
+            {
+                da = new SqlDataAdapter(sSel, sCnn);
+                da.Fill(dt);
+
+                int totalFilas = dt.Rows.Count;
+                int fila = 0;
+
+                for (; fila < totalFilas; fila++)
+                {
+                    totalRespuestas = int.Parse(dt.Rows[fila][0].ToString());
+
+                }
+            }
+            catch (Exception)
+            {
+                //Label1.Text = "Error: " + ex.Message;
+            }
+            return totalRespuestas;
+        }
         public static void ObtenerEgresos(int idCategoria, int idCond, int mes, int año)
         {
             alEgresos.Clear();
@@ -143,7 +176,41 @@ namespace Dao
                 //Label1.Text = "Error: " + ex.Message;
             }
         }
+        public static void ObtenerCategoriasEgresosT(int idCondominio)
+        {
+            alCategoriaEgresos.Clear();
 
+            Conexion con = new Conexion();
+            string sCnn = con.Conectar();
+
+            string sSel = "SELECT * FROM categoriaEgresos  WHERE idCond ='" + idCondominio + "'  ";
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            try
+            {
+                da = new SqlDataAdapter(sSel, sCnn);
+                da.Fill(dt);
+
+                int totalFilas = dt.Rows.Count;
+                int fila = 0;
+
+                for (; fila < totalFilas; fila++)
+                {
+                    int id = int.Parse(dt.Rows[fila][0].ToString());
+                    String descripcion = dt.Rows[fila][1].ToString(); ;
+
+
+
+                    CategoriaEgresos categoriaEgresos = new CategoriaEgresos(id, descripcion, idCondominio);
+
+                    alCategoriaEgresos.Add(categoriaEgresos);
+                }
+            }
+            catch (Exception)
+            {
+                //Label1.Text = "Error: " + ex.Message;
+            }
+        }
         public static bool AgregarEgreso(int idProveedor, string descripcion, int idCategoria, string fecha, int monto, int estado, string documentoCobro, string comprobante, int idCond)
         {
             bool e = false;
