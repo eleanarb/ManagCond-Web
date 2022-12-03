@@ -13,6 +13,15 @@ namespace ManagCond
 {
     public partial class PagoRealizado : System.Web.UI.Page
     {
+        static class Pretty
+        {
+            public static void Print<T>(T x)
+            {
+                string json = JsonConvert.SerializeObject(x, Formatting.Indented);
+                Console.WriteLine(json);
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Configuration.ReceiverId = 432730;
@@ -23,8 +32,7 @@ namespace ManagCond
             string notificationToken = HttpContext.Current.Request.Form["notification_token"];
             string apiVersion = HttpContext.Current.Request.Form["api_version"];
 
-            string json = JsonConvert.SerializeObject(apiVersion, Formatting.Indented);
-            Console.WriteLine(json);
+            Pretty.Print(notificationToken);
 
             double amount = 100;
 
