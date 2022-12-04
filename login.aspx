@@ -83,9 +83,7 @@
                                         <span class="font-medium">Error al restablecer la contraseña <a
                                             class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
                                         </a></span>
-                                    </div>
-                                
-                            
+                                    </div>                      
                                 </div>
                             </div>
                         </div>
@@ -94,8 +92,6 @@
             </div>
         </div>
     </div>
-
-    
      <script>
          var email = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
 
@@ -115,8 +111,6 @@
                  $('#messageClave').html('').css('color', 'green');
          });
 
-         
-
          function validarFormulario(evento) {
              var usuario = document.getElementById('TextBoxUsuario').value;
              if (!email.test(usuario)) {
@@ -134,8 +128,6 @@
          }
      </script>
 
-
-    
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 </body>

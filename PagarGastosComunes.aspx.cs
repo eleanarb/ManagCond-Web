@@ -35,7 +35,7 @@ namespace ManagCond
                     expiresDate: dt,
                     body: "Descripción de la compra",
                     pictureUrl: "http://mi-ecomerce.com/pictures/foto-producto.jpg",
-                    returnUrl: "https://localhost:44338/PagoRealizado.aspx/",
+                    returnUrl: "https://managcond.azurewebsites.net/PagoRealizado.aspx/",
                     cancelUrl: "http://mi-ecomerce.com/backend/cancel",
                     notifyUrl: "http://mi-ecomerce.com/backend/notify",
                     notifyApiVersion: "1.3"
