@@ -14,6 +14,7 @@ namespace ManagCond
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
         }
         protected void ButtonAgregar_Click(object sender, EventArgs e)
         {
@@ -34,7 +35,7 @@ namespace ManagCond
                     expiresDate: dt,
                     body: "Descripción de la compra",
                     pictureUrl: "http://mi-ecomerce.com/pictures/foto-producto.jpg",
-                    returnUrl: "https://managcond.azurewebsites.net/PagoRealizado.aspx/",
+                    returnUrl: "https://localhost:44338/PagoRealizado.aspx/",
                     cancelUrl: "http://mi-ecomerce.com/backend/cancel",
                     notifyUrl: "http://mi-ecomerce.com/backend/notify",
                     notifyApiVersion: "1.3"

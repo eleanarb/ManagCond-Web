@@ -13,26 +13,13 @@ namespace ManagCond
 {
     public partial class PagoRealizado : System.Web.UI.Page
     {
-        static class Pretty
-        {
-            public static void Print<T>(T x)
-            {
-                string json = JsonConvert.SerializeObject(x, Formatting.Indented);
-                Console.WriteLine(json);
-            }
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             Configuration.ReceiverId = 432730;
             Configuration.Secret = "21e14d913cd4ee4bd3176fb1808130c6b7c23ca9";
 
-            
-
             string notificationToken = HttpContext.Current.Request.Form["notification_token"];
-            string apiVersion = HttpContext.Current.Request.Form["api_version"];
-
-            Pretty.Print(notificationToken);
+            string apiVersion = "1.3";
 
             double amount = 100;
 
