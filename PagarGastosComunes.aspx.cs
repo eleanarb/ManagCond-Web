@@ -37,7 +37,7 @@ namespace ManagCond
                     pictureUrl: "http://mi-ecomerce.com/pictures/foto-producto.jpg",
                     returnUrl: "https://managcond.azurewebsites.net/PagoRealizado.aspx/",
                     cancelUrl: "http://mi-ecomerce.com/backend/cancel",
-                    notifyUrl: "http://mi-ecomerce.com/backend/notify",
+                    notifyUrl: "https://managcond.azurewebsites.net/PagoRealizado.aspx/",
                     notifyApiVersion: "1.3"
                  );
                 Response.Redirect(response.PaymentUrl);
