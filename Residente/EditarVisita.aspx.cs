@@ -19,7 +19,6 @@ namespace ManagCond.Residente
             if (!IsPostBack)
             {
                 LlenarDropDownList();
-                LlenarDropDownListEstado();
 
                 id = Request.QueryString["id"];
                 int idCond = int.Parse(Session["idCond"].ToString());
@@ -36,7 +35,7 @@ namespace ManagCond.Residente
                 TextBoxNombres.Text = visita.Nombres;
                 TextBoxApellidos.Text = visita.Apellidos;
                 TextBoxPatente.Text = visita.Patente;
-                DropDownListEstado.SelectedItem.Text = visita.Estado;
+                inputFecha.Value = visita.Fecha.ToString();
             }
             if (Session["usuario"] == null)
             {
@@ -54,15 +53,15 @@ namespace ManagCond.Residente
         {
             id = Request.QueryString["id"];
             int idCond = int.Parse(Session["idCond"].ToString());
-            String numDpto = DropDownList.SelectedValue;
-            String rut = TextBoxRut.Text;
-            String nombres = TextBoxNombres.Text;
-            String apellidos = TextBoxApellidos.Text;
-            String patente = TextBoxPatente.Text;
-            String estado = DropDownListEstado.SelectedValue;
+            string numDpto = DropDownList.SelectedValue;
+            string rut = TextBoxRut.Text;
+            string nombres = TextBoxNombres.Text;
+            string apellidos = TextBoxApellidos.Text;
+            DateTime fecha = DateTime.Parse(inputFecha.Value);
+            string fecha2 = fecha.ToString("yyyy-MM-dd");
+            string patente = TextBoxPatente.Text;
 
-
-            if (VisitaDao.ModificarVisitaG(id, idCond, numDpto, rut, nombres, apellidos, patente, estado))
+            if (VisitaDao.ModificarVisitaR(id, idCond, numDpto, rut, nombres, apellidos, fecha2, patente))
             {
                 Response.Redirect("Visitas.aspx");
             }
@@ -85,19 +84,6 @@ namespace ManagCond.Residente
             DropDownList.DataTextField = "numDpto";
             DropDownList.DataValueField = "id";
             DropDownList.DataBind();
-        }
-        public void LlenarDropDownListEstado()
-        {
-            SqlCommand cmd = new SqlCommand("SELECT * from estadoVisita where id between 2 and 4", Conexion.Open());
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-
-            DropDownListEstado.DataSource = ds;
-            DropDownListEstado.DataTextField = "descripcion";
-            DropDownListEstado.DataValueField = "id";
-            DropDownListEstado.DataBind();
-
         }
     }
 }

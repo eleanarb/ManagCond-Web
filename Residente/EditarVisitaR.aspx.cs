@@ -36,6 +36,7 @@ namespace ManagCond.Residente
                 TextBoxNombres.Text = visita.Nombres;
                 TextBoxApellidos.Text = visita.Apellidos;
                 TextBoxPatente.Text = visita.Patente;
+                inputFecha.Value = visita.Fecha.ToString();
                 DropDownListEstado.SelectedValue = visita.Estado;
             }
             if (Session["usuario"] == null)

@@ -153,8 +153,11 @@
                                 <tbody
                                     class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                                     <%
-
-                                        foreach (GastosComunes obj in GastosComunesDao.GetAlGastosComunes(idCondominio))
+                                        DateTime fechaActual = System.DateTime.Now;
+                                        int mesActual = int.Parse(fechaActual.ToString("MM"));
+                                        int añoActual = int.Parse(fechaActual.ToString("yyyy"));
+                                        string depto = "";
+                                        foreach (GastosComunes obj in GastosComunesDao.GetAlGastosComunes(idCondominio, mesActual, añoActual, depto))
                                         {
                                             int total = obj.GastoComun + obj.FondoReserva + obj.Multas + obj.MoraPeriodo + obj.Varios;
 
@@ -191,7 +194,7 @@
                                         </td>
                                         <%} %>
 
-                                        <td class="px-4 py-3 text-sm"><%=obj.FechaEmision.ToString("dd-MM-yyyyy") %>
+                                        <td class="px-4 py-3 text-sm"><%=obj.FechaEmision.ToString("dd-MM-yyyy") %>
                                         </td>
                                     </tr>
                                     <%

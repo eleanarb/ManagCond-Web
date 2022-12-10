@@ -15,31 +15,31 @@ namespace ManagCond.Administrador
     {
 
         /// <summary>
-        /// Control DropDownListBuscar.
+        /// Control DropDownListDepto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListBuscar;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListDepto;
 
         /// <summary>
-        /// Control DropDownList1.
+        /// Control DropDownListMesF.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListMesF;
 
         /// <summary>
-        /// Control DropDownList2.
+        /// Control DropDownListAñoF.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList2;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListAñoF;
 
         /// <summary>
         /// Control ButtonGenerarPdf.

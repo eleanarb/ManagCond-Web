@@ -21,6 +21,16 @@ namespace Dao
             ObtenerDatosVisitaTOPR(numDpto, idCond);
             return alVisitas;
         }
+        public static List<Visita> GetAlVisitaPendiente(int idNumDpto, int idCond)
+        {
+            ObtenerDatosVisitaPendiente(idNumDpto, idCond);
+            return alVisitas;
+        }
+        public static List<Visita> GetAlVisitaRegistrada(int idNumDpto, int idCond)
+        {
+            ObtenerDatosVisitaRegistrada(idNumDpto, idCond);
+            return alVisitas;
+        }
         public static void ObtenerDatosVisitaTOPR(int idNumDpto, int idCond)
         {
             alVisitas.Clear();
@@ -93,48 +103,66 @@ namespace Dao
             }
             return alVisitas;
         }
-
-        public static List<Visita> ObtenerDatosVisitaPendiente(string numDpto, int idCond)
+        public static void ObtenerDatosVisitaPendiente(int idNDpto, int idCond)
         {
             alVisitas.Clear();
+            string strSql = String.Format("SELECT V.id, D.numDpto as 'numDpto', V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.numDpto FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id WHERE V.numDpto = {0} AND V.id_Cond = {1} AND V.estado = 1 ORDER BY fecha DESC, hora DESC", idNDpto, idCond);
 
-            Conexion con = new Conexion();
-            string sCnn = con.Conectar();
-
-            string sSel = "SELECT V.id, D.numDpto as 'numDpto', V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.numDpto FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id WHERE V.numDpto = " + numDpto + " AND V.id_Cond = " + idCond + " AND V.estado IN (1,4) ORDER BY fecha DESC, hora DESC";
-            SqlDataAdapter da;
-            DataTable dt = new DataTable();
-            try
+            using (SqlConnection con = new SqlConnection(conBD))
             {
-                da = new SqlDataAdapter(sSel, sCnn);
-                da.Fill(dt);
+                SqlCommand cmd = new SqlCommand(strSql, con) { CommandType = CommandType.Text };
+                con.Open();
+                SqlDataReader sdr = cmd.ExecuteReader();
 
-                int totalFilas = dt.Rows.Count;
-                int fila = 0;
-
-                for (; fila < totalFilas; fila++)
+                while (sdr.Read())
                 {
-                    int id = int.Parse(dt.Rows[fila][0].ToString());
-                    string numDptoQ = dt.Rows[fila][1].ToString();
-                    string rut = dt.Rows[fila][2].ToString();
-                    string nombres = dt.Rows[fila][3].ToString();
-                    string apellidos = dt.Rows[fila][4].ToString();
-                    DateTime fecha = Convert.ToDateTime(dt.Rows[fila][5]);
-                    TimeSpan hora = TimeSpan.Parse(dt.Rows[fila][6].ToString());
-                    string patente = dt.Rows[fila][7].ToString();
-                    string estado = dt.Rows[fila][8].ToString();
-                    int idNumDpto = int.Parse(dt.Rows[fila][9].ToString());
+                    int id = int.Parse(sdr["id"].ToString());
+                    string numDpto = sdr["numDpto"].ToString();
+                    string rut = sdr["rut"].ToString();
+                    string nombres = sdr["nombres"].ToString();
+                    string apellidos = sdr["apellidos"].ToString();
+                    DateTime fecha = DateTime.Parse(sdr["fecha"].ToString());
+                    TimeSpan hora = TimeSpan.Parse(sdr["hora"].ToString());
+                    string patente = sdr["patente"].ToString();
+                    string estado = sdr["estado"].ToString();
 
-                    Visita visita = new Visita(id, numDptoQ, rut, nombres, apellidos, fecha, hora, patente, estado, idCond, idNumDpto);
+                    Visita visita = new Visita(id, numDpto, rut, nombres, apellidos, fecha, hora, patente, estado, idCond, idNDpto);
 
                     alVisitas.Add(visita);
                 }
+                con.Close();
             }
-            catch (Exception)
+        }
+
+        public static void ObtenerDatosVisitaRegistrada(int idNDpto, int idCond)
+        {
+            alVisitas.Clear();
+            string strSql = String.Format("SELECT V.id, D.numDpto as 'numDpto', V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.numDpto FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id WHERE V.numDpto = {0} AND V.id_Cond = {1} AND V.estado = 4 ORDER BY fecha DESC, hora DESC", idNDpto, idCond);
+
+            using (SqlConnection con = new SqlConnection(conBD))
             {
-                //Label1.Text = "Error: " + ex.Message;
+                SqlCommand cmd = new SqlCommand(strSql, con) { CommandType = CommandType.Text };
+                con.Open();
+                SqlDataReader sdr = cmd.ExecuteReader();
+
+                while (sdr.Read())
+                {
+                    int id = int.Parse(sdr["id"].ToString());
+                    string numDpto = sdr["numDpto"].ToString();
+                    string rut = sdr["rut"].ToString();
+                    string nombres = sdr["nombres"].ToString();
+                    string apellidos = sdr["apellidos"].ToString();
+                    DateTime fecha = DateTime.Parse(sdr["fecha"].ToString());
+                    TimeSpan hora = TimeSpan.Parse(sdr["hora"].ToString());
+                    string patente = sdr["patente"].ToString();
+                    string estado = sdr["estado"].ToString();
+
+                    Visita visita = new Visita(id, numDpto, rut, nombres, apellidos, fecha, hora, patente, estado, idCond, idNDpto);
+
+                    alVisitas.Add(visita);
+                }
+                con.Close();
             }
-            return alVisitas;
         }
         public static bool AgregarVisitaR(string numDpto, string rut, string nombres, string apellidos, string fecha, string patente, int idCond)
         {
@@ -155,8 +183,6 @@ namespace Dao
                     da = new SqlDataAdapter(sSel, sCnn);
                     da.Fill(dt);
 
-                    ObtenerDatosVisita(numDpto, idCond);
-
                     estado = true;
 
                 }
@@ -168,21 +194,126 @@ namespace Dao
 
             return estado;
         }
+        public static bool ModificarVisitaR(string id, int idCond, string numDpto, string rut, string nombres, string apellidos, string fecha, string patente)
+        {
+            bool estado = false;
 
+            try
+            {
+                Conexion c = new Conexion();
+                string sCnn = c.Conectar();
+
+                string sSel = "EXEC	sp_modificar_visitaR @id = " + id + ", @idCond = " + idCond + ", @numDpto = " + numDpto + ", @rut = '" + rut + "', @nombres = '" + nombres + "', @apellidos = '" + apellidos + "', @fecha = '" + fecha + "', @patente = '" + patente + "'";
+
+                SqlDataAdapter da;
+                DataTable dt = new DataTable();
+                da = new SqlDataAdapter(sSel, sCnn);
+                da.Fill(dt);
+
+                estado = true;
+            }
+            catch (Exception)
+            {
+
+            }
+            return estado;
+        }
+        public static int ObtenerTotalVisitasPendientes(int idCond)
+        {
+            alVisitas.Clear();
+
+            Conexion con = new Conexion();
+            string sCnn = con.Conectar();
+
+            int totalReservas = 0;
+
+            string sSel = "select count(*) from visitas where estado = 1 and id_cond = '" + idCond + "' ";
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            try
+            {
+                da = new SqlDataAdapter(sSel, sCnn);
+                da.Fill(dt);
+
+                int totalFilas = dt.Rows.Count;
+                int fila = 0;
+
+                for (; fila < totalFilas; fila++)
+                {
+                    totalReservas = int.Parse(dt.Rows[fila][0].ToString());
+
+                }
+            }
+            catch (Exception)
+            {
+                //Label1.Text = "Error: " + ex.Message;
+            }
+            return totalReservas;
+        }
+        public static bool AprobarVisita(int id)
+        {
+
+            bool estado = false;
+
+            Conexion con = new Conexion();
+            string sCnn = con.Conectar();
+
+
+            string sSel = "EXECUTE sp_aprobar_visita @id= '" + id + "' ";
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            try
+            {
+                da = new SqlDataAdapter(sSel, sCnn);
+                da.Fill(dt);
+                estado = true;
+            }
+            catch (Exception)
+            {
+                //Label1.Text = "Error: " + ex.Message;
+            }
+
+            return estado;
+        }
+        public static bool RechazarVisita(int id)
+        {
+
+            bool estado = false;
+
+            Conexion con = new Conexion();
+            string sCnn = con.Conectar();
+
+
+            string sSel = "EXECUTE sp_rechazar_visita @id= '" + id + "' ";
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            try
+            {
+                da = new SqlDataAdapter(sSel, sCnn);
+                da.Fill(dt);
+                estado = true;
+            }
+            catch (Exception)
+            {
+                //Label1.Text = "Error: " + ex.Message;
+            }
+
+            return estado;
+        }
         //Guardia
         public static List<Visita> GetAlVisitaTOP(int idCond)
         {
             ObtenerDatosVisitaTOP(idCond);
             return alVisitas;
         }
-        public static List<Visita> GetAlVisita(int idCond)
+        public static List<Visita> GetAlVisita(int idCond, string depto)
         {
-            ObtenerDatosVisita(idCond);
+            ObtenerDatosVisitaG(idCond, depto);
             return alVisitas;
         }
-        public static List<Visita> GetAlVisitaHistorial(int idCond)
+        public static List<Visita> GetAlVisitaHistorial(int idCond, string depto2)
         {
-            ObtenerDatosVisitaHistorial(idCond);
+            ObtenerDatosVisitaHistorial(idCond, depto2);
             return alVisitas;
         }
         public static void ObtenerDatosVisitaTOP(int idCond)
@@ -246,10 +377,10 @@ namespace Dao
 
             return estado;
         }
-        public static void ObtenerDatosVisita(int idCond)
+        public static void ObtenerDatosVisitaG(int idCond, string depto)
         {
             alVisitas.Clear();
-            string strSql = String.Format("SELECT V.id, D.numDpto as 'numDpto', V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.numDpto as idNumDpto FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id where V.id_Cond = {0} and (V.estado = 1 or V.estado = 4) ORDER BY fecha DESC,hora DESC", idCond);
+            string strSql = String.Format("SELECT V.id, D.numDpto as 'numDpto', V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.numDpto as idNumDpto FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id where V.id_Cond = {0} and (V.estado = 1 or V.estado = 4) " + depto + " ORDER BY fecha DESC,hora DESC", idCond);
 
             using (SqlConnection con = new SqlConnection(conBD))
             {
@@ -277,10 +408,10 @@ namespace Dao
                 con.Close();
             }
         }
-        public static void ObtenerDatosVisitaHistorial(int idCond)
+        public static void ObtenerDatosVisitaHistorial(int idCond, string depto2)
         {
             alVisitas.Clear();
-            string strSql = String.Format("SELECT V.id, D.numDpto, V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.numDpto AS idNumDpto FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id where V.id_Cond = {0} and (V.estado = 2 or V.estado = 3) ORDER BY fecha DESC, hora DESC", idCond);
+            string strSql = String.Format("SELECT V.id, D.numDpto, V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.numDpto AS idNumDpto FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id where V.id_Cond = {0} and (V.estado = 2 or V.estado = 3) "+ depto2 + " ORDER BY fecha DESC, hora DESC", idCond);
 
             using (SqlConnection con = new SqlConnection(conBD))
             {

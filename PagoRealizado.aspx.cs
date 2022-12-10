@@ -20,9 +20,17 @@ namespace ManagCond
 
             string notificationToken = HttpContext.Current.Request.Form["notification_token"];
             string apiVersion = "1.3";
-
+            Page.Response.Write("<script>console.log('"+ Configuration.Secret + "');</script>");
             double amount = 100;
-
+            Page.Response.Write("<script>console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');</script>");
+            string[] keys = Request.Form.AllKeys;
+            Page.Response.Write("<script>console.log('"+ Request.Form.AllKeys + "');</script>");
+            for (int i = 0; i < keys.Length; i++)
+            {
+                Response.Write(keys[i] + ": " + Request.Form[keys[i]] + "<br>");
+                Page.Response.Write("<script>console.log('" +  Request.Form[keys[i]] + "');</script>");
+                Page.Response.Write("<script>console.log('dddddddddddddddddddddddddddddddddddddddddddd');</script>");
+            }
 
             if (apiVersion.Equals("1.3"))
             {

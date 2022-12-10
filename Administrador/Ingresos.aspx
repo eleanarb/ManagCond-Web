@@ -14,10 +14,10 @@
       <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
       <script src="../assets/js/init-alpine.js"></script>
       <script src="../assets/js/focus-trap.js" defer></script>
-      <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
       <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
-      <script src="https://unpkg.com/flowbite@1.5.3/dist/datepicker.js"></script>
+      <script src="https://unpkg.com/flowbite@1.5.3/dist/datepicker.js%22%3E"></script>
   </head>
 <body>
     <div

@@ -29,6 +29,7 @@ namespace ManagCond.Residente
                 DropDownListDpto.SelectedIndex = int.Parse(Session["numDpto"].ToString());
                 inputFecha.Value = reserva.Fecha.ToString();
                 TextBoxSolicitante.Text = reserva.Solicitante;
+                DropDownListEspaciComun.Text = reserva.EspacioComun.ToString();
             }
             if (Session["usuario"] == null)
             {

@@ -1,21 +1,20 @@
-﻿using System;
+﻿using Dao;
+using Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Model;
-using Dao;
-using System.Net.Mail;
-using System.Net;
 
-namespace ManagCond.Administrador
+namespace ManagCond.Residente
 {
-    public partial class perfil : System.Web.UI.Page
+    public partial class Perfil : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
             mensajeError.Visible = false;
             mensajeExitoso.Visible = false;
             mensajeErrorCorreo.Visible = false;
@@ -41,8 +40,7 @@ namespace ManagCond.Administrador
 
             if (!IsPostBack)
             {
-                Usuario usuario = new Usuario();
-                usuario = (Usuario)Session["usuario"];
+                Usuario usuario = (Usuario)Session["usuario"];
                 Session["mensaje"] = "0";
 
                 TextBoxNombres.Text = usuario.Nombres;
@@ -59,12 +57,11 @@ namespace ManagCond.Administrador
             }
             else
             {
-                if (!Session["tipoUsuario"].Equals(1))
+                if (!Session["tipoUsuario"].Equals(3))
                 {
                     Response.Redirect("../Login.aspx");
                 }
             }
-
         }
         public void MessageBox(string msg)
         {
@@ -73,14 +70,12 @@ namespace ManagCond.Administrador
         }
         protected void ButtonPerfil_Click(object sender, EventArgs e)
         {
-            Usuario usuario = new Usuario();
-            usuario = (Usuario)Session["usuario"];
+            Usuario usuario = (Usuario)Session["usuario"];
             string rut = usuario.Rut;
             string correo = TextBoxCorreo.Text;
             string telefono = TextBoxTlf.Value;
 
-            int resultado = 0;
-            resultado = UsuarioDao.BuscarUsuario(correo);
+            int resultado = UsuarioDao.BuscarUsuario(correo);
 
             if (resultado == 0)
             {
@@ -108,8 +103,7 @@ namespace ManagCond.Administrador
         }
         protected void ButtonClave_Click(object sender, EventArgs e)
         {
-            Usuario usuario = new Usuario();
-            usuario = (Usuario)Session["usuario"];
+            Usuario usuario = (Usuario)Session["usuario"];
             string rut = usuario.Rut;
             string clave1 = TextBoxClave1.Value;
             string clave2 = TextBoxClave2.Value;

@@ -11,26 +11,17 @@ namespace ManagCond.Residente
 {
 
 
-    public partial class Visitas
+    public partial class Perfil
     {
 
         /// <summary>
-        /// Control DropDownList.
+        /// Control perfil.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList;
-
-        /// <summary>
-        /// Control TextBoxRut.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxRut;
+        protected global::System.Web.UI.HtmlControls.HtmlForm perfil;
 
         /// <summary>
         /// Control TextBoxNombres.
@@ -51,75 +42,111 @@ namespace ManagCond.Residente
         protected global::System.Web.UI.WebControls.TextBox TextBoxApellidos;
 
         /// <summary>
-        /// Control TextBoxPatente.
+        /// Control TextBoxRut.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxPatente;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText TextBoxRut;
 
         /// <summary>
-        /// Control TextBoxFecha.
+        /// Control TextBoxNac.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText TextBoxFecha;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxNac;
 
         /// <summary>
-        /// Control ButtonAgregar.
+        /// Control TextBoxCorreo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonAgregar;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxCorreo;
 
         /// <summary>
-        /// Control ButtonEliminar.
+        /// Control TextBoxTlf.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonEliminar;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText TextBoxTlf;
 
         /// <summary>
-        /// Control TextBoxIdEliminar.
+        /// Control ButtonPerfil.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden TextBoxIdEliminar;
+        protected global::System.Web.UI.WebControls.Button ButtonPerfil;
 
         /// <summary>
-        /// Control idVisita.
+        /// Control TextBoxClave1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden idVisita;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword TextBoxClave1;
 
         /// <summary>
-        /// Control ButtonAprobar.
+        /// Control TextBoxClave2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonAprobar;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword TextBoxClave2;
 
         /// <summary>
-        /// Control ButtonRechazar.
+        /// Control TextBoxClave3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonRechazar;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword TextBoxClave3;
+
+        /// <summary>
+        /// Control ButtonClave.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonClave;
+
+        /// <summary>
+        /// Control mensajeError.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mensajeError;
+
+        /// <summary>
+        /// Control mensajeErrorCorreo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mensajeErrorCorreo;
+
+        /// <summary>
+        /// Control mensajeExitoso.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mensajeExitoso;
     }
 }

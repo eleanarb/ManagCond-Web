@@ -20,8 +20,7 @@ namespace ManagCond.Administrador
             if (!IsPostBack)
             {
                 LlenarDropDownListRut(); 
-                int mesActualC = int.Parse(fechaActual.ToString("MM"));
-                DropDownListMesF.SelectedValue = mesActualC.ToString();
+                DropDownListMesF.SelectedValue = mesActual.ToString();
                 DropDownListAñoF.SelectedValue = añoActual.ToString();
                 DropDownListRut.SelectedValue = "0";
 

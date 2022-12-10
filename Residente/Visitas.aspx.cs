@@ -67,5 +67,54 @@ namespace ManagCond.Residente
             DropDownList.DataValueField = "id";
             DropDownList.DataBind();
         }
+        protected void ButtonEliminar_Click(object sender, EventArgs e)
+        {
+            int id = int.Parse(TextBoxIdEliminar.Value);
+            if (VisitaDao.EliminarVisita(id))
+            {
+                Response.Redirect("Visitas.aspx");
+            }
+            else
+            {
+                Response.Redirect("Visita.aspx");
+            }
+        }
+        protected void ButtonAprobar_Click(object sender, EventArgs e)
+        {
+
+            int id = int.Parse(idVisita.Value);
+
+
+            if (VisitaDao.AprobarVisita(id))
+            {
+                Response.Redirect("Visitas.aspx");
+            }
+            else
+            {
+                string script = String.Format(@"<script type='text/javascript'>alert('No se puedo aprobar la visita');</script>");
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, false);
+                Response.Redirect("Visitas.aspx");
+            }
+
+        }
+
+        protected void ButtonRechazar_Click(object sender, EventArgs e)
+        {
+
+            int id = int.Parse(idVisita.Value);
+
+
+            if (VisitaDao.RechazarVisita(id))
+            {
+                Response.Redirect("Visitas.aspx");
+            }
+            else
+            {
+                string script = String.Format(@"<script type='text/javascript'>alert('No se puedo rechazar la visita');</script>");
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, false);
+                Response.Redirect("Visitas.aspx");
+            }
+
+        }
     }
 }

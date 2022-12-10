@@ -8,17 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ManagCond</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="../assets/css/tailwind.output.css" />   
+    <link rel="stylesheet" href="../assets/css/tailwind.output.css" />
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="../assets/js/init-alpine.js"></script>
-
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
-
-    <script src="https://unpkg.com/flowbite@1.5.3/dist/datepicker.js"></script>
-
-        <script src=
-"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> 
-    </script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
     <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
@@ -104,7 +98,7 @@
          });
 
          $('#TextBoxClave').on('keyup', function () {
-             if ($('#TextBoxClave').val().length < 6) {
+             if ($('#TextBoxClave').val().length < 3) {
                  $('#messageClave').html('Ingrese una clave válida').css('color', 'red');
 
              } else
@@ -116,11 +110,10 @@
              if (!email.test(usuario)) {
                  return false;
              } else {
-                 return true;
              }
 
              var clave = document.getElementById('TextBoxClave').value;
-             if (clave.length < 6) {
+             if (clave.length < 3) {
                  return false;
              } else {
                  return true;

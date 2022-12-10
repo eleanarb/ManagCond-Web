@@ -53,9 +53,6 @@
     <Reference Include="KhipuApiClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\KhipuApiClient.2.9.1\lib\net472\KhipuApiClient.dll</HintPath>
     </Reference>
-    <Reference Include="MercadoPago, Version=2.2.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\mercadopago-sdk.2.2.3\lib\net461\MercadoPago.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
     </Reference>
@@ -198,6 +195,7 @@
     <Content Include="Guardia\Foro.aspx" />
     <Content Include="Guardia\Index.aspx" />
     <Content Include="Guardia\Listado.aspx" />
+    <Content Include="Guardia\Perfil.aspx" />
     <Content Include="Guardia\publicacionForo.aspx" />
     <Content Include="Guardia\Reservas.aspx" />
     <Content Include="Guardia\Template\AsideGuardia.html" />
@@ -220,6 +218,7 @@
     <Content Include="Residente\Foro.aspx" />
     <Content Include="Residente\GastosComunes.aspx" />
     <Content Include="Residente\Index.aspx" />
+    <Content Include="Residente\Perfil.aspx" />
     <Content Include="Residente\publicacionForo.aspx" />
     <Content Include="Residente\Reservas.aspx" />
     <Content Include="Residente\Template\AsideResidente.html" />
@@ -476,6 +475,13 @@
     <Compile Include="Guardia\Listado.aspx.designer.cs">
       <DependentUpon>Listado.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Guardia\Perfil.aspx.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Guardia\Perfil.aspx.designer.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Guardia\publicacionForo.aspx.cs">
       <DependentUpon>publicacionForo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -616,6 +622,13 @@
     </Compile>
     <Compile Include="Residente\Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Residente\Perfil.aspx.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Residente\Perfil.aspx.designer.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
     </Compile>
     <Compile Include="Residente\publicacionForo.aspx.cs">
       <DependentUpon>publicacionForo.aspx</DependentUpon>

@@ -22,7 +22,20 @@ namespace ManagCond.Administrador
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["usuario"] == null)
+            DateTime fechaActual = DateTime.Now;
+            int mesActual = int.Parse(fechaActual.ToString("MM"));
+            int añoActual = fechaActual.Year;
+            if (!IsPostBack)
+            {
+                LlenarDropDownListFiltro();
+                DropDownListMesF.SelectedValue = mesActual.ToString();
+                DropDownListAñoF.SelectedValue = añoActual.ToString();
+                Session["depto"] = "";
+
+                Session["mes"] = int.Parse(mesActual.ToString());
+                Session["año"] = int.Parse(añoActual.ToString());
+            }
+                if (Session["usuario"] == null)
             {
                 Response.Redirect("../Login.aspx");
             }
@@ -172,6 +185,62 @@ namespace ManagCond.Administrador
             oSmtpCliente.Send(oMailMessage);
 
             oSmtpCliente.Dispose();
+        }
+        public void LlenarDropDownListFiltro()
+        {
+            int idCond = int.Parse(Session["idCondominio"].ToString());
+
+            SqlCommand cmd = new SqlCommand("Select id , numDpto from departamento where id_Cond = " + idCond + " and not numDpto = 'No aplica'", Conexion.Open());
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            DropDownListDepto.DataSource = ds;
+            DropDownListDepto.DataTextField = "numDpto";
+            DropDownListDepto.DataValueField = "id";
+            DropDownListDepto.DataBind();
+            DropDownListDepto.Items.Insert(0, new System.Web.UI.WebControls.ListItem("Todos", "0"));
+        }
+        protected void Depto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (DropDownListDepto.SelectedValue == "0")
+            {
+                Session["depto"] = "";
+            }
+            else
+            {
+                Session["depto"] = "AND gc.idDpto= " + DropDownListDepto.SelectedValue;
+            }
+            Session["mes"] = int.Parse(DropDownListMesF.SelectedValue);
+            Session["año"] = int.Parse(DropDownListAñoF.SelectedValue);
+        }
+        protected void Mes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Session["mes"] = int.Parse(DropDownListMesF.SelectedValue);
+            Session["año"] = int.Parse(DropDownListAñoF.SelectedValue);
+
+            if (DropDownListDepto.SelectedValue == "0")
+            {
+                Session["Depto"] = "";
+            }
+            else
+            {
+                Session["Depto"] = "AND gc.idDpto = '" + DropDownListDepto.SelectedValue + "'";
+            }
+        }
+        protected void Año_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Session["mes"] = int.Parse(DropDownListMesF.SelectedValue);
+            Session["año"] = int.Parse(DropDownListAñoF.SelectedValue);
+
+            if (DropDownListDepto.SelectedValue == "0")
+            {
+                Session["Depto"] = "";
+            }
+            else
+            {
+                Session["Depto"] = "AND gc.idDpto = '" + DropDownListDepto.SelectedValue + "'";
+            }
         }
     }
 }

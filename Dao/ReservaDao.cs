@@ -18,9 +18,9 @@ namespace Dao
             ObtenerReservasPendientes(idCond);
             return alReservas;
         }
-        public static List<Reserva> GetAlReservasAnteriores(int idCond)
+        public static List<Reserva> GetAlReservasAnteriores(int idCond, string depto)
         {
-            ObtenerReservasAnteriores(idCond);
+            ObtenerReservasAnteriores(idCond, depto);
             return alReservas;
         }
 
@@ -56,7 +56,6 @@ namespace Dao
             }
             return totalReservas;
         }
-
         public static void ObtenerReservasPendientes(int idCond)
         {
             alReservas.Clear();
@@ -96,43 +95,32 @@ namespace Dao
             }
         }
 
-        public static void ObtenerReservasAnteriores(int idCond)
+        public static void ObtenerReservasAnteriores(int idCond, string depto)
         {
             alReservas.Clear();
+            string strSql = String.Format("SELECT R.id, D.numDpto as 'numDpto', R.solicitante, E.nombre as 'espacioComun' ,R.fecha, R.rangoFecha, R.estado FROM reservasEspacios R JOIN departamento D ON R.numDpto = D.id JOIN espaciosComunes E ON E.id = R.espacioComun WHERE E.id_Cond = {0} AND (R.estado =2 or R.estado =3)" + depto + " ORDER BY fecha DESC", idCond);
 
-            Conexion con = new Conexion();
-            string sCnn = con.Conectar();
-
-            string sSel = "SELECT * FROM reservasEspacios INNER JOIN espaciosComunes ON reservasEspacios.espacioComun = espaciosComunes.id where (reservasEspacios.estado = 2 or reservasEspacios.estado = 3) and reservasEspacios.id_Cond = '" + idCond + "' ";
-            SqlDataAdapter da;
-            DataTable dt = new DataTable();
-            try
+            using (SqlConnection con = new SqlConnection(conBD))
             {
-                da = new SqlDataAdapter(sSel, sCnn);
-                da.Fill(dt);
+                SqlCommand cmd = new SqlCommand(strSql, con) { CommandType = CommandType.Text };
+                con.Open();
+                SqlDataReader sdr = cmd.ExecuteReader();
 
-                int totalFilas = dt.Rows.Count;
-                int fila = 0;
-
-                for (; fila < totalFilas; fila++)
+                while (sdr.Read())
                 {
-                    int id = int.Parse(dt.Rows[fila][0].ToString());
-                    String numDpto = dt.Rows[fila][1].ToString();
-                    DateTime fecha = Convert.ToDateTime(dt.Rows[fila][2]);
-                    String rangoHorario = dt.Rows[fila][3].ToString();
-                    String solicitante = dt.Rows[fila][5].ToString();
-                    int estado = int.Parse(dt.Rows[fila][6].ToString());
-                    string espacioComun = dt.Rows[fila][9].ToString();
+                    int id = int.Parse(sdr["id"].ToString());
+                    string numDptoN = sdr["numDpto"].ToString();
+                    DateTime fecha = DateTime.Parse(sdr["fecha"].ToString());
+                    string rangoFecha = sdr["rangoFecha"].ToString();
+                    string espacioComun = sdr["espacioComun"].ToString();
+                    string solicitante = sdr["solicitante"].ToString();
+                    int estado = int.Parse(sdr["estado"].ToString());
 
-
-                    Reserva reserva = new Reserva(id, numDpto, fecha, rangoHorario, espacioComun, solicitante, estado, idCond);
+                    Reserva reserva = new Reserva(id, numDptoN, fecha, rangoFecha, espacioComun, solicitante, estado, idCond);
 
                     alReservas.Add(reserva);
                 }
-            }
-            catch (Exception)
-            {
-                //Label1.Text = "Error: " + ex.Message;
+                con.Close();
             }
         }
 
@@ -204,9 +192,9 @@ namespace Dao
             return estado;
         }
         //Guardia
-        public static List<Reserva> GetAlReservasAnterioresG(int idCond)
+        public static List<Reserva> GetAlReservasG(int idCond, string depto)
         {
-            ObtenerReservasAnterioresG(idCond);
+            ObtenerReservasG(idCond, depto);
             return alReservas;
         }
         public static List<Reserva> GetAlReservasTOPG(int idCond)
@@ -214,80 +202,60 @@ namespace Dao
             ObtenerReservasTOPG(idCond);
             return alReservas;
         }
-        public static void ObtenerReservasAnterioresG(int idCond)
+        public static void ObtenerReservasG(int idCond, string depto)
         {
             alReservas.Clear();
+            string strSql = String.Format("SELECT R.id, D.numDpto as 'numDpto', R.solicitante, E.nombre as 'espacioComun' ,R.fecha, R.rangoFecha, R.estado FROM reservasEspacios R JOIN departamento D ON R.numDpto = D.id JOIN espaciosComunes E ON E.id = R.espacioComun WHERE E.id_Cond = {0} AND R.estado = 2 "+ depto + " ORDER BY fecha DESC", idCond);
 
-            Conexion con = new Conexion();
-            string sCnn = con.Conectar();
-
-            string sSel = "SELECT * FROM reservasEspacios INNER JOIN espaciosComunes ON reservasEspacios.espacioComun = espaciosComunes.id where (reservasEspacios.estado = 2 or reservasEspacios.estado = 4) and reservasEspacios.id_Cond = " + idCond + "";
-            SqlDataAdapter da;
-            DataTable dt = new DataTable();
-            try
+            using (SqlConnection con = new SqlConnection(conBD))
             {
-                da = new SqlDataAdapter(sSel, sCnn);
-                da.Fill(dt);
+                SqlCommand cmd = new SqlCommand(strSql, con) { CommandType = CommandType.Text };
+                con.Open();
+                SqlDataReader sdr = cmd.ExecuteReader();
 
-                int totalFilas = dt.Rows.Count;
-                int fila = 0;
-
-                for (; fila < totalFilas; fila++)
+                while (sdr.Read())
                 {
-                    int id = int.Parse(dt.Rows[fila][0].ToString());
-                    String numDpto = dt.Rows[fila][1].ToString();
-                    DateTime fecha = Convert.ToDateTime(dt.Rows[fila][2]);
-                    String rangoHorario = dt.Rows[fila][3].ToString();
-                    String solicitante = dt.Rows[fila][5].ToString();
-                    int estado = int.Parse(dt.Rows[fila][6].ToString());
-                    string espacioComun = dt.Rows[fila][9].ToString();
+                    int id = int.Parse(sdr["id"].ToString());
+                    string numDptoN = sdr["numDpto"].ToString();
+                    DateTime fecha = DateTime.Parse(sdr["fecha"].ToString());
+                    string rangoFecha = sdr["rangoFecha"].ToString();
+                    string espacioComun = sdr["espacioComun"].ToString();
+                    string solicitante = sdr["solicitante"].ToString();
+                    int estado = int.Parse(sdr["estado"].ToString());
 
-                    Reserva reserva = new Reserva(id, numDpto, fecha, rangoHorario, espacioComun, solicitante, estado, idCond);
+                    Reserva reserva = new Reserva(id, numDptoN, fecha, rangoFecha, espacioComun, solicitante, estado, idCond);
 
                     alReservas.Add(reserva);
                 }
-            }
-            catch (Exception)
-            {
-                //Label1.Text = "Error: " + ex.Message;
+                con.Close();
             }
         }
         public static void ObtenerReservasTOPG(int idCond)
         {
             alReservas.Clear();
+            string strSql = String.Format("SELECT TOP 10 R.id, D.numDpto as 'numDpto', R.solicitante, E.nombre as 'espacioComun' ,R.fecha, R.rangoFecha, R.estado FROM reservasEspacios R JOIN departamento D ON R.numDpto = D.id JOIN espaciosComunes E ON E.id = R.espacioComun WHERE E.id_Cond = {0} AND R.estado = 2 ORDER BY fecha DESC", idCond);
 
-            Conexion con = new Conexion();
-            string sCnn = con.Conectar();
-
-            string sSel = "SELECT TOP 10 * FROM reservasEspacios INNER JOIN espaciosComunes ON reservasEspacios.espacioComun = espaciosComunes.id where reservasEspacios.estado = 2 and reservasEspacios.id_Cond = " + idCond + "";
-            SqlDataAdapter da;
-            DataTable dt = new DataTable();
-            try
+            using (SqlConnection con = new SqlConnection(conBD))
             {
-                da = new SqlDataAdapter(sSel, sCnn);
-                da.Fill(dt);
+                SqlCommand cmd = new SqlCommand(strSql, con) { CommandType = CommandType.Text };
+                con.Open();
+                SqlDataReader sdr = cmd.ExecuteReader();
 
-                int totalFilas = dt.Rows.Count;
-                int fila = 0;
-
-                for (; fila < totalFilas; fila++)
+                while (sdr.Read())
                 {
-                    int id = int.Parse(dt.Rows[fila][0].ToString());
-                    string numDpto = dt.Rows[fila][1].ToString();
-                    DateTime fecha = Convert.ToDateTime(dt.Rows[fila][2]);
-                    string rangoHorario = dt.Rows[fila][3].ToString();
-                    string solicitante = dt.Rows[fila][5].ToString();
-                    int estado = int.Parse(dt.Rows[fila][6].ToString());
-                    string espacioComun = dt.Rows[fila][9].ToString();
+                    int id = int.Parse(sdr["id"].ToString());
+                    string numDptoN = sdr["numDpto"].ToString();
+                    DateTime fecha = DateTime.Parse(sdr["fecha"].ToString());
+                    string rangoFecha = sdr["rangoFecha"].ToString();
+                    string espacioComun = sdr["espacioComun"].ToString();
+                    string solicitante = sdr["solicitante"].ToString();
+                    int estado = int.Parse(sdr["estado"].ToString());
 
-                    Reserva reserva = new Reserva(id, numDpto, fecha, rangoHorario, espacioComun, solicitante, estado, idCond);
+                    Reserva reserva = new Reserva(id, numDptoN, fecha, rangoFecha, espacioComun, solicitante, estado, idCond);
 
                     alReservas.Add(reserva);
                 }
-            }
-            catch (Exception)
-            {
-                //Label1.Text = "Error: " + ex.Message;
+                con.Close();
             }
         }
         //Residente

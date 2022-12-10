@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
     <div
@@ -83,12 +84,15 @@
 
                                             <th class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 <input type="text" id="TextBoxNombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nombre" runat="server">
+                                                <span id="mensajeNombre" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                             </th>
                                             <td class="py-4 px-6">
                                                 <input type="text" id="TextBoxDesc" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Descripcion" runat="server">
+                                                <span id="mensajeDesc" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                             </td>
                                             <td class="py-4 px-6">
-                                                <input type="number" id="TextBoxMonto" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Monto" runat="server">
+                                                <input type="number" min="0" id="TextBoxMonto" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Monto" runat="server">
+                                                <span id="mensajeMonto" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                             </td>
 
                                             <td class="py-4 px-6">
@@ -110,7 +114,7 @@
 
                                             <td class="py-4 px-6 grid grid-rows-4 text-center">
                                                 <div>
-                                                    <asp:Button ID="ButtonAgregar" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purplee" runat="server" OnClick="ButtonAgregar_Click" Text="Agregar" />
+                                                    <asp:Button ID="ButtonAgregar" OnClientClick="return validarFormulario()" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purplee" runat="server" OnClick="ButtonAgregar_Click" Text="Agregar" />
                                                 </div>
                                                 <br />
                                                 <div>
@@ -152,23 +156,17 @@
                                                 { %>
                                             <td class="py-4 px-6">SI</td>
                                             <%} %>
-                                            <td class="py-4 px-6">
                                             <td class="py-4 px-6 md:grid-cols-2">
-                                        
                                                 <button type="button" data-id="<%=obj.id %>" @click="openModal" class="btnEditar text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-                                            </button>
-
-
+                                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                                </button>
                                                 <button type="button" data-modal-toggle="popup-modal" data-id="<%=obj.id %>" class="btnEliminar text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                                 </button>
-
                                             </td>
                                         </tr>
-
                                         <%}
                                             }%>
                                     </tbody>
@@ -176,8 +174,7 @@
                             </div>
                         </div>
                     </div>
-
-                      <!-- Modal backdrop. This what you want to place close to the closing body tag -->
+                    <!-- Modal backdrop. This what you want to place close to the closing body tag -->
     <div
       x-show="isModalOpen"
       x-transition:enter="transition ease-out duration-150"
@@ -226,38 +223,31 @@
           </button>
         </header>
           <!-- Modal body -->
-
           <div class="mt-4 mb-6 grid">
               <div class="grid gap-6 mb-8 md:grid-cols-2">
-
                   <div>
                       <label class="block text-sm">
                           <span class="text-gray-700 dark:text-gray-400">Nombre</span>
                           <input type="text" runat="server" id="TextBoxNombreModal"
-                              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               />
+                              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                       </label>
                   </div>
                   <div>
                       <label class="block text-sm">
                           <span class="text-gray-700 dark:text-gray-400">Descripción</span>
                           <input type="text" runat="server" id="TextBoxDescModal"
-                              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500t"
-                               />
+                              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500t" />
                       </label>
                   </div>
               </div>
-
               <div class="grid gap-6 mb-8 md:grid-cols-2">
                   <div>
                       <label class="block text-sm">
                           <span class="text-gray-700 dark:text-gray-400">Monto</span>
                           <input type="text" runat="server" id="TextBoxMontoModal"
-                              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               />
+                              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                       </label>
                   </div>
-
                   <div>
                       <span class="text-gray-700 dark:text-gray-400">Multa</span>
                       <div class="grid grid-cols-4">
@@ -278,75 +268,110 @@
               </div>
           </div>
           <footer class="flex flex-col items-center justify-end px-6 py-3 -mx-6 -mb-4 space-y-4 sm:space-y-0 sm:space-x-6 sm:flex-row bg-gray-50 dark:bg-gray-800">
-              <asp:Button ID="ButtonModificar" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purplee" runat="server" OnClick="ButtonModificar_Click" data-id="0" Text="Modificar" />                                 
-              <input type="hidden" id="TextBoxId" name="TextBoxId" value="0" runat="server">                       
+              <asp:Button ID="ButtonModificar" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purplee" runat="server" OnClick="ButtonModificar_Click" data-id="0" Text="Modificar" />
+              <input type="hidden" id="TextBoxId" name="TextBoxId" value="0" runat="server">
           </footer>
 
       </div>
     </div>
-      <!-- End of modal backdrop -->
-
-      </form>
+                    <!-- End of modal backdrop -->
+                </form>
             </main>
-            </div>
         </div>
-    
+    </div>
+    <script>
+        var letras = /^[a-zA-Z]+$/;
+        var numeros = /^[0-9]+$/;
 
-            <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+        $('#TextBoxNombre').on('keyup', function () {
+            if (!letras.test($('#TextBoxNombre').val())) {
+                $('#mensajeNombre').html('Ingrese nombre valido').css('color', 'red');
 
-            <script>
-                document.getElementById('filaAgregar').style.display = 'none';
-                document.etElementsByClassName('guardarCambios').style.display = 'none';
-                function mostrar() {
-                    document.getElementById('filaAgregar').style.display = '';
+            } else
+                $('#mensajeNombre').html('').css('color', 'green');
+        });
+        $('#TextBoxDesc').on('keyup', function () {
+            if (!letras.test($('#TextBoxDesc').val())) {
+                $('#mensajeDesc').html('Ingrese descripcion valida').css('color', 'red');
+
+            } else
+                $('#mensajeDesc').html('').css('color', 'green');
+        });
+        $('#TextBoxMonto').on('keyup', function () {
+            if (!numeros.test($('#TextBoxMonto').val())) {
+                $('#mensajeMonto').html('Ingrese monto valido').css('color', 'red');
+
+            } else
+                $('#mensajeMonto').html('').css('color', 'green');
+        });
+    </script>
+    <script>
+        function validarFormulario(evento) {
+            if (!letras.test($('#TextBoxNombre').val())) {
+                $('#mensajeNombre').html('Ingrese nombre valido').css('color', 'red');
+                return false;
+            } else {
+            }
+            if (!letras.test($('#TextBoxDesc').val())) {
+                $('#mensajeDesc').html('Ingrese descripcion valida').css('color', 'red');
+                return false;
+            } else {
+            }
+            if (!numeros.test($('#TextBoxMonto').val())) {
+                $('#mensajeMonto').html('Ingrese monto valido').css('color', 'red');
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+    <script>
+        document.getElementById('filaAgregar').style.display = 'none';
+        document.etElementsByClassName('guardarCambios').style.display = 'none';
+        function mostrar() {
+            document.getElementById('filaAgregar').style.display = '';
+        }
+
+        function ocultar() {
+            document.getElementById('filaAgregar').style.display = 'none';
+        }
+    </script>
+    <script>
+        let editar = document.querySelectorAll(".btnEditar")
+
+        editar.forEach((boton) => {
+            boton.addEventListener("click", (event) => {
+                event.preventDefault()
+                var fila = event.target.parentElement.parentElement.parentElement
+                let nombre = fila.children[0].innerHTML
+                let descripcion = fila.children[1].innerHTML
+
+                let monto = fila.children[2].innerHTML
+                let monto2 = monto.slice(1)
+
+                let id = fila.querySelector('.btnEditar').getAttribute('data-id')
+                let multa = fila.children[3].innerHTML
+
+                document.querySelector('#TextBoxNombreModal').value = nombre;
+                document.querySelector('#TextBoxDescModal').value = descripcion;
+                document.querySelector('#TextBoxMontoModal').value = monto2;
+                document.querySelector('#TextBoxId').value = id;
+                document.querySelector('#ButtonModificar').setAttribute('data-id', id)
+
+                localStorage.setItem('multa', multa)
+                if (multa == 'SI') {
+                    document.querySelector('#MultaSiModal').checked = true;
+                    localStorage.setItem('modal', 'si')
+
+                } else {
+                    document.querySelector('#MultaNoModal').checked = true;
+                    localStorage.setItem('modal', 'no')
                 }
-
-                function ocultar() {
-                    document.getElementById('filaAgregar').style.display = 'none';
-                }
-
-            </script>
-
-      <script>
-          let editar = document.querySelectorAll(".btnEditar")
-
-          editar.forEach((boton) => {
-              boton.addEventListener("click", (event) => {
-                  event.preventDefault()
-                  var fila = event.target.parentElement.parentElement.parentElement
-                  let nombre = fila.children[0].innerHTML
-                  let descripcion = fila.children[1].innerHTML
-
-                  let monto = fila.children[2].innerHTML
-                  let monto2 = monto.slice(1)
-
-                  let id = fila.querySelector('.btnEditar').getAttribute('data-id')
-                  let multa = fila.children[3].innerHTML
-
-                  document.querySelector('#TextBoxNombreModal').value = nombre;
-                  document.querySelector('#TextBoxDescModal').value = descripcion;
-                  document.querySelector('#TextBoxMontoModal').value = monto2;
-                  document.querySelector('#TextBoxId').value = id;
-                  document.querySelector('#ButtonModificar').setAttribute('data-id', id)
-
-                  localStorage.setItem('multa', multa)
-                  if (multa == 'SI') {
-                      document.querySelector('#MultaSiModal').checked = true;
-                      localStorage.setItem('modal', 'si')
-
-                  } else {
-                      document.querySelector('#MultaNoModal').checked = true;
-                      localStorage.setItem('modal', 'no')
-                  }
-                  
-              })
-              
-          })
-      </script>
-
+            })
+        })
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
 </body>
-
-
-
-
 </html>

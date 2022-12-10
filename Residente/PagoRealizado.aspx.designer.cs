@@ -7,29 +7,20 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace ManagCond.Administrador
+namespace ManagCond.Residente
 {
 
 
-    public partial class Encomiendas
+    public partial class PagoRealizado
     {
 
         /// <summary>
-        /// Control DropDownListDepto.
+        /// Control login.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListDepto;
-
-        /// <summary>
-        /// Control DropDownListDepto2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListDepto2;
+        protected global::System.Web.UI.HtmlControls.HtmlForm login;
     }
 }

@@ -39,8 +39,8 @@ namespace ManagCond.Residente.Template
             int numDpto = int.Parse(DropDownListDpto.SelectedValue);
             DateTime fecha = DateTime.Parse(inputFecha.Value);
             string fecha2 = fecha.ToString("yyyy-MM-dd");
-            string rangofecha = DropDownRangoHorario.SelectedItem.Text;
             int espacioComun = int.Parse(DropDownListEspaciComun.SelectedValue);
+            string rangofecha = DropDownRangoHorario.SelectedItem.Text;
             string solicitante = TextBoxSolicitante.Text;
             int idCond = int.Parse(Session["idCond"].ToString());
 

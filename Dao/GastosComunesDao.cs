@@ -21,14 +21,14 @@ namespace Dao
             ObtenerDatosGastosComunes(idCondominio);
             return alGastosComunes;
         }
-        public static int ObtenerTotalGastoComunes()
+        public static int ObtenerTotalGastoComunes(int idCondominio)
         {
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
             int totalRespuestas = 0;
 
-            string sSel = "SELECT count(*) FROM gastosComunes";
+            string sSel = "SELECT count(*) FROM gastosComunes WHERE id_Cond = " + idCondominio + " ";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -54,7 +54,7 @@ namespace Dao
         public static void ObtenerDatosGastosComunes(int idCond)
         {
             alGastosComunes.Clear();
-            string strSql = String.Format("SELECT gc.id, gc.idDpto, D.numDpto, gc.mesCobro, gc.añoCobro, gc.fechaEmision, gc.fechaVencimiento, gc.gastoComun, gc.fondoReserva, gc.multas, gc.diasAtraso, gc.moraPeriodo, gc.varios, gc.id_Cond, gc.estado, gc.fechaPago, gc.totalPagar from gastosComunes gc INNER JOIN estadoGastosComunes egc on gc.estado = egc.id INNER JOIN departamento d ON d.id = gc.idDpto where gc.id_Cond = {0}", idCond);
+            string strSql = String.Format("EXEC sp_obtener_gastosComunes @idCond = {0}", idCond);
 
             using (SqlConnection con = new SqlConnection(conBD))
             {
@@ -121,14 +121,64 @@ namespace Dao
 
         //Residente
 
-        public static List<GastosComunes> ObtenerDatosGastosComunesPagados(string numDpto, int id_Cond)
+
+        public static GastosComunes ObtenerDatosUltimoGastoComun(int idCond, int idDpto)
         {
-            alGastosComunes.Clear();
+            GastosComunes gastosComunes = null;
 
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            string sSel = "SELECT G.id, D.numDpto AS 'numDpto', G.fechaEmision, G.fechaVencimiento, G.gastoComun, G.fondoReserva, G.seguro, G.multas, G.moraPeriodo, G.varios, E.descripcion AS 'estado' FROM gastosComunes G JOIN departamento D ON G.numDpto = D.id JOIN estadoGastosComunes E ON G.estado = E.id WHERE G.numDpto =" + numDpto + " AND G.id_Cond =" + id_Cond + " AND G.estado = 2 ORDER BY fechaEmision desc ";
+            string sSel = "EXEC sp_obtener_ultimo_gastoComun @idCond = " + idCond + ", @idDpto = " + idDpto + " ";
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            try
+            {
+                da = new SqlDataAdapter(sSel, sCnn);
+                da.Fill(dt);
+
+
+                int id = int.Parse(dt.Rows[0][0].ToString());
+
+                string numDpto = dt.Rows[0][2].ToString();
+                int mesCobro = int.Parse(dt.Rows[0][3].ToString());
+                int añoCobro = int.Parse(dt.Rows[0][4].ToString());
+                DateTime fechaEmision = Convert.ToDateTime(dt.Rows[0][5]);
+                DateTime fechaVencimiento = Convert.ToDateTime(dt.Rows[0][6]);
+                int gastoComun = int.Parse(dt.Rows[0][7].ToString());
+                int fondoReserva = int.Parse(dt.Rows[0][8].ToString());
+                int multas = int.Parse(dt.Rows[0][9].ToString());
+                int diasAtraso = int.Parse(dt.Rows[0][10].ToString());
+                int moraPeriodo = int.Parse(dt.Rows[0][11].ToString());
+                int varios = int.Parse(dt.Rows[0][12].ToString());
+
+                int estado = int.Parse(dt.Rows[0][14].ToString());
+                DateTime fechaPago = Convert.ToDateTime(dt.Rows[0][15]);
+                int totalPagar = int.Parse(dt.Rows[0][16].ToString());
+
+
+                gastosComunes = new GastosComunes(id, idDpto, numDpto, mesCobro, añoCobro, fechaEmision, fechaVencimiento, gastoComun, fondoReserva, multas, diasAtraso, moraPeriodo, varios, idCond, estado, fechaPago, totalPagar);
+
+
+            }
+            catch (Exception)
+            {
+                //Label1.Text = "Error: " + ex.Message;
+            }
+            return gastosComunes;
+        }
+
+        public static bool PagoRealizado(int id)
+        {
+
+            bool estado = false;
+
+            Conexion con = new Conexion();
+            string sCnn = con.Conectar();
+
+            int exit = 0;
+
+            string sSel = "EXECUTE sp_pago_realizado @id= " + id + " ";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -141,38 +191,83 @@ namespace Dao
 
                 for (; fila < totalFilas; fila++)
                 {
-                    int id = int.Parse(dt.Rows[fila][0].ToString());
-                    String numDptoQ = dt.Rows[fila][1].ToString();
-                    DateTime fechaEmision = Convert.ToDateTime(dt.Rows[fila][2]);
-                    DateTime fechaVencimiento = Convert.ToDateTime(dt.Rows[fila][3]);
-                    int gastoComun = int.Parse(dt.Rows[fila][4].ToString());
-                    int fondoReserva = int.Parse(dt.Rows[fila][5].ToString());
-                    int seguro = int.Parse(dt.Rows[fila][6].ToString());
-                    int multas = int.Parse(dt.Rows[fila][7].ToString());
-                    int moraPeriodo = int.Parse(dt.Rows[fila][8].ToString());
-                    int varios = int.Parse(dt.Rows[fila][9].ToString());
-                    string estado = dt.Rows[fila][10].ToString();
+                    exit = int.Parse(dt.Rows[fila][0].ToString());
+                    if (exit == 1)
+                    {
+                        estado = true;
+                    }
+                    else if (exit == 0)
+                    {
+                        estado = false;
+                    }
 
-                    //GastosComunes gastoscomunes = new GastosComunes(id, numDptoQ, fechaEmision, fechaVencimiento, gastoComun, fondoReserva, seguro, multas, moraPeriodo, varios, id_Cond, estado);
-
-                    //alGastosComunes.Add(gastoscomunes);
                 }
             }
             catch (Exception)
             {
                 //Label1.Text = "Error: " + ex.Message;
             }
-            return alGastosComunes;
+
+            return estado;
         }
 
-        public static List<GastosComunes> ObtenerDatosUltimoGastoComunPagado(string numDpto, int id_Cond)
+        public static GastosComunes ObtenerDatosGastoComun(int idCond, int id)
         {
+            GastosComunes gastosComunes = null;
+
+            Conexion con = new Conexion();
+            string sCnn = con.Conectar();
+
+            string sSel = "EXEC sp_obtener_gastoComun @idCond = " + idCond + ", @idGC = " + id + " ";
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            try
+            {
+                da = new SqlDataAdapter(sSel, sCnn);
+                da.Fill(dt);
+
+
+                int idDpto = int.Parse(dt.Rows[0][1].ToString());
+
+                string numDpto = dt.Rows[0][2].ToString();
+                int mesCobro = int.Parse(dt.Rows[0][3].ToString());
+                int añoCobro = int.Parse(dt.Rows[0][4].ToString());
+                DateTime fechaEmision = Convert.ToDateTime(dt.Rows[0][5]);
+                DateTime fechaVencimiento = Convert.ToDateTime(dt.Rows[0][6]);
+                int gastoComun = int.Parse(dt.Rows[0][7].ToString());
+                int fondoReserva = int.Parse(dt.Rows[0][8].ToString());
+                int multas = int.Parse(dt.Rows[0][9].ToString());
+                int diasAtraso = int.Parse(dt.Rows[0][10].ToString());
+                int moraPeriodo = int.Parse(dt.Rows[0][11].ToString());
+                int varios = int.Parse(dt.Rows[0][12].ToString());
+
+                int estado = int.Parse(dt.Rows[0][14].ToString());
+                DateTime fechaPago = Convert.ToDateTime(dt.Rows[0][15]);
+                int totalPagar = int.Parse(dt.Rows[0][16].ToString());
+
+
+                gastosComunes = new GastosComunes(id, idDpto, numDpto, mesCobro, añoCobro, fechaEmision, fechaVencimiento, gastoComun, fondoReserva, multas, diasAtraso, moraPeriodo, varios, idCond, estado, fechaPago, totalPagar);
+
+
+            }
+            catch (Exception)
+            {
+                //Label1.Text = "Error: " + ex.Message;
+            }
+            return gastosComunes;
+        }
+
+        public static int ObtenerTotalGastosComunesPendientes(int idDpto, int idCondominio)
+        {
+            ObtenerDatosGastosComunes(idCondominio);
             alGastosComunes.Clear();
 
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            string sSel = "SELECT TOP (1) G.id, D.numDpto AS 'numDpto', G.fechaEmision, G.fechaVencimiento, G.gastoComun, G.fondoReserva, G.seguro, G.multas, G.moraPeriodo, G.varios, E.descripcion AS 'estado' FROM gastosComunes G JOIN departamento D ON G.numDpto = D.id JOIN estadoGastosComunes E ON G.estado = E.id WHERE G.numDpto =" + numDpto + " AND G.id_Cond =" + id_Cond + "AND G.estado = 2 ORDER BY G.id DESC";
+            int totalGastosComunes = 0;
+
+            string sSel = "SELECT COUNT(*) FROM dbo.gastosComunes WHERE NOT estado = 2 AND idDpto = '" + idDpto + "' ";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -185,38 +280,29 @@ namespace Dao
 
                 for (; fila < totalFilas; fila++)
                 {
-                    int id = int.Parse(dt.Rows[fila][0].ToString());
-                    String numDptoQ = dt.Rows[fila][1].ToString();
-                    DateTime fechaEmision = Convert.ToDateTime(dt.Rows[fila][2]);
-                    DateTime fechaVencimiento = Convert.ToDateTime(dt.Rows[fila][3]);
-                    int gastoComun = int.Parse(dt.Rows[fila][4].ToString());
-                    int fondoReserva = int.Parse(dt.Rows[fila][5].ToString());
-                    int seguro = int.Parse(dt.Rows[fila][6].ToString());
-                    int multas = int.Parse(dt.Rows[fila][7].ToString());
-                    int moraPeriodo = int.Parse(dt.Rows[fila][8].ToString());
-                    int varios = int.Parse(dt.Rows[fila][9].ToString());
-                    string estado = dt.Rows[fila][10].ToString();
+                    totalGastosComunes = int.Parse(dt.Rows[fila][0].ToString());
 
-                    //GastosComunes gastoscomunes = new GastosComunes(id, numDptoQ, fechaEmision, fechaVencimiento, gastoComun, fondoReserva, seguro, multas, moraPeriodo, varios, id_Cond, estado);
-
-                    //alGastosComunes.Add(gastoscomunes);
                 }
             }
             catch (Exception)
             {
                 //Label1.Text = "Error: " + ex.Message;
             }
-            return alGastosComunes;
+            return totalGastosComunes;
         }
 
-        public static List<GastosComunes> ObtenerDatosGastosComunesPorPagar(string numDpto, int id_Cond)
+        public static int ObtenerTotalGastosComunesVencidos(int idDpto, int idCondominio)
         {
+
             alGastosComunes.Clear();
+            ObtenerDatosGastosComunes(idCondominio);
 
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            string sSel = "SELECT G.id, D.numDpto AS 'numDpto', G.fechaEmision, G.fechaVencimiento, G.gastoComun, G.fondoReserva, G.seguro, G.multas, G.moraPeriodo, G.varios, E.descripcion AS 'estado' FROM gastosComunes G JOIN departamento D ON G.numDpto = D.id JOIN estadoGastosComunes E ON G.estado = E.id WHERE G.numDpto =" + numDpto + " AND G.id_Cond =" + id_Cond + "AND G.estado IN (1,3) ORDER BY G.fechaEmision DESC";
+            int totalGastosComunes = 0;
+
+            string sSel = "SELECT COUNT(*) FROM dbo.gastosComunes WHERE estado = 3 AND idDpto = '" + idDpto + "' ";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -229,30 +315,137 @@ namespace Dao
 
                 for (; fila < totalFilas; fila++)
                 {
-                    int id = int.Parse(dt.Rows[fila][0].ToString());
-                    String numDptoQ = dt.Rows[fila][1].ToString();
-                    DateTime fechaEmision = Convert.ToDateTime(dt.Rows[fila][2]);
-                    DateTime fechaVencimiento = Convert.ToDateTime(dt.Rows[fila][3]);
-                    int gastoComun = int.Parse(dt.Rows[fila][4].ToString());
-                    int fondoReserva = int.Parse(dt.Rows[fila][5].ToString());
-                    int seguro = int.Parse(dt.Rows[fila][6].ToString());
-                    int multas = int.Parse(dt.Rows[fila][7].ToString());
-                    int moraPeriodo = int.Parse(dt.Rows[fila][8].ToString());
-                    int varios = int.Parse(dt.Rows[fila][9].ToString());
-                    string estado = dt.Rows[fila][10].ToString();
+                    totalGastosComunes = int.Parse(dt.Rows[fila][0].ToString());
 
-                    //GastosComunes gastoscomunes = new GastosComunes(id, numDptoQ, fechaEmision, fechaVencimiento, gastoComun, fondoReserva, seguro, multas, moraPeriodo, varios, id_Cond, estado);
-
-                    //alGastosComunes.Add(gastoscomunes);
                 }
             }
             catch (Exception)
             {
                 //Label1.Text = "Error: " + ex.Message;
             }
+            return totalGastosComunes;
+        }
+
+        public static int ObtenerTotalGastosComunesPagados(int idDpto, int idCondominio)
+        {
+            ObtenerDatosGastosComunes(idCondominio);
+            alGastosComunes.Clear();
+
+            Conexion con = new Conexion();
+            string sCnn = con.Conectar();
+
+            int totalGastosComunes = 0;
+
+            string sSel = "SELECT COUNT(*) FROM dbo.gastosComunes WHERE estado = 2 AND idDpto = '" + idDpto + "' ";
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            try
+            {
+                da = new SqlDataAdapter(sSel, sCnn);
+                da.Fill(dt);
+
+                int totalFilas = dt.Rows.Count;
+                int fila = 0;
+
+                for (; fila < totalFilas; fila++)
+                {
+                    totalGastosComunes = int.Parse(dt.Rows[fila][0].ToString());
+
+                }
+            }
+            catch (Exception)
+            {
+                //Label1.Text = "Error: " + ex.Message;
+            }
+            return totalGastosComunes;
+        }
+
+        public static List<GastosComunes> GetAlGastosComunesVencidos(int idDpto, int idCond)
+        {
+            ObtenerDatosGastosComunesVencidos(idDpto, idCond);
+            return alGastosComunes;
+        }
+        public static List<GastosComunes> ObtenerDatosGastosComunesVencidos(int idDpto, int idCond)
+        {
+
+            alGastosComunes.Clear();
+            string strSql = String.Format("EXEC sp_obtener_gastosComunesVencidos @idCond = {0}, @idDpto = {1} ", idCond, idDpto);
+
+            using (SqlConnection con = new SqlConnection(conBD))
+            {
+                SqlCommand cmd = new SqlCommand(strSql, con) { CommandType = CommandType.Text };
+                con.Open();
+                SqlDataReader sdr = cmd.ExecuteReader();
+
+                while (sdr.Read())
+                {
+                    int id = int.Parse(sdr["id"].ToString());
+                    string numDpto = sdr["numDpto"].ToString();
+                    int mesCobro = int.Parse(sdr["mesCobro"].ToString());
+                    int añoCobro = int.Parse(sdr["añoCobro"].ToString());
+                    DateTime fechaEmision = DateTime.Parse(sdr["fechaEmision"].ToString());
+                    DateTime fechaVencimiento = DateTime.Parse(sdr["fechaVencimiento"].ToString());
+                    int gastoComun = int.Parse(sdr["gastoComun"].ToString());
+                    int fondoReserva = int.Parse(sdr["fondoReserva"].ToString());
+                    int multas = int.Parse(sdr["multas"].ToString());
+                    int diasAtraso = int.Parse(sdr["diasAtraso"].ToString());
+                    int moraPeriodo = int.Parse(sdr["moraPeriodo"].ToString());
+                    int varios = int.Parse(sdr["varios"].ToString());
+                    int estado = int.Parse(sdr["estado"].ToString());
+                    DateTime fechaPago = DateTime.Parse(sdr["fechaPago"].ToString());
+                    int totalPagar = int.Parse(sdr["totalPagar"].ToString());
+
+                    GastosComunes gastosComunes = new GastosComunes(id, idDpto, numDpto, mesCobro, añoCobro, fechaEmision, fechaVencimiento, gastoComun, fondoReserva, multas, diasAtraso, moraPeriodo, varios, idCond, estado, fechaPago, totalPagar);
+
+                    alGastosComunes.Add(gastosComunes);
+                }
+                con.Close();
+            }
             return alGastosComunes;
         }
 
+        public static List<GastosComunes> GetAlGastosComunesPagados(int idDpto, int idCond)
+        {
+            ObtenerDatosGastosComunesPagados(idDpto, idCond);
+            return alGastosComunes;
+        }
+        public static List<GastosComunes> ObtenerDatosGastosComunesPagados(int idDpto, int idCond)
+        {
 
+            alGastosComunes.Clear();
+            string strSql = String.Format("EXEC sp_obtener_gastosComunesPagados @idCond = {0}, @idDpto = {1} ", idCond, idDpto);
+
+            using (SqlConnection con = new SqlConnection(conBD))
+            {
+                SqlCommand cmd = new SqlCommand(strSql, con) { CommandType = CommandType.Text };
+                con.Open();
+                SqlDataReader sdr = cmd.ExecuteReader();
+
+                while (sdr.Read())
+                {
+                    int id = int.Parse(sdr["id"].ToString());
+                    string numDpto = sdr["numDpto"].ToString();
+                    int mesCobro = int.Parse(sdr["mesCobro"].ToString());
+                    int añoCobro = int.Parse(sdr["añoCobro"].ToString());
+                    DateTime fechaEmision = DateTime.Parse(sdr["fechaEmision"].ToString());
+                    DateTime fechaVencimiento = DateTime.Parse(sdr["fechaVencimiento"].ToString());
+                    int gastoComun = int.Parse(sdr["gastoComun"].ToString());
+                    int fondoReserva = int.Parse(sdr["fondoReserva"].ToString());
+                    int multas = int.Parse(sdr["multas"].ToString());
+                    int diasAtraso = int.Parse(sdr["diasAtraso"].ToString());
+                    int moraPeriodo = int.Parse(sdr["moraPeriodo"].ToString());
+                    int varios = int.Parse(sdr["varios"].ToString());
+                    int estado = int.Parse(sdr["estado"].ToString());
+                    DateTime fechaPago = DateTime.Parse(sdr["fechaPago"].ToString());
+                    int totalPagar = int.Parse(sdr["totalPagar"].ToString());
+
+                    GastosComunes gastosComunes = new GastosComunes(id, idDpto, numDpto, mesCobro, añoCobro, fechaEmision, fechaVencimiento, gastoComun, fondoReserva, multas, diasAtraso, moraPeriodo, varios, idCond, estado, fechaPago, totalPagar);
+
+                    alGastosComunes.Add(gastosComunes);
+                }
+                con.Close();
+            }
+            return alGastosComunes;
+        }
     }
 }

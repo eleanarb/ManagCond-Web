@@ -3,22 +3,21 @@
 <!DOCTYPE html>
 
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
-  <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>ManagCond</title>
-      <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet" />
-      <link rel="stylesheet" href="../assets/css/tailwind.output.css" />
-      <script
-          src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
-          defer></script>
-      <script src="../assets/js/init-alpine.js"></script>
-      <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
-
-      <script src="https://unpkg.com/flowbite@1.5.3/dist/datepicker.js"></script>
-  </head>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ManagCond</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/tailwind.output.css" />
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="../assets/js/init-alpine.js"></script>
+    <script src="../assets/js/focus-trap.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/datepicker.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
 <body>
     <div
         class="flex h-screen bg-gray-50 dark:bg-gray-900"
@@ -35,7 +34,7 @@
                                 <div>
                                     <label class="block text-sm">
                                         <span class="text-gray-700 dark:text-gray-200">Numero departamento</span><br />
-                                        <asp:DropDownList class="mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-multiselect focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownListDpto" runat="server" disabled="true">
+                                        <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListDpto" runat="server" disabled="true">
                                         </asp:DropDownList>
                                     </label>
                                 </div>
@@ -52,26 +51,26 @@
                             </div>
                             <div class="grid gap-6 mb-8 md:grid-cols-2">
                                 <div>
-                            <label class="block text-sm">
-                                <span class="text-gray-700 dark:text-gray-200">Espacio Comun</span><br />
-                                <asp:DropDownList class="mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-multiselect focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownListEspaciComun" runat="server" OnSelectedIndexChanged="EspacioSeleccionado" AutoPostBack="True">
-                                </asp:DropDownList>
-                            </label>
-                                    </div>
-                                    <div>
-                            <label class="block text-sm">
-                                <span class="text-gray-700 dark:text-gray-200">Rango Horario</span><br />
-                                <asp:DropDownList class="mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-multiselect focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownRangoHorario" runat="server">
-                                </asp:DropDownList>
-                            </label>
-                                        </div>
-                        </div>
-                         <div class="grid gap-6 mb-8 md:grid-cols-2">
-                            <label class="block mt-4 text-sm">
-                                <span class="text-gray-700 dark:text-gray-400">Solicitante</span>
-                                <asp:TextBox ID="TextBoxSolicitante" class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" runat="server"></asp:TextBox>
-                            </label>
-                        </div>
+                                    <label class="block text-sm">
+                                        <span class="text-gray-700 dark:text-gray-200">Espacio Comun</span><br />
+                                        <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListEspaciComun" runat="server" OnSelectedIndexChanged="EspacioSeleccionado" AutoPostBack="True">
+                                        </asp:DropDownList>
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="block text-sm">
+                                        <span class="text-gray-700 dark:text-gray-200">Rango Horario</span><br />
+                                        <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownRangoHorario" runat="server">
+                                        </asp:DropDownList>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="grid gap-6 mb-8 md:grid-cols-2">
+                                <label class="block mt-4 text-sm">
+                                    <span class="text-gray-700 dark:text-gray-400">Solicitante</span>
+                                    <asp:TextBox ID="TextBoxSolicitante" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500t" runat="server"></asp:TextBox>
+                                </label>
+                            </div>
                             <br />
                             <br />
                             <asp:Button ID="ButtonEditar" class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" runat="server" OnClick="ButtonEditar_Click" Text="Editar" />
