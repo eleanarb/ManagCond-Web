@@ -86,50 +86,50 @@
     <script>
         var numeros = /^[0-9]+$/;
 
+        $('#TextBoxHorasExtras').on('keyup', function () {
+            if (!numeros.test($('#TextBoxHorasExtras').val())) {
+                $('#mensajeHorasExtras').html('Ingrese horas extras validas').css('color', 'red');
+            } else
+                $('#mensajeHorasExtras').html('').css('color', 'green');
+        });
+        $('#TextBoxBonos').on('keyup', function () {
+            if (!numeros.test($('#TextBoxBonos').val())) {
+                $('#mensajeBonos').html('Ingrese bono valido').css('color', 'red');
+            } else
+                $('#mensajeBonos').html('').css('color', 'green');
+        });
+        $('#TextBoxDiasNoTrabajados').on('keyup', function () {
+            if (!numeros.test($('#TextBoxDiasNoTrabajados').val())) {
+                $('#mensajeDiasNoTrabajados').html('Ingrese dias no trabajados validos').css('color', 'red');
+            } else
+                $('#mensajeDiasNoTrabajados').html('').css('color', 'green');
+        });
         $('#TextBoxOtrosDescuentos').on('keyup', function () {
             if (!numeros.test($('#TextBoxOtrosDescuentos').val())) {
-                $('#mensajeNombres').html('Ingrese nombres validos').css('color', 'red');
+                $('#mensajeOtrosDescuentos').html('Ingrese otros descuentos validos').css('color', 'red');
             } else
-                $('#mensajeNombres').html('').css('color', 'green');
-        });
-        $('#TextBoxApellidos').on('keyup', function () {
-            if (!numeros.test($('#TextBoxApellidos').val())) {
-                $('#mensajeApellidos').html('Ingrese apellidos validos').css('color', 'red');
-            } else
-                $('#mensajeApellidos').html('').css('color', 'green');
-        });
-        $('#TextBoxCorreo').on('keyup', function () {
-            if (!numeros.test($('#TextBoxCorreo').val())) {
-                $('#mensajeCorreo').html('Ingrese correo valido').css('color', 'red');
-            } else
-                $('#mensajeCorreo').html('').css('color', 'green');
-        });
-        $('#TextBoxTelefono').on('keyup', function () {
-            if (!numeros.test($('#TextBoxTelefono').val())) {
-                $('#mensajeTelefono').html('Ingrese telefono valido').css('color', 'red');
-            } else
-                $('#mensajeTelefono').html('').css('color', 'green');
+                $('#mensajeOtrosDescuentos').html('').css('color', 'green');
         });
     </script>
     <script>
         function validarFormulario(evento) {
-            if (!numeros.test($('#TextBoxNombres').val())) {
-                $('#mensajeNombres').html('Ingrese nombres validos').css('color', 'red');
+            if (!numeros.test($('#TextBoxHorasExtras').val())) {
+                $('#mensajeHorasExtras').html('Ingrese horas extras validas').css('color', 'red');
                 return false;
             } else {
             }
-            if (!numeros.test($('#TextBoxApellidos').val())) {
-                $('#mensajeApellidos').html('Ingrese apellidos validos').css('color', 'red');
+            if (!numeros.test($('#TextBoxBonos').val())) {
+                $('#mensajeBonos').html('Ingrese bono valido').css('color', 'red');
                 return false;
             } else {
             }
-            if (!numeros.test($('#TextBoxCorreo').val())) {
-                $('#mensajeCorreo').html('Ingrese correo valido').css('color', 'red');
+            if (!numeros.test($('#TextBoxDiasNoTrabajados').val())) {
+                $('#mensajeDiasNoTrabajados').html('Ingrese dias no trabajados validos').css('color', 'red');
                 return false;
             } else {
             }
-            if (!numeros.test($('#TextBoxTelefono').val())) {
-                $('#mensajeTelefono').html('Ingrese telefono valido').css('color', 'red');
+            if (!numeros.test($('#TextBoxOtrosDescuentos').val())) {
+                $('#mensajeOtrosDescuentos').html('Ingrese otros descuentos validos').css('color', 'red');
                 return false;
             } else {
                 return true;

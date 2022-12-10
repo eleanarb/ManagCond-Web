@@ -120,7 +120,7 @@
                                         }
                                         else
                                         {
-                                            foreach (GastosComunes obj in GastosComunesDao.GetAlGastosComunes(usuario.IdCond, mesActualN, añoActualN, depto.ToString()))
+                                            foreach (GastosComunes obj in GastosComunesDao.GetAlGastosComunesV(usuario.IdCond, mesActualN, añoActualN, depto.ToString()))
                                             {
                                     %>
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">

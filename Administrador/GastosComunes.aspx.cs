@@ -66,8 +66,6 @@ namespace ManagCond.Administrador
         protected void ButtonGenerarPdf_Click(object sender, EventArgs e)
         {
             Usuario usuario = (Usuario)Session["usuario"];
-            string EmailDestino = usuario.Correo;
-            Notificacion(EmailDestino);
 
             Document document = new Document();
             _ = PdfWriter.GetInstance(document, HttpContext.Current.Response.OutputStream);
