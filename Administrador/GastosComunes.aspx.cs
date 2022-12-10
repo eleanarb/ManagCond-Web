@@ -10,7 +10,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dao;
 using Model;
-using IronPdf;
+using SelectPdf;
 
 namespace ManagCond.Administrador
 {
@@ -65,12 +65,49 @@ namespace ManagCond.Administrador
         protected void ButtonGenerarPdf_Click(object sender, EventArgs e)
         {
 
-            IronPdf.ChromePdfRenderer renderer = new IronPdf.ChromePdfRenderer();
-            // Create a PDF from a URL or local file path
-            PdfDocument doc = renderer.RenderUrlAsPdf("https://managcond.azurewebsites.net/Template/DetalleGastoComun.aspx?id=1");
-            // Export to a file or Stream
-            doc.Print();
-            doc.GetPrintDocument().PrinterSettings.PrinterName = "gastosComunes";
+            // read parameters from the webpage
+            string url = "https://www.google.cl/";
+
+            string pdf_page_size = "A4";
+            PdfPageSize pageSize = (PdfPageSize)Enum.Parse(typeof(PdfPageSize),
+                pdf_page_size, true);
+
+            string pdf_orientation = "Portrait";
+            PdfPageOrientation pdfOrientation =
+                (PdfPageOrientation)Enum.Parse(typeof(PdfPageOrientation),
+                pdf_orientation, true);
+
+            int webPageWidth = 1024;
+            try
+            {
+                webPageWidth = Convert.ToInt32(1024);
+            }
+            catch { }
+
+            int webPageHeight = 0;
+            try
+            {
+                webPageHeight = Convert.ToInt32(0);
+            }
+            catch { }
+
+            // instantiate a html to pdf converter object
+            HtmlToPdf converter = new HtmlToPdf();
+
+            // set converter options
+            converter.Options.PdfPageSize = pageSize;
+            converter.Options.PdfPageOrientation = pdfOrientation;
+            converter.Options.WebPageWidth = webPageWidth;
+            converter.Options.WebPageHeight = webPageHeight;
+
+            // create a new pdf document converting an url
+            PdfDocument doc = converter.ConvertUrl(url);
+
+            // save pdf document
+            doc.Save(Response, false, "Sample.pdf");
+
+            // close pdf document
+            doc.Close();
         }
 
         public DataTable DtAlumno()
@@ -143,7 +180,7 @@ namespace ManagCond.Administrador
             DropDownListDepto.DataTextField = "numDpto";
             DropDownListDepto.DataValueField = "id";
             DropDownListDepto.DataBind();
-            DropDownListDepto.Items.Insert(0, new System.Web.UI.WebControls.ListItem("Todos", "0"));
+            DropDownListDepto.Items.Insert(0, new ListItem("Todos", "0"));
         }
         protected void Depto_SelectedIndexChanged(object sender, EventArgs e)
         {
