@@ -9,9 +9,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dao;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
 using Model;
+using IronPdf;
 
 namespace ManagCond.Administrador
 {
@@ -65,66 +64,13 @@ namespace ManagCond.Administrador
 
         protected void ButtonGenerarPdf_Click(object sender, EventArgs e)
         {
-            Usuario usuario = (Usuario)Session["usuario"];
 
-            Document document = new Document();
-            _ = PdfWriter.GetInstance(document, HttpContext.Current.Response.OutputStream);
-            DataTable dt = DtAlumno();
-            if (dt.Rows.Count > 0)
-            {
-                document.Open();
-                Font fontTitle = FontFactory.GetFont(FontFactory.COURIER_BOLD, 25);
-                Font font9 = FontFactory.GetFont(FontFactory.TIMES, 9);
-
-                PdfPTable table = new PdfPTable(dt.Columns.Count);
-                document.Add(new Paragraph(20, "Gastos Comunes", fontTitle));
-                document.Add(new Chunk("\n"));
-
-                float[] widths = new float[dt.Columns.Count];
-                for (int i = 0; i < dt.Columns.Count; i++)
-                    widths[i] = 4f;
-
-                table.SetWidths(widths);
-                table.WidthPercentage = 110;
-                _ = new PdfPCell(new Phrase("columns"))
-                {
-                    Colspan = dt.Columns.Count
-                };
-
-                foreach (DataColumn c in dt.Columns)
-                {
-                    table.AddCell(new Phrase(c.ColumnName, font9));
-                }
-
-                foreach (DataRow r in dt.Rows)
-                {
-                    if (dt.Rows.Count > 0)
-                    {
-                        for (int h = 0; h < dt.Columns.Count; h++)
-                        {
-                            table.AddCell(new Phrase(r[h].ToString(), font9));
-                        }
-                    }
-                }
-                document.Add(table);
-            }
-            else 
-            {
-                document.Open();
-                Font fontTitle = FontFactory.GetFont(FontFactory.COURIER_BOLD, 25);
-                Font font9 = FontFactory.GetFont(FontFactory.TIMES, 12);
-
-                document.Add(new Paragraph(50, "Gastos Comunes", fontTitle));
-                document.Add(new Paragraph(25, "No hay gastos comunes en este mes", font9));
-                document.Add(new Chunk("\n"));
-            }
-            document.Close();
-
-            Response.ContentType = "application/pdf";
-            Response.AddHeader("content-disposition", "attachment;filename=GastosComunes" + ".pdf");
-            HttpContext.Current.Response.Write(document);
-            Response.Flush();
-            Response.End();
+            IronPdf.ChromePdfRenderer renderer = new IronPdf.ChromePdfRenderer();
+            // Create a PDF from a URL or local file path
+            PdfDocument doc = renderer.RenderUrlAsPdf("https://managcond.azurewebsites.net/Template/DetalleGastoComun.aspx?id=1");
+            // Export to a file or Stream
+            doc.Print();
+            doc.GetPrintDocument().PrinterSettings.PrinterName = "gastosComunes";
         }
 
         public DataTable DtAlumno()

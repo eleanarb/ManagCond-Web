@@ -47,6 +47,9 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
+    <Reference Include="IronPdf, Version=2022.11.0.10347, Culture=neutral, PublicKeyToken=94e1c31412563c75, processorArchitecture=MSIL">
+      <HintPath>packages\IronPdf.Slim.2022.11.10347\lib\net40\IronPdf.dll</HintPath>
+    </Reference>
     <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
     </Reference>
@@ -226,6 +229,7 @@
     <Content Include="Residente\Visitas.aspx" />
     <Content Include="tables.aspx" />
     <Content Include="Administrador\Template\HeaderAdministrador.html" />
+    <Content Include="Template\DetalleGastoComun.aspx" />
     <Content Include="Web.config" />
     <Content Include="WebFormError.aspx" />
   </ItemGroup>
@@ -658,6 +662,13 @@
     <Compile Include="tables.aspx.designer.cs">
       <DependentUpon>tables.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Template\DetalleGastoComun.aspx.cs">
+      <DependentUpon>DetalleGastoComun.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Template\DetalleGastoComun.aspx.designer.cs">
+      <DependentUpon>DetalleGastoComun.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebFormError.aspx.cs">
       <DependentUpon>WebFormError.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -723,7 +734,9 @@
       <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('packages\IronPdf.Native.Chrome.Windows.2022.11.10299\build\IronPdf.Native.Chrome.Windows.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\IronPdf.Native.Chrome.Windows.2022.11.10299\build\IronPdf.Native.Chrome.Windows.targets'))" />
   </Target>
+  <Import Project="packages\IronPdf.Native.Chrome.Windows.2022.11.10299\build\IronPdf.Native.Chrome.Windows.targets" Condition="Exists('packages\IronPdf.Native.Chrome.Windows.2022.11.10299\build\IronPdf.Native.Chrome.Windows.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
