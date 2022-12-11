@@ -56,9 +56,9 @@
                             <div class="swiper-wrapper">
                                 <%=""%>
                                 <%
-                                    int idCondominio = 0;
-                                    idCondominio = (int)Session["idCond"];
-                                    int totalVisitasP = VisitaDao.ObtenerTotalVisitasPendientes(idCondominio);
+                                    Usuario usuario = (Usuario)Session["usuario"];
+
+                                    int totalVisitasP = VisitaDao.ObtenerTotalVisitasPendientes(usuario.IdCond, int.Parse(usuario.numDpto));
 
                                     if (totalVisitasP == 0)
                                     { %>
@@ -102,13 +102,54 @@
                             <div class="swiper-button-prev"></div>
                             <div class="swiper-pagination"></div>
                         </div>
-                    <div class="grid grid-cols-4 gap-4">
-                        <div>
-                            <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Listado de Visitas</h2>
-                                <button id="buttonList" type="button" @click="openModal" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">Agregar Visita</button>
-                        </div>
-                    </div>
-                    <br>
+                       <div class="grid grid-cols-4 gap-4">
+                           <div>
+                               <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Historial de visitas</h2>
+                           </div>
+                       </div>
+                       <!-- CTA -->
+                       <div class="">
+                           <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800 ">
+                               <div class="grid grid-cols-6 items-center">
+                                   <div class="">
+                                       <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListMesF" runat="server" OnSelectedIndexChanged="Mes_SelectedIndexChanged" AutoPostBack="true">
+                                           <asp:ListItem Value="01">Enero</asp:ListItem>
+                                           <asp:ListItem Value="02">Febrero</asp:ListItem>
+                                           <asp:ListItem Value="03">Marzo</asp:ListItem>
+                                           <asp:ListItem Value="04">Abril</asp:ListItem>
+                                           <asp:ListItem Value="05">Mayo</asp:ListItem>
+                                           <asp:ListItem Value="06">Junio</asp:ListItem>
+                                           <asp:ListItem Value="07">Julio</asp:ListItem>
+                                           <asp:ListItem Value="08">Agosto</asp:ListItem>
+                                           <asp:ListItem Value="09">Septiembre</asp:ListItem>
+                                           <asp:ListItem Value="10">Octubre</asp:ListItem>
+                                           <asp:ListItem Value="11">Noviembre</asp:ListItem>
+                                           <asp:ListItem Value="12">Diciembre</asp:ListItem>
+                                       </asp:DropDownList>
+                                   </div>
+                                   <div class="">
+                                       <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListAñoF" runat="server" OnSelectedIndexChanged="Año_SelectedIndexChanged" AutoPostBack="true">
+                                           <asp:ListItem Value="2019">2019</asp:ListItem>
+                                           <asp:ListItem Value="2020">2020</asp:ListItem>
+                                           <asp:ListItem Value="2022">2022</asp:ListItem>
+                                           <asp:ListItem Value="2023">2023</asp:ListItem>
+                                           <asp:ListItem Value="2024">2024</asp:ListItem>
+                                           <asp:ListItem Value="2025">2025</asp:ListItem>
+                                           <asp:ListItem Value="2026">2026</asp:ListItem>
+                                       </asp:DropDownList>
+                                   </div>
+                                   <div class="">
+                                   </div>
+                                   <div></div>
+                                   <div class="col-end-4 ">
+                                   </div>
+                                   <div class="col-end-4 ">
+                                      <button id="buttonList" type="button" @click="openModal" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">Agregar Visita</button>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                       <br>
                     <!-- CTA -->
                     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
                         <div class="w-full overflow-x-auto">
@@ -128,9 +169,10 @@
                                 </thead>
                                 <tbody>
                                     <%
-                                        Usuario usuario = (Usuario)Session["usuario"];
+                                        int mesActualN = (int)Session["mes"];
+                                        int añoActualN = (int)Session["año"];
 
-                                        foreach (Visita obj in VisitaDao.GetAlVisitaRegistrada(int.Parse(usuario.NumDpto), usuario.IdCond))
+                                        foreach (Visita obj in VisitaDao.GetAlVisitaRegistrada(int.Parse(usuario.NumDpto), usuario.IdCond, mesActualN, añoActualN))
                                         {
                                     %>
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -164,11 +206,14 @@
                                                     }
                                                 }%> 
                                         </td>
-                                        <td class="px-4 py-3 text-xs"><%if (obj.Estado.Equals("Registrado")){%> <a class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" href="EditarVisita.aspx?id=<%= obj.Id %>"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg></a>                                            
-                                            <button type="button" data-id="<%=obj.Id %>" data-modal-toggle="popup-modal" class="btnEliminar text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">    
+                                        <td class="px-4 py-3 text-xs"><%if (obj.Estado.Equals("Registrado"))
+      {%>                                    <a class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" href="EditarVisita.aspx?id=<%= obj.Id %>">
                                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg></a>
+                                            <button type="button" data-id="<%=obj.Id %>" data-modal-toggle="popup-modal" class="btnEliminar text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                                            </button> 
+                                            </button>
                                             <%} %>
                                         </td>
                                     </tr>
@@ -264,141 +309,193 @@
                         </div>
                     </div>
                 </div>
-                <div class="container grid px-6 mx-auto">
-                    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Historial de Visitas</h2>
-                    <!-- CTA -->
-                    <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
-                        <div class="w-full overflow-x-auto">
-                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                    <tr>
-                                        <th scope="col" class="py-3 px-6">Departamento</th>
-                                        <th scope="col" class="py-3 px-6">Rut</th>
-                                        <th scope="col" class="py-3 px-6">Nombres</th>
-                                        <th scope="col" class="py-3 px-6">Apellidos</th>
-                                        <th scope="col" class="py-3 px-6">Fecha</th>
-                                        <th scope="col" class="py-3 px-6">Hora</th>
-                                        <th scope="col" class="py-3 px-6">Patente</th>
-                                        <th scope="col" class="py-3 px-6">Estado</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <%
-                                        foreach (Visita obj in VisitaDao.ObtenerDatosVisita(usuario.NumDpto.ToString(), usuario.IdCond))
-                                        {
-                                    %>
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                        <td class="py-4 px-6"><%= obj.NumDpto %> </td>
-                                        <td class="py-4 px-6"><%= obj.Rut %> </td>
-                                        <td class="py-4 px-6"><%= obj.Nombres %> </td>
-                                        <td class="py-4 px-6"><%= obj.Apellidos %> </td>
-                                        <td class="py-4 px-6"><%= obj.Fecha.ToString("dd/MM/yyyy") %> </td>
-                                        <td class="py-4 px-6"><%= obj.Hora.ToString("hh':'mm''") %> </td>
-                                        <td class="py-4 px-6"><%= obj.Patente %> </td>
-                                        <td class="py-4 px-6"><%if (obj.Estado.Equals("Pendiente"))
-                                                                { %><span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700">Pendiente</span><%}
-                                                                else{
-                                                                if (obj.Estado.Equals("Registrado"))
-                                                                { %><span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700">Registrado</span><%}
-                                                                else{
-                                                                if (obj.Estado.Equals("Aprobado"))
-                                                                { %><span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">Aprobado</span><%}
-                                                                else
-                                                                {%><span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">Rechazado</span> <%}
-                                                                }}%> </td>
-                                    </tr>
-                                    <%
-                                        }
-                                    %>
-                                </tbody>
-                            </table>
+                    <div class="container grid px-6 mx-auto">
+                        <div class="grid grid-cols-4 gap-4">
+                            <div>
+                                <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Historial de visitas</h2>
+                            </div>
                         </div>
-                        <div
-                            class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-                            <span class="flex items-center col-span-3">Showing 1-30 of 100
-                            </span>
-                            <span class="col-span-2"></span>
-                            <!-- Pagination -->
-                            <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
-                                <nav aria-label="Table navigation">
-                                    <ul class="inline-flex items-center">
-                                        <li>
-                                            <button
-                                                class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
-                                                aria-label="Previous">
-                                                <svg
-                                                    aria-hidden="true"
-                                                    class="w-4 h-4 fill-current"
-                                                    viewBox="0 0 20 20">
-                                                    <path
-                                                        d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                                        clip-rule="evenodd"
-                                                        fill-rule="evenodd">
-                                                    </path>
-                                                </svg>
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button
-                                                class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                1
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button
-                                                class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                2
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button
-                                                class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                3
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button
-                                                class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                4
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <span class="px-3 py-1">...</span>
-                                        </li>
-                                        <li>
-                                            <button
-                                                class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                8
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button
-                                                class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                9
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button
-                                                class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
-                                                aria-label="Next">
-                                                <svg
-                                                    class="w-4 h-4 fill-current"
-                                                    aria-hidden="true"
-                                                    viewBox="0 0 20 20">
-                                                    <path
-                                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                        clip-rule="evenodd"
-                                                        fill-rule="evenodd">
-                                                    </path>
-                                                </svg>
-                                            </button>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </span>
+                        <!-- CTA -->
+                        <div class="">
+                            <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800 ">
+                                <div class="grid grid-cols-6 items-center">
+                                    <div class="">
+                                        <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListMesF2" runat="server" OnSelectedIndexChanged="Mes_SelectedIndexChanged" AutoPostBack="true">
+                                            <asp:ListItem Value="01">Enero</asp:ListItem>
+                                            <asp:ListItem Value="02">Febrero</asp:ListItem>
+                                            <asp:ListItem Value="03">Marzo</asp:ListItem>
+                                            <asp:ListItem Value="04">Abril</asp:ListItem>
+                                            <asp:ListItem Value="05">Mayo</asp:ListItem>
+                                            <asp:ListItem Value="06">Junio</asp:ListItem>
+                                            <asp:ListItem Value="07">Julio</asp:ListItem>
+                                            <asp:ListItem Value="08">Agosto</asp:ListItem>
+                                            <asp:ListItem Value="09">Septiembre</asp:ListItem>
+                                            <asp:ListItem Value="10">Octubre</asp:ListItem>
+                                            <asp:ListItem Value="11">Noviembre</asp:ListItem>
+                                            <asp:ListItem Value="12">Diciembre</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+                                    <div class="">
+                                        <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListAñoF2" runat="server" OnSelectedIndexChanged="Año_SelectedIndexChanged" AutoPostBack="true">
+                                            <asp:ListItem Value="2019">2019</asp:ListItem>
+                                            <asp:ListItem Value="2020">2020</asp:ListItem>
+                                            <asp:ListItem Value="2022">2022</asp:ListItem>
+                                            <asp:ListItem Value="2023">2023</asp:ListItem>
+                                            <asp:ListItem Value="2024">2024</asp:ListItem>
+                                            <asp:ListItem Value="2025">2025</asp:ListItem>
+                                            <asp:ListItem Value="2026">2026</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+                                    <div class="">
+                                    </div>
+                                    <div></div>
+                                    <div class="col-end-4 ">
+                                    </div>
+                                    <div class="col-end-4 ">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                        <br>
+                        <!-- CTA -->
+                        <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
+                            <div class="w-full overflow-x-auto">
+                                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                        <tr>
+                                            <th scope="col" class="py-3 px-6">Departamento</th>
+                                            <th scope="col" class="py-3 px-6">Rut</th>
+                                            <th scope="col" class="py-3 px-6">Nombres</th>
+                                            <th scope="col" class="py-3 px-6">Apellidos</th>
+                                            <th scope="col" class="py-3 px-6">Fecha</th>
+                                            <th scope="col" class="py-3 px-6">Hora</th>
+                                            <th scope="col" class="py-3 px-6">Patente</th>
+                                            <th scope="col" class="py-3 px-6">Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%
+                                            int mesActualN2 = (int)Session["mes2"];
+                                            int añoActualN2 = (int)Session["año2"];
+
+                                            foreach (Visita obj in VisitaDao.ObtenerDatosVisita(int.Parse(usuario.NumDpto), usuario.IdCond, mesActualN2, añoActualN2))
+                                            {
+                                        %>
+                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                            <td class="py-4 px-6"><%= obj.NumDpto %> </td>
+                                            <td class="py-4 px-6"><%= obj.Rut %> </td>
+                                            <td class="py-4 px-6"><%= obj.Nombres %> </td>
+                                            <td class="py-4 px-6"><%= obj.Apellidos %> </td>
+                                            <td class="py-4 px-6"><%= obj.Fecha.ToString("dd/MM/yyyy") %> </td>
+                                            <td class="py-4 px-6"><%= obj.Hora.ToString("hh':'mm''") %> </td>
+                                            <td class="py-4 px-6"><%= obj.Patente %> </td>
+                                            <td class="py-4 px-6"><%if (obj.Estado.Equals("Pendiente"))
+                                                                      { %><span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700">Pendiente</span><%}
+                                                                    else
+                                                                    {
+                                                                    if (obj.Estado.Equals("Registrado"))
+                                                                    { %><span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700">Registrado</span><%}
+                                                                    else
+                                                                    {
+                                                                    if (obj.Estado.Equals("Aprobado"))
+                                                                    { %><span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">Aprobado</span><%}
+                                                                    else
+                                                                    {%><span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">Rechazado</span> <%}
+                                                                    }
+                                                                    }%> </td>
+                                        </tr>
+                                        <%
+                                            }
+                                        %>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div
+                                class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+                                <span class="flex items-center col-span-3">Showing 1-30 of 100
+                                </span>
+                                <span class="col-span-2"></span>
+                                <!-- Pagination -->
+                                <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+                                    <nav aria-label="Table navigation">
+                                        <ul class="inline-flex items-center">
+                                            <li>
+                                                <button
+                                                    class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
+                                                    aria-label="Previous">
+                                                    <svg
+                                                        aria-hidden="true"
+                                                        class="w-4 h-4 fill-current"
+                                                        viewBox="0 0 20 20">
+                                                        <path
+                                                            d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                                            clip-rule="evenodd"
+                                                            fill-rule="evenodd">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button
+                                                    class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                                    1
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button
+                                                    class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                                    2
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button
+                                                    class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                                    3
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button
+                                                    class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                                    4
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <span class="px-3 py-1">...</span>
+                                            </li>
+                                            <li>
+                                                <button
+                                                    class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                                    8
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button
+                                                    class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                                    9
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button
+                                                    class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
+                                                    aria-label="Next">
+                                                    <svg
+                                                        class="w-4 h-4 fill-current"
+                                                        aria-hidden="true"
+                                                        viewBox="0 0 20 20">
+                                                        <path
+                                                            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                            clip-rule="evenodd"
+                                                            fill-rule="evenodd">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </span>
+                            </div>
+                        </div>
+                                                        </div>
      <!-- Modal backdrop. This what you want to place close to the closing body tag -->
     <div
         x-show="isModalOpen"

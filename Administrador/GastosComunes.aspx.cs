@@ -99,9 +99,11 @@ namespace ManagCond.Administrador
             converter.Options.PdfPageOrientation = pdfOrientation;
             converter.Options.WebPageWidth = webPageWidth;
             converter.Options.WebPageHeight = webPageHeight;
+            converter.Options.MaxPageLoadTime = 120;
 
             // create a new pdf document converting an url
             PdfDocument doc = converter.ConvertUrl(url);
+
 
             // save pdf document
             doc.Save(Response, false, "Sample.pdf");

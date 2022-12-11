@@ -18,9 +18,9 @@ namespace Dao
             ObtenerReservasPendientes(idCond);
             return alReservas;
         }
-        public static List<Reserva> GetAlReservasAnteriores(int idCond, string depto)
+        public static List<Reserva> GetAlReservasAnteriores(int idCond, string depto, int mes, int año)
         {
-            ObtenerReservasAnteriores(idCond, depto);
+            ObtenerReservasAnteriores(idCond, depto, mes, año);
             return alReservas;
         }
 
@@ -95,10 +95,10 @@ namespace Dao
             }
         }
 
-        public static void ObtenerReservasAnteriores(int idCond, string depto)
+        public static void ObtenerReservasAnteriores(int idCond, string depto, int mes, int año)
         {
             alReservas.Clear();
-            string strSql = String.Format("SELECT R.id, D.numDpto as 'numDpto', R.solicitante, E.nombre as 'espacioComun' ,R.fecha, R.rangoFecha, R.estado FROM reservasEspacios R JOIN departamento D ON R.numDpto = D.id JOIN espaciosComunes E ON E.id = R.espacioComun WHERE E.id_Cond = {0} AND (R.estado =2 or R.estado =3)" + depto + " ORDER BY fecha DESC", idCond);
+            string strSql = String.Format("SELECT R.id, D.numDpto as 'numDpto', R.solicitante, E.nombre as 'espacioComun' , R.fecha, R.rangoFecha, R.estado FROM reservasEspacios R JOIN departamento D ON R.numDpto = D.id JOIN espaciosComunes E ON E.id = R.espacioComun WHERE E.id_Cond = {0} AND (R.estado =2 or R.estado =3) AND MONTH(R.fecha)={1} AND YEAR(R.fecha)={2} " + depto + "  ORDER BY fecha DESC", idCond, mes, año);
 
             using (SqlConnection con = new SqlConnection(conBD))
             {
@@ -192,9 +192,9 @@ namespace Dao
             return estado;
         }
         //Guardia
-        public static List<Reserva> GetAlReservasG(int idCond, string depto)
+        public static List<Reserva> GetAlReservasG(int idCond, string depto, int mes, int año)
         {
-            ObtenerReservasG(idCond, depto);
+            ObtenerReservasG(idCond, depto, mes, año);
             return alReservas;
         }
         public static List<Reserva> GetAlReservasTOPG(int idCond)
@@ -202,10 +202,10 @@ namespace Dao
             ObtenerReservasTOPG(idCond);
             return alReservas;
         }
-        public static void ObtenerReservasG(int idCond, string depto)
+        public static void ObtenerReservasG(int idCond, string depto, int mes, int año)
         {
             alReservas.Clear();
-            string strSql = String.Format("SELECT R.id, D.numDpto as 'numDpto', R.solicitante, E.nombre as 'espacioComun' ,R.fecha, R.rangoFecha, R.estado FROM reservasEspacios R JOIN departamento D ON R.numDpto = D.id JOIN espaciosComunes E ON E.id = R.espacioComun WHERE E.id_Cond = {0} AND R.estado = 2 "+ depto + " ORDER BY fecha DESC", idCond);
+            string strSql = String.Format("SELECT R.id, D.numDpto as 'numDpto', R.solicitante, E.nombre as 'espacioComun' , R.fecha, R.rangoFecha, R.estado FROM reservasEspacios R JOIN departamento D ON R.numDpto = D.id JOIN espaciosComunes E ON E.id = R.espacioComun WHERE E.id_Cond = {0} AND R.estado = 2 AND MONTH(R.fecha)={1} AND YEAR(R.fecha)={2} " + depto + " ORDER BY fecha DESC", idCond, mes, año);
 
             using (SqlConnection con = new SqlConnection(conBD))
             {
@@ -264,14 +264,14 @@ namespace Dao
             ObtenerReservasTOPR(numDpto, idCond);
             return alReservas;
         }
-        public static List<Reserva> GetAlReservasR(string numDpto, int idCond)
+        public static List<Reserva> GetAlReservasR(string numDpto, int idCond, int mes, int año)
         {
-            ObtenerReservasR(numDpto, idCond);
+            ObtenerReservasR(numDpto, idCond, mes, año);
             return alReservas;
         }
-        public static List<Reserva> GetAlReservasRP(string numDpto, int idCond)
+        public static List<Reserva> GetAlReservasRP(string numDpto, int idCond, int mes2, int año2)
         {
-            ObtenerReservasRP(numDpto, idCond);
+            ObtenerReservasRP(numDpto, idCond, mes2, año2);
             return alReservas;
         }
         public static void ObtenerReservasTOPR(string numDpto, int idCond)
@@ -342,10 +342,10 @@ namespace Dao
 
             return estado;
         }
-        public static void ObtenerReservasR(string numDpto, int idCond)
+        public static void ObtenerReservasR(string numDpto, int idCond, int mes, int año)
         {
             alReservas.Clear();
-            string strSql = String.Format("SELECT R.id, D.numDpto as 'numDpto', R.solicitante, E.nombre as 'espacioComun' ,R.fecha, R.rangoFecha, R.estado FROM reservasEspacios R JOIN departamento D ON R.numDpto = D.id JOIN espaciosComunes E ON E.id = R.espacioComun WHERE R.numDpto = {0} AND E.id_Cond = {1} AND (R.estado = 1 or R.estado = 2) ORDER BY fecha DESC", numDpto, idCond);
+            string strSql = String.Format("SELECT R.id, D.numDpto as 'numDpto', R.solicitante, E.nombre as 'espacioComun' , R.fecha, R.rangoFecha, R.estado FROM reservasEspacios R JOIN departamento D ON R.numDpto = D.id JOIN espaciosComunes E ON E.id = R.espacioComun WHERE R.numDpto = {0} AND E.id_Cond = {1} AND (R.estado = 1 or R.estado = 2) AND MONTH(R.fecha)={2} AND YEAR(R.fecha)={3} ORDER BY fecha DESC", numDpto, idCond, mes, año);
 
             using (SqlConnection con = new SqlConnection(conBD))
             {
@@ -370,10 +370,10 @@ namespace Dao
                 con.Close();
             }
         }
-        public static void ObtenerReservasRP(string numDpto, int idCond)
+        public static void ObtenerReservasRP(string numDpto, int idCond, int mes2, int año2)
         {
             alReservas.Clear();
-            string strSql = String.Format("SELECT R.id, D.numDpto as 'numDpto', R.solicitante, E.nombre as 'espacioComun' ,R.fecha, R.rangoFecha, R.estado FROM reservasEspacios R JOIN departamento D ON R.numDpto = D.id JOIN espaciosComunes E ON E.id = R.espacioComun WHERE R.numDpto = {0} AND E.id_Cond = {1} AND (R.estado = 3 or R.estado = 4) ORDER BY fecha DESC", numDpto, idCond);
+            string strSql = String.Format("SELECT R.id, D.numDpto as 'numDpto', R.solicitante, E.nombre as 'espacioComun' ,R.fecha, R.rangoFecha, R.estado FROM reservasEspacios R JOIN departamento D ON R.numDpto = D.id JOIN espaciosComunes E ON E.id = R.espacioComun WHERE R.numDpto = {0} AND E.id_Cond = {1} AND (R.estado = 3 or R.estado = 4) AND MONTH(R.fecha)={2} AND YEAR(R.fecha)={3} ORDER BY fecha DESC", numDpto, idCond, mes2, año2);
 
             using (SqlConnection con = new SqlConnection(conBD))
             {

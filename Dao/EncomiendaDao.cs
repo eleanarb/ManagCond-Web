@@ -21,14 +21,14 @@ namespace Dao
             ObtenerDatosEncomiendaTOPR(numDpto, idCond);
             return alEncomiendas;
         }
-        public static List<Encomienda> ObtenerDatosEncomienda(int idNumDpto, int id_Cond)
+        public static List<Encomienda> ObtenerDatosEncomienda(int idNumDpto, int idCond, int mes, int año)
         {
             alEncomiendas.Clear();
 
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            string sSel = "SELECT E.id, D.numDpto as 'numDpto', E.destinatario, E.fecha, E.hora, E.descripcion, E.imagen, EE.descripcion as 'estado', E.recepcion FROM encomienda E JOIN departamento D ON E.numDpto = D.id JOIN estadoEncomienda EE ON E.estado = EE.id WHERE E.numDpto = " + idNumDpto + " AND E.estado = 1 AND E.id_Cond =" + id_Cond + "";
+            string sSel = "SELECT E.id, D.numDpto as 'numDpto', E.destinatario, E.fecha, E.hora, E.descripcion, E.imagen, EE.descripcion as 'estado', E.recepcion FROM encomienda E JOIN departamento D ON E.numDpto = D.id JOIN estadoEncomienda EE ON E.estado = EE.id WHERE E.numDpto = " + idNumDpto + " AND E.estado = 1 AND E.id_Cond =" + idCond + " AND MONTH(E.fecha)= "+ mes +" AND YEAR(E.fecha)= "+ año + "";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -51,7 +51,7 @@ namespace Dao
                     string estado = dt.Rows[fila][7].ToString();
                     string recepcion = dt.Rows[fila][8].ToString();
 
-                    Encomienda encomienda = new Encomienda(id, numDpto, destinatario, fecha, hora, descripcion, imagen, estado, id_Cond, idNumDpto, recepcion);
+                    Encomienda encomienda = new Encomienda(id, numDpto, destinatario, fecha, hora, descripcion, imagen, estado, idCond, idNumDpto, recepcion);
 
                     alEncomiendas.Add(encomienda);
                 }
@@ -62,14 +62,14 @@ namespace Dao
             }
             return alEncomiendas;
         }
-        public static List<Encomienda> ObtenerDatosEncomiendaH(int idNumDpto, int id_Cond)
+        public static List<Encomienda> ObtenerDatosEncomiendaH(int idNumDpto, int idCond, int mes2, int año2)
         {
             alEncomiendas.Clear();
 
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            string sSel = "SELECT E.id, D.numDpto as 'numDpto', E.destinatario, E.fecha, E.hora, E.descripcion, E.imagen, EE.descripcion as 'estado', E.recepcion FROM encomienda E JOIN departamento D ON E.numDpto = D.id JOIN estadoEncomienda EE ON E.estado = EE.id WHERE E.numDpto = " + idNumDpto + " AND E.estado = 2 AND E.id_Cond =" + id_Cond + "";
+            string sSel = "SELECT E.id, D.numDpto as 'numDpto', E.destinatario, E.fecha, E.hora, E.descripcion, E.imagen, EE.descripcion as 'estado', E.recepcion FROM encomienda E JOIN departamento D ON E.numDpto = D.id JOIN estadoEncomienda EE ON E.estado = EE.id WHERE E.numDpto = " + idNumDpto + " AND E.estado = 2 AND E.id_Cond =" + idCond + " AND MONTH(E.fecha)= " + mes2 + " AND YEAR(E.fecha)= " + año2 + "";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -92,7 +92,7 @@ namespace Dao
                     string estado = dt.Rows[fila][7].ToString();
                     string recepcion = dt.Rows[fila][8].ToString();
 
-                    Encomienda encomienda = new Encomienda(id, numDpto, Destinatario, fecha, Hora, Descripcion, imagen, estado, id_Cond, idNumDpto, recepcion);
+                    Encomienda encomienda = new Encomienda(id, numDpto, Destinatario, fecha, Hora, Descripcion, imagen, estado, idCond, idNumDpto, recepcion);
 
                     alEncomiendas.Add(encomienda);
                 }
@@ -140,14 +140,14 @@ namespace Dao
             ObtenerDatosEncomiendaTOP(idCond);
             return alEncomiendas;
         }
-        public static List<Encomienda> GetAlEncomiendas(int idCond, string depto)
+        public static List<Encomienda> GetAlEncomiendas(int idCond, string depto, int mes, int año)
         {
-            ObtenerDatosEncomiendasP(idCond, depto);
+            ObtenerDatosEncomiendasP(idCond, depto, mes, año);
             return alEncomiendas;
         }
-        public static List<Encomienda> GetAlEncomiendasHistorial(int idCond, string depto2)
+        public static List<Encomienda> GetAlEncomiendasHistorial(int idCond, string depto2, int mes2, int año2)
         {
-            ObtenerDatosEncomiendaHistorial(idCond, depto2);
+            ObtenerDatosEncomiendaHistorial(idCond, depto2, mes2, año2);
             return alEncomiendas;
         }
         public static void ObtenerDatosEncomiendaTOP(int idCond)
@@ -210,10 +210,10 @@ namespace Dao
             }
             return estado;
         }
-        public static void ObtenerDatosEncomiendasP(int idCond, string depto)
+        public static void ObtenerDatosEncomiendasP(int idCond, string depto, int mes, int año)
         {
             alEncomiendas.Clear();
-            string strSql = String.Format("SELECT E.id, D.numDpto,E.destinatario, E.fecha, E.hora, E.descripcion, E.imagen, EE.descripcion as 'estado', E.numDpto as idNumDpto, E.recepcion FROM encomienda E JOIN estadoEncomienda EE ON E.estado = EE.Id JOIN departamento D ON E.numDpto = D.id where estado = 1 and E.id_Cond= {0} " + depto + " ORDER BY fecha DESC,hora DESC", idCond);
+            string strSql = String.Format("SELECT E.id, D.numDpto,E.destinatario, E.fecha, E.hora, E.descripcion, E.imagen, EE.descripcion as 'estado', E.numDpto as idNumDpto, E.recepcion FROM encomienda E JOIN estadoEncomienda EE ON E.estado = EE.Id JOIN departamento D ON E.numDpto = D.id where estado = 1 and E.id_Cond= {0} AND MONTH(E.fecha)={1} AND YEAR(E.fecha)={2} " + depto + " ORDER BY fecha DESC,hora DESC", idCond, mes, año);
 
             using (SqlConnection con = new SqlConnection(conBD))
             {
@@ -241,10 +241,10 @@ namespace Dao
                 con.Close();
             }
         }
-        public static void ObtenerDatosEncomiendaHistorial(int idCond, string depto2)
+        public static void ObtenerDatosEncomiendaHistorial(int idCond, string depto2, int mes2, int año2)
         {
             alEncomiendas.Clear();
-            string strSql = String.Format("SELECT E.id, D.numDpto, E.destinatario, E.fecha, E.hora, E.descripcion, E.imagen, EE.descripcion as 'estado', E.numDpto as idNumDpto, E.recepcion FROM encomienda E JOIN estadoEncomienda EE ON E.estado = EE.Id JOIN departamento D ON E.numDpto = D.id where estado = 2 and E.id_Cond = {0} "+ depto2 + " ORDER BY fecha DESC,hora DESC", idCond);
+            string strSql = String.Format("SELECT E.id, D.numDpto, E.destinatario, E.fecha, E.hora, E.descripcion, E.imagen, EE.descripcion as 'estado', E.numDpto as idNumDpto, E.recepcion FROM encomienda E JOIN estadoEncomienda EE ON E.estado = EE.Id JOIN departamento D ON E.numDpto = D.id where estado = 2 and E.id_Cond = {0} AND MONTH(E.fecha)={1} AND YEAR(E.fecha)={2} " + depto2 + " ORDER BY fecha DESC,hora DESC", idCond, mes2, año2);
 
             using (SqlConnection con = new SqlConnection(conBD))
             {

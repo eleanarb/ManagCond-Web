@@ -24,6 +24,24 @@ namespace ManagCond
         protected global::System.Web.UI.WebControls.DropDownList DropDownListDepto;
 
         /// <summary>
+        /// Control DropDownListMesF.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListMesF;
+
+        /// <summary>
+        /// Control DropDownListAñoF.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListAñoF;
+
+        /// <summary>
         /// Control DropDownListDepto2.
         /// </summary>
         /// <remarks>
@@ -31,6 +49,24 @@ namespace ManagCond
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropDownListDepto2;
+
+        /// <summary>
+        /// Control DropDownListMesF2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListMesF2;
+
+        /// <summary>
+        /// Control DropDownListAñoF2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListAñoF2;
 
         /// <summary>
         /// Control DropDownList.

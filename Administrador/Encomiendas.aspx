@@ -44,8 +44,31 @@
                                     </asp:DropDownList>
                                 </div>
                                 <div class="">
+                                    <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListMesF" runat="server" OnSelectedIndexChanged="Mes_SelectedIndexChanged" AutoPostBack="true">
+                                        <asp:ListItem Value="01">Enero</asp:ListItem>
+                                        <asp:ListItem Value="02">Febrero</asp:ListItem>
+                                        <asp:ListItem Value="03">Marzo</asp:ListItem>
+                                        <asp:ListItem Value="04">Abril</asp:ListItem>
+                                        <asp:ListItem Value="05">Mayo</asp:ListItem>
+                                        <asp:ListItem Value="06">Junio</asp:ListItem>
+                                        <asp:ListItem Value="07">Julio</asp:ListItem>
+                                        <asp:ListItem Value="08">Agosto</asp:ListItem>
+                                        <asp:ListItem Value="09">Septiembre</asp:ListItem>
+                                        <asp:ListItem Value="10">Octubre</asp:ListItem>
+                                        <asp:ListItem Value="11">Noviembre</asp:ListItem>
+                                        <asp:ListItem Value="12">Diciembre</asp:ListItem>
+                                    </asp:DropDownList>
                                 </div>
                                 <div class="">
+                                    <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListAñoF" runat="server" OnSelectedIndexChanged="Año_SelectedIndexChanged" AutoPostBack="true">
+                                        <asp:ListItem Value="2019">2019</asp:ListItem>
+                                        <asp:ListItem Value="2020">2020</asp:ListItem>
+                                        <asp:ListItem Value="2022">2022</asp:ListItem>
+                                        <asp:ListItem Value="2023">2023</asp:ListItem>
+                                        <asp:ListItem Value="2024">2024</asp:ListItem>
+                                        <asp:ListItem Value="2025">2025</asp:ListItem>
+                                        <asp:ListItem Value="2026">2026</asp:ListItem>
+                                    </asp:DropDownList>
                                 </div>
                                 <div></div>
                                 <div class="col-end-4 ">
@@ -80,8 +103,10 @@
                                         string containerSA = ConfigurationManager.AppSettings["containerSA"].ToString();
 
                                         string depto = (String)Session["depto"];
+                                        int mesActualN = (int)Session["mes"];
+                                        int añoActualN = (int)Session["año"];
 
-                                        foreach (Encomienda obj in EncomiendaDao.GetAlEncomiendas(usuario.IdCond, depto))
+                                        foreach (Encomienda obj in EncomiendaDao.GetAlEncomiendas(usuario.IdCond, depto, mesActualN, añoActualN))
                                         {
                                             string url = obj.Imagen == ""? "../assets/img/notImage.jpg" :  urlSA + containerSA + "/" + obj.Fecha.ToString("yyyy") + "/" + obj.Fecha.ToString("MM") + "/" + obj.IdNumDpto + "/" + obj.Imagen + tokenSAS;
                                     %>
@@ -199,8 +224,31 @@
                                     </asp:DropDownList>
                                 </div>
                                 <div class="">
+                                    <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListMesF2" runat="server" OnSelectedIndexChanged="Mes_SelectedIndexChanged2" AutoPostBack="true">
+                                        <asp:ListItem Value="01">Enero</asp:ListItem>
+                                        <asp:ListItem Value="02">Febrero</asp:ListItem>
+                                        <asp:ListItem Value="03">Marzo</asp:ListItem>
+                                        <asp:ListItem Value="04">Abril</asp:ListItem>
+                                        <asp:ListItem Value="05">Mayo</asp:ListItem>
+                                        <asp:ListItem Value="06">Junio</asp:ListItem>
+                                        <asp:ListItem Value="07">Julio</asp:ListItem>
+                                        <asp:ListItem Value="08">Agosto</asp:ListItem>
+                                        <asp:ListItem Value="09">Septiembre</asp:ListItem>
+                                        <asp:ListItem Value="10">Octubre</asp:ListItem>
+                                        <asp:ListItem Value="11">Noviembre</asp:ListItem>
+                                        <asp:ListItem Value="12">Diciembre</asp:ListItem>
+                                    </asp:DropDownList>
                                 </div>
                                 <div class="">
+                                    <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListAñoF2" runat="server" OnSelectedIndexChanged="Año_SelectedIndexChanged2" AutoPostBack="true">
+                                        <asp:ListItem Value="2019">2019</asp:ListItem>
+                                        <asp:ListItem Value="2020">2020</asp:ListItem>
+                                        <asp:ListItem Value="2022">2022</asp:ListItem>
+                                        <asp:ListItem Value="2023">2023</asp:ListItem>
+                                        <asp:ListItem Value="2024">2024</asp:ListItem>
+                                        <asp:ListItem Value="2025">2025</asp:ListItem>
+                                        <asp:ListItem Value="2026">2026</asp:ListItem>
+                                    </asp:DropDownList>
                                 </div>
                                 <div></div>
                                 <div class="col-end-4 ">
@@ -229,10 +277,12 @@
                                 <tbody>
                                     <%
                                         string depto2 = (String)Session["depto2"];
+                                        int mesActualN2 = (int)Session["mes2"];
+                                        int añoActualN2 = (int)Session["año2"];
 
-                                        foreach (Encomienda obj1 in EncomiendaDao.GetAlEncomiendasHistorial(usuario.IdCond, depto2))
+                                        foreach (Encomienda obj1 in EncomiendaDao.GetAlEncomiendasHistorial(usuario.IdCond, depto2, mesActualN2, añoActualN2))
                                         {
-                                           string url = obj1.Imagen == ""? "../assets/img/notImage.jpg" :  urlSA + containerSA + "/" + obj1.Fecha.ToString("yyyy") + "/" + obj1.Fecha.ToString("MM") + "/" + obj1.IdNumDpto + "/" + obj1.Imagen + tokenSAS;
+                                            string url = obj1.Imagen == ""? "../assets/img/notImage.jpg" :  urlSA + containerSA + "/" + obj1.Fecha.ToString("yyyy") + "/" + obj1.Fecha.ToString("MM") + "/" + obj1.IdNumDpto + "/" + obj1.Imagen + tokenSAS;
                                     %>
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <td class="py-4 px-6"><%= obj1.NumDpto %> </td>

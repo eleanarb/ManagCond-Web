@@ -26,9 +26,9 @@ namespace Dao
             ObtenerDatosVisitaPendiente(idNumDpto, idCond);
             return alVisitas;
         }
-        public static List<Visita> GetAlVisitaRegistrada(int idNumDpto, int idCond)
+        public static List<Visita> GetAlVisitaRegistrada(int idNumDpto, int idCond, int mes, int año)
         {
-            ObtenerDatosVisitaRegistrada(idNumDpto, idCond);
+            ObtenerDatosVisitaRegistrada(idNumDpto, idCond, mes, año);
             return alVisitas;
         }
         public static void ObtenerDatosVisitaTOPR(int idNumDpto, int idCond)
@@ -61,14 +61,14 @@ namespace Dao
                 con.Close();
             }
         }
-        public static List<Visita> ObtenerDatosVisita(string numDpto, int idCond)
+        public static List<Visita> ObtenerDatosVisita(int numDpto, int idCond, int mes2, int año2)
         {
             alVisitas.Clear();
 
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            string sSel = "SELECT V.id, D.numDpto as 'numDpto', V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.numDpto FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id WHERE V.numDpto =" + numDpto + " AND V.id_Cond =" + idCond + " AND V.estado IN (2,3) ORDER BY fecha DESC, hora DESC";
+            string sSel = "SELECT V.id, D.numDpto as 'numDpto', V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.numDpto FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id WHERE V.numDpto =" + numDpto + " AND V.id_Cond =" + idCond + " AND V.estado IN (2,3) AND MONTH(V.fecha)="+ mes2 +" AND YEAR(V.fecha)="+ año2 +" ORDER BY fecha DESC, hora DESC";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -134,10 +134,10 @@ namespace Dao
             }
         }
 
-        public static void ObtenerDatosVisitaRegistrada(int idNDpto, int idCond)
+        public static void ObtenerDatosVisitaRegistrada(int idNDpto, int idCond, int mes, int año)
         {
             alVisitas.Clear();
-            string strSql = String.Format("SELECT V.id, D.numDpto as 'numDpto', V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.numDpto FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id WHERE V.numDpto = {0} AND V.id_Cond = {1} AND V.estado = 4 ORDER BY fecha DESC, hora DESC", idNDpto, idCond);
+            string strSql = String.Format("SELECT V.id, D.numDpto as 'numDpto', V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.numDpto FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id WHERE V.numDpto = {0} AND V.id_Cond = {1} AND V.estado = 4 AND MONTH(V.fecha)={2} AND YEAR(V.fecha)={3} ORDER BY fecha DESC, hora DESC", idNDpto, idCond, mes, año);
 
             using (SqlConnection con = new SqlConnection(conBD))
             {
@@ -218,7 +218,7 @@ namespace Dao
             }
             return estado;
         }
-        public static int ObtenerTotalVisitasPendientes(int idCond)
+        public static int ObtenerTotalVisitasPendientes(int idCond, int idDpto)
         {
             alVisitas.Clear();
 
@@ -227,7 +227,7 @@ namespace Dao
 
             int totalReservas = 0;
 
-            string sSel = "select count(*) from visitas where estado = 1 and id_cond = '" + idCond + "' ";
+            string sSel = "select count(*) from visitas where estado = 1 and id_cond = '" + idCond + "' AND numDpto= " + idDpto + " ";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -306,14 +306,14 @@ namespace Dao
             ObtenerDatosVisitaTOP(idCond);
             return alVisitas;
         }
-        public static List<Visita> GetAlVisita(int idCond, string depto)
+        public static List<Visita> GetAlVisita(int idCond, string depto, int mes, int año)
         {
-            ObtenerDatosVisitaG(idCond, depto);
+            ObtenerDatosVisitaG(idCond, depto, mes, año);
             return alVisitas;
         }
-        public static List<Visita> GetAlVisitaHistorial(int idCond, string depto2)
+        public static List<Visita> GetAlVisitaHistorial(int idCond, string depto2, int mes2, int año2)
         {
-            ObtenerDatosVisitaHistorial(idCond, depto2);
+            ObtenerDatosVisitaHistorial(idCond, depto2, mes2, año2);
             return alVisitas;
         }
         public static void ObtenerDatosVisitaTOP(int idCond)
@@ -377,10 +377,10 @@ namespace Dao
 
             return estado;
         }
-        public static void ObtenerDatosVisitaG(int idCond, string depto)
+        public static void ObtenerDatosVisitaG(int idCond, string depto, int mes, int año)
         {
             alVisitas.Clear();
-            string strSql = String.Format("SELECT V.id, D.numDpto as 'numDpto', V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.numDpto as idNumDpto FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id where V.id_Cond = {0} and (V.estado = 1 or V.estado = 4) " + depto + " ORDER BY fecha DESC,hora DESC", idCond);
+            string strSql = String.Format("SELECT V.id, D.numDpto as 'numDpto', V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.numDpto as idNumDpto FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id where V.id_Cond = {0} AND (V.estado = 1 or V.estado = 4) AND MONTH(V.fecha)={1} AND YEAR(V.fecha)={2} " + depto + " ORDER BY fecha DESC,hora DESC", idCond, mes, año);
 
             using (SqlConnection con = new SqlConnection(conBD))
             {
@@ -408,10 +408,10 @@ namespace Dao
                 con.Close();
             }
         }
-        public static void ObtenerDatosVisitaHistorial(int idCond, string depto2)
+        public static void ObtenerDatosVisitaHistorial(int idCond, string depto2, int mes2, int año2)
         {
             alVisitas.Clear();
-            string strSql = String.Format("SELECT V.id, D.numDpto, V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.numDpto AS idNumDpto FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id where V.id_Cond = {0} and (V.estado = 2 or V.estado = 3) "+ depto2 + " ORDER BY fecha DESC, hora DESC", idCond);
+            string strSql = String.Format("SELECT V.id, D.numDpto, V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.numDpto AS idNumDpto FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id where V.id_Cond = {0} and (V.estado = 2 or V.estado = 3) AND MONTH(V.fecha)={1} AND YEAR(V.fecha)={2} " + depto2 + " ORDER BY fecha DESC, hora DESC", idCond, mes2, año2);
 
             using (SqlConnection con = new SqlConnection(conBD))
             {

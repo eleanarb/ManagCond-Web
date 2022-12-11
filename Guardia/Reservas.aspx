@@ -45,8 +45,31 @@
                                     </asp:DropDownList>
                                 </div>
                                 <div class="">
+                                    <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListMesF" runat="server" OnSelectedIndexChanged="Mes_SelectedIndexChanged" AutoPostBack="true">
+                                        <asp:ListItem Value="01">Enero</asp:ListItem>
+                                        <asp:ListItem Value="02">Febrero</asp:ListItem>
+                                        <asp:ListItem Value="03">Marzo</asp:ListItem>
+                                        <asp:ListItem Value="04">Abril</asp:ListItem>
+                                        <asp:ListItem Value="05">Mayo</asp:ListItem>
+                                        <asp:ListItem Value="06">Junio</asp:ListItem>
+                                        <asp:ListItem Value="07">Julio</asp:ListItem>
+                                        <asp:ListItem Value="08">Agosto</asp:ListItem>
+                                        <asp:ListItem Value="09">Septiembre</asp:ListItem>
+                                        <asp:ListItem Value="10">Octubre</asp:ListItem>
+                                        <asp:ListItem Value="11">Noviembre</asp:ListItem>
+                                        <asp:ListItem Value="12">Diciembre</asp:ListItem>
+                                    </asp:DropDownList>
                                 </div>
                                 <div class="">
+                                    <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListAñoF" runat="server" OnSelectedIndexChanged="Año_SelectedIndexChanged" AutoPostBack="true">
+                                        <asp:ListItem Value="2019">2019</asp:ListItem>
+                                        <asp:ListItem Value="2020">2020</asp:ListItem>
+                                        <asp:ListItem Value="2022">2022</asp:ListItem>
+                                        <asp:ListItem Value="2023">2023</asp:ListItem>
+                                        <asp:ListItem Value="2024">2024</asp:ListItem>
+                                        <asp:ListItem Value="2025">2025</asp:ListItem>
+                                        <asp:ListItem Value="2026">2026</asp:ListItem>
+                                    </asp:DropDownList>
                                 </div>
                                 <div></div>
                                 <div class="col-end-4 ">
@@ -74,8 +97,10 @@
                                     <%
                                         Usuario usuario = (Usuario)Session["usuario"];
                                         string depto = (String)Session["depto"];
+                                        int mesActualN = (int)Session["mes"];
+                                        int añoActualN = (int)Session["año"];
 
-                                        foreach (Reserva obj in ReservaDao.GetAlReservasG(usuario.IdCond, depto))
+                                        foreach (Reserva obj in ReservaDao.GetAlReservasG(usuario.IdCond, depto, mesActualN, añoActualN))
                                         {
                                     %>
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">

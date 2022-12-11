@@ -14,7 +14,7 @@ namespace ManagCond.Residente.Template
     public partial class AgregarReserva : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {          
             if (!IsPostBack)
             {
                 LlenarDropDownListDpto();
