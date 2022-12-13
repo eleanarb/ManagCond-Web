@@ -40,6 +40,7 @@
                                     <label for="DropDownListCategoria" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Categoría </label>
                                     <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListCategoria" runat="server">
                                     </asp:DropDownList>
+                                    <span id="mensajeCategoria" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                             </div>
                             <div class="grid gap-6 mb-8 md:grid-cols-2">
@@ -47,6 +48,7 @@
                                     <label for="DropDownListProveedor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Proveedor</label>
                                     <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListProveedor" runat="server">
                                     </asp:DropDownList>
+                                    <span id="mensajeProveedor" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                                 <div>
                                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Fecha</label>
@@ -57,6 +59,7 @@
                                         </div>
                                         <input datepicker datepicker-autohide datepicker-format="dd-mm-yyyy" id="TextBoxFechaModal" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Seleccione fecha" runat="server" />
                                     </div>
+                                    <span id="mensajeFecha" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                             </div>
                             <div class="grid gap-6 mb-8 md:grid-cols-2">
@@ -67,7 +70,7 @@
                                             <input type="number" min="0" runat="server" id="TextBoxMontoModal"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                                         </label>
-                                    <span id="mensajeMonto" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
+                                        <span id="mensajeMonto" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                     </div>
                                     <div>
                                         <label for="DropDownListEstado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Estado</label>
@@ -76,6 +79,7 @@
                                             <asp:ListItem Value="Pagado">Pagado</asp:ListItem>
                                             <asp:ListItem Value="Pendiente">Pendiente</asp:ListItem>
                                         </asp:DropDownList>
+                                        <span id="mensajeEstado" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                     </div>
                                 </div>
                                 <div>
@@ -133,10 +137,38 @@
     </script>
     <script>
         function validarFormulario(evento) {
+            var categoria = document.getElementById('DropDownListCategoria');
+            if (categoria.value < 1) {
+                $('#mensajeCategoria').html('Ingrese categoria').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeCategoria').html('').css('color', 'green');
+            }
+            var proveedor = document.getElementById('DropDownListProveedor');
+            if (proveedor.value < 1) {
+                $('#mensajeProveedor').html('Ingrese proveedor').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeProveedor').html('').css('color', 'green');
+            }
+            var fecha = document.getElementById('TextBoxFechaModal').value;
+            if (fecha.length < 1) {
+                $('#mensajeFecha').html('Ingrese fecha').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeFecha').html('').css('color', 'green');
+            }
             if (!numeros.test($('#TextBoxMontoModal').val())) {
                 $('#mensajeMonto').html('Ingrese monto de manera correcta').css('color', 'red');
                 return false;
             } else {
+            }
+            var estado = document.getElementById('DropDownListEstado');
+            if (estado.value < 1) {
+                $('#mensajeEstado').html('Ingrese estado').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeEstado').html('').css('color', 'green');
             }
             if (!letras.test($('#TextBoxDescModal').val())) {
                 $('#mensajeDesc').html('Ingrese descripcion de manera correcta').css('color', 'red');

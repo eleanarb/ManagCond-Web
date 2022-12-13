@@ -23,7 +23,7 @@ namespace Dao
 
             Condominio condominio = null;
 
-            string sSel = "select * from condominio where id = '" + idCondominio + "' ";
+            string sSel = "select c.id, c.nombre, c.cant_edf, d.nombre, co.nombre, r.nombre, c.porcentajeMora, c.porcentajeFondoReserva from condominio c INNER JOIN dbo.direccion d ON c.direccion = d.id INNER JOIN dbo.comuna co ON d.comuna = co.id INNER JOIN region r ON co.region = r.id WHERE c.id = '" + idCondominio + "' ";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -36,13 +36,17 @@ namespace Dao
 
                 for (; fila < totalFilas; fila++)
                 {
-                   
-                    int idCond = int.Parse(dt.Rows[fila][0].ToString());
-                    String nombre = dt.Rows[fila][1].ToString();
-                    String direccion = dt.Rows[fila][2].ToString();
-                    int cant_edf = int.Parse(dt.Rows[fila][3].ToString());
 
-                    condominio = new Condominio(idCond, nombre, direccion, cant_edf);
+                    int idCond = int.Parse(dt.Rows[fila][0].ToString());
+                    string nombre = dt.Rows[fila][1].ToString();
+                    int cant_edf = int.Parse(dt.Rows[fila][2].ToString());
+                    string direccion = dt.Rows[fila][3].ToString();
+                    string comuna = dt.Rows[fila][4].ToString();
+                    string region = dt.Rows[fila][5].ToString();
+                    decimal porcentajeMora = decimal.Parse(dt.Rows[fila][6].ToString());
+                    decimal porcentajeFondoReserva = decimal.Parse(dt.Rows[fila][7].ToString());
+
+                    condominio = new Condominio(idCond, nombre, direccion, comuna, region, cant_edf, porcentajeMora, porcentajeFondoReserva);
 
                     alCondominios.Add(condominio);
                 }

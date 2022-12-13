@@ -93,7 +93,7 @@ namespace ManagCond.Administrador
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText TextBoxMontoModal;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl TextBoxMontoModal;
 
         /// <summary>
         /// Control MultaSiModal.

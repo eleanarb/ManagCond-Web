@@ -28,7 +28,7 @@ namespace Dao
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            string sSel = "SELECT E.id, D.numDpto as 'numDpto', E.destinatario, E.fecha, E.hora, E.descripcion, E.imagen, EE.descripcion as 'estado', E.recepcion FROM encomienda E JOIN departamento D ON E.numDpto = D.id JOIN estadoEncomienda EE ON E.estado = EE.id WHERE E.numDpto = " + idNumDpto + " AND E.estado = 1 AND E.id_Cond =" + idCond + " AND MONTH(E.fecha)= "+ mes +" AND YEAR(E.fecha)= "+ año + "";
+            string sSel = "SELECT E.id, D.numDpto as 'numDpto', E.destinatario, E.fecha, E.hora, E.descripcion, E.imagen, EE.descripcion as 'estado', E.recepcion FROM encomienda E JOIN departamento D ON E.numDpto = D.id JOIN estadoEncomienda EE ON E.estado = EE.id WHERE E.numDpto = " + idNumDpto + " AND E.estado = 1 AND E.id_Cond =" + idCond + " AND MONTH(E.fecha)= "+ mes +" AND YEAR(E.fecha)= "+ año + " ORDER BY fecha DESC,hora DESC";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -69,7 +69,7 @@ namespace Dao
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            string sSel = "SELECT E.id, D.numDpto as 'numDpto', E.destinatario, E.fecha, E.hora, E.descripcion, E.imagen, EE.descripcion as 'estado', E.recepcion FROM encomienda E JOIN departamento D ON E.numDpto = D.id JOIN estadoEncomienda EE ON E.estado = EE.id WHERE E.numDpto = " + idNumDpto + " AND E.estado = 2 AND E.id_Cond =" + idCond + " AND MONTH(E.fecha)= " + mes2 + " AND YEAR(E.fecha)= " + año2 + "";
+            string sSel = "SELECT E.id, D.numDpto as 'numDpto', E.destinatario, E.fecha, E.hora, E.descripcion, E.imagen, EE.descripcion as 'estado', E.recepcion FROM encomienda E JOIN departamento D ON E.numDpto = D.id JOIN estadoEncomienda EE ON E.estado = EE.id WHERE E.numDpto = " + idNumDpto + " AND E.estado = 2 AND E.id_Cond =" + idCond + " AND MONTH(E.fecha)= " + mes2 + " AND YEAR(E.fecha)= " + año2 + " ORDER BY fecha DESC,hora DESC";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try

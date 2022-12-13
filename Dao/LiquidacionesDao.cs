@@ -52,7 +52,7 @@ namespace Dao
         public static void ObtenerDatosLiquidaciones(int mes, int año, int idCond, string trabajador)
         {
             alLiquidaciones.Clear();
-            string strSql = String.Format("SELECT L.id, L.fecha, C.rutTrabajador, L.otrosIngresos, L.totalRemuneracion, L.totalHaberes, L.cotizacionPrevisional, L.cotizacionSalud, L.totalDescuentoPrevisionales, L.otrosDescuentos, L.diasNoTrabajados, L.descuentosDiasNoTrabajados, L.saldoLiquido from liquidacion L INNER JOIN contrato C ON L.idContrato = C.id INNER JOIN usuario u ON u.rut = c.rutTrabajador WHERE u.id_cond = "+ idCond + " AND MONTH(l.fecha) = " + mes + " AND YEAR(l.fecha) = " + año + " " + trabajador + " ");
+            string strSql = String.Format("SELECT L.id, L.fecha, CONCAT(u.nombres, ' ', U.apellidos) AS trabajador, L.otrosIngresos, L.totalRemuneracion, L.totalHaberes, L.cotizacionPrevisional, L.cotizacionSalud, L.totalDescuentoPrevisionales, L.otrosDescuentos, L.diasNoTrabajados, L.descuentosDiasNoTrabajados, L.saldoLiquido from liquidacion L INNER JOIN contrato C ON L.idContrato = C.id INNER JOIN usuario u ON u.rut = c.rutTrabajador WHERE u.id_cond = " + idCond + " AND MONTH(l.fecha) = " + mes + " AND YEAR(l.fecha) = " + año + " " + trabajador + " ");
 
             using (SqlConnection con = new SqlConnection(conBD))
             {
@@ -64,7 +64,7 @@ namespace Dao
                 {
                     int id = int.Parse(sdr["id"].ToString());
                     DateTime fecha = DateTime.Parse(sdr["fecha"].ToString());
-                    string rutTrabajador = sdr["rutTrabajador"].ToString();
+                    string rutTrabajador = sdr["trabajador"].ToString();
                     int otrosIngresos = int.Parse(sdr["otrosIngresos"].ToString());
                     int totalRemuneracion = int.Parse(sdr["totalRemuneracion"].ToString());
                     int totalHaberes = int.Parse(sdr["totalHaberes"].ToString());
@@ -89,13 +89,13 @@ namespace Dao
 
             string sCnn;
 
-            if (rutTrabajador != null && sueldoBase != 0 && horasSemanales != 0 && diasSemanales != 0 && idTipoContrato != 0 && fechaInicio != null  && valorHoraAdicional != 0 && afp != null && previsionSalud != null && nombreDireccion != null && idComuna != 0 && nombreCuenta != null && rut != null && banco != null && numCuenta != null && tipoPago != null && tipoCuenta != null)
+            if (rutTrabajador != null && sueldoBase != 0 && horasSemanales != 0 && diasSemanales != 0 && idTipoContrato != 0 && fechaInicio != null && valorHoraAdicional != 0 && afp != null && previsionSalud != null && nombreDireccion != null && idComuna != 0 && nombreCuenta != null && rut != null && banco != null && numCuenta != null && tipoPago != null && tipoCuenta != null)
             {
                 try
                 {
                     Conexion c = new Conexion();
                     sCnn = c.Conectar();
-                    string sSel = "EXEC sp_agregar_contrato @rutTrabajador = '"+ rutTrabajador + "',  @sueldoBase = "+ sueldoBase + ", @horasSemanales = "+ horasSemanales + ", @diasSemanales = "+ diasSemanales + ", @idTipoContrato = "+ idTipoContrato + ", @fechaInicio = '"+ fechaInicio + "', @asignacionMovilizacion = "+ asignacionMovilizacion + ", @asignacionColacion = "+ asignacionColacion + ", @valorHoraAdicional = "+ valorHoraAdicional + ", @afp = '"+ afp + "', @previsionSalud = '"+ previsionSalud + "', @nombreDireccion = '"+ nombreDireccion + "', @idComuna = "+ idComuna +", @nombreCuenta = '"+ nombreCuenta + "', @rut = '"+ rut + "', @banco = '"+ banco + "', @numCuenta = '"+ numCuenta + "', @tipoPago = '"+ tipoPago + "', @tipoCuenta = '"+ tipoCuenta + "'";
+                    string sSel = "EXEC sp_agregar_contrato @rutTrabajador = '" + rutTrabajador + "',  @sueldoBase = " + sueldoBase + ", @horasSemanales = " + horasSemanales + ", @diasSemanales = " + diasSemanales + ", @idTipoContrato = " + idTipoContrato + ", @fechaInicio = '" + fechaInicio + "', @asignacionMovilizacion = " + asignacionMovilizacion + ", @asignacionColacion = " + asignacionColacion + ", @valorHoraAdicional = " + valorHoraAdicional + ", @afp = '" + afp + "', @previsionSalud = '" + previsionSalud + "', @nombreDireccion = '" + nombreDireccion + "', @idComuna = " + idComuna + ", @nombreCuenta = '" + nombreCuenta + "', @rut = '" + rut + "', @banco = '" + banco + "', @numCuenta = '" + numCuenta + "', @tipoPago = '" + tipoPago + "', @tipoCuenta = '" + tipoCuenta + "'";
 
                     SqlDataAdapter da;
                     DataTable dt = new DataTable();
@@ -120,13 +120,13 @@ namespace Dao
 
             string sCnn;
 
-            if (rut != null && idCond != 0 && nombres != null && apellidos != null && fechaNac != null && correo != null && telefono != null && cargo !=0)
+            if (rut != null && idCond != 0 && nombres != null && apellidos != null && fechaNac != null && correo != null && telefono != null && cargo != 0)
             {
                 try
                 {
                     Conexion c = new Conexion();
                     sCnn = c.Conectar();
-                    string sSel = "EXEC sp_agregar_trabajador @rut = '"+ rut + "', @idCond = "+ idCond + ", @nombres = '"+ nombres + "', @apellidos = '"+ apellidos + "', @fechaNac = '"+ fechaNac + "', @correo = '"+ correo + "', @telefono = '"+ telefono + "', @cargo = "+ cargo + "";
+                    string sSel = "EXEC sp_agregar_trabajador @rut = '" + rut + "', @idCond = " + idCond + ", @nombres = '" + nombres + "', @apellidos = '" + apellidos + "', @fechaNac = '" + fechaNac + "', @correo = '" + correo + "', @telefono = '" + telefono + "', @cargo = " + cargo + "";
 
                     SqlDataAdapter da;
                     DataTable dt = new DataTable();
@@ -145,7 +145,6 @@ namespace Dao
 
             return estado;
         }
-
         public static bool AgregarLiquidacion(string rut, int horasExtras, int bonos, int diasNoTrabajados, int otrosDescuentos)
         {
             bool estado = false;

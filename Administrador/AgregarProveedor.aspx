@@ -17,6 +17,8 @@
     <script src="../assets/js/focus-trap.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
@@ -38,7 +40,7 @@
                                         <label class="block text-sm">
                                             <span class="text-gray-700 dark:text-gray-400">Nombre</span>
                                             <input type="text" runat="server" id="TextBoxNombre"
-                                                class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 required />
                                         </label>
                                         <span id="mensajeNombre" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
@@ -47,7 +49,7 @@
                                         <label class="block text-sm">
                                             <span class="text-gray-700 dark:text-gray-400">Teléfono</span>
                                             <input type="text" runat="server" id="TextBoxTelefono"
-                                                class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 required />
                                         </label>
                                         <span id="mensajeTelefono" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
@@ -57,31 +59,33 @@
                                     <label class="block text-sm">
                                         <span class="text-gray-700 dark:text-gray-400">Correo</span>
                                         <input type="text" runat="server" id="TextBoxCorreo"
-                                            class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             required />
                                     </label>
-                                        <span id="mensajeEmail" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
+                                    <span id="mensajeEmail" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                             </div>
                             <div class="grid gap-6 mb-8 md:grid-cols-2">
                                 <div class="grid gap-6 mb-8 md:grid-cols-2">
                                     <div>
                                         <label for="DropDownListRegion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Región</label>
-                                        <asp:DropDownList class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownListRegion" OnSelectedIndexChanged="Region_SelectedIndexChanged" AutoPostBack="true" runat="server">
+                                        <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListRegion" OnSelectedIndexChanged="Region_SelectedIndexChanged" AutoPostBack="true" runat="server">
                                         </asp:DropDownList>
+                                        <span id="mensajeRegion" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                     </div>
                                     <div>
                                         <label for="DropDownListComuna" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Comuna</label>
-                                        <asp:DropDownList class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownListComuna" OnSelectedIndexChanged="Comuna_SelectedIndexChanged" AutoPostBack="true" runat="server">
+                                        <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListComuna" OnSelectedIndexChanged="Comuna_SelectedIndexChanged" AutoPostBack="true" runat="server">
                                             <asp:ListItem Selected="True" Value="0">Seleccione Comuna:</asp:ListItem>
                                         </asp:DropDownList>
+                                        <span id="mensajeComuna" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                     </div>
                                 </div>
                                 <div>
                                     <label class="block text-sm">
                                         <span class="text-gray-700 dark:text-gray-400">Direccion</span>
                                         <input type="text" runat="server" id="TextBoxDireccion"
-                                            class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             required />
                                     </label>
                                     <span id="mensajeDireccion" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
@@ -93,7 +97,7 @@
                                     <label class=" text-sm">
                                         <span class="text-gray-700 dark:text-gray-400">Nombre</span>
                                         <input type="text" runat="server" id="TextBoxNombrePago"
-                                            class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             required />
                                     </label>
                                    <span id="mensajeNombrePago" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
@@ -102,13 +106,13 @@
                                     <label class=" text-sm">
                                         <span class="text-gray-700 dark:text-gray-400">Rut</span>
                                         <input type="text" runat="server" id="TextBoxRut"
-                                            class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             required />
                                     </label>
                                 </div>
                                 <div>
                                     <label for="DropDownListBanco" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Banco</label>
-                                    <asp:DropDownList class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownListBanco" runat="server">
+                                    <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListBanco" runat="server">
                                         <asp:ListItem Selected="True" Value="0">Seleccione Banco:</asp:ListItem>
                                         <asp:ListItem Value="Banco Chile/Edwards">Banco Chile/Edwards</asp:ListItem>
                                         <asp:ListItem Value="Banco Estado">Banco Estado</asp:ListItem>
@@ -133,32 +137,35 @@
                                         <asp:ListItem Value="Tenpo Prepago">Tenpo Prepago</asp:ListItem>
                                         <asp:ListItem Value="Mercado Pago">Mercado Pago</asp:ListItem>
                                     </asp:DropDownList>
+                                    <span id="mensajeBanco" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                                 <div>
                                     <label for="DropDownListCuenta" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tipo de Cuenta</label>
-                                    <asp:DropDownList class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownListCuenta" runat="server">
+                                    <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListCuenta" runat="server">
                                         <asp:ListItem Selected="True" Value="0">Seleccione Tipo de Cuenta:</asp:ListItem>
                                         <asp:ListItem Value="Cuenta Corriente">Cuenta Corriente</asp:ListItem>
                                         <asp:ListItem Value="Cuenta Vista">Cuenta Vista</asp:ListItem>
                                         <asp:ListItem Value="Cuenta de Ahorro">Cuenta de Ahorro</asp:ListItem>
                                     </asp:DropDownList>
+                                    <span id="mensajeCuenta" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                                 <div>
                                     <label class=" text-sm">
                                         <span class="text-gray-700 dark:text-gray-400">Número de Cuenta</span>
                                         <input type="number" min="0" runat="server" id="TextBoxNumero"
-                                            class="form-control block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             required />
                                     </label>
                                    <span id="mensajeNumero" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                                 <div>
                                     <label for="DropDownListPago" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tipo de Pago</label>
-                                    <asp:DropDownList class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" ID="DropDownListPago" runat="server">
+                                    <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListPago" runat="server">
                                         <asp:ListItem Selected="True" Value="0">Seleccione Tipo de Pago:</asp:ListItem>
                                         <asp:ListItem Value="Depósito">Depósito</asp:ListItem>
                                         <asp:ListItem Value="Transferencia">Transferencia</asp:ListItem>
                                     </asp:DropDownList>
+                                    <span id="mensajePago" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                             </div>
                             <div class="grid gap-6 mb-8 md:grid-cols-4">
@@ -238,6 +245,20 @@
                 return false;
             } else {
             }
+            var region = document.getElementById('DropDownListRegion');
+            if (region.value < 1) {
+                $('#mensajeRegion').html('Ingrese region').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeRegion').html('').css('color', 'green');
+            }
+            var comuna = document.getElementById('DropDownListComuna');
+            if (comuna.value < 1) {
+                $('#mensajeComuna').html('Ingrese comuna').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeComuna').html('').css('color', 'green');
+            }
             var direccion = document.getElementById('TextBoxDireccion').value;
             if (!letras.test(direccion)) {
                 $('#mensajeDireccion').html('Ingrese un correo válido').css('color', 'red');
@@ -250,11 +271,32 @@
                 return false;
             } else {
             }
+            var banco = document.getElementById('DropDownListBanco');
+            if (banco.value < 1) {
+                $('#mensajeBanco').html('Ingrese banco').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeBanco').html('').css('color', 'green');
+            }
+            var cuenta = document.getElementById('DropDownListCuenta');
+            if (cuenta.value < 1) {
+                $('#mensajeCuenta').html('Ingrese cuenta').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeCuenta').html('').css('color', 'green');
+            }
             var numero = document.getElementById('TextBoxNumero').value;
             if (!numeros.test(numero)) {
                 $('#mensajeNumero').html('Ingrese un un numero de cuenta válido').css('color', 'red');
                 return false;
             } else {
+            }
+            var pago = document.getElementById('DropDownListPago');
+            if (pago.value < 1) {
+                $('#mensajePago').html('Ingrese cuenta').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajePago').html('').css('color', 'green');
                 return true;
             }
         }

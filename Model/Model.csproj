@@ -59,9 +59,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Balance.cs" />
     <Compile Include="CalendarEvent.cs" />
     <Compile Include="CategoriaEgresos.cs" />
     <Compile Include="Condominio.cs" />
+    <Compile Include="Departamento.cs" />
     <Compile Include="Egresos.cs" />
     <Compile Include="Encomienda.cs" />
     <Compile Include="Foro.cs" />

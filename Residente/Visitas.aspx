@@ -679,6 +679,7 @@
                 $('#mensajeFecha').html('Ingrese fecha').css('color', 'red');
                 return false;
             } else {
+                $('#mensajeFecha').html('').css('color', 'green');
                 return true;
             }
         }

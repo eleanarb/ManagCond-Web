@@ -59,8 +59,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BalanceDao.cs" />
     <Compile Include="CondominioDao.cs" />
     <Compile Include="Conexion.cs" />
+    <Compile Include="DepartamentoDao.cs" />
     <Compile Include="EgresosDao.cs" />
     <Compile Include="EncomiendaDao.cs" />
     <Compile Include="EventDAO.cs" />

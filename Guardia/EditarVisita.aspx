@@ -36,6 +36,7 @@
                                          <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownList" runat="server">
                                          </asp:DropDownList>
                                      </label>
+                                     <span id="mensajeDepto" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                  </div>
                                  <div class="grid gap-6 mb-8 md:grid-cols-2">
                                      <label class="block mt-4 text-sm">
@@ -45,12 +46,15 @@
                                      <label class="block mt-4 text-sm">
                                          <span class="text-gray-700 dark:text-gray-400">Nombres</span>
                                          <asp:TextBox ID="TextBoxNombres" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500t" runat="server"></asp:TextBox>
+                                         <span id="mensajeNombres" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                      </label>
                                  </div>
+                                 
                                  <div class="grid gap-6 mb-8 md:grid-cols-2">
                                      <label class="block mt-4 text-sm">
                                          <span class="text-gray-700 dark:text-gray-400">Apellidos</span>
                                          <asp:TextBox ID="TextBoxApellidos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500t" runat="server"></asp:TextBox>
+                                          <span id="mensajeApellidos" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                      </label>
                                      <label class="block mt-4 text-sm">
                                          <span class="text-gray-700 dark:text-gray-400">Patente</span>
@@ -66,12 +70,56 @@
                                  </div>
                                  <br/>
                                  <br/>
-                                 <asp:Button ID="ButtonAgregar" class="px-4 py-2 text-sm font-semibold leading-tight text-green-700 transition-colors duration-150 bg-green-100 border border-transparent rounded-lg active:bg-green-200 hover:bg-green-200 focus:outline-none focus:shadow-outline-white" runat="server" OnClick="ButtonAceptar_Click" Text="Aceptar" />
+                                 <asp:Button ID="ButtonAgregar" OnClientClick="return validarFormulario()" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" runat="server" OnClick="ButtonAceptar_Click" Text="Aceptar" />
                              </form>
                          </div>
                      </div>
                  </main>
              </div>
          </div>
+    <script>
+        var letras = /[a-záéíóúñA-ZÁÉÍÓÚÑ ]+$/;
+
+        $('#TextBoxNombres').on('keyup', function () {
+            if (!letras.test($('#TextBoxNombres').val())) {
+                $('#mensajeNombres').html('Ingrese nombres de manera correcta').css('color', 'red');
+
+            } else
+                $('#mensajeNombres').html('').css('color', 'green');
+        });
+        $('#TextBoxApellidos').on('keyup', function () {
+            if (!letras.test($('#TextBoxApellidos').val())) {
+                $('#mensajeApellidos').html('Ingrese apellidos de manera correcta').css('color', 'red');
+
+            } else
+                $('#mensajeApellidos').html('').css('color', 'green');
+        });
+
+    </script>
+    <script>
+        function validarFormulario(evento) {
+            var depto = document.getElementById('DropDownList');
+            if (depto.value < 1) {
+                $('#mensajeDepto').html('Ingrese departamento').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeDepto').html('').css('color', 'green');
+            }
+            if (!letras.test($('#TextBoxNombres').val())) {
+                $('#mensajeNombres').html('Ingrese nombres de manera correcta').css('color', 'red');
+                return false;
+            } else {
+            }
+            if (!letras.test($('#TextBoxApellidos').val())) {
+                $('#mensajeApellidos').html('Ingrese apellidos de manera correcta').css('color', 'red');
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
 </body>
 </html>

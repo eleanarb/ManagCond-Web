@@ -21,6 +21,27 @@
     <script src="https://unpkg.com/flowbite@1.5.3/dist/datepicker.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+    <!-- Demo styles -->
+    <style>
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+        }
+
+            .swiper-slide img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+    </style>
 </head>
 <body>
      <div
@@ -31,7 +52,56 @@
             <!-- #include file ="Template/HeaderGuardia.html" -->
             <main class="h-full pb-16 overflow-y-auto">
                 <form runat="server">
-                <div class="container grid px-6 mx-auto">
+                    <div class="container grid px-6 mx-auto">
+                    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Visitas Pendientes</h2>
+                    <div class="swiper mySwiper" id="reservas-pendientes">
+                        <div class="swiper-wrapper">
+                            <%=""%>
+                            <%
+                                Usuario usuario = (Usuario)Session["usuario"];
+
+                                int totalVisitasP = VisitaDao.ObtenerTotalVisitasPendientesG(usuario.IdCond);
+
+                                if (totalVisitasP == 0)
+                                { %>
+
+                            <div class="flex-1 p-6">
+                                <div class="text-center py-24 text-gray-500 dark:text-slate-400">
+                                    <p>No hay visitas pendientes</p>
+                                </div>
+                            </div>
+                            <% }
+                                else
+                                {
+                                    foreach (Visita obj1 in VisitaDao.GetAlVisitaPendienteG(usuario.IdCond))
+                                    {
+                                        int idVisita = obj1.Id;
+                                        string fecha = obj1.Fecha.ToString("ddd dd  MMMM  yyyy");
+                            %>
+                            <div class="swiper-slide">
+                                <div
+                                    class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+                                    <h2 class="font-semibold text-gray-700 dark:text-gray-200"><strong>Dpto<%=obj1.NumDpto %></strong></h2>
+                                    <i class="mb-4 text-gray-600 dark:text-gray-400"><%=obj1.Rut%> - <%=obj1.Nombres %> <%=obj1.Apellidos %> </i>
+                                    <br />
+                                    <p class="mb-4 text-gray-600 dark:text-gray-400">
+                                        <%=fecha %>
+                                        <br />
+                                        <%=obj1.Patente %>
+                                    </p>
+                                    <button type="button" data-id="<%=idVisita%>" data-modal-toggle="popup-modalVisita"
+                                        class="btnVisita px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                                        Modificar
+                                    </button>
+                                </div>
+                            </div>
+                            <%}
+                                }%>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-pagination"></div>
+                    </div>
                     <div class="grid grid-cols-4 gap-4">
                         <div>
                             <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Listado de Visitas</h2>
@@ -102,7 +172,6 @@
                                 </thead>
                                 <tbody>
                                     <%
-                                        Usuario usuario = (Usuario)Session["usuario"];
                                         string depto = (String)Session["depto"];
                                         int mesActualN = (int)Session["mes"];
                                         int añoActualN = (int)Session["año"];
@@ -123,8 +192,7 @@
                                             <button type="button" data-id="<%=obj.Id %>" data-modal-toggle="popup-modal" class="btnEliminar text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">    
                                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                                            </button><% }else
-                                                                      { %><a class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" href="EditarVisitaR.aspx?id=<%= obj.Id %>"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg></a>    <%} %>
+                                            </button><% } %>
                                         </td>
                                     </tr>
                                     <%
@@ -450,11 +518,11 @@
                         <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownList" runat="server">
                         </asp:DropDownList>
                     </label>
+                    <span id="mensajeDepto" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                     <label class="block mt-4 text-sm">
                         <span class="text-gray-700 dark:text-gray-400">Rut</span>
                         <asp:TextBox ID="TextBoxRut" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" runat="server"></asp:TextBox>
-                    </label>
-                    <span id="messageRut" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
+                    </label>                  
                     <label class="block mt-4 text-sm">
                         <span class="text-gray-700 dark:text-gray-400">Nombres</span>
                         <asp:TextBox ID="TextBoxNombres" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" runat="server"></asp:TextBox>
@@ -499,6 +567,34 @@
                             </div>
                         </div>
                     </div>
+                    <!-- End of modal backdrop -->
+                    <div id="popup-modalVisita" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full">
+                        <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modalVisita">
+                                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                    <span class="sr-only">Close modal</span>
+                                </button>
+                                <div class="p-6 text-center">
+                                    <input type="hidden" id="idVisita" name="TextBoxId" value="0" runat="server">
+                                    <!-- Modal title -->
+                                    <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-300" id="depto">
+                                        depto
+                                    </p>
+                                    <!-- Modal description -->
+                                    <p class="text-sm text-gray-700 dark:text-gray-400" id="rutNombre">
+                                        rut-Nombre
+                                    </p>
+                                    <p class="text-sm text-gray-700 dark:text-gray-400" id="fecha">
+                                        fecha
+                                    </p>
+                                    <asp:Button ID="ButtonAprobar" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" runat="server" OnClick="ButtonAprobar_Click" Text="Aprobar" />
+                                    <asp:Button ID="ButtonRechazar" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" runat="server" OnClick="ButtonRechazar_Click" Text="Rechazar" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </main>
         </div>
@@ -523,6 +619,13 @@
     </script>
     <script>
         function validarFormulario(evento) {
+            var depto = document.getElementById('DropDownList');
+            if (depto.value < 1) {
+                $('#mensajeDepto').html('Ingrese departamento').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeDepto').html('').css('color', 'green');
+            }
             if (!letras.test($('#TextBoxNombres').val())) {
                 $('#mensajeNombres').html('Ingrese nombres de manera correcta').css('color', 'red');
                 return false;
@@ -536,6 +639,46 @@
             }
         }
     </script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            slidesPerGroup: 3,
+            loop: true,
+            loopFillGroupWithBlank: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+    </script>
+    <script>
+        let editar = document.querySelectorAll(".btnVisita")
+
+        editar.forEach((boton) => {
+            boton.addEventListener("click", (event) => {
+                event.preventDefault()
+                var visita = event.target.parentElement
+
+                depto = visita.querySelector('h2').textContent
+                rutNombre = visita.querySelector('i').textContent
+                fecha = visita.querySelector('p').textContent
+                id = visita.querySelector('.btnVisita').getAttribute('data-id')
+
+                document.querySelector('#depto').innerText = depto;
+                document.querySelector('#rutNombre').innerText = rutNombre;
+                document.querySelector('#fecha').innerText = fecha;
+                document.querySelector('#idVisita').value = id;
+            })
+        })
+    </script>
     <script>
         let eliminar = document.querySelectorAll(".btnEliminar")
 
@@ -546,10 +689,7 @@
 
                 let idE = filaE.querySelector('.btnEliminar').getAttribute('data-id')
                 document.querySelector('#TextBoxIdEliminar').value = idE;
-
-
             })
-
         })
     </script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>

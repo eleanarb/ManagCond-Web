@@ -55,6 +55,7 @@
                                         <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListEspaciComun" runat="server" OnSelectedIndexChanged="EspacioSeleccionado" AutoPostBack="True">
                                         </asp:DropDownList>
                                     </label>
+                                    <span id="mensajeEspacioComun" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                                 <div>
                                     <label class="block text-sm">
@@ -62,7 +63,6 @@
                                         <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownRangoHorario" runat="server">
                                         </asp:DropDownList>
                                     </label>
-                                    <span id="mensajeEspacio" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                             </div>
                             <div class="grid gap-6 mb-8 md:grid-cols-2">
@@ -81,35 +81,6 @@
             </main>
         </div>
     </div>
-        <script>
-        $('#TextBoxTlf').mask('(+56) 9 0000 0000');
-        $(function () {
-            $("#TextBoxRut").rut().on('rutValido', function (e, rut, dv) {
-                alert("El rut " + rut + "-" + dv + " es correcto");
-            }, { minimumLength: 7 });
-        })
-
-        $(function () {
-            $("#TextBoxRut").rut();
-        });
-    </script>
-    <script>
-        var email = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
-
-        $('#TextBoxClave2, #TextBoxClave3').on('keyup', function () {
-            if ($('#TextBoxClave2').val() == $('#TextBoxClave3').val()) {
-                $('#message').html('Coinciden').css('color', 'green');
-            } else
-                $('#message').html('No coinciden').css('color', 'red');
-        });
-        $('#TextBoxCorreo').on('keyup', function () {
-            if (!email.test($('#TextBoxCorreo').val())) {
-                $('#messageEmail').html('Ingrese un correo válido').css('color', 'red');
-
-            } else
-                $('#messageEmail').html('').css('color', 'green');
-        });
-    </script>
     <script>
         var letras = /^[a-zA-Z]+$/;
 
@@ -129,7 +100,12 @@
                 return false;
             } else {
             }
-
+            var espacioComun = document.getElementById('DropDownListEspaciComun');
+            if (espacioComun.value < 1) {
+                $('#mensajeEspacioComun').html('Ingrese espacio comun').css('color', 'red');
+                return false;
+            } else {
+            }
             var solicitante = document.getElementById('TextBoxSolicitante').value;
             if (solicitante.length < 4) {
                 $('#mensajeSolicitante').html('Ingrese Solicitante').css('color', 'red');

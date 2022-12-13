@@ -8,6 +8,8 @@ using System.IO;
 using System.Configuration;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
+using System.Net.Mail;
+using System.Net;
 
 namespace ManagCond
 {
@@ -73,9 +75,15 @@ namespace ManagCond
             Usuario usuario = (Usuario)Session["usuario"];
             string recepcion = usuario.Nombres + " " + usuario.Apellidos;
 
+            Model.Residente residente = ResidenteDao.ObtenerDatosResidenteNotifiacion(numDpto, usuario.IdCond);
+           
+            string EmailDestino = "diegomolina2115@gmail.com";
+            string nombre = residente.NombresResidente;
+
             if (EncomiendaDao.AgregarEncomienda(numDpto, destinatario, descripcion, fileNameBD, idCond, recepcion))
             {
                 _ = UploadBlop(fileName, filestream);
+                Notificacion(EmailDestino, nombre, destinatario);
                 Response.Redirect("Encomiendas.aspx");
             }
             else
@@ -107,6 +115,33 @@ namespace ManagCond
                 return false;
             }
             return true;
+        }
+        protected void Notificacion(string emailDestino, string nombre, string destinatario)
+        {
+            string EmailOrigen = "managcond@outlook.com";
+            string Contraseña = "Trompeta45@";
+            string fecha = DateTime.Now.ToString("dd MMMM");
+
+            string link = string.Format("https://managcond.azurewebsites.net/Residente/Visitas.aspx");
+
+            string body = @"<h2>Encomienda</h2><p>Estimado/a,  " + nombre + ":</p><p> Hoy " + fecha + " Ha recibido una encomienda a nombre de "+ destinatario + " para obtener mas informacion ingrese al apartado de encomiendas de la pagina de managcond </p><a href=" + link + ">Mas Info</a><p> Si no realizaste esta modificación o si cree que alguien ha accedido a su cuenta sin autorización, visita <a href =" + link + "> ManagCond </a> para restablecer su contraseña inmediatamente</p><p> Si necesita ayuda adicional, comunícate con Soporte técnico de ManagCond.</p><p> Atentamente,</p><p> Administración </p><br><div style = 'text-align: center;'><img style='width: 100px' src = 'https://managcondstorage.blob.core.windows.net/fotos/2022/11/3/logo.png?sp=r&st=2022-10-29T04:27:40Z&se=2023-01-31T12:27:40Z&spr=https&sv=2021-06-08&sr=c&sig=D9P23%2FM2m24SojVnKloNP3KCNGM5j%2B1NiTTVZqsHd6I%3D' /> </div> ";
+
+            SmtpClient oSmtpCliente = new SmtpClient("smtp.office365.com")
+            {
+                EnableSsl = true,
+                UseDefaultCredentials = false,
+                Port = 587,
+                Credentials = new NetworkCredential(EmailOrigen, Contraseña)
+            };
+
+            MailMessage oMailMessage = new MailMessage(EmailOrigen, emailDestino, "Encomienda Recibida", body)
+            {
+                IsBodyHtml = true
+            };
+
+            oSmtpCliente.Send(oMailMessage);
+
+            oSmtpCliente.Dispose();
         }
         public void LlenarDropDownList()
         {

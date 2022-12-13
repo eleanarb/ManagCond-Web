@@ -47,6 +47,7 @@
                                         </div>
                                         <input datepicker datepicker-autohide datepicker-format="dd-mm-yyyy" id="inputFecha" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Seleccione fecha" runat="server" />
                                     </div>
+                                    <span id="mensajeFecha" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                             </div>
                             <div class="grid gap-6 mb-8 md:grid-cols-2">
@@ -56,6 +57,7 @@
                                         <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListEspaciComun" runat="server" OnSelectedIndexChanged="EspacioSeleccionado" AutoPostBack="True">
                                         </asp:DropDownList>
                                     </label>
+                                    <span id="mensajeEspacioComun" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                                 <div>
                                     <label class="block text-sm">
@@ -70,15 +72,54 @@
                                     <span class="text-gray-700 dark:text-gray-400">Solicitante</span>
                                     <asp:TextBox ID="TextBoxSolicitante" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500t" runat="server"></asp:TextBox>
                                 </label>
+                                <span id="mensajeSolicitante" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                             </div>
                             <br />
                             <br />
-                            <asp:Button ID="ButtonEditar" class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" runat="server" OnClick="ButtonEditar_Click" Text="Editar" />
+                            <asp:Button ID="ButtonEditar" OnClientClick="return validarFormulario()" class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" runat="server" OnClick="ButtonEditar_Click" Text="Editar" />
                         </form>
                     </div>
                 </div>
             </main>
         </div>
     </div>
+    <script>
+        var letras = /^[a-zA-Z]+$/;
+
+        $('#TextBoxSolicitante').on('keyup', function () {
+            if (!letras.test($('#TextBoxSolicitante').val())) {
+                $('#mensajeSolicitante').html('Ingrese Solicitante').css('color', 'red');
+
+            } else
+                $('#mensajeSolicitante').html('').css('color', 'green');
+        });
+    </script>
+    <script>
+        function validarFormulario(evento) {
+            var fecha = document.getElementById('inputFecha').value;
+            if (fecha.length < 1) {
+                $('#mensajeFecha').html('Ingrese fecha').css('color', 'red');
+                return false;
+            } else {
+            }
+            var espacioComun = document.getElementById('DropDownListEspaciComun');
+            if (espacioComun.value < 1) {
+                $('#mensajeEspacioComun').html('Ingrese espacio comun').css('color', 'red');
+                return false;
+            } else {
+            }
+            var solicitante = document.getElementById('TextBoxSolicitante').value;
+            if (solicitante.length < 4) {
+                $('#mensajeSolicitante').html('Ingrese Solicitante').css('color', 'red');
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
 </body>
 </html>

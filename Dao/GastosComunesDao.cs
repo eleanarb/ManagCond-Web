@@ -33,7 +33,7 @@ namespace Dao
 
             int totalRespuestas = 0;
 
-            string sSel = "SELECT count(*) FROM gastosComunes WHERE id_Cond = " + idCondominio + " AND mesCobro= "+ mes + " AND añoCobro= "+ año + " ";
+            string sSel = "SELECT count(*) FROM gastosComunes WHERE id_Cond = " + idCondominio + " AND mesCobro= " + mes + " AND añoCobro= " + año + " ";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -59,7 +59,7 @@ namespace Dao
         public static void ObtenerDatosGastosComunesV(int idCond, int mes, int año, string depto)
         {
             alGastosComunes.Clear();
-            string strSql = String.Format("SELECT gc.id, gc.idDpto, D.numDpto, gc.mesCobro, gc.añoCobro, gc.fechaEmision, gc.fechaVencimiento, gc.gastoComun, gc.fondoReserva, gc.multas, gc.diasAtraso, gc.moraPeriodo, gc.varios, gc.id_Cond, gc.estado, gc.fechaPago, gc.totalPagar FROM gastosComunes gc INNER JOIN estadoGastosComunes egc ON gc.estado = egc.id INNER JOIN departamento d ON d.id = gc.idDpto WHERE gc.id_Cond = "+ idCond + " AND gc.mesCobro= "+ mes +" AND gc.añoCobro= "+ año + " "+ depto + "");
+            string strSql = String.Format("SELECT gc.id, gc.idDpto, D.numDpto, gc.mesCobro, gc.añoCobro, gc.fechaEmision, gc.fechaVencimiento, gc.gastoComun, gc.fondoReserva, gc.multas, gc.diasAtraso, gc.moraPeriodo, gc.varios, gc.id_Cond, gc.estado, gc.fechaPago, gc.totalPagar FROM gastosComunes gc INNER JOIN estadoGastosComunes egc ON gc.estado = egc.id INNER JOIN departamento d ON d.id = gc.idDpto WHERE gc.id_Cond = " + idCond + " AND gc.mesCobro= " + mes + " AND gc.añoCobro= " + año + " " + depto + "");
 
             using (SqlConnection con = new SqlConnection(conBD))
             {
@@ -407,6 +407,7 @@ namespace Dao
             ObtenerDatosGastosComunesVencidos(idDpto, idCond);
             return alGastosComunes;
         }
+
         public static List<GastosComunes> ObtenerDatosGastosComunesVencidos(int idDpto, int idCond)
         {
 

@@ -143,6 +143,7 @@
     <Content Include="assets\css\custom-theme\images\ui-icons_ffffff_256x240.png" />
     <Content Include="assets\css\custom-theme\jquery-ui-1.9.2.custom.css" />
     <Content Include="assets\css\custom-theme\jquery-ui-1.9.2.custom.min.css" />
+    <Content Include="assets\css\factura.css" />
     <Content Include="assets\css\flick\images\ui-bg_glass_65_ffffff_1x400.png" />
     <Content Include="assets\css\flick\images\ui-bg_highlight-soft_100_f6f6f6_1x100.png" />
     <Content Include="assets\css\flick\images\ui-bg_highlight-soft_25_0073ea_1x100.png" />
@@ -194,7 +195,6 @@
     <Content Include="Administrador\dashboard.aspx" />
     <Content Include="Guardia\EditarEncomienda.aspx" />
     <Content Include="Guardia\EditarVisita.aspx" />
-    <Content Include="Guardia\EditarVisitaR.aspx" />
     <Content Include="Guardia\Encomiendas.aspx" />
     <Content Include="forms.aspx" />
     <Content Include="Administrador\foro.aspx" />
@@ -217,13 +217,18 @@
     <Content Include="PagoRealizado.aspx" />
     <Content Include="RecuperarClave.aspx" />
     <Content Include="Residente\AgregarReserva.aspx" />
+    <Content Include="Residente\Cargos.aspx" />
+    <Content Include="Residente\DetalleGastoComun.aspx" />
     <Content Include="Residente\EditarReserva.aspx" />
     <Content Include="Residente\EditarVisita.aspx" />
-    <Content Include="Residente\EditarVisitaR.aspx" />
+    <Content Include="Residente\Egresos.aspx" />
     <Content Include="Residente\Encomienda.aspx" />
     <Content Include="Residente\Foro.aspx" />
     <Content Include="Residente\GastosComunes.aspx" />
     <Content Include="Residente\Index.aspx" />
+    <Content Include="Residente\Liquidaciones.aspx" />
+    <Content Include="Residente\PagarGastoComun.aspx" />
+    <Content Include="Residente\PagoRealizado.aspx" />
     <Content Include="Residente\Perfil.aspx" />
     <Content Include="Residente\publicacionForo.aspx" />
     <Content Include="Residente\Reservas.aspx" />
@@ -232,8 +237,6 @@
     <Content Include="Residente\Visitas.aspx" />
     <Content Include="tables.aspx" />
     <Content Include="Administrador\Template\HeaderAdministrador.html" />
-    <Content Include="Template\DetalleGastoComun.aspx" />
-    <Content Include="Template\DetalleGastoComun.html" />
     <Content Include="Web.config" />
     <Content Include="WebFormError.aspx" />
   </ItemGroup>
@@ -434,13 +437,6 @@
     <Compile Include="Guardia\EditarVisita.aspx.designer.cs">
       <DependentUpon>EditarVisita.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Guardia\EditarVisitaR.aspx.cs">
-      <DependentUpon>EditarVisitaR.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Guardia\EditarVisitaR.aspx.designer.cs">
-      <DependentUpon>EditarVisitaR.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Guardia\Encomiendas.aspx.cs">
       <DependentUpon>Encomiendas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -582,6 +578,20 @@
     <Compile Include="Residente\AgregarReserva.aspx.designer.cs">
       <DependentUpon>AgregarReserva.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Residente\Cargos.aspx.cs">
+      <DependentUpon>Cargos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Residente\Cargos.aspx.designer.cs">
+      <DependentUpon>Cargos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Residente\DetalleGastoComun.aspx.cs">
+      <DependentUpon>DetalleGastoComun.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Residente\DetalleGastoComun.aspx.designer.cs">
+      <DependentUpon>DetalleGastoComun.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Residente\EditarReserva.aspx.cs">
       <DependentUpon>EditarReserva.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -596,12 +606,12 @@
     <Compile Include="Residente\EditarVisita.aspx.designer.cs">
       <DependentUpon>EditarVisita.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Residente\EditarVisitaR.aspx.cs">
-      <DependentUpon>EditarVisitaR.aspx</DependentUpon>
+    <Compile Include="Residente\Egresos.aspx.cs">
+      <DependentUpon>Egresos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Residente\EditarVisitaR.aspx.designer.cs">
-      <DependentUpon>EditarVisitaR.aspx</DependentUpon>
+    <Compile Include="Residente\Egresos.aspx.designer.cs">
+      <DependentUpon>Egresos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Residente\Encomienda.aspx.cs">
       <DependentUpon>Encomienda.aspx</DependentUpon>
@@ -630,6 +640,27 @@
     </Compile>
     <Compile Include="Residente\Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Residente\Liquidaciones.aspx.cs">
+      <DependentUpon>Liquidaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Residente\Liquidaciones.aspx.designer.cs">
+      <DependentUpon>Liquidaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Residente\PagarGastoComun.aspx.cs">
+      <DependentUpon>PagarGastoComun.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Residente\PagarGastoComun.aspx.designer.cs">
+      <DependentUpon>PagarGastoComun.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Residente\PagoRealizado.aspx.cs">
+      <DependentUpon>PagoRealizado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Residente\PagoRealizado.aspx.designer.cs">
+      <DependentUpon>PagoRealizado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Residente\Perfil.aspx.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
@@ -665,13 +696,6 @@
     </Compile>
     <Compile Include="tables.aspx.designer.cs">
       <DependentUpon>tables.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Template\DetalleGastoComun.aspx.cs">
-      <DependentUpon>DetalleGastoComun.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Template\DetalleGastoComun.aspx.designer.cs">
-      <DependentUpon>DetalleGastoComun.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebFormError.aspx.cs">
       <DependentUpon>WebFormError.aspx</DependentUpon>

@@ -39,8 +39,7 @@
 
     <div
       class="flex h-screen bg-gray-50 dark:bg-gray-900"
-      :class="{ 'overflow-hidden': isSideMenuOpen }"
-    >
+      :class="{ 'overflow-hidden': isSideMenuOpen }">
              <!-- #include file ="Template/AsideAdministrador.html" -->
         <div class="flex flex-col flex-1 w-full">
             <!-- #include file ="Template/HeaderAdministrador.html" -->
@@ -48,37 +47,36 @@
                 <form runat="server">
                 <div class="container grid px-6 mx-auto">
                     <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Gestión de Proveedores</h2>
-                    <div class="">                         
-                        
-                        
-                       
-                            <div class="grid grid-cols-5 items-center">
-                                <div class="col-span-3">
+                    <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800 ">
+                        <div class="grid grid-cols-2 items-center">
+                            <div class="grid grid-cols-2">
+                                <div class="">
                                     <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Search</label>
                                     <div class="relative">
                                         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                             <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                                         </div>
-                                        <input type="search" id="default-search" class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos...">
-                                        <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2">Search</button>
+                                        <input type="search" id="default-search" class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Buscar por nombre">
+                                        <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2">Buscar</button>
                                     </div>
                                 </div>
-
-                                <div></div>
-
-                                <div class="col-end-5 ">
-                                    <div class="agregar">
-                                            <a class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="AgregarProveedor.aspx">Agregar</a>                                    
-                                        </div>  
+                                <div class="">
                                 </div>
-                       
-
-
+                            </div>
+                            <div class="grid grid-cols-4">
+                                <div></div>
+                                <div></div>
+                                <div class="">
+                                </div>
+                                <div class="">
+                                    <a class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="AgregarProveedor.aspx">Agregar</a>
+                                </div>
+                            </div>
                         </div>
-                        <br />
-                    <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
-                        
+                    </div>
+                    <br />
+                    <div class="overflow-x-auto relative shadow-md sm:rounded-lg">                     
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
@@ -152,7 +150,6 @@
                         </table>
                     </div>
                 </div>
-                </div>
                      <div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full">
                         <div class="relative p-4 w-full max-w-md h-full md:h-auto">
                             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -171,17 +168,13 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-
-      </form>
+                     </div>
+                </form>
             </main>
-            </div>
         </div>
-    
-
-            <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
-            <script>
+    </div>
+      <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+      <script>
           let eliminar = document.querySelectorAll(".btnEliminar")
 
           eliminar.forEach((botonE) => {
@@ -189,19 +182,10 @@
                   eventE.preventDefault()
                   var filaE = eventE.target.parentElement.parentElement.parentElement
 
-                  let idE = filaE.querySelector('.btnEliminar').getAttribute('data-id')                  
+                  let idE = filaE.querySelector('.btnEliminar').getAttribute('data-id')
                   document.querySelector('#TextBoxIdEliminar').value = idE;
-
-
               })
-
           })
-            </script>
-
-
-</body>
-
-
-
-
+      </script>
+  </body>
 </html>

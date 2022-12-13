@@ -62,6 +62,7 @@
                                     </div>
                                     <input datepicker datepicker-autohide datepicker-format="dd-mm-yyyy" id="inputFecha" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Seleccione fecha" runat="server" />
                                 </div>
+                                    <span id="mensajeFecha" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                                 
                                 <div>
@@ -83,6 +84,7 @@
                                 <span class="text-gray-700 dark:text-gray-200">Cargo</span><br />
                                 <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListCargo" runat="server">
                                 </asp:DropDownList>
+                                <span id="mensajeCargo" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                             </label>
                                 </div>
                             </div>
@@ -139,6 +141,13 @@
                 return false;
             } else {
             }
+            var fecha = document.getElementById('inputFecha').value;
+            if (fecha.length < 1) {
+                $('#mensajeFecha').html('Ingrese fecha').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeFecha').html('').css('color', 'green');
+            }
             if (!email.test($('#TextBoxCorreo').val())) {
                 $('#mensajeCorreo').html('Ingrese correo valido').css('color', 'red');
                 return false;
@@ -148,6 +157,13 @@
                 $('#mensajeTelefono').html('Ingrese telefono valido').css('color', 'red');
                 return false;
             } else {
+            }
+            var cargo = document.getElementById('DropDownListCargo');
+            if (cargo.value < 1) {
+                $('#mensajeCargo').html('Ingrese cargo').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeCargo').html('').css('color', 'green');
                 return true;
             }
         }

@@ -8,6 +8,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Model;
 using Dao;
+using System.Net.Mail;
+using System.Net;
 
 namespace ManagCond.Guardia
 {
@@ -56,14 +58,47 @@ namespace ManagCond.Guardia
             String patente = TextBoxPatente.Text;
             int idCond = int.Parse(Session["idCond"].ToString());
 
+            Usuario usuario = (Usuario)Session["usuario"];
+            Model.Residente residente = ResidenteDao.ObtenerDatosResidenteNotifiacion(numDpto, usuario.IdCond);
+            string emailDestino = "diegomolina2115@gmail.com";
+            string nombreR = residente.NombresResidente;
+
             if (VisitaDao.AgregarVisitaG(numDpto, rut, nombres, apellidos, patente, idCond))
             {
+                Notificacion(emailDestino, nombreR, nombres, apellidos);
                 Response.Redirect("Visitas.aspx");
             }
             else
             {
                 Response.Redirect("Visita.aspx");
             }
+        }
+        protected void Notificacion(string emailDestino, string nombreR, string nombres, string apellidos)
+        {
+            string EmailOrigen = "managcond@outlook.com";
+            string Contraseña = "Trompeta45@";
+            string fecha = DateTime.Now.ToString("dd MMMM");
+
+            string link = string.Format("https://managcond.azurewebsites.net/Residente/Encomienda.aspx");
+
+            string body = @"<h2>Visita</h2><p>Estimado/a,  " + nombreR + ":</p><p> Hoy " + fecha + " Ha llegado " + nombres + " " + apellidos + " para aceptar o rechazar visita ingrese al apartado de vistas de la pagina de managcond </p><a href=" + link + ">Click aqui</a><p> Si no realizaste esta modificación o si cree que alguien ha accedido a su cuenta sin autorización, visita <a href =" + link + "> ManagCond </a> para restablecer su contraseña inmediatamente</p><p> Si necesita ayuda adicional, comunícate con Soporte técnico de ManagCond.</p><p> Atentamente,</p><p> Administración </p><br><div style = 'text-align: center;'><img style='width: 100px' src = 'https://managcondstorage.blob.core.windows.net/fotos/2022/11/3/logo.png?sp=r&st=2022-10-29T04:27:40Z&se=2023-01-31T12:27:40Z&spr=https&sv=2021-06-08&sr=c&sig=D9P23%2FM2m24SojVnKloNP3KCNGM5j%2B1NiTTVZqsHd6I%3D' /> </div> ";
+
+            SmtpClient oSmtpCliente = new SmtpClient("smtp.office365.com")
+            {
+                EnableSsl = true,
+                UseDefaultCredentials = false,
+                Port = 587,
+                Credentials = new NetworkCredential(EmailOrigen, Contraseña)
+            };
+
+            MailMessage oMailMessage = new MailMessage(EmailOrigen, emailDestino, "Visita en conserjeria", body)
+            {
+                IsBodyHtml = true
+            };
+
+            oSmtpCliente.Send(oMailMessage);
+
+            oSmtpCliente.Dispose();
         }
         public void LlenarDropDownList()
         {
@@ -109,6 +144,43 @@ namespace ManagCond.Guardia
             DropDownListDepto2.DataValueField = "id";
             DropDownListDepto2.DataBind();
             DropDownListDepto2.Items.Insert(0, new ListItem("Todos", "0"));
+        }
+        protected void ButtonAprobar_Click(object sender, EventArgs e)
+        {
+
+            int id = int.Parse(idVisita.Value);
+
+
+            if (VisitaDao.AprobarVisita(id))
+            {
+                Response.Redirect("Visitas.aspx");
+            }
+            else
+            {
+                string script = String.Format(@"<script type='text/javascript'>alert('No se puedo aprobar la visita');</script>");
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, false);
+                Response.Redirect("Visitas.aspx");
+            }
+
+        }
+
+        protected void ButtonRechazar_Click(object sender, EventArgs e)
+        {
+
+            int id = int.Parse(idVisita.Value);
+
+
+            if (VisitaDao.RechazarVisita(id))
+            {
+                Response.Redirect("Visitas.aspx");
+            }
+            else
+            {
+                string script = String.Format(@"<script type='text/javascript'>alert('No se puedo rechazar la visita');</script>");
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, false);
+                Response.Redirect("Visitas.aspx");
+            }
+
         }
         protected void ButtonEliminar_Click(object sender, EventArgs e)
         {

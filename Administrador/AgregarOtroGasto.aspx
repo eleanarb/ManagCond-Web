@@ -38,6 +38,7 @@
                                     <label for="DropDownListDepto" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Departamento</label>
                                     <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListDepto" runat="server">
                                     </asp:DropDownList>
+                                     <span id="mensajeDepto" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                             </div>
                             <div class="grid gap-6 mb-8 md:grid-cols-2">
@@ -45,6 +46,7 @@
                                     <label for="DropDownListCargo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cargo</label>
                                     <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListCargo" runat="server">
                                     </asp:DropDownList>
+                                    <span id="mensajeCargo" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                                 <div>
                                     <label class="block text-sm">
@@ -75,6 +77,7 @@
                                             <asp:ListItem Value="11">Noviembre</asp:ListItem>
                                             <asp:ListItem Value="12">Diciembre</asp:ListItem>
                                         </asp:DropDownList>
+                                        <span id="mensajeMes" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                     </div>
                                     <div>
                                         <label for="DropDownListAño" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Año</label>
@@ -88,6 +91,7 @@
                                             <asp:ListItem Value="2025">2025</asp:ListItem>
                                             <asp:ListItem Value="2026">2026</asp:ListItem>
                                         </asp:DropDownList>
+                                        <span id="mensajeAño" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                     </div>
                                 </div>
                                 <div>
@@ -111,6 +115,7 @@
                 </div>
             </main>
         </div>
+         </div>
         <script>
             var letras = /^[a-zA-Z]+$/;
             var numeros = /^[0-9]+$/;
@@ -132,10 +137,38 @@
         </script>
         <script>
             function validarFormulario(evento) {
+                var depto = document.getElementById('DropDownListDepto');
+                if (depto.value < 1) {
+                    $('#mensajeDepto').html('Ingrese departamento').css('color', 'red');
+                    return false;
+                } else {
+                    $('#mensajeDepto').html('').css('color', 'green');
+                }
+                var mes = document.getElementById('DropDownListCargo');
+                if (mes.value < 1) {
+                    $('#mensajeCargo').html('Ingrese cargo').css('color', 'red');
+                    return false;
+                } else {
+                    $('#mensajeCargo').html('').css('color', 'green');
+                }
                 if (!numeros.test($('#TextBoxCantidad').val())) {
                     $('#mensajeCantidad').html('Ingrese cantidad valida').css('color', 'red');
                     return false;
                 } else {
+                }
+                var mes = document.getElementById('DropDownListMes');
+                if (mes.value < 1) {
+                    $('#mensajeMes').html('Ingrese mes').css('color', 'red');
+                    return false;
+                } else {
+                    $('#mensajeMes').html('').css('color', 'green');
+                }
+                var año = document.getElementById('DropDownListAño');
+                if (año.value < 1) {
+                    $('#mensajeAño').html('Ingrese año').css('color', 'red');
+                    return false;
+                } else {
+                    $('#mensajeAño').html('').css('color', 'green');
                 }
                 if (!letras.test($('#TextBoxDesc').val())) {
                     $('#mensajeDesc').html('Ingrese descripcion valida').css('color', 'red');

@@ -38,6 +38,7 @@
                                         <span class="text-gray-700 dark:text-gray-200">Rut Trabajador</span><br />
                                         <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListTrabajador" runat="server">
                                         </asp:DropDownList>
+                                        <span id="mensajeTrabajador" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                     </label>
                                 </div>
                             </div>
@@ -113,6 +114,13 @@
     </script>
     <script>
         function validarFormulario(evento) {
+            var trabajador = document.getElementById('DropDownListTrabajador');
+            if (trabajador.value < 1) {
+                $('#mensajeTrabajador').html('Ingrese trabajador').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeTrabajador').html('').css('color', 'green');
+            }
             if (!numeros.test($('#TextBoxHorasExtras').val())) {
                 $('#mensajeHorasExtras').html('Ingrese horas extras validas').css('color', 'red');
                 return false;

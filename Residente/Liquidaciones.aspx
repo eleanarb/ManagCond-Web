@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Liquidaciones.aspx.cs" Inherits="ManagCond.Administrador.Liquidaciones" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Liquidaciones.aspx.cs" Inherits="ManagCond.Residente.Liquidaciones" %>
 <%@ Import Namespace="Model" %>
 <%@ Import Namespace="Dao" %>
 
@@ -23,9 +23,9 @@
     <div
         class="flex h-screen bg-gray-50 dark:bg-gray-900"
         :class="{ 'overflow-hidden': isSideMenuOpen }">
-        <!-- #include file ="Template/AsideAdministrador.html" -->
+        <!-- #include file ="Template/AsideResidente.html" -->
         <div class="flex flex-col flex-1 w-full">
-            <!-- #include file ="Template/HeaderAdministrador.html" -->
+            <!-- #include file ="Template/HeaderResidente.html" -->
             <main class="h-full overflow-y-auto">
                 <form runat="server">
                     <div class="container grid px-6 mx-auto">
@@ -69,15 +69,11 @@
                                             <asp:ListItem Value="2026">2026</asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
-
                                     <div>
-                                        <a class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="AgregarContrato.aspx">Agregar Contrato</a>
                                     </div>
                                     <div>
-                                        <a class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="AgregarTrabajador.aspx">Agregar Trabajador</a>
                                     </div>
                                     <div>
-                                        <a class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="AgregarLiquidacion.aspx">Agregar Liquidacion</a>
                                     </div>
                                 </div>
                             </div>
@@ -105,24 +101,20 @@
                                         <th scope="col" class="py-3 px-6">Dias No Trabajados</th>
                                         <th scope="col" class="py-3 px-6">Descuentos Dias No Trabajados</th>
                                         <th scope="col" class="py-3 px-6">Saldo Liquido</th>
-                                        <th scope="col" class="py-3 px-6">Acciones</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
                                     <%
-                                        int idCondominio = 0;
-                                        int mesActualN = 0;
-                                        int añoActualN = 0;
-                                        string rut = "";
+                                        int idCond = 0;
 
-                                        idCondominio = (int)Session["idCondominio"];
-                                        mesActualN = (int)Session["mes"];
-                                        añoActualN = (int)Session["año"];
-                                        rut = (String)Session["rut"];
+                                        idCond = (int)Session["idCond"];
+                                        int mesActualN = (int)Session["mes"];
+                                        int añoActualN = (int)Session["año"];
+                                        string rut = (String)Session["rut"];
 
                                         int totalLiquidaciones = 0;
-                                        totalLiquidaciones = LiquidacionesDao.ObtenerTotalLiquidaciones(mesActualN, añoActualN, idCondominio, rut);
+                                        totalLiquidaciones = LiquidacionesDao.ObtenerTotalLiquidaciones(mesActualN, añoActualN, idCond, rut);
 
                                         if (totalLiquidaciones == 0)
                                         {
@@ -136,7 +128,7 @@
                                         else
                                         {
 
-                                            foreach (Liquidacion obj in LiquidacionesDao.GetAlLiquidaciones(mesActualN, añoActualN, idCondominio, rut))
+                                            foreach (Liquidacion obj in LiquidacionesDao.GetAlLiquidaciones(mesActualN, añoActualN, idCond, rut))
                                             {
                                     %>
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -158,10 +150,6 @@
                                         <td class="py-4 px-6">$<%=obj.DiasNoTrabajados.ToString("N0")%></td>
                                         <td class="py-4 px-6">$<%=obj.DescuentosDiasNoTrabajados.ToString("N0")%></td>
                                         <td class="py-4 px-6">$<%=obj.SaldoLiquido.ToString("N0")%></td>
-                                        <td class="py-4 px-6">
-                                            <button type="button" data-id="<%=obj.Id %>" @click="openModal" class="btnEditar block w-full px-4 py-2 mt-4 text-sm text-center font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">Editar</button>
-                                            <a href="EliminarIngreso.aspx?id=<%=obj.Id %>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Elimnar</a>
-                                        </td>
                                     </tr>
                                     <%}
                                         }%>

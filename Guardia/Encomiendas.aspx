@@ -119,7 +119,7 @@
                                         <td class="py-4 px-6"><%= obj.Fecha.ToString("dd/MM/yyyy") %></td>
                                         <td class="py-4 px-6"><%= obj.Hora.ToString("hh':'mm''") %></td>
                                         <td class="py-4 px-6"><%= obj.Descripcion %></td>
-                                        <td class="py-4 px-6"><img id="img1" src="<%=url%>" alt="" style="width:100px; height:100px"/></td>
+                                        <td class="py-4 px-6"><img id="img1" src="<%=url%>" alt="Error" style="width:100px; height:100px"/></td>
                                         <td class="py-4 px-6"><span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700"><%= obj.Estado %></span></td>
                                         <td class="py-4 px-6"><a  class="btnEditar text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" href="EditarEncomienda.aspx?id=<%= obj.Id %>"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg></a>
                                             <button type="button" data-id="<%=obj.Id %>" data-modal-toggle="popup-modal" class="btnEliminar text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
@@ -448,6 +448,7 @@
                           <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownList" runat="server">
                           </asp:DropDownList>
                       </label>
+                      <span id="mensajeDepto" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                       <label class="block mt-4 text-sm">
                           <span class="text-gray-700 dark:text-gray-200">Destinatario</span>
                           <asp:TextBox ID="TextBoxDestinatario" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500t" runat="server"></asp:TextBox>
@@ -505,6 +506,13 @@
     </script>
     <script>
         function validarFormulario(evento) {
+            var depto = document.getElementById('DropDownList');
+            if (depto.value < 1) {
+                $('#mensajeDepto').html('Ingrese departamento').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeDepto').html('').css('color', 'green');
+            }
             if (!letras.test($('#TextBoxDestinatario').val())) {
                 $('#mensajeDestinatario').html('Ingrese destinatario de manera correcta').css('color', 'red');
                 return false;

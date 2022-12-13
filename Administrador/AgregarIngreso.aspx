@@ -73,6 +73,7 @@
                                         <asp:ListItem Value="11">Noviembre</asp:ListItem>
                                         <asp:ListItem Value="12">Diciembre</asp:ListItem>
                                     </asp:DropDownList>
+                                    <span id="mensajeMes" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                                 <div>
                                     <label for="DropDownListAño" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-400">Año</label>
@@ -86,12 +87,12 @@
                                         <asp:ListItem Value="2025">2025</asp:ListItem>
                                         <asp:ListItem Value="2026">2026</asp:ListItem>
                                     </asp:DropDownList>
+                                    <span id="mensajeAño" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                             </div>
                             <div class="grid gap-6 mb-8 md:grid-cols-2">
                                 <div>
                                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Fecha Ingreso:</label>
-
                                     <div class="relative">
                                         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                             <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -99,6 +100,7 @@
                                         </div>
                                         <input datepicker datepicker-autohide datepicker-format="dd-mm-yyyy" id="inputFecha" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Seleccione fecha" runat="server" />
                                     </div>
+                                    <span id="mensajeFecha" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                                 <div>
                                     <span class="text-gray-700 dark:text-gray-400">Documento</span>
@@ -118,6 +120,7 @@
             </main>
         </div>
     </div>
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
     <script>
         var letras = /[a-záéíóúñA-ZÁÉÍÓÚÑ ]+$/;
         var numeros = /^[0-9]+$/;
@@ -160,12 +163,32 @@
                 $('#mensajeMonto').html('Ingrese monto de manera correcta').css('color', 'red');
                 return false;
             } else {
+            }
+            var mes = document.getElementById('DropDownListMes');
+            if (mes.value < 1) {
+                $('#mensajeMes').html('Ingrese mes').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeMes').html('').css('color', 'green');
+            }
+            var año = document.getElementById('DropDownListAño');
+            if (año.value < 1) {
+                $('#mensajeAño').html('Ingrese año').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeAño').html('').css('color', 'green');
+            }
+            var fecha = document.getElementById('inputFecha').value;
+            if (fecha.length < 1) {
+                $('#mensajeFecha').html('Ingrese fecha').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeFecha').html('').css('color', 'green');
                 return true;
             }
         }
     </script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
-    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
 </body>
 </html>

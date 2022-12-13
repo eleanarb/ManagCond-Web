@@ -40,6 +40,7 @@
                                         <span class="text-gray-700 dark:text-gray-200">Rut Trabajador</span><br />
                                         <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListRutTrabajador" runat="server">
                                         </asp:DropDownList>
+                                        <span id="mensajeTrabajador" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                     </label>
                                 </div>
                                 <div>
@@ -47,6 +48,7 @@
                                         <span class="text-gray-700 dark:text-gray-200">Tipo Contrato</span><br />
                                         <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListTipoContrato" runat="server">
                                         </asp:DropDownList>
+                                        <span id="mensajeTipoContrato" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                     </label>
                                 </div>
                                 <div>
@@ -58,6 +60,7 @@
                                         </div>
                                         <input datepicker datepicker-autohide datepicker-format="dd-mm-yyyy" id="inputFecha" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Seleccione fecha" runat="server" />
                                     </div>
+                                    <span id="mensajeFecha" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                             </div>
                             <div class="grid gap-6 mb-8 md:grid-cols-3">
@@ -66,6 +69,7 @@
                                         <span class="text-gray-700 dark:text-gray-200">Región</span><br />
                                         <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListRegion" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownListRegion_SelectedIndexChanged">
                                         </asp:DropDownList>
+                                        <span id="mensajeRegion" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                     </label>
                                 </div>
                                 <div>
@@ -73,6 +77,7 @@
                                         <span class="text-gray-700 dark:text-gray-200">Comuna</span><br />
                                         <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListComuna" runat="server">
                                         </asp:DropDownList>
+                                        <span id="mensajeComuna" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                     </label>
                                 </div>
                                 <div>
@@ -143,6 +148,7 @@
                                         <asp:ListItem Value="Modelo">Capital</asp:ListItem>
                                         <asp:ListItem Value="Uno">Uno</asp:ListItem>
                                     </asp:DropDownList>
+                                    <span id="mensajeAFP" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                                 <div>
                                     <label for="DropDownListSalud" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Plan de salud</label>
@@ -161,6 +167,7 @@
                                         <asp:ListItem Value="Cruz del Norte">Cruz del Norte</asp:ListItem>
                                         <asp:ListItem Value="Esencial">Esencial</asp:ListItem>
                                     </asp:DropDownList>
+                                    <span id="mensajeSalud" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                             </div>
                             <br />
@@ -187,6 +194,7 @@
                                         <asp:ListItem Value="Depósito">Depósito</asp:ListItem>
                                         <asp:ListItem Value="Transferencia">Transferencia</asp:ListItem>
                                     </asp:DropDownList>
+                                    <span id="mensajePago" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                             </div>
                             <div class="grid gap-6 mb-8 md:grid-cols-3">
@@ -218,6 +226,7 @@
                                             <asp:ListItem Value="Tenpo Prepago">Tenpo Prepago</asp:ListItem>
                                             <asp:ListItem Value="Mercado Pago">Mercado Pago</asp:ListItem>
                                         </asp:DropDownList>
+                                        <span id="mensajeBanco" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                     </div>
                                 </div>
                                 <div>
@@ -228,6 +237,7 @@
                                         <asp:ListItem Value="Cuenta Vista">Cuenta Vista</asp:ListItem>
                                         <asp:ListItem Value="Cuenta de Ahorro">Cuenta de Ahorro</asp:ListItem>
                                     </asp:DropDownList>
+                                    <span id="mensajeCuenta" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
                                 <div>
                                     <label class="block text-sm">
@@ -319,6 +329,41 @@
     </script>
     <script>
         function validarFormulario(evento) {
+            var trabajador = document.getElementById('DropDownListRutTrabajador');
+            if (trabajador.value < 1) {
+                $('#mensajeTrabajador').html('Ingrese trabajador').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeTrabajador').html('').css('color', 'green');
+            }
+            var tipoContrato = document.getElementById('DropDownListTipoContrato');
+            if (tipoContrato.value < 1) {
+                $('#mensajeTipoContrato').html('Ingrese tipo de contrato').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeTipoContrato').html('').css('color', 'green');
+            }
+            var fecha = document.getElementById('inputFecha').value;
+            if (fecha.length < 1) {
+                $('#mensajeFecha').html('Ingrese fecha').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeFecha').html('').css('color', 'green');
+            }
+            var region = document.getElementById('DropDownListRegion');
+            if (region.value < 1) {
+                $('#mensajeRegion').html('Ingrese region').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeRegion').html('').css('color', 'green');
+            }
+            var comuna = document.getElementById('DropDownListComuna');
+            if (comuna.value < 1) {
+                $('#mensajeComuna').html('Ingrese comuna').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeComuna').html('').css('color', 'green');
+            }
             if (!letras.test($('#TextBoxDirección').val())) {
                 $('#mensajeDireccion').html('Ingrese direccion valida').css('color', 'red');
                 return false;
@@ -354,10 +399,45 @@
                 return false;
             } else {
             }
+            var AFP = document.getElementById('DropDownListAFP');
+            if (AFP.value < 1) {
+                $('#mensajeAFP').html('Ingrese AFP').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeAFP').html('').css('color', 'green');
+            }
+            var salud = document.getElementById('DropDownListSalud');
+            if (salud.value < 1) {
+                $('#mensajeSalud').html('Ingrese salud').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeSalud').html('').css('color', 'green');
+            }
             if (!letras.test($('#TextBoxNombreCuenta').val())) {
                 $('#mensajeNombreCuenta').html('Ingrese nombre de cuenta valida').css('color', 'red');
                 return false;
             } else {
+            }
+            var Pago = document.getElementById('DropDownListPago');
+            if (Pago.value < 1) {
+                $('#mensajePago').html('Ingrese pago').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajePago').html('').css('color', 'green');
+            }
+            var banco = document.getElementById('DropDownListBanco');
+            if (banco.value < 1) {
+                $('#mensajeBanco').html('Ingrese banco').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeBanco').html('').css('color', 'green');
+            }
+            var cuenta = document.getElementById('DropDownListCuenta');
+            if (cuenta.value < 1) {
+                $('#mensajeCuenta').html('Ingrese cuenta').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeCuenta').html('').css('color', 'green');
             }
             if (!numeros.test($('#TextBoxNumCuenta').val())) {
                 $('#mensajeNumCuenta').html('Ingrese numero de cuenta valido').css('color', 'red');
