@@ -33,7 +33,8 @@ namespace ManagCond
             {
                 Session["mensaje"] = "0";
                 Session.Abandon();
-                Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
+                Session.Clear();
+                Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));            
             }
         }
 
