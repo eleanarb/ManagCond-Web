@@ -251,7 +251,53 @@ namespace Dao
 
             return estado;
         }
+        public static bool EliminarMensajeForo(int id)
+        {
+            bool estado = true;
+            try
+            {
+                Conexion c = new Conexion();
+                string sCnn = c.Conectar();
 
 
+                string sSel = "EXEC sp_eliminar_mensajeForo @id = " + id + " ";
+
+                SqlDataAdapter da;
+                DataTable dt = new DataTable();
+
+                da = new SqlDataAdapter(sSel, sCnn);
+                da.Fill(dt);
+            }
+            catch (Exception)
+            {
+                estado = false;
+            }
+
+            return estado;
+        }
+        public static bool EliminarRespuestaForo(int id)
+        {
+            bool estado = true;
+            try
+            {
+                Conexion c = new Conexion();
+                string sCnn = c.Conectar();
+
+
+                string sSel = "EXEC sp_eliminar_respuestaForo @id = " + id + " ";
+
+                SqlDataAdapter da;
+                DataTable dt = new DataTable();
+
+                da = new SqlDataAdapter(sSel, sCnn);
+                da.Fill(dt);
+            }
+            catch (Exception)
+            {
+                estado = false;
+            }
+
+            return estado;
+        }
     }
 }

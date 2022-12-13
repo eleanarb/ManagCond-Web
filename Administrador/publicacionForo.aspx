@@ -1,30 +1,28 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="publicacionForo.aspx.cs" Inherits="ManagCond.Administrador.RespuestaForo" %>
 <%@ Import Namespace="Model" %>
 <%@ Import Namespace="Dao" %>
+
 <!DOCTYPE html>
 
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <title>ManagCond</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../assets/css/tailwind.output.css" />
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="../assets/js/init-alpine.js"></script>
-      <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
-
-      <link href="../assets/css/style.css" rel="stylesheet" type="text/css" />
-
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
+    <link href="../assets/css/style.css" rel="stylesheet" type="text/css" />
     <!-- You need focus-trap.js to make the modal accessible -->
     <script src="../assets/js/focus-trap.js" defer></script>
-  </head>
-  <body>
+</head>
+<body>
     <div
-      class="flex h-screen bg-gray-50 dark:bg-gray-900"
-      :class="{ 'overflow-hidden': isSideMenuOpen}"
-    >
+        class="flex h-screen bg-gray-50 dark:bg-gray-900"
+        :class="{ 'overflow-hidden': isSideMenuOpen}">
         <!-- #include file ="Template/AsideAdministrador.html" -->
         <div class="flex flex-col flex-1 w-full">
             <!-- #include file ="Template/HeaderAdministrador.html" -->
@@ -61,11 +59,37 @@
                                 <h1><%=foro.Categoria %></h1>
                             </div>
                         </div>
+                        <%if (foro.tipoUsuario == 1)
+                            {%>
                         <div class="text-sm font-normal text-gray-500 lex dark:text-gray-300">
-                            Publicado por                        
+                            Publicado por 
+                             
+                      <a href="#" class="font-semibold text-purple-600 dark:text-purple-800 hover:underline"><%=foro.nombre %></a>
+                            - Administrador
+                        </div>
+                        <%}
+                            else
+                            {
+                                if (foro.tipoUsuario == 2)
+                                {%>
+                        <div class="text-sm font-normal text-gray-500 lex dark:text-gray-300">
+                            Publicado por 
+                             
+                      <a href="#" class="font-semibold text-purple-600 dark:text-purple-800 hover:underline"><%=foro.nombre %></a>
+                            - Guardia
+                        </div>
+                        <%}
+                            else
+                            { %>
+                        <div class="text-sm font-normal text-gray-500 lex dark:text-gray-300">
+                            Publicado por 
+                             
                       <a href="#" class="font-semibold text-purple-600 dark:text-purple-800 hover:underline"><%=foro.nombre %></a>
                             - Departamento <%=foro.depto %>
                         </div>
+                        <%}
+                            }
+                        %>
                         <br />
                         <div class="font-medium text-gray-900 dark:text-white">
                             <%=foro.mensaje %>
@@ -114,7 +138,6 @@
                                     {
                                         string fechaR = obj.Fecha.ToString("ddd dd  MMMM  yyyy");
                                         string horaR = obj.Hora.ToString("hh':'mm''");
-
                                         if (obj.TipoUsuario == 1)
                                         {
                                 %>
@@ -135,7 +158,28 @@
                                 </li>
                                 <%}
                                     else
-                                    { %>
+                                    {
+                                        if (obj.TipoUsuario == 2)
+                                        {
+                                %>
+                                <li>
+                                    <a href="#" class="block items-center p-3 sm:flex  ">
+                                        <%--<img class="mr-3 mb-3 w-12 h-12 rounded-full sm:mb-0" src="/docs/images/people/profile-picture-4.jpg" alt="Laura Romeros image">--%>
+                                        <div class="text-gray-600 dark:text-gray-400">
+                                            <div class="text-base font-normal"><span class="font-medium text-gray-900 dark:text-white"><%=obj.Nombre %></span><span class="text-sm font-normal text-gray-500 lex dark:text-gray-300"> - Guardia</span></div>
+                                            <br />
+                                            <div class="text-sm font-normal"><%=obj.Mensaje %></div>
+                                            <span class="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
+                                                <%--<svg aria-hidden="true" class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">--%>
+                                                <%--<path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd"></path><path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z"></path></svg>--%>
+                                                <%=fechaR %> | <%=horaR %>
+                                            </span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <%}
+                                    else
+                                    {%>
                                 <li>
                                     <a href="#" class="block items-center p-3 sm:flex  ">
                                         <%--<img class="mr-3 mb-3 w-12 h-12 rounded-full sm:mb-0" src="/docs/images/people/profile-picture-4.jpg" alt="Laura Romeros image">--%>
@@ -151,7 +195,8 @@
                                         </div>
                                     </a>
                                 </li>
-                                <% }
+                                <%}
+                                            }
                                         }
                                     }%>
                             </ol>
@@ -161,7 +206,7 @@
             </main>
         </div>
     </div>
-      <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
-      <!-- End of modal backdrop -->
-  </body>
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+    <!-- End of modal backdrop -->
+</body>
 </html>
