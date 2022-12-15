@@ -18,6 +18,17 @@ namespace ManagCond.Residente
                 GastosComunesDao.PagoRealizado(id);
 
             }
+            if (Session["usuario"] == null)
+            {
+                Response.Redirect("../Login.aspx");
+            }
+            else
+            {
+                if (!Session["tipoUsuario"].Equals(3))
+                {
+                    Response.Redirect("../Login.aspx");
+                }
+            }
         }
     }
 }

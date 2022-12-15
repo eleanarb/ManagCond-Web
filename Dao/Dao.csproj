@@ -65,6 +65,7 @@
     <Compile Include="DepartamentoDao.cs" />
     <Compile Include="EgresosDao.cs" />
     <Compile Include="EncomiendaDao.cs" />
+    <Compile Include="EspacioComunDao.cs" />
     <Compile Include="EventDAO.cs" />
     <Compile Include="ForoDao.cs" />
     <Compile Include="GastosComunesDao.cs" />

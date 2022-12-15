@@ -121,11 +121,13 @@
     <Content Include="Administrador\AgregarProveedor.aspx" />
     <Content Include="Administrador\AgregarTrabajador.aspx" />
     <Content Include="Administrador\Calendario.aspx" />
+    <Content Include="Administrador\EditarEspacioComun.aspx" />
     <Content Include="Administrador\EditarOtroGasto.aspx" />
     <Content Include="Administrador\EditarProveedor.aspx" />
     <Content Include="Administrador\Egresos.aspx" />
     <Content Include="Administrador\Encomiendas.aspx" />
     <Content Include="Administrador\GastosComunes.aspx" />
+    <Content Include="Administrador\GestionarEspaciosComunes.aspx" />
     <Content Include="Administrador\GestionProveedores.aspx" />
     <Content Include="Administrador\Ingresos.aspx" />
     <Content Include="Administrador\Liquidaciones.aspx" />
@@ -297,6 +299,13 @@
     <Compile Include="Administrador\Calendario.aspx.designer.cs">
       <DependentUpon>Calendario.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administrador\EditarEspacioComun.aspx.cs">
+      <DependentUpon>EditarEspacioComun.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\EditarEspacioComun.aspx.designer.cs">
+      <DependentUpon>EditarEspacioComun.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Administrador\EditarOtroGasto.aspx.cs">
       <DependentUpon>EditarOtroGasto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -331,6 +340,13 @@
     </Compile>
     <Compile Include="Administrador\GastosComunes.aspx.designer.cs">
       <DependentUpon>GastosComunes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\GestionarEspaciosComunes.aspx.cs">
+      <DependentUpon>GestionarEspaciosComunes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\GestionarEspaciosComunes.aspx.designer.cs">
+      <DependentUpon>GestionarEspaciosComunes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrador\GestionProveedores.aspx.cs">
       <DependentUpon>GestionProveedores.aspx</DependentUpon>

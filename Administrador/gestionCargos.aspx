@@ -115,7 +115,7 @@
                                             </td>
                                             <td class="py-4 px-6 grid grid-rows-4 text-center">
                                                 <div>
-                                                    <asp:Button ID="ButtonAgregar" OnClientClick="return validarFormulario()" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purplee" runat="server" OnClick="ButtonAgregar_Click" Text="Agregar" />
+                                                    <asp:Button ID="ButtonAgregar" OnClientClick="return validarFormulario2()" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purplee" runat="server" OnClick="ButtonAgregar_Click" Text="Agregar" />
                                                 </div>
                                                 <br />
                                                 <div>
@@ -271,7 +271,7 @@
               </div>
           </div>
           <footer class="flex flex-col items-center justify-end px-6 py-3 -mx-6 -mb-4 space-y-4 sm:space-y-0 sm:space-x-6 sm:flex-row bg-gray-50 dark:bg-gray-800">
-              <asp:Button ID="ButtonModificar" OnClientClick="return validarFormulario2()" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purplee" runat="server" OnClick="ButtonModificar_Click" data-id="0" Text="Modificar" />
+              <asp:Button ID="ButtonModificar" OnClientClick="return validarFormulario()" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purplee" runat="server" OnClick="ButtonModificar_Click" data-id="0" Text="Modificar" />
               <input type="hidden" id="TextBoxId" name="TextBoxId" value="0" runat="server">
           </footer>
 
@@ -283,26 +283,26 @@
         </div>
     </div>
     <script>
-        var letras = /^[a-zA-Z]+$/;
+        var letras = /^[a-zA-Z ]+$/;
         var numeros = /^[0-9]+$/;
 
         $('#TextBoxNombreModal').on('keyup', function () {
             if (!letras.test($('#TextBoxNombreModal').val())) {
-                $('#mensajeNombreModal').html('Ingrese nombre valido').css('color', 'red');
+                $('#mensajeNombreModal').html('Ingrese nombre2 valido').css('color', 'red');
 
             } else
                 $('#mensajeNombreModal').html('').css('color', 'green');
         });
         $('#TextBoxDescModal').on('keyup', function () {
             if (!letras.test($('#TextBoxDescModal').val())) {
-                $('#mensajeDescModal').html('Ingrese descripcion valida').css('color', 'red');
+                $('#mensajeDescModal').html('Ingrese descripcion2 valida').css('color', 'red');
 
             } else
                 $('#mensajeDescModal').html('').css('color', 'green');
         });
         $('#TextBoxMontoModal').on('keyup', function () {
             if (!numeros.test($('#TextBoxMontoModal').val())) {
-                $('#mensajeMontoModal').html('Ingrese monto valido').css('color', 'red');
+                $('#mensajeMontoModal').html('Ingrese monto2 valido').css('color', 'red');
 
             } else
                 $('#mensajeMontoModal').html('').css('color', 'green');
@@ -311,17 +311,17 @@
     <script>
         function validarFormulario(evento) {
             if (!letras.test($('#TextBoxNombreModal').val())) {
-                $('#mensajeNombreModal').html('Ingrese nombre valido').css('color', 'red');
+                $('#mensajeNombreModal').html('Ingrese nombr2e valido').css('color', 'red');
                 return false;
             } else {
             }
             if (!letras.test($('#TextBoxDescModal').val())) {
-                $('#mensajeDescModal').html('Ingrese descripcion valida').css('color', 'red');
+                $('#mensajeDescModal').html('Ingrese descripcion 2valida').css('color', 'red');
                 return false;
             } else {
             }
             if (!numeros.test($('#TextBoxMontoModal').val())) {
-                $('#mensajeMontoModal').html('Ingrese monto valido').css('color', 'red');
+                $('#mensajeMontoModal').html('Ingrese monto 2valido').css('color', 'red');
                 return false;
             } else {
                 return true;
@@ -329,7 +329,7 @@
         }
     </script>
     <script>
-        var letras = /^[a-zA-Z]+$/;
+        var letras = /^[a-zA-Z ]+$/;
         var numeros = /^[0-9]+$/;
 
         $('#TextBoxNombre').on('keyup', function () {

@@ -66,6 +66,7 @@
     <Compile Include="Departamento.cs" />
     <Compile Include="Egresos.cs" />
     <Compile Include="Encomienda.cs" />
+    <Compile Include="EspacioComun.cs" />
     <Compile Include="Foro.cs" />
     <Compile Include="GastosComunes.cs" />
     <Compile Include="ImproperCalendarEvent.cs" />
