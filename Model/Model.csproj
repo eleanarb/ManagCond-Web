@@ -76,6 +76,7 @@
     <Compile Include="OtrosGastos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proveedor.cs" />
+    <Compile Include="RangoHorario.cs" />
     <Compile Include="Reserva.cs" />
     <Compile Include="Residente.cs" />
     <Compile Include="RespuestaForo.cs" />

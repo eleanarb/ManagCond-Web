@@ -77,7 +77,7 @@ namespace ManagCond
 
             Model.Residente residente = ResidenteDao.ObtenerDatosResidenteNotifiacion(numDpto, usuario.IdCond);
            
-            string EmailDestino = "diegomolina2115@gmail.com";
+            string EmailDestino = residente.CorreoResidente;
             string nombre = residente.NombresResidente;
 
             if (EncomiendaDao.AgregarEncomienda(numDpto, destinatario, descripcion, fileNameBD, idCond, recepcion))
@@ -124,7 +124,7 @@ namespace ManagCond
 
             string link = string.Format("https://managcond.azurewebsites.net/Residente/Visitas.aspx");
 
-            string body = @"<h2>Encomienda</h2><p>Estimado/a,  " + nombre + ":</p><p> Hoy " + fecha + " Ha recibido una encomienda a nombre de "+ destinatario + " para obtener mas informacion ingrese al apartado de encomiendas de la pagina de managcond </p><a href=" + link + ">Mas Info</a><p> Si no realizaste esta modificación o si cree que alguien ha accedido a su cuenta sin autorización, visita <a href =" + link + "> ManagCond </a> para restablecer su contraseña inmediatamente</p><p> Si necesita ayuda adicional, comunícate con Soporte técnico de ManagCond.</p><p> Atentamente,</p><p> Administración </p><br><div style = 'text-align: center;'><img style='width: 100px' src = 'https://managcondstorage.blob.core.windows.net/fotos/2022/11/3/logo.png?sp=r&st=2022-10-29T04:27:40Z&se=2023-01-31T12:27:40Z&spr=https&sv=2021-06-08&sr=c&sig=D9P23%2FM2m24SojVnKloNP3KCNGM5j%2B1NiTTVZqsHd6I%3D' /> </div> ";
+            string body = @"<h2>Encomienda</h2><p>Estimado/a,  " + nombre + ":</p><p> Hoy " + fecha + " Ha recibido una encomienda a nombre de "+ destinatario + " para obtener mas informacion ingrese al apartado de encomiendas de la pagina de managcond </p><a href=" + link + ">Mas Info</a><p> Atentamente,</p><p> Administración </p><br><div style = 'text-align: center;'><img style='width: 100px' src = 'https://managcondstorage.blob.core.windows.net/fotos/2022/11/3/logo.png?sp=r&st=2022-10-29T04:27:40Z&se=2023-01-31T12:27:40Z&spr=https&sv=2021-06-08&sr=c&sig=D9P23%2FM2m24SojVnKloNP3KCNGM5j%2B1NiTTVZqsHd6I%3D' /> </div> ";
 
             SmtpClient oSmtpCliente = new SmtpClient("smtp.office365.com")
             {

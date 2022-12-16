@@ -210,6 +210,53 @@ namespace Dao
             return gastosComunes;
         }
 
+
+        public static GastosComunes ObtenerDatosUltimoPago(int idCond, int idDpto)
+        {
+            GastosComunes gastosComunes = null;
+
+            Conexion con = new Conexion();
+            string sCnn = con.Conectar();
+
+            string sSel = "EXEC sp_obtener_ultimo_pago @idCond = " + idCond + ", @idDpto = " + idDpto + " ";
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            try
+            {
+                da = new SqlDataAdapter(sSel, sCnn);
+                da.Fill(dt);
+
+
+                int id = int.Parse(dt.Rows[0][0].ToString());
+
+                string numDpto = dt.Rows[0][2].ToString();
+                int mesCobro = int.Parse(dt.Rows[0][3].ToString());
+                int añoCobro = int.Parse(dt.Rows[0][4].ToString());
+                DateTime fechaEmision = Convert.ToDateTime(dt.Rows[0][5]);
+                DateTime fechaVencimiento = Convert.ToDateTime(dt.Rows[0][6]);
+                int gastoComun = int.Parse(dt.Rows[0][7].ToString());
+                int fondoReserva = int.Parse(dt.Rows[0][8].ToString());
+                int multas = int.Parse(dt.Rows[0][9].ToString());
+                int diasAtraso = int.Parse(dt.Rows[0][10].ToString());
+                int moraPeriodo = int.Parse(dt.Rows[0][11].ToString());
+                int varios = int.Parse(dt.Rows[0][12].ToString());
+
+                int estado = int.Parse(dt.Rows[0][14].ToString());
+                DateTime fechaPago = Convert.ToDateTime(dt.Rows[0][15]);
+                int totalPagar = int.Parse(dt.Rows[0][16].ToString());
+
+
+                gastosComunes = new GastosComunes(id, idDpto, numDpto, mesCobro, añoCobro, fechaEmision, fechaVencimiento, gastoComun, fondoReserva, multas, diasAtraso, moraPeriodo, varios, idCond, estado, fechaPago, totalPagar);
+
+
+            }
+            catch (Exception)
+            {
+                //Label1.Text = "Error: " + ex.Message;
+            }
+            return gastosComunes;
+        }
+
         public static bool PagoRealizado(int id)
         {
 
@@ -379,6 +426,40 @@ namespace Dao
             int totalGastosComunes = 0;
 
             string sSel = "SELECT COUNT(*) FROM dbo.gastosComunes WHERE estado = 2 AND idDpto = '" + idDpto + "' ";
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            try
+            {
+                da = new SqlDataAdapter(sSel, sCnn);
+                da.Fill(dt);
+
+                int totalFilas = dt.Rows.Count;
+                int fila = 0;
+
+                for (; fila < totalFilas; fila++)
+                {
+                    totalGastosComunes = int.Parse(dt.Rows[fila][0].ToString());
+
+                }
+            }
+            catch (Exception)
+            {
+                //Label1.Text = "Error: " + ex.Message;
+            }
+            return totalGastosComunes;
+        }
+
+        public static int ObtenerDeudaTotal(int idDpto, int idCondominio)
+        {
+            ObtenerDatosGastosComunes(idCondominio);
+            alGastosComunes.Clear();
+
+            Conexion con = new Conexion();
+            string sCnn = con.Conectar();
+
+            int totalGastosComunes = 0;
+
+            string sSel = "EXEC sp_obtener_deuda_total @idCond = " + idCondominio + ", @idDpto = " + idDpto + "";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try

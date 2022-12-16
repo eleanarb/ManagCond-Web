@@ -51,24 +51,6 @@ namespace ManagCond.Administrador
         protected global::System.Web.UI.WebControls.TextBox TextBoxMonto;
 
         /// <summary>
-        /// Control DropDownListHoraIncio.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListHoraIncio;
-
-        /// <summary>
-        /// Control DropDownListHoraFin.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListHoraFin;
-
-        /// <summary>
         /// Control ButtonAgregar.
         /// </summary>
         /// <remarks>

@@ -173,6 +173,9 @@
     <Content Include="assets\img\login-office.jpeg" />
     <Content Include="assets\img\logo.png" />
     <Content Include="assets\img\notImage.jpg" />
+    <Content Include="assets\img\paquete.png" />
+    <Content Include="assets\img\profile.jpg" />
+    <Content Include="assets\img\reserva.png" />
     <Content Include="assets\img\twitter.svg" />
     <Content Include="assets\js\calendarscript.js" />
     <Content Include="assets\js\charts-bars.js" />

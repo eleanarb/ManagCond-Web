@@ -34,7 +34,7 @@ namespace Dao
         public static void ObtenerDatosVisitaTOPR(int idNumDpto, int idCond)
         {
             alVisitas.Clear();
-            string strSql = String.Format("SELECT TOP 10 V.id, D.numDpto, V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.id_Cond FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id where V.numDpto = {0} and V.id_Cond = {1} ORDER BY fecha DESC,hora DESC", idNumDpto, idCond);
+            string strSql = String.Format("SELECT TOP (3) V.id, D.numDpto, V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.id_Cond FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id where V.numDpto = {0} and V.id_Cond = {1} ORDER BY fecha DESC,hora DESC", idNumDpto, idCond);
 
             using (SqlConnection con = new SqlConnection(conBD))
             {
@@ -68,7 +68,7 @@ namespace Dao
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            string sSel = "SELECT V.id, D.numDpto as 'numDpto', V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.numDpto FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id WHERE V.numDpto =" + numDpto + " AND V.id_Cond =" + idCond + " AND V.estado IN (2,3) AND MONTH(V.fecha)="+ mes2 +" AND YEAR(V.fecha)="+ año2 +" ORDER BY fecha DESC, hora DESC";
+            string sSel = "SELECT V.id, D.numDpto as 'numDpto', V.rut, V.nombres, V.apellidos, V.fecha, V.hora, V.patente, E.descripcion as 'estado', V.numDpto FROM visitas V JOIN estadoVisita E ON V.estado = E.id JOIN departamento D ON V.numDpto = D.id WHERE V.numDpto =" + numDpto + " AND V.id_Cond =" + idCond + " AND V.estado IN (2,3) AND MONTH(V.fecha)=" + mes2 + " AND YEAR(V.fecha)=" + año2 + " ORDER BY fecha DESC, hora DESC";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -175,7 +175,7 @@ namespace Dao
                 {
                     Conexion c = new Conexion();
                     sCnn = c.Conectar();
-                    string sSel = "EXECUTE sp_agregar_visitasR @numDpto = " + numDpto + ", @rut = '" + rut + "', @nombres = '" + nombres + "', @apellidos= '" + apellidos + "',@fecha= '"+ fecha +"', @patente= '" + patente + "' , @idCond= " + idCond + ", @estado=4";
+                    string sSel = "EXECUTE sp_agregar_visitasR @numDpto = " + numDpto + ", @rut = '" + rut + "', @nombres = '" + nombres + "', @apellidos= '" + apellidos + "',@fecha= '" + fecha + "', @patente= '" + patente + "' , @idCond= " + idCond + ", @estado=4";
 
                     SqlDataAdapter da;
                     DataTable dt = new DataTable();
@@ -217,16 +217,16 @@ namespace Dao
             }
             return estado;
         }
-        public static int ObtenerTotalVisitasPendientes(int idCond, int idDpto)
+        public static int ObtenerTotalVisitasPendientes(int idDpto)
         {
             alVisitas.Clear();
 
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            int totalReservas = 0;
+            int totalVisitas = 0;
 
-            string sSel = "select count(*) from visitas where estado = 1 and id_cond = '" + idCond + "' AND numDpto= " + idDpto + " ";
+            string sSel = "select COUNT(*) from visitas where estado = 1 and numDpto =  " + idDpto + " ";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -239,7 +239,7 @@ namespace Dao
 
                 for (; fila < totalFilas; fila++)
                 {
-                    totalReservas = int.Parse(dt.Rows[fila][0].ToString());
+                    totalVisitas = int.Parse(dt.Rows[fila][0].ToString());
 
                 }
             }
@@ -247,7 +247,7 @@ namespace Dao
             {
                 //Label1.Text = "Error: " + ex.Message;
             }
-            return totalReservas;
+            return totalVisitas;
         }
         public static bool AprobarVisita(int id)
         {

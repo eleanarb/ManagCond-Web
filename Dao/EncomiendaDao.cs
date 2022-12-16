@@ -21,6 +21,39 @@ namespace Dao
             ObtenerDatosEncomiendaTOPR(numDpto, idCond);
             return alEncomiendas;
         }
+
+        public static int ObtenerTotalEncomiendasPendientes(int idDpto)
+        {
+            alEncomiendas.Clear();
+
+            Conexion con = new Conexion();
+            string sCnn = con.Conectar();
+
+            int totalEncomiendas = 0;
+
+            string sSel = "select COUNT(*) from encomienda where estado = 2 and numDpto =  " + idDpto + " ";
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            try
+            {
+                da = new SqlDataAdapter(sSel, sCnn);
+                da.Fill(dt);
+
+                int totalFilas = dt.Rows.Count;
+                int fila = 0;
+
+                for (; fila < totalFilas; fila++)
+                {
+                    totalEncomiendas = int.Parse(dt.Rows[fila][0].ToString());
+
+                }
+            }
+            catch (Exception)
+            {
+                //Label1.Text = "Error: " + ex.Message;
+            }
+            return totalEncomiendas;
+        }
         public static List<Encomienda> ObtenerDatosEncomienda(int idNumDpto, int idCond, int mes, int año)
         {
             alEncomiendas.Clear();
@@ -28,7 +61,7 @@ namespace Dao
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            string sSel = "SELECT E.id, D.numDpto as 'numDpto', E.destinatario, E.fecha, E.hora, E.descripcion, E.imagen, EE.descripcion as 'estado', E.recepcion FROM encomienda E JOIN departamento D ON E.numDpto = D.id JOIN estadoEncomienda EE ON E.estado = EE.id WHERE E.numDpto = " + idNumDpto + " AND E.estado = 1 AND E.id_Cond =" + idCond + " AND MONTH(E.fecha)= "+ mes +" AND YEAR(E.fecha)= "+ año + " ORDER BY fecha DESC,hora DESC";
+            string sSel = "SELECT E.id, D.numDpto as 'numDpto', E.destinatario, E.fecha, E.hora, E.descripcion, E.imagen, EE.descripcion as 'estado', E.recepcion FROM encomienda E JOIN departamento D ON E.numDpto = D.id JOIN estadoEncomienda EE ON E.estado = EE.id WHERE E.numDpto = " + idNumDpto + " AND E.estado = 1 AND E.id_Cond =" + idCond + " AND MONTH(E.fecha)= " + mes + " AND YEAR(E.fecha)= " + año + " ORDER BY fecha DESC,hora DESC";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -106,7 +139,7 @@ namespace Dao
         public static void ObtenerDatosEncomiendaTOPR(int idNumDpto, int idCond)
         {
             alEncomiendas.Clear();
-            string strSql = String.Format("SELECT TOP 10 E.id, D.numDpto, E.destinatario, E.fecha, E.hora, E.descripcion, E.imagen, EE.descripcion as 'estado', E.recepcion FROM encomienda E JOIN estadoEncomienda EE ON E.estado = EE.Id JOIN departamento D ON E.numDpto = D.id where E.numDpto = {0} and E.id_Cond = {1} ORDER BY fecha DESC,hora DESC", idNumDpto, idCond);
+            string strSql = String.Format("SELECT TOP 3 E.id, D.numDpto, E.destinatario, E.fecha, E.hora, E.descripcion, E.imagen, EE.descripcion as 'estado', E.recepcion FROM encomienda E JOIN estadoEncomienda EE ON E.estado = EE.Id JOIN departamento D ON E.numDpto = D.id where E.numDpto = {0} and E.id_Cond = {1} ORDER BY fecha DESC,hora DESC", idNumDpto, idCond);
 
             using (SqlConnection con = new SqlConnection(conBD))
             {

@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace Dao
 {
-    public class  ReservaDao
+    public class ReservaDao
     {
         private static readonly List<Reserva> alReservas = new List<Reserva>();
         private static readonly Conexion con = new Conexion();
@@ -34,6 +34,39 @@ namespace Dao
             int totalReservas = 0;
 
             string sSel = "select count(*) from reservasEspacios where estado = 1 and id_cond = '" + idCond + "' ";
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            try
+            {
+                da = new SqlDataAdapter(sSel, sCnn);
+                da.Fill(dt);
+
+                int totalFilas = dt.Rows.Count;
+                int fila = 0;
+
+                for (; fila < totalFilas; fila++)
+                {
+                    totalReservas = int.Parse(dt.Rows[fila][0].ToString());
+
+                }
+            }
+            catch (Exception)
+            {
+                //Label1.Text = "Error: " + ex.Message;
+            }
+            return totalReservas;
+        }
+
+        public static int ObtenerTotalReservasPendientesDpto(int dpto)
+        {
+            alReservas.Clear();
+
+            Conexion con = new Conexion();
+            string sCnn = con.Conectar();
+
+            int totalReservas = 0;
+
+            string sSel = "select count(*) from reservasEspacios where estado = 2 and numDpto = '" + dpto + "' ";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -124,7 +157,7 @@ namespace Dao
             }
         }
 
-        public static bool AprobarReserva (int id)
+        public static bool AprobarReserva(int id)
         {
 
             bool estado = false;
@@ -148,10 +181,11 @@ namespace Dao
                 for (; fila < totalFilas; fila++)
                 {
                     exit = int.Parse(dt.Rows[fila][0].ToString());
-                    if(exit == 1)
+                    if (exit == 1)
                     {
                         estado = true;
-                    }else if(exit == 0)
+                    }
+                    else if (exit == 0)
                     {
                         estado = false;
                     }
@@ -259,7 +293,7 @@ namespace Dao
             }
         }
         //Residente
-        public static List<Reserva> GetAlReservasTOPR(string numDpto, int idCond)
+        public static List<Reserva> GetAlReservasTOPR(int numDpto, int idCond)
         {
             ObtenerReservasTOPR(numDpto, idCond);
             return alReservas;
@@ -274,14 +308,14 @@ namespace Dao
             ObtenerReservasRP(numDpto, idCond, mes2, año2);
             return alReservas;
         }
-        public static void ObtenerReservasTOPR(string numDpto, int idCond)
+        public static void ObtenerReservasTOPR(int numDpto, int idCond)
         {
             alReservas.Clear();
 
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            string sSel = "SELECT TOP 10 * FROM reservasEspacios INNER JOIN espaciosComunes ON reservasEspacios.espacioComun = espaciosComunes.id where reservasEspacios.numDpto = " + numDpto + " and reservasEspacios.id_Cond = " + idCond + "";
+            string sSel = "SELECT TOP 3 * FROM reservasEspacios INNER JOIN espaciosComunes ON reservasEspacios.espacioComun = espaciosComunes.id where reservasEspacios.numDpto = " + numDpto + " and reservasEspacios.id_Cond = " + idCond + "";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try

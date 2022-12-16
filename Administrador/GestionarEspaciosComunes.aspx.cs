@@ -32,13 +32,9 @@ namespace ManagCond.Administrador
             string descripcion = TextBoxDesc.Text;
             int monto = int.Parse(TextBoxMonto.Text);
 
-            string horaInicio = DropDownListHoraIncio.SelectedItem.ToString();
-            string horaFin = DropDownListHoraFin.SelectedItem.ToString();
-            string rangoHorario = horaInicio+"-"+horaFin;
-
             int idCond = int.Parse(Session["idCondominio"].ToString());
 
-            if (EspacioComunDao.AgregarEspacioComun(nombre, descripcion, monto, rangoHorario, idCond))
+            if (EspacioComunDao.AgregarEspacioComun(nombre, descripcion, monto, idCond))
             {
                 Response.Redirect("GestionarEspaciosComunes.aspx");
             }
@@ -50,7 +46,15 @@ namespace ManagCond.Administrador
 
         protected void ButtoEliminar_Click(object sender, EventArgs e)
         {
-
+            int id = int.Parse(TextBoxIdEliminar.Value);
+            if (EspacioComunDao.EliminaEspacioComun(id))
+            {
+                Response.Redirect("GestionarEspaciosComunes.aspx");
+            }
+            else
+            {
+                Response.Redirect("GestionarEspas.aspx");
+            }
         }
     }
 }

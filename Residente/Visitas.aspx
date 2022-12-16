@@ -58,7 +58,7 @@
                                 <%
                                     Usuario usuario = (Usuario)Session["usuario"];
 
-                                    int totalVisitasP = VisitaDao.ObtenerTotalVisitasPendientes(usuario.IdCond, int.Parse(usuario.numDpto));
+                                    int totalVisitasP = VisitaDao.ObtenerTotalVisitasPendientes(int.Parse(usuario.numDpto));
 
                                     if (totalVisitasP == 0)
                                     { %>
