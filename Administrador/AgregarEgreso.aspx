@@ -117,7 +117,7 @@
         </div>
     </div>
     <script>
-        var letras = /^[a-zA-Z]+$/;
+        var letras = /^[a-zA-Z ]+$/;
         var numeros = /^[0-9]+$/;
 
         $('#TextBoxMontoModal').on('keyup', function () {

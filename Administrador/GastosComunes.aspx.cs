@@ -64,6 +64,18 @@ namespace ManagCond.Administrador
 
         protected void ButtonGenerarPdf_Click(object sender, EventArgs e)
         {
+            int idCond = int.Parse(Session["idCondominio"].ToString());
+            int totalResidentes = ResidenteDao.ObtenerTotalResidentes(idCond);
+            int totalFilas = totalResidentes;
+            int fila = 0;
+
+            for (; fila < totalFilas; fila++)
+            {
+                Model.Residente residente1 = ResidenteDao.ObtenerDatosResidenteN(idCond);
+                Usuario usuario = (Usuario)Session["usuario"];
+                Model.Residente residente = ResidenteDao.ObtenerDatosResidenteNotifiacion(residente1.NumDpto, usuario.IdCond);
+                Notificacion(residente.CorreoResidente);
+            }
 
             // read parameters from the webpage
             string url = "https://www.google.cl/";
@@ -110,25 +122,6 @@ namespace ManagCond.Administrador
 
             // close pdf document
             doc.Close();
-        }
-
-        public DataTable DtAlumno()
-        {
-            DataTable dt = new DataTable();
-            using (SqlConnection conn = new SqlConnection(conBD))
-            {
-                SqlCommand cmd = new SqlCommand
-                {
-                    CommandType = CommandType.StoredProcedure,
-                    CommandText = "sp_gastosComunes",
-                    Connection = conn
-                };
-                conn.Open();
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
-                da.Dispose();
-            }
-            return dt;
         }
         protected void Notificacion(string EmailDestino)
         {

@@ -122,7 +122,7 @@
     </div>
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
     <script>
-        var letras = /[a-záéíóúñA-ZÁÉÍÓÚÑ ]+$/;
+        var letras = /[a-zA-Z ]+$/;
         var numeros = /^[0-9]+$/;
 
         $('#TextBoxNombre').on('keyup', function () {

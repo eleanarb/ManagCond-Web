@@ -82,7 +82,7 @@
         </div>
     </div>
     <script>
-        var letras = /^[a-zA-Z]+$/;
+        var letras = /^[a-zA-Z ]+$/;
 
         $('#TextBoxSolicitante').on('keyup', function () {
             if (!letras.test($('#TextBoxSolicitante').val())) {
