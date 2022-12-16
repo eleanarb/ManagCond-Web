@@ -146,7 +146,7 @@
                                     class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                                     <%
                                         DateTime fechaActual = System.DateTime.Now;
-                                        int mesActual = int.Parse(fechaActual.ToString("MM"));
+                                        int mesActual = int.Parse(fechaActual.ToString("MM")) -1;
                                         int añoActual = int.Parse(fechaActual.ToString("yyyy"));
                                         string depto = "";
                                         foreach (GastosComunes obj in GastosComunesDao.GetAlGastosComunesV(idCondominio, mesActual, añoActual, depto))
