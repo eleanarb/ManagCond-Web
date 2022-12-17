@@ -19,6 +19,7 @@ namespace ManagCond.Guardia
             {
                 LlenarDropDownListModal();
                 LlenarDropDownListBuscar();
+                DropDownListBuscar.SelectedValue = "0";
             }
             if (Session["usuario"] == null)
             {
@@ -82,7 +83,22 @@ namespace ManagCond.Guardia
             DropDownListBuscar.DataTextField = "nombre";
             DropDownListBuscar.DataValueField = "id";
             DropDownListBuscar.DataBind();
+            DropDownListBuscar.Items.Insert(0, new ListItem("Todos", "0"));
 
+        }
+
+        protected void Categeoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Session["categoria"] = int.Parse(DropDownListBuscar.SelectedValue);
+
+            if (DropDownListBuscar.SelectedValue == "0")
+            {
+                Session["categoria"] = "";
+            }
+            else
+            {
+                Session["categoria"] = "and cf.id =  '" + DropDownListBuscar.SelectedValue + "'";
+            }
         }
     }
 }
