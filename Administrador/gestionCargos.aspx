@@ -284,21 +284,21 @@
 
         $('#TextBoxNombreModal').on('keyup', function () {
             if (!letras.test($('#TextBoxNombreModal').val())) {
-                $('#mensajeNombreModal').html('Ingrese nombre2 valido').css('color', 'red');
+                $('#mensajeNombreModal').html('Ingrese nombre valido').css('color', 'red');
 
             } else
                 $('#mensajeNombreModal').html('').css('color', 'green');
         });
         $('#TextBoxDescModal').on('keyup', function () {
             if (!letras.test($('#TextBoxDescModal').val())) {
-                $('#mensajeDescModal').html('Ingrese descripcion2 valida').css('color', 'red');
+                $('#mensajeDescModal').html('Ingrese descripcion valida').css('color', 'red');
 
             } else
                 $('#mensajeDescModal').html('').css('color', 'green');
         });
         $('#TextBoxMontoModal').on('keyup', function () {
             if (!numeros.test($('#TextBoxMontoModal').val())) {
-                $('#mensajeMontoModal').html('Ingrese monto2 valido').css('color', 'red');
+                $('#mensajeMontoModal').html('Ingrese monto valido').css('color', 'red');
 
             } else
                 $('#mensajeMontoModal').html('').css('color', 'green');
@@ -307,7 +307,7 @@
     <script>
         function validarFormulario(evento) {
             if (!letras.test($('#TextBoxNombreModal').val())) {
-                $('#mensajeNombreModal').html('Ingrese nombr2e valido').css('color', 'red');
+                $('#mensajeNombreModal').html('Ingrese nombre valido').css('color', 'red');
                 return false;
             } else {
             }

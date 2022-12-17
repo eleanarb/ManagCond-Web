@@ -167,6 +167,45 @@ namespace Dao
 
             return ingreso;
         }
+        public static bool BuscarDocumento(string documento, int idCond)
+        {
+            bool estado = false;
+            try
+            {
+                alIngresos.Clear();
+                string strSql = String.Format("SELECT * FROM ingresos WHERE documento = '{0}' AND idCond = {1} AND documento <> ''", documento, idCond);
+
+                using (SqlConnection con = new SqlConnection(conBD))
+                {
+                    SqlCommand cmd = new SqlCommand(strSql, con) { CommandType = CommandType.Text };
+                    con.Open();
+                    SqlDataReader sdr = cmd.ExecuteReader();
+
+                    while (sdr.Read())
+                    {
+                        int id = int.Parse(sdr["id"].ToString());
+                        string nombre = sdr["nombre"].ToString();
+                        string comentario = sdr["comentario"].ToString();
+                        int monto = int.Parse(sdr["monto"].ToString());
+                        int mesI = int.Parse(sdr["mes"].ToString());
+                        int añoI = int.Parse(sdr["año"].ToString());
+                        DateTime fecha = DateTime.Parse(sdr["fecha"].ToString());
+
+                        Ingreso ingreso = new Ingreso(id, nombre, comentario, monto, mesI, añoI, fecha, documento, idCond);
+
+                        alIngresos.Add(ingreso);
+                        estado = true;
+                    }
+                    con.Close();
+                }            
+            }
+            catch (Exception)
+            {
+
+            }
+
+            return estado;
+        }
         public static bool EliminarIngreso(int id)
         {
             bool estado = true;

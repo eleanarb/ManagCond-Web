@@ -82,7 +82,10 @@ namespace ManagCond
 
             if (EncomiendaDao.AgregarEncomienda(numDpto, destinatario, descripcion, fileNameBD, idCond, recepcion))
             {
-                _ = UploadBlop(fileName, filestream);
+                if (FileUploadEncomienda.Value != "")
+                {
+                    _ = UploadBlop(fileName, filestream);
+                }
                 Notificacion(EmailDestino, nombre, destinatario);
                 Response.Redirect("Encomiendas.aspx");
             }

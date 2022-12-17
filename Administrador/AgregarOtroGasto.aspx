@@ -117,7 +117,7 @@
         </div>
          </div>
         <script>
-            var letras = /^[a-zA-Z]+$/;
+            var letras = /^[a-zA-Z ]+$/;
             var numeros = /^[0-9]+$/;
 
             $('#TextBoxCantidad').on('keyup', function () {
@@ -152,7 +152,7 @@
                     $('#mensajeCargo').html('').css('color', 'green');
                 }
                 if (!numeros.test($('#TextBoxCantidad').val())) {
-                    $('#mensajeCantidad').html('Ingrese cantidad valida').css('color', 'red');
+                    $('#mensajeCantidad').html('Ingrese cantidad').css('color', 'red');
                     return false;
                 } else {
                 }
@@ -171,7 +171,7 @@
                     $('#mensajeAño').html('').css('color', 'green');
                 }
                 if (!letras.test($('#TextBoxDesc').val())) {
-                    $('#mensajeDesc').html('Ingrese descripcion valida').css('color', 'red');
+                    $('#mensajeDesc').html('Ingrese descripcion').css('color', 'red');
                     return false;
                 } else {
                     return true;

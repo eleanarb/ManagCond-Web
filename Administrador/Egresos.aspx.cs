@@ -1,8 +1,13 @@
 ﻿using Dao;
+using Model;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -58,14 +63,193 @@ namespace ManagCond.Administrador
                 estado = 1;
             }
 
-            if (EgresosDao.ModificarEgreso(id, proveedor, descripcion, categoria, fecha2, monto, estado))
+            int idF = int.Parse(TextBoxId.Value);
+            int idCondF = int.Parse(Session["idCondominio"].ToString());
+            string año = fecha.ToString("yyyy");
+            string mes = fecha.ToString("MM");
+
+            string fileNameBDCobro = "";
+            string fileNameCobro = "";
+            Stream filestreamCobro = FileUploadCobro.PostedFile.InputStream;
+
+            string fileNameBDComprobante = "";
+            string fileNameComprobante = "";
+            Stream filestreamComprobante = FileUploadComprobante.PostedFile.InputStream;
+
+            if (FileUploadCobro.Value != "" && FileUploadComprobante.Value != "")
             {
-                Response.Redirect("Egresos.aspx");
+                fileNameBDCobro = FileUploadCobro.Value;
+                fileNameCobro = año + "/" + mes + "/" + fileNameBDCobro;
+                filestreamCobro = FileUploadCobro.PostedFile.InputStream;
+
+                fileNameBDComprobante = FileUploadComprobante.Value;
+                fileNameComprobante = año + "/" + mes + "/" + fileNameBDComprobante;
+                filestreamComprobante = FileUploadComprobante.PostedFile.InputStream;
+
+
+                if (EgresosDao.BuscarDocumentoCobro(fileNameBDCobro, idCondF))
+                {
+                    int counter = 1;
+                    string tempfileName = "(" + counter.ToString() + ") " + fileNameBDCobro;
+                    while (EgresosDao.BuscarDocumentoCobro(tempfileName, idCondF))
+                    {
+
+                        tempfileName = "(" + counter.ToString() + ") " + fileNameBDCobro;
+                        counter++;
+                    }
+
+                    fileNameBDCobro = tempfileName;
+                    fileNameCobro = año + "/" + mes + "/" + fileNameBDCobro;
+                }
+
+                if (EgresosDao.BuscarComprobante(fileNameBDComprobante, idCondF))
+                {
+                    int counter = 1;
+                    string tempfileName = "(" + counter.ToString() + ") " + fileNameBDComprobante;
+                    while (EgresosDao.BuscarComprobante(tempfileName, idCondF))
+                    {
+
+                        tempfileName = "(" + counter.ToString() + ") " + fileNameBDComprobante;
+                        counter++;
+                    }
+
+                    fileNameBDComprobante = tempfileName;
+                    fileNameComprobante = año + "/" + mes + "/" + fileNameBDComprobante;
+                }
+            }
+
+            if (FileUploadCobro.Value != "" && FileUploadComprobante.Value == "")
+            {
+                fileNameBDCobro = FileUploadCobro.Value;
+                fileNameCobro = año + "/" + mes + "/" + fileNameBDCobro;
+                filestreamCobro = FileUploadCobro.PostedFile.InputStream;
+
+                Model.Egresos egreso = EgresosDao.BuscarEgreso(idF, idCondF);
+                fileNameBDComprobante = egreso.Comprobante;
+
+                if (EgresosDao.BuscarDocumentoCobro(fileNameBDCobro, idCondF))
+                {
+                    int counter = 1;
+                    string tempfileName = "(" + counter.ToString() + ") " + fileNameBDCobro;
+                    while (EgresosDao.BuscarDocumentoCobro(tempfileName, idCondF))
+                    {
+
+                        tempfileName = "(" + counter.ToString() + ") " + fileNameBDCobro;
+                        counter++;
+                    }
+
+                    fileNameBDCobro = tempfileName;
+                    fileNameCobro = año + "/" + mes + "/" + fileNameBDCobro;
+                }
+            }
+
+            if (FileUploadCobro.Value == "" && FileUploadComprobante.Value != "")
+            {
+                Model.Egresos egreso = EgresosDao.BuscarEgreso(idF, idCondF);
+                fileNameBDCobro = egreso.DocumentoCobro;
+
+                fileNameBDComprobante = FileUploadComprobante.Value;
+                fileNameComprobante = año + "/" + mes + "/" + fileNameBDComprobante;
+                filestreamComprobante = FileUploadComprobante.PostedFile.InputStream;
+
+                if (EgresosDao.BuscarComprobante(fileNameBDComprobante, idCondF))
+                {
+                    int counter = 1;
+                    string tempfileName = "(" + counter.ToString() + ") " + fileNameBDComprobante;
+                    while (EgresosDao.BuscarComprobante(tempfileName, idCondF))
+                    {
+
+                        tempfileName = "(" + counter.ToString() + ") " + fileNameBDComprobante;
+                        counter++;
+                    }
+
+                    fileNameBDComprobante = tempfileName;
+                    fileNameComprobante = año + "/" + mes + "/" + fileNameBDComprobante;
+                }
+            }
+
+            if (FileUploadCobro.Value == "" && FileUploadComprobante.Value == "")
+            {
+                Model.Egresos egreso = EgresosDao.BuscarEgreso(idF, idCondF);
+
+                fileNameBDCobro = egreso.DocumentoCobro;
+
+                fileNameBDComprobante = egreso.Comprobante;
+            }
+
+            if (EgresosDao.ModificarEgreso(id, proveedor, descripcion, categoria, fecha2, monto, estado, fileNameBDCobro, fileNameBDComprobante))
+            {
+                if (FileUploadCobro.Value != "" && FileUploadComprobante.Value != "")
+                {
+                    _ = UploadBlop(fileNameCobro, filestreamCobro);
+                    _ = UploadBlop2(fileNameComprobante, filestreamComprobante);
+                }
+
+                if (FileUploadCobro.Value != "" && FileUploadComprobante.Value == "")
+                {
+                    _ = UploadBlop(fileNameCobro, filestreamCobro);
+                }
+                if (FileUploadCobro.Value == "" && FileUploadComprobante.Value != "")
+                {
+                    _ = UploadBlop2(fileNameComprobante, filestreamComprobante);
+                }
+
+                    Response.Redirect("Egresos.aspx");
             }
             else
             {
                 Response.Redirect("f.aspx");
             }
+        }
+        public Boolean UploadBlop2(String filename, Stream filestream)
+        {
+            try
+            {
+                string storageAccount_connectionString = ConfigurationManager.AppSettings["connectionStringSA"].ToString();
+                string containerName = ConfigurationManager.AppSettings["containerArchivosSA"].ToString();
+
+                CloudStorageAccount mycloudStorageAccount = CloudStorageAccount.Parse(storageAccount_connectionString);
+                CloudBlobClient blobClient = mycloudStorageAccount.CreateCloudBlobClient();
+                CloudBlobContainer container = blobClient.GetContainerReference(containerName);
+
+                string file_extension = Path.GetExtension(filename);
+                string filename_withExtension = filename;
+
+                CloudBlockBlob cloudBlockBlob = container.GetBlockBlobReference(filename_withExtension);
+                cloudBlockBlob.Properties.ContentType = file_extension;
+                cloudBlockBlob.UploadFromStream(filestream);
+                filestream.Dispose();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+        public Boolean UploadBlop(String filename, Stream filestream)
+        {
+            try
+            {
+                string storageAccount_connectionString = ConfigurationManager.AppSettings["connectionStringSA"].ToString();
+                string containerName = ConfigurationManager.AppSettings["containerArchivosSA"].ToString();
+
+                CloudStorageAccount mycloudStorageAccount = CloudStorageAccount.Parse(storageAccount_connectionString);
+                CloudBlobClient blobClient = mycloudStorageAccount.CreateCloudBlobClient();
+                CloudBlobContainer container = blobClient.GetContainerReference(containerName);
+
+                string file_extension = Path.GetExtension(filename);
+                string filename_withExtension = filename;
+
+                CloudBlockBlob cloudBlockBlob = container.GetBlockBlobReference(filename_withExtension);
+                cloudBlockBlob.Properties.ContentType = file_extension;
+                cloudBlockBlob.UploadFromStream(filestream);
+                filestream.Dispose();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
         }
         protected void ButtonEliminar_Click(object sender, EventArgs e)
         {

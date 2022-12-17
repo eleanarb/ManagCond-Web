@@ -14,9 +14,9 @@ namespace Dao
         private static readonly List<Foro> alForo1 = new List<Foro>();
         private static readonly List<RespuestaForo> alRespuestas = new List<RespuestaForo>();
 
-        public static List<Foro> GetAlPublicacionesForo(int idCondominio)
+        public static List<Foro> GetAlPublicacionesForo(int idCondominio, string categoria)
         {
-            ObtenerPublicacionesForo(idCondominio);
+            ObtenerPublicacionesForo(idCondominio, categoria);
             return alForo1;
         }
 
@@ -71,14 +71,14 @@ namespace Dao
             return foro;
         }
 
-        public static void ObtenerPublicacionesForo(int idCondominio)
+        public static void ObtenerPublicacionesForo(int idCondominio, string sCategoria)
         {
             alForo1.Clear();
 
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
 
-            string sSel = "SELECT f.id, u.rut, concat(u.nombres, ' ', u.apellidos) as nombre, f.mensaje, f.fecha, f.hora, f.imagen, f.idCond, cf.nombre, cf.importancia, d.numDpto, u.tipoUsuario FROM foro f INNER JOIN categoriaForo cf ON f.categoria = cf.id INNER JOIN usuario u ON f.rut = u.rut INNER JOIN departamento d ON u.numDpto = d.id where f.idCond = '" + idCondominio + "' ";
+            string sSel = "SELECT f.id, u.rut, concat(u.nombres, ' ', u.apellidos) as nombre, f.mensaje, f.fecha, f.hora, f.imagen, f.idCond, cf.nombre, cf.importancia, d.numDpto, u.tipoUsuario FROM foro f INNER JOIN categoriaForo cf ON f.categoria = cf.id INNER JOIN usuario u ON f.rut = u.rut INNER JOIN departamento d ON u.numDpto = d.id where f.idCond = '" + idCondominio + "' " + sCategoria + " ";
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             try
@@ -99,7 +99,7 @@ namespace Dao
                     TimeSpan hora = TimeSpan.Parse(dt.Rows[fila][5].ToString());
                     String imagen = dt.Rows[fila][6].ToString();
                     int idCond = int.Parse(dt.Rows[fila][7].ToString());
-                    String categoria = dt.Rows[fila][8].ToString();                     
+                    String categoria = dt.Rows[fila][8].ToString();
                     int importancia = int.Parse(dt.Rows[fila][9].ToString());
                     String depto = dt.Rows[fila][10].ToString();
                     int tipoUsuario = int.Parse(dt.Rows[fila][11].ToString());
@@ -137,7 +137,7 @@ namespace Dao
                 {
                     int id = int.Parse(dt.Rows[fila][0].ToString());
                     int idForo2 = int.Parse(dt.Rows[fila][1].ToString());
-                    String mensaje = dt.Rows[fila][2].ToString(); 
+                    String mensaje = dt.Rows[fila][2].ToString();
                     String rut = dt.Rows[fila][3].ToString();
                     String nombre = dt.Rows[fila][4].ToString();
                     DateTime fecha = Convert.ToDateTime(dt.Rows[fila][5]);
@@ -159,7 +159,7 @@ namespace Dao
 
         public static int ObtenerTotalRespuestas(int idForo)
         {
-            
+
 
             Conexion con = new Conexion();
             string sCnn = con.Conectar();
@@ -251,53 +251,6 @@ namespace Dao
 
             return estado;
         }
-        public static bool EliminarMensajeForo(int id)
-        {
-            bool estado = true;
-            try
-            {
-                Conexion c = new Conexion();
-                string sCnn = c.Conectar();
 
-
-                string sSel = "EXEC sp_eliminar_mensajeForo @id = " + id + " ";
-
-                SqlDataAdapter da;
-                DataTable dt = new DataTable();
-
-                da = new SqlDataAdapter(sSel, sCnn);
-                da.Fill(dt);
-            }
-            catch (Exception)
-            {
-                estado = false;
-            }
-
-            return estado;
-        }
-        public static bool EliminarRespuestaForo(int id)
-        {
-            bool estado = true;
-            try
-            {
-                Conexion c = new Conexion();
-                string sCnn = c.Conectar();
-
-
-                string sSel = "EXEC sp_eliminar_respuestaForo @id = " + id + " ";
-
-                SqlDataAdapter da;
-                DataTable dt = new DataTable();
-
-                da = new SqlDataAdapter(sSel, sCnn);
-                da.Fill(dt);
-            }
-            catch (Exception)
-            {
-                estado = false;
-            }
-
-            return estado;
-        }
     }
 }

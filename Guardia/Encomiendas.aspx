@@ -136,7 +136,7 @@
                         </div>
                         <div
                             class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-                            <span class="flex items-center col-span-3">Showing 1-30 of 100
+                            <span class="flex items-center col-span-3">Mostrando 1-3 de 3
                             </span>
                             <span class="col-span-2"></span>
                             <!-- Pagination -->
@@ -309,7 +309,7 @@
                         </div>
                         <div
                             class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-                            <span class="flex items-center col-span-3">Showing 1-30 of 100
+                            <span class="flex items-center col-span-3">Mostrando 1-3 de 3
                             </span>
                             <span class="col-span-2"></span>
                             <!-- Pagination -->
@@ -494,11 +494,11 @@
             </main>
         </div>
     <script>
-        var letras = /[a-záéíóúñA-ZÁÉÍÓÚÑ ]+$/;
+        var letras = /[a-zA-Z ]+$/;
 
         $('#TextBoxDestinatario').on('keyup', function () {
             if (!letras.test($('#TextBoxDestinatario').val())) {
-                $('#mensajeDestinatario').html('Ingrese destinatario de manera correcta').css('color', 'red');
+                $('#mensajeDestinatario').html('Ingrese destinatario valido').css('color', 'red');
 
             } else
                 $('#mensajeDestinatario').html('').css('color', 'green');
@@ -514,7 +514,7 @@
                 $('#mensajeDepto').html('').css('color', 'green');
             }
             if (!letras.test($('#TextBoxDestinatario').val())) {
-                $('#mensajeDestinatario').html('Ingrese destinatario de manera correcta').css('color', 'red');
+                $('#mensajeDestinatario').html('Ingrese destinatario').css('color', 'red');
                 return false;
             } else {
                 return true;

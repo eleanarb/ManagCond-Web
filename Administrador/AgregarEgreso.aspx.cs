@@ -83,18 +83,47 @@ namespace ManagCond.Administrador
                 filestreamComprobante = FileUploadComprobante.PostedFile.InputStream;
             }
 
+            if (EgresosDao.BuscarDocumentoCobro(fileNameBDCobro, idCond))
+            {
+                int counter = 1;
+                string tempfileName = "(" + counter.ToString() + ") " + fileNameBDCobro;
+                while (EgresosDao.BuscarDocumentoCobro(tempfileName, idCond))
+                {
+
+                    tempfileName = "(" + counter.ToString() + ") " + fileNameBDCobro;
+                    counter++;
+                }
+
+                fileNameBDCobro = tempfileName;
+                fileNameCobro = año + "/" + mes + "/" + fileNameBDCobro;
+            }
+
+            if (EgresosDao.BuscarComprobante(fileNameBDComprobante, idCond))
+            {
+                int counter = 1;
+                string tempfileName = "(" + counter.ToString() + ") " + fileNameBDComprobante;
+                while (EgresosDao.BuscarComprobante(tempfileName, idCond))
+                {
+
+                    tempfileName = "(" + counter.ToString() + ") " + fileNameBDComprobante;
+                    counter++;
+                }
+
+                fileNameBDComprobante = tempfileName;
+                fileNameComprobante = año + "/" + mes + "/" + fileNameBDComprobante;
+            }
+
             if (EgresosDao.AgregarEgreso(proveedor, descripcion, categoria, fecha2, monto, estado, fileNameBDCobro, fileNameBDComprobante, idCond))
             {
                 if (FileUploadCobro.Value != "")
                 {
                     _ = UploadBlop(fileNameCobro, filestreamCobro);
-                    _ = UploadBlop2(fileNameComprobante, filestreamComprobante);
-                    Response.Redirect("Egresos.aspx");
                 }
-                if (FileUploadCobro.Value == "")
+                if (FileUploadComprobante.Value != "")
                 {
-                    Response.Redirect("Egresos.aspx");
+                    _ = UploadBlop2(fileNameComprobante, filestreamComprobante);
                 }
+                Response.Redirect("Egresos.aspx");
             }
             else
             {

@@ -122,22 +122,22 @@
                 $('#mensajeTrabajador').html('').css('color', 'green');
             }
             if (!numeros.test($('#TextBoxHorasExtras').val())) {
-                $('#mensajeHorasExtras').html('Ingrese horas extras validas').css('color', 'red');
+                $('#mensajeHorasExtras').html('Ingrese horas extras').css('color', 'red');
                 return false;
             } else {
             }
             if (!numeros.test($('#TextBoxBonos').val())) {
-                $('#mensajeBonos').html('Ingrese bono valido').css('color', 'red');
+                $('#mensajeBonos').html('Ingrese bono').css('color', 'red');
                 return false;
             } else {
             }
             if (!numeros.test($('#TextBoxDiasNoTrabajados').val())) {
-                $('#mensajeDiasNoTrabajados').html('Ingrese dias no trabajados validos').css('color', 'red');
+                $('#mensajeDiasNoTrabajados').html('Ingrese dias no trabajados').css('color', 'red');
                 return false;
             } else {
             }
             if (!numeros.test($('#TextBoxOtrosDescuentos').val())) {
-                $('#mensajeOtrosDescuentos').html('Ingrese otros descuentos validos').css('color', 'red');
+                $('#mensajeOtrosDescuentos').html('Ingrese otros descuentos').css('color', 'red');
                 return false;
             } else {
                 return true;

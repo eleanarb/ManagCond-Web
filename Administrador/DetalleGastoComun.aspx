@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DetalleGastoComun.aspx.cs" Inherits="ManagCond.Template.DetalleGastoComun" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DetalleGastoComun.aspx.cs" Inherits="ManagCond.Administrador.DetalleGastoComun" %>
 <%@ Import Namespace="Model" %>
 <%@ Import Namespace="Dao" %>
 
@@ -11,22 +11,52 @@
     <link rel="stylesheet" href="../assets/css/factura.css" media="all"/>
 </head>
 <body>
+    <form runat="server">
     <div class="control-bar">
         <div class="container">
-            <div class="row">
-                <div class="col-2-4">
-                    <div class="slogan"><a href="GastosComunes.aspx">Volver</a></div>
+            <div class="row ">
+                <div class="col-2 ">                     
+                        <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListMes" runat="server" OnSelectedIndexChanged="Mes_SelectedIndexChanged" AutoPostBack="true">
+                            <asp:ListItem Value="01">Enero</asp:ListItem>
+                            <asp:ListItem Value="02">Febrero</asp:ListItem>
+                            <asp:ListItem Value="03">Marzo</asp:ListItem>
+                            <asp:ListItem Value="04">Abril</asp:ListItem>
+                            <asp:ListItem Value="05">Mayo</asp:ListItem>
+                            <asp:ListItem Value="06">Junio</asp:ListItem>
+                            <asp:ListItem Value="07">Julio</asp:ListItem>
+                            <asp:ListItem Value="08">Agosto</asp:ListItem>
+                            <asp:ListItem Value="09">Septiembre</asp:ListItem>
+                            <asp:ListItem Value="10">Octubre</asp:ListItem>
+                            <asp:ListItem Value="11">Noviembre</asp:ListItem>
+                            <asp:ListItem Value="12">Diciembre</asp:ListItem>
+                        </asp:DropDownList>
 
+                        <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListAño" runat="server" OnSelectedIndexChanged="Año_SelectedIndexChanged" AutoPostBack="true">
+                            <asp:ListItem Value="2019">2019</asp:ListItem>
+                            <asp:ListItem Value="2020">2020</asp:ListItem>
+                            <asp:ListItem Value="2022">2022</asp:ListItem>
+                            <asp:ListItem Value="2023">2023</asp:ListItem>
+                            <asp:ListItem Value="2024">2024</asp:ListItem>
+                            <asp:ListItem Value="2025">2025</asp:ListItem>
+                            <asp:ListItem Value="2026">2026</asp:ListItem>
+                        </asp:DropDownList>                   
                 </div>
-                <div class="col-4 text-right">
-                    <a href="javascript:window.print()">Imprimir</a>
+
+                <div class="col-2">
+                     <div class="slogan"><a href="GastosComunes.aspx">Volver</a> &nbsp  <a href="javascript:window.print()">Imprimir</a></div>
+                    
                 </div>
+
+
+                    
+
                 <!--.col-->
             </div>
             <!--.row-->
         </div>
         <!--.container-->
     </div>
+        </form>
     <!--.control-bar-->
 
     <header class="row">
@@ -34,25 +64,19 @@
             <img style="width:100%" src="../assets/img/logo.png" />
         </div>
         <%
-            int id = int.Parse(Request.QueryString["id"]);
-            int idCondominio = (int)Session["idCond"];
-            int idDpto = int.Parse((string)Session["numDpto"]);   
-            Usuario usuario = (Usuario)Session["usuario"];
+            int idCondominio = (int)Session["idCondominio"];
             Condominio cond = CondominioDao.ObtenerDatosCondominio(idCondominio);
-            Departamento dpto = DepartamentoDao.ObtenerDatosDepartamento(idDpto);
-            GastosComunes gc = GastosComunesDao.ObtenerDatosGastoComun(idCondominio, id);
 
-            int vMes = gc.MesCobro;
-            int vAño = gc.AñoCobro;
+             int vMes = (int)Session["mes"];
+             int vAño = (int)Session["año"];
             Balance balance = BalanceDao.ObtenerDatosBalance(idCondominio, vMes, vAño);
             int totalLiquidaciones = LiquidacionesDao.ObtenerTotalLiquidaciones(vMes, vAño, idCondominio, "");
             int totalCategorias = EgresosDao.ObtenerTotalCategoriaEgresos(idCondominio, vMes, vAño);
             int totalIngresos = IngresosDao.ObtenerTotalIngresos(vMes, vAño, idCondominio);
 
-            decimal prorrateo = dpto.Prorrateo * 100;
             string mes = "";
-            if( gc.MesCobro == 1){mes = "Enero"; } if( gc.MesCobro == 2){mes = "Febrero"; } if( gc.MesCobro == 3){mes = "Marzo"; } if( gc.MesCobro == 4){mes = "Abril"; } if( gc.MesCobro == 5){mes = "Mayo"; } if( gc.MesCobro == 6){mes = "Junio"; } if( gc.MesCobro == 7){mes = "Julio"; } if( gc.MesCobro == 8){mes = "Agosto"; } if( gc.MesCobro == 9){mes = "Septiembre"; } if( gc.MesCobro == 10){mes = "Octubre"; } if( gc.MesCobro == 11){mes = "Noviembre"; } if( gc.MesCobro == 12){mes = "Diciembre"; }
-                    
+            if( vMes == 1){mes = "Enero"; } if( vMes == 2){mes = "Febrero"; } if( vMes == 3){mes = "Marzo"; } if( vMes == 4){mes = "Abril"; } if( vMes == 5){mes = "Mayo"; } if( vMes == 6){mes = "Junio"; } if( vMes == 7){mes = "Julio"; } if( vMes == 8){mes = "Agosto"; } if( vMes == 9){mes = "Septiembre"; } if( vMes == 10){mes = "Octubre"; } if( vMes == 11){mes = "Noviembre"; } if( vMes == 12){mes = "Diciembre"; }
+
         %>
 
         <div class="me">
@@ -86,108 +110,11 @@
 
         <div class="col-2">
 
-
-            <p class="client">
-                <strong>Propietario:  </strong><%=usuario.NombrePropietario %><br />
-                <strong>Copropietario: </strong><%=usuario.Nombres %> <%=usuario.Apellidos %> <br />
-                <strong>Unidad:  </strong><%=dpto.NumDpto%><br />
-            </p>
         </div>
         <!--.col-->
 
-
-        <div class="col-2">
-
-            <p class="client">
-                <strong>Mes de cobro: </strong><%=mes %> - <%=gc.AñoCobro %><br />
-                <strong>Vencimiento: </strong><%=gc.FechaVencimiento.ToString("dddd, dd MMMM yyyy") %><br />
-                <strong>Prorrateo: </strong><%=prorrateo %>%<br />
-            </p>
-        </div>
-        <!--.col-->
-
-
-
     </div>
 
-    <div class="invoicelist-body">
-        <table class="styled-table">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr style="margin: -5.5% 0;">
-                    <td>Total Gasto Común</td>
-                    <td>$ <%=balance.TotalGastoComun.ToString("N0") %></td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="styled-table" >
-            <thead style="border-collapse: collapse; border: none">
-                <tr>
-                    <th>Detalle de su Gasto Común</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr style="background-color: white;">
-                    <td style="padding-bottom: 0;">Gastos común</td>
-                    <td style="padding-bottom: 0;">$<%=gc.TotalPagar.ToString("N0") %></td>
-                </tr>
-                <tr style="background-color: white; ">
-                    <td style="padding-bottom: 0;">Fondo reserva</td>
-                    <td style="padding-bottom: 0;">$<%=gc.FondoReserva.ToString("N0") %></td>
-                </tr>
-                <tr style="background-color: white">
-                    <td style="padding-bottom: 0;">Intereses por atraso</td>
-                    <td style="padding-bottom: 0;">$<%=gc.MoraPeriodo.ToString("N0") %></td>
-                </tr>
-                <tr style="background-color: white">
-                    <td style="padding-bottom: 0;">Cargos</td>
-                    <td style="padding-bottom: 0;">$<%=gc.Varios.ToString("N0") %></td>
-                </tr >
-                <tr style="background-color: white">
-                    <td style="padding-bottom: 0;">Multas</td>
-                    <td style="padding-bottom: 0;">$<%=gc.Multas.ToString("N0")%> </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!--.invoice-body-->
-
-    <div class="invoicelist-footer">
-        <table>
-            <tr class="">
-                <td width="85%"><strong>TOTAL A PAGAR:</strong> </td>
-                <td id="total_tax"><strong><%=gc.TotalPagar.ToString("N0") %></strong></td>
-            </tr>
-        </table>
-    </div>
-
-    <div class="note">
-        <h2>Nota:</h2>
-    </div>
-    <!--.note-->
-
-    <footer class="row">
-        <div class="col-1">
-            <p class="notaxrelated">Para pagar vía transferencia electrónica los datos son: <br />
-                <strong>Banco:</strong> BCI <br />
-                <strong>Tipo de Cuenta:</strong> Vista <br />
-                <strong>N° de Cuenta:</strong> 7770 26 638 804  <br />
-                <strong>Rut:</strong> 65.256.563-7 <br />
-                <strong>Correo:</strong> managcond@outlook.com <br />
-                Enviar el comprobante de la transferencia indicando el número de la unidad. 
-            </p>
-
-        </div>
-    </footer>
-
-    <br /><br /><br /><br />
 
     <div class="invoicelist-body">
          <table class="styled-table" >
@@ -292,3 +219,4 @@
 
 </body>
 </html>
+

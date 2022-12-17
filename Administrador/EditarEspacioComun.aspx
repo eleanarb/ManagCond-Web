@@ -308,7 +308,7 @@
                                     </div>
                                     <div>
                                         <label for="DropDownListHoraFinMdoal" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-400">Hora fin</label>
-                                        <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListHoraFinMdoal" runat="server">
+                                        <asp:DropDownList class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ID="DropDownListHoraFinModal" runat="server">
                                             <asp:ListItem Selected="True" Value="0">Seleccione hora fin:</asp:ListItem>
                                             <asp:ListItem Value="00:00">00:00</asp:ListItem>
                                             <asp:ListItem Value="01:00">01:00</asp:ListItem>
@@ -340,7 +340,7 @@
                                 </div>
                             </div>
                             <footer class="flex flex-col items-center justify-end px-6 py-3 -mx-6 -mb-4 space-y-4 sm:space-y-0 sm:space-x-6 sm:flex-row bg-gray-50 dark:bg-gray-800">
-                                <asp:Button ID="ButtonModificarRango" OnClientClick="return validarFormulario()" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purplee" runat="server" OnClick="ButtonModificarRango_Click" data-id="0" Text="Modificar" />
+                                <asp:Button ID="ButtonModificarRango" OnClientClick="return validarFormulario3()" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purplee" runat="server" OnClick="ButtonModificarRango_Click" data-id="0" Text="Modificar" />
                                 <input type="hidden" id="TextBoxId" name="TextBoxId" value="0" runat="server">
                             </footer>
 
@@ -422,45 +422,90 @@
 
         $('#TextBoxNombre').on('keyup', function () {
             if (!letras.test($('#TextBoxNombre').val())) {
-                $('#mensajeNombre').html('Ingrese nombre de manera correcta').css('color', 'red');
+                $('#mensajeNombre').html('Ingrese nombre valido').css('color', 'red');
 
             } else
                 $('#mensajeNombre').html('').css('color', 'green');
         });
         $('#TextBoxDesc').on('keyup', function () {
             if (!letras.test($('#TextBoxDesc').val())) {
-                $('#mensajeDesc').html('Ingrese descripcion de manera correcta').css('color', 'red');
+                $('#mensajeDesc').html('Ingrese descripcion valido').css('color', 'red');
 
             } else
                 $('#mensajeDesc').html('').css('color', 'green');
         });
         $('#TextBoxMonto').on('keyup', function () {
             if (!numeros.test($('#TextBoxMonto').val())) {
-                $('#mensajeMonto').html('Ingrese monto de manera correcta').css('color', 'red');
+                $('#mensajeMonto').html('Ingrese monto valido').css('color', 'red');
 
             } else
                 $('#mensajeMonto').html('').css('color', 'green');
         });
     </script>
     <script>
-        function validarFormulario2(evento) {
+        function validarFormulario(evento) {
             if (!letras.test($('#TextBoxNombre').val())) {
-                $('#mensajeNombre').html('Ingrese nombre de manera correcta').css('color', 'red');
+                $('#mensajeNombre').html('Ingrese nombre').css('color', 'red');
                 return false;
             } else {
             }
             if (!letras.test($('#TextBoxDesc').val())) {
-                $('#mensajeDesc').html('Ingrese descripcion de manera correcta').css('color', 'red');
+                $('#mensajeDesc').html('Ingrese descripcion').css('color', 'red');
                 return false;
             } else {
             }
             if (!numeros.test($('#TextBoxMonto').val())) {
-                $('#mensajeMonto').html('Ingrese monto de manera correcta').css('color', 'red');
+                $('#mensajeMonto').html('Ingrese monto').css('color', 'red');
                 return false;
             } else {
+                return true
             }
         }
     </script>
+    <script>
+        function validarFormulario2(evento) {
+            var horaInicio = document.getElementById('DropDownListHoraIncio');
+            if (horaInicio.value < 1) {
+                $('#mensajeHoraInicio').html('Ingrese hora inicio').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeHoraInicio').html('').css('color', 'green');
+            }
+            var horaFin = document.getElementById('DropDownListHoraFin');
+            if (horaFin.value < 1) {
+                $('#mensajeHoraFin').html('Ingrese hora fin').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeHoraFin').html('').css('color', 'green');
+                return true;
+            }
+        }
+    </script>
+    <script>
+        function validarFormulario3(evento) {
+            var horaInicio = document.getElementById('DropDownListHoraIncioModal');
+            if (horaInicio.value < 1) {
+                $('#mensajeHoraInicioModal').html('Ingrese hora inicio').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeHoraInicioModal').html('').css('color', 'green');
+            }
+            var horaFin = document.getElementById('DropDownListHoraFinModal');
+            if (horaFin.value < 1) {
+                $('#mensajeHoraInicioModal').html('Ingrese hora fin').css('color', 'red');
+                return false;
+            } else {
+                $('#mensajeHoraInicioModal').html('').css('color', 'green');
+                return true;
+            }
+        }
+    </script>
+
+
+
+
+
+
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 </body>

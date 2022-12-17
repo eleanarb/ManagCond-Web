@@ -92,39 +92,29 @@ namespace Dao
         public static void ObtenerReservasPendientes(int idCond)
         {
             alReservas.Clear();
+            string strSql = String.Format("SELECT RE.id, D.numDpto, RE.fecha, RE.rangoFecha, EC.nombre, RE.solicitante, RE.estado, RE.id_Cond FROM reservasEspacios RE INNER JOIN espaciosComunes EC ON RE.espacioComun = EC.id JOIN departamento D ON RE.numDpto = d.id where RE.estado = 1 and RE.id_Cond = {0}", idCond);
 
-            Conexion con = new Conexion();
-            string sCnn = con.Conectar();
-
-            string sSel = "SELECT * FROM reservasEspacios INNER JOIN espaciosComunes ON reservasEspacios.espacioComun = espaciosComunes.id where reservasEspacios.estado = 1 and reservasEspacios.id_Cond = '" + idCond + "' ";
-            SqlDataAdapter da;
-            DataTable dt = new DataTable();
-            try
+            using (SqlConnection con = new SqlConnection(conBD))
             {
-                da = new SqlDataAdapter(sSel, sCnn);
-                da.Fill(dt);
+                SqlCommand cmd = new SqlCommand(strSql, con) { CommandType = CommandType.Text };
+                con.Open();
+                SqlDataReader sdr = cmd.ExecuteReader();
 
-                int totalFilas = dt.Rows.Count;
-                int fila = 0;
-
-                for (; fila < totalFilas; fila++)
+                while (sdr.Read())
                 {
-                    int id = int.Parse(dt.Rows[fila][0].ToString());
-                    String numDpto = dt.Rows[fila][1].ToString();
-                    DateTime fecha = Convert.ToDateTime(dt.Rows[fila][2]);
-                    String rangoHorario = dt.Rows[fila][3].ToString();
-                    String solicitante = dt.Rows[fila][5].ToString();
-                    int estado = int.Parse(dt.Rows[fila][6].ToString());
-                    string espacioComun = dt.Rows[fila][9].ToString();
+                    int id = int.Parse(sdr["id"].ToString());
+                    string numDptoN = sdr["numDpto"].ToString();
+                    DateTime fecha = DateTime.Parse(sdr["fecha"].ToString());
+                    string rangoFecha = sdr["rangoFecha"].ToString();
+                    string espacioComun = sdr["nombre"].ToString();
+                    string solicitante = sdr["solicitante"].ToString();
+                    int estado = int.Parse(sdr["estado"].ToString());
 
-                    Reserva reserva = new Reserva(id, numDpto, fecha, rangoHorario, espacioComun, solicitante, estado, idCond);
+                    Reserva reserva = new Reserva(id, numDptoN, fecha, rangoFecha, espacioComun, solicitante, estado, idCond);
 
                     alReservas.Add(reserva);
                 }
-            }
-            catch (Exception)
-            {
-                //Label1.Text = "Error: " + ex.Message;
+                con.Close();
             }
         }
 

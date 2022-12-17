@@ -260,7 +260,7 @@
         </div>
     </div>
     <script>
-        var letras = /^[a-zA-Z]+$/;
+        var letras = /^[a-zA-Z ]+$/;
         var numeros = /^[0-9]+$/;
 
         $('#TextBoxDirección').on('keyup', function () {
@@ -365,37 +365,37 @@
                 $('#mensajeComuna').html('').css('color', 'green');
             }
             if (!letras.test($('#TextBoxDirección').val())) {
-                $('#mensajeDireccion').html('Ingrese direccion valida').css('color', 'red');
+                $('#mensajeDireccion').html('Ingrese direccion').css('color', 'red');
                 return false;
             } else {
             }
             if (!numeros.test($('#TextBoxSueldoBase').val())) {
-                $('#mensajeSueldoBase').html('Ingrese sueldo base valido').css('color', 'red');
+                $('#mensajeSueldoBase').html('Ingrese sueldo base').css('color', 'red');
                 return false;
             } else {
             }
             if (!numeros.test($('#TextBoxHorasSemanales').val())) {
-                $('#mensajeHorasSemanales').html('Ingrese horas semanales validas').css('color', 'red');
+                $('#mensajeHorasSemanales').html('Ingrese horas semanales').css('color', 'red');
                 return false;
             } else {
             }
             if (!numeros.test($('#TextBoxDiasSemanales').val())) {
-                $('#mensajeDiasSemanales').html('Ingrese dias semanales validos').css('color', 'red');
+                $('#mensajeDiasSemanales').html('Ingrese dias semanales').css('color', 'red');
                 return false;
             } else {
             }
             if (!numeros.test($('#TextBoxAsignacionMovilizacion').val())) {
-                $('#mensajeAsignacionMovilizacion').html('Ingrese asignacion de movilizacion valida').css('color', 'red');
+                $('#mensajeAsignacionMovilizacion').html('Ingrese asignacion de movilizacion').css('color', 'red');
                 return false;
             } else {
             }
             if (!numeros.test($('#TextBoxAsignacionColacion').val())) {
-                $('#mensajeAsignacionColacion').html('Ingrese asignacion de colacion valida').css('color', 'red');
+                $('#mensajeAsignacionColacion').html('Ingrese asignacion de colacion').css('color', 'red');
                 return false;
             } else {
             }
             if (!numeros.test($('#TextBoxValorHoraAdicional').val())) {
-                $('#mensajeValorHoraAdicional').html('Ingrese valor de hora adicional valida').css('color', 'red');
+                $('#mensajeValorHoraAdicional').html('Ingrese valor de hora adicional').css('color', 'red');
                 return false;
             } else {
             }
@@ -414,7 +414,7 @@
                 $('#mensajeSalud').html('').css('color', 'green');
             }
             if (!letras.test($('#TextBoxNombreCuenta').val())) {
-                $('#mensajeNombreCuenta').html('Ingrese nombre de cuenta valida').css('color', 'red');
+                $('#mensajeNombreCuenta').html('Ingrese nombre de cuenta').css('color', 'red');
                 return false;
             } else {
             }
@@ -440,7 +440,7 @@
                 $('#mensajeCuenta').html('').css('color', 'green');
             }
             if (!numeros.test($('#TextBoxNumCuenta').val())) {
-                $('#mensajeNumCuenta').html('Ingrese numero de cuenta valido').css('color', 'red');
+                $('#mensajeNumCuenta').html('Ingrese numero de cuenta').css('color', 'red');
                 return false;
             } else {
                 return true;

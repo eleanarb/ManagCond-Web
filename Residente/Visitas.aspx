@@ -225,7 +225,7 @@
                         </div>
                         <div
                             class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-                            <span class="flex items-center col-span-3">Showing 1-30 of 100
+                            <span class="flex items-center col-span-3">Mostrando 1-3 de 3
                             </span>
                             <span class="col-span-2"></span>
                             <!-- Pagination -->
@@ -412,7 +412,7 @@
                             </div>
                             <div
                                 class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-                                <span class="flex items-center col-span-3">Showing 1-30 of 100
+                                <span class="flex items-center col-span-3">Mostrando 1-3 de 3
                                 </span>
                                 <span class="col-span-2"></span>
                                 <!-- Pagination -->
@@ -638,18 +638,18 @@
             </main>
         </div>
     <script>
-        var letras = /^[a-zA-Z]+$/;
+        var letras = /^[a-zA-Z ]+$/;
 
         $('#TextBoxNombres').on('keyup', function () {
             if (!letras.test($('#TextBoxNombres').val())) {
-                $('#mensajeNombres').html('Ingrese nombres de manera correcta').css('color', 'red');
+                $('#mensajeNombres').html('Ingrese nombres validos').css('color', 'red');
 
             } else
                 $('#mensajeNombres').html('').css('color', 'green');
         });
         $('#TextBoxApellidos').on('keyup', function () {
             if (!letras.test($('#TextBoxApellidos').val())) {
-                $('#mensajeApellidos').html('Ingrese apellidos de manera correcta').css('color', 'red');
+                $('#mensajeApellidos').html('Ingrese apellidos validos').css('color', 'red');
 
             } else
                 $('#mensajeApellidos').html('').css('color', 'green');
@@ -665,12 +665,12 @@
     <script>
         function validarFormulario(evento) {
             if (!letras.test($('#TextBoxNombres').val())) {
-                $('#mensajeNombres').html('Ingrese nombres de manera correcta').css('color', 'red');
+                $('#mensajeNombres').html('Ingrese nombres').css('color', 'red');
                 return false;
             } else {
             }
             if (!letras.test($('#TextBoxApellidos').val())) {
-                $('#mensajeApellidos').html('Ingrese apellidos de manera correcta').css('color', 'red');
+                $('#mensajeApellidos').html('Ingrese apellidos').css('color', 'red');
                 return false;
             } else {
             }

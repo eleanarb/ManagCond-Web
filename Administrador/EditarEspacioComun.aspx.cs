@@ -73,7 +73,7 @@ namespace ManagCond.Administrador
         {
             int idEspacioComun = int.Parse(Request.QueryString["id"]);
             int id = int.Parse(TextBoxId.Value);
-            string rangoHorario = DropDownListHoraIncioModal.SelectedValue +"-"+ DropDownListHoraFinMdoal.SelectedValue;
+            string rangoHorario = DropDownListHoraIncioModal.SelectedValue +"-"+ DropDownListHoraFinModal.SelectedValue;
 
 
             if (EspacioComunDao.ModificarRangoHorario(id, rangoHorario))

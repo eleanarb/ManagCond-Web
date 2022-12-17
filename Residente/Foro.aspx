@@ -192,7 +192,7 @@
                                     <div class="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
                                         <div class="py-2 px-4 bg-white rounded-t-lg dark:bg-gray-800">
                                             <label for="comment" class="sr-only">Your comment</label>
-                                            <textarea runat="server" id="TextBoxMensaje" rows="4" class="px-0 w-full text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write a comment..." required></textarea>
+                                            <textarea runat="server" id="TextBoxMensaje" rows="4" class="px-0 w-full text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Escribe un comentario..." required></textarea>
                                         </div>
                                         <div class="flex justify-between items-center py-2 px-3 border-t dark:border-gray-600">
                                             <asp:Button ID="ButtonPublicar" class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" runat="server" OnClick="ButtonPublicar_Click" Text="Publicar" />

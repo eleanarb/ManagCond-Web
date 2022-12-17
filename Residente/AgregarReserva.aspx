@@ -86,7 +86,7 @@
 
         $('#TextBoxSolicitante').on('keyup', function () {
             if (!letras.test($('#TextBoxSolicitante').val())) {
-                $('#mensajeSolicitante').html('Ingrese Solicitante').css('color', 'red');
+                $('#mensajeSolicitante').html('Ingrese Solicitante valido').css('color', 'red');
 
             } else
                 $('#mensajeSolicitante').html('').css('color', 'green');

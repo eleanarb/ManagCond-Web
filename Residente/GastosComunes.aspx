@@ -31,6 +31,7 @@
                     <div class="container grid px-6 mx-auto">
                         <br />
                         <div class="grid gap-6 mb-8 md:grid-cols-3">
+
                         <div class="">
                             <%
                                 int idCondominio = (int)Session["idCond"];
@@ -41,6 +42,7 @@
 
                             <% if (pendientes == 0)
                                 { %>
+                            <h2 class="my-6 text-lg font-semibold text-gray-700 dark:text-gray-200">Último Gasto Común</h2>
                             <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800 text-center" >
                                 <div>
                                    
@@ -56,7 +58,7 @@
                             </div>
                             <%} else { %>
 
-                    
+                            <h2 class="my-6 text-lg font-semibold text-gray-700 dark:text-gray-200">Último Gasto Común</h2>
                             <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800 text-center" >
                                 <div>
                                     <%                                     
@@ -164,8 +166,12 @@
                                                 <td class="py-4 px-6">$<%=gcV.TotalPagar.ToString("N0") %>
                                                 </td>
                                                 <td class="py-4 px-6 md:grid-cols-2">
-                                                    <a class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center" href="PagarGastoComun.aspx?id=<%=gcV.Id %>">Pagar</a>
-                                    
+                                                    <a class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" href="PagarGastoComun.aspx?id=<%=gcV.Id %>">
+                                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                                    </a>
+                                                    <a class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800" href="DetalleGastoComun.aspx?id=<%= gcV.Id %>">
+                                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                                    </a>
                                                 </td>
                                             </tr>
                                             <%

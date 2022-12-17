@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
-    <script src="https://unpkg.com/flowbite@1.5.3/dist/datepicker.js%22%3E"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
 
@@ -234,7 +233,7 @@
                         </div>
                         <div
                             class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-                            <span class="flex items-center col-span-3">Showing 21-30 of 100
+                            <span class="flex items-center col-span-3">Mostrando 1-3 de 3
                             </span>
                             <span class="col-span-2"></span>
                             <!-- Pagination -->
@@ -259,7 +258,7 @@
                                         </li>
                                         <li>
                                             <button
-                                                class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                                class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
                                                 1
                                             </button>
                                         </li>
@@ -271,7 +270,7 @@
                                         </li>
                                         <li>
                                             <button
-                                                class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                                class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
                                                 3
                                             </button>
                                         </li>

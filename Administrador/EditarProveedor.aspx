@@ -182,7 +182,7 @@
         </div>
     </div>
     <script>
-        var letras = /^[a-zA-Z]+$/;
+        var letras = /^[a-zA-Z ]+$/;
         var email = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
         var numeros = /^[0-9]+$/;
 
@@ -231,19 +231,19 @@
 
         function validarFormulario(evento) {
             if (!letras.test($('#TextBoxNombre').val())) {
-                $('#mensajeNombre').html('Ingrese nombre valido').css('color', 'red');
+                $('#mensajeNombre').html('Ingrese nombre').css('color', 'red');
                 return false;
             } else {
             }
             var telefono = document.getElementById('TextBoxTelefono').value;
             if (telefono.length < 9) {
-                $('#mensajeTelefono').html('Ingrese telefono valido').css('color', 'red');
+                $('#mensajeTelefono').html('Ingrese telefono').css('color', 'red');
                 return false;
             } else {
             }
             var correo = document.getElementById('TextBoxCorreo').value;
             if (!email.test(correo)) {
-                $('#mensajeEmail').html('Ingrese un correo válido').css('color', 'red');
+                $('#mensajeEmail').html('Ingrese un correo').css('color', 'red');
                 return false;
             } else {
             }
@@ -263,13 +263,13 @@
             }
             var direccion = document.getElementById('TextBoxDireccion').value;
             if (!letras.test(direccion)) {
-                $('#mensajeDireccion').html('Ingrese un correo válido').css('color', 'red');
+                $('#mensajeDireccion').html('Ingrese un correo').css('color', 'red');
                 return false;
             } else {
             }
             var nombrePago = document.getElementById('TextBoxNombrePago').value;
             if (!letras.test(nombrePago)) {
-                $('#mensajeNombrePago').html('Ingrese nombre válido').css('color', 'red');
+                $('#mensajeNombrePago').html('Ingrese nombre').css('color', 'red');
                 return false;
             } else {
             }
@@ -289,7 +289,7 @@
             }
             var numero = document.getElementById('TextBoxNumero').value;
             if (!numeros.test(numero)) {
-                $('#mensajeNumero').html('Ingrese un un numero de cuenta válido').css('color', 'red');
+                $('#mensajeNumero').html('Ingrese un numero de cuenta').css('color', 'red');
                 return false;
             } else {
             }

@@ -10,7 +10,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dao;
 using Model;
-using SelectPdf;
 
 namespace ManagCond.Administrador
 {
@@ -34,7 +33,7 @@ namespace ManagCond.Administrador
                 Session["mes"] = int.Parse(mesActual.ToString());
                 Session["año"] = int.Parse(añoActual.ToString());
             }
-                if (Session["usuario"] == null)
+            if (Session["usuario"] == null)
             {
                 Response.Redirect("../Login.aspx");
             }
@@ -54,6 +53,11 @@ namespace ManagCond.Administrador
 
             if (GastosComunesDao.GenerarGastoComun(mes, año, idCond))
             {
+
+                foreach (Model.Residente residente in ResidenteDao.GetAlObtenerDatosResidente(idCond))
+                {
+                    Notificacion(residente.CorreoResidente);
+                }
                 Response.Redirect("GastosComunes.aspx");
             }
             else
@@ -64,64 +68,8 @@ namespace ManagCond.Administrador
 
         protected void ButtonGenerarPdf_Click(object sender, EventArgs e)
         {
-            int idCond = int.Parse(Session["idCondominio"].ToString());
-            int totalResidentes = ResidenteDao.ObtenerTotalResidentes(idCond);
-            int totalFilas = totalResidentes;
-            int fila = 0;
+            Response.Redirect("DetalleGastoComun.aspx");
 
-            for (; fila < totalFilas; fila++)
-            {
-                Model.Residente residente1 = ResidenteDao.ObtenerDatosResidenteN(idCond);
-                Usuario usuario = (Usuario)Session["usuario"];
-                Model.Residente residente = ResidenteDao.ObtenerDatosResidenteNotifiacion(residente1.NumDpto, usuario.IdCond);
-                Notificacion(residente.CorreoResidente);
-            }
-
-            // read parameters from the webpage
-            string url = "https://www.google.cl/";
-
-            string pdf_page_size = "A4";
-            PdfPageSize pageSize = (PdfPageSize)Enum.Parse(typeof(PdfPageSize),
-                pdf_page_size, true);
-
-            string pdf_orientation = "Portrait";
-            PdfPageOrientation pdfOrientation =
-                (PdfPageOrientation)Enum.Parse(typeof(PdfPageOrientation),
-                pdf_orientation, true);
-
-            int webPageWidth = 1024;
-            try
-            {
-                webPageWidth = Convert.ToInt32(1024);
-            }
-            catch { }
-
-            int webPageHeight = 0;
-            try
-            {
-                webPageHeight = Convert.ToInt32(0);
-            }
-            catch { }
-
-            // instantiate a html to pdf converter object
-            HtmlToPdf converter = new HtmlToPdf();
-
-            // set converter options
-            converter.Options.PdfPageSize = pageSize;
-            converter.Options.PdfPageOrientation = pdfOrientation;
-            converter.Options.WebPageWidth = webPageWidth;
-            converter.Options.WebPageHeight = webPageHeight;
-            converter.Options.MaxPageLoadTime = 120;
-
-            // create a new pdf document converting an url
-            PdfDocument doc = converter.ConvertUrl(url);
-
-
-            // save pdf document
-            doc.Save(Response, false, "Sample.pdf");
-
-            // close pdf document
-            doc.Close();
         }
         protected void Notificacion(string EmailDestino)
         {

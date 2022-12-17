@@ -78,18 +78,18 @@
              </div>
          </div>
     <script>
-        var letras = /[a-záéíóúñA-ZÁÉÍÓÚÑ ]+$/;
+        var letras = /[a-zA-Z ]+$/;
 
         $('#TextBoxNombres').on('keyup', function () {
             if (!letras.test($('#TextBoxNombres').val())) {
-                $('#mensajeNombres').html('Ingrese nombres de manera correcta').css('color', 'red');
+                $('#mensajeNombres').html('Ingrese nombres validos').css('color', 'red');
 
             } else
                 $('#mensajeNombres').html('').css('color', 'green');
         });
         $('#TextBoxApellidos').on('keyup', function () {
             if (!letras.test($('#TextBoxApellidos').val())) {
-                $('#mensajeApellidos').html('Ingrese apellidos de manera correcta').css('color', 'red');
+                $('#mensajeApellidos').html('Ingrese apellidos validos').css('color', 'red');
 
             } else
                 $('#mensajeApellidos').html('').css('color', 'green');
@@ -106,12 +106,12 @@
                 $('#mensajeDepto').html('').css('color', 'green');
             }
             if (!letras.test($('#TextBoxNombres').val())) {
-                $('#mensajeNombres').html('Ingrese nombres de manera correcta').css('color', 'red');
+                $('#mensajeNombres').html('Ingrese nombres').css('color', 'red');
                 return false;
             } else {
             }
             if (!letras.test($('#TextBoxApellidos').val())) {
-                $('#mensajeApellidos').html('Ingrese apellidos de manera correcta').css('color', 'red');
+                $('#mensajeApellidos').html('Ingrese apellidos').css('color', 'red');
                 return false;
             } else {
                 return true;

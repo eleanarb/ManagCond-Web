@@ -100,7 +100,7 @@
         </div>
     </div>
     <script>
-        var letras = /^[a-zA-Z]+$/;
+        var letras = /^[a-zA-Z ]+$/;
         var email = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
         var numeros = /^[0-9]+$/;
 
@@ -132,12 +132,12 @@
     <script>
         function validarFormulario(evento) {
             if (!letras.test($('#TextBoxNombres').val())) {
-                $('#mensajeNombres').html('Ingrese nombres validos').css('color', 'red');
+                $('#mensajeNombres').html('Ingrese nombres').css('color', 'red');
                 return false;
             } else {
             }
             if (!letras.test($('#TextBoxApellidos').val())) {
-                $('#mensajeApellidos').html('Ingrese apellidos validos').css('color', 'red');
+                $('#mensajeApellidos').html('Ingrese apellidos').css('color', 'red');
                 return false;
             } else {
             }
@@ -149,12 +149,12 @@
                 $('#mensajeFecha').html('').css('color', 'green');
             }
             if (!email.test($('#TextBoxCorreo').val())) {
-                $('#mensajeCorreo').html('Ingrese correo valido').css('color', 'red');
+                $('#mensajeCorreo').html('Ingrese correo').css('color', 'red');
                 return false;
             } else {
             }
             if (!numeros.test($('#TextBoxTelefono').val())) {
-                $('#mensajeTelefono').html('Ingrese telefono valido').css('color', 'red');
+                $('#mensajeTelefono').html('Ingrese telefono').css('color', 'red');
                 return false;
             } else {
             }

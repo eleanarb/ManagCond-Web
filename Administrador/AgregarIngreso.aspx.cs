@@ -50,17 +50,28 @@ namespace ManagCond.Administrador
                 filestream = FileUploadDocumento.PostedFile.InputStream;
             }
 
+            if (IngresosDao.BuscarDocumento(fileNameBD, idCond))
+            {
+                int counter = 1;
+                string tempfileName = "(" + counter.ToString() + ") " + fileNameBD;
+                while (IngresosDao.BuscarDocumento(tempfileName, idCond))
+                {
+
+                    tempfileName = "(" + counter.ToString() + ") " + fileNameBD;
+                    counter++;
+                }
+
+                fileNameBD = tempfileName;
+                fileName = año + "/" + mes + "/" + fileNameBD;
+            }
+
             if (IngresosDao.AgregarIngreso(nombre, comentario, monto, mes, año, fecha2, fileNameBD, idCond))
             {
                 if (FileUploadDocumento.Value != "")
                 {
                     _ = UploadBlop(fileName, filestream);
-                    Response.Redirect("Ingresos.aspx");
                 }
-                if (FileUploadDocumento.Value == "")
-                {
-                    Response.Redirect("Ingresos.aspx");
-                }
+                Response.Redirect("Ingresos.aspx");
             }
             else
             {

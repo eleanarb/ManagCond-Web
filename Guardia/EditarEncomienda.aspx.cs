@@ -70,6 +70,21 @@ namespace ManagCond.Guardia
                 fileName = DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + numDpto + "/" + FileUploadEncomienda.Value;
                 fileNameBD = FileUploadEncomienda.Value;
                 filestream = FileUploadEncomienda.PostedFile.InputStream;
+
+                if (EncomiendaDao.BuscarFotoEncomienda(fileNameBD, idCond))
+                {
+                    int counter = 1;
+                    string tempfileName = "(" + counter.ToString() + ") " + fileNameBD;
+                    while (EncomiendaDao.BuscarFotoEncomienda(tempfileName, idCond))
+                    {
+
+                        tempfileName = "(" + counter.ToString() + ") " + fileNameBD;
+                        counter++;
+                    }
+
+                    fileNameBD = tempfileName;
+                    fileName = DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + numDpto + "/" + fileNameBD;
+                }
             }
             if (FileUploadEncomienda.Value == "")
             {
@@ -88,7 +103,6 @@ namespace ManagCond.Guardia
                 if (FileUploadEncomienda.Value != "")
                 {
                     _ = UploadBlop(fileName, filestream);
-                    Response.Redirect("Encomiendas.aspx");
                 }
                 Response.Redirect("Encomiendas.aspx");
 

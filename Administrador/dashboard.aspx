@@ -18,6 +18,45 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
     <script src="../assets/js/charts-lines.js" defer></script>
     <script src="../assets/js/charts-pie.js" defer></script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load("current", { packages: ["corechart"] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable(<%=obtenerGastos()%>);
+
+            var options = {
+                legend: 'none',
+                pieSliceText: 'label',
+                pieStartAngle: 100,
+                "backgroundColor": { "fill": "transparent" },
+            };
+
+
+            var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+            chart.draw(data, options);
+        }
+    </script>
+    
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['line'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable(<%=obtenerBalance()%>);
+
+            var options = {
+                legend: { position: 'none' },
+                "backgroundColor": { "fill": "transparent" },
+            };
+
+            var chart = new google.charts.Line(document.getElementById('linechart_material'));
+
+            chart.draw(data, google.charts.Line.convertOptions(options));
+        }
+    </script>
+
 </head>
 <body>
     <div
@@ -28,7 +67,7 @@
             <!-- #include file ="Template/HeaderAdministrador.html" -->
             <main class="h-full overflow-y-auto">
                 <div class="container px-6 mx-auto grid">
-
+                    <input type="hidden" id="TextBoxId" name="TextBoxId" value="7" runat="server">
                     <%
                         int idCondominio = 0;
                         idCondominio = (int)Session["idCondominio"];
@@ -294,51 +333,21 @@
                             class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
                             <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">Distribución de Gastos
                             </h4>
-                            <canvas id="pie"></canvas>
-                            <div
-                                class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
-                                <!-- Chart legend -->
-                                <div class="flex items-center">
-                                    <span
-                                        class="inline-block w-3 h-3 mr-1 bg-blue-500 rounded-full"></span>
-                                    <span>Mantención</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <span
-                                        class="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
-                                    <span>Administrativos</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <span
-                                        class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
-                                    <span>Básicos</span>
-                                </div>
-                            </div>
+                             <div id="donutchart" style="width: 100%; height: 120%; padding: 0;"></div>
+
                         </div>
                         <div
                             class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
                             <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">Ingresos y Egresos
                             </h4>
-                            <canvas id="line"></canvas>
-                            <div
-                                class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
-                                <!-- Chart legend -->
-                                <div class="flex items-center">
-                                    <span
-                                        class="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
-                                    <span>Ingresos</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <span
-                                        class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
-                                    <span>Egresos</span>
-                                </div>
-                            </div>
+                            <div id="linechart_material" style="width: 420px; height: 250px; padding: 0;"></div>
                         </div>
                     </div>
                 </div>
             </main>
         </div>
     </div>
+
+
 </body>
 </html>

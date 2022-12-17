@@ -47,12 +47,6 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
-    <Reference Include="IronPdf, Version=2022.11.0.10347, Culture=neutral, PublicKeyToken=94e1c31412563c75, processorArchitecture=MSIL">
-      <HintPath>packages\IronPdf.Slim.2022.11.10347\lib\net40\IronPdf.dll</HintPath>
-    </Reference>
-    <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
-    </Reference>
     <Reference Include="KhipuApiClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\KhipuApiClient.2.9.1\lib\net472\KhipuApiClient.dll</HintPath>
     </Reference>
@@ -68,9 +62,6 @@
     </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Select.HtmlToPdf, Version=22.1.0.0, Culture=neutral, PublicKeyToken=e0ae9f6e27a97018, processorArchitecture=MSIL">
-      <HintPath>packages\Select.HtmlToPdf.22.1.0\lib\net40\Select.HtmlToPdf.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -121,6 +112,7 @@
     <Content Include="Administrador\AgregarProveedor.aspx" />
     <Content Include="Administrador\AgregarTrabajador.aspx" />
     <Content Include="Administrador\Calendario.aspx" />
+    <Content Include="Administrador\DetalleGastoComun.aspx" />
     <Content Include="Administrador\EditarEspacioComun.aspx" />
     <Content Include="Administrador\EditarOtroGasto.aspx" />
     <Content Include="Administrador\EditarProveedor.aspx" />
@@ -193,15 +185,11 @@
     <Content Include="assets\js\jquery.rut.js" />
     <Content Include="assets\js\listado.js" />
     <Content Include="assets\js\listadoScript.js" />
-    <Content Include="buttons.aspx" />
     <Content Include="CambiarClave.aspx" />
-    <Content Include="cards.aspx" />
-    <Content Include="charts.aspx" />
     <Content Include="Administrador\dashboard.aspx" />
     <Content Include="Guardia\EditarEncomienda.aspx" />
     <Content Include="Guardia\EditarVisita.aspx" />
     <Content Include="Guardia\Encomiendas.aspx" />
-    <Content Include="forms.aspx" />
     <Content Include="Administrador\foro.aspx" />
     <Content Include="Guardia\Foro.aspx" />
     <Content Include="Guardia\Index.aspx" />
@@ -215,9 +203,8 @@
     <Content Include="Index.aspx" />
     <Content Include="Administrador\listados.aspx" />
     <Content Include="Login.aspx" />
-    <Content Include="LogOut.aspx" />
-    <Content Include="modals.aspx" />
     <Content Include="Administrador\reservas.aspx" />
+    <Content Include="Pag404.aspx" />
     <Content Include="PagarGastosComunes.aspx" />
     <Content Include="PagoRealizado.aspx" />
     <Content Include="RecuperarClave.aspx" />
@@ -240,7 +227,6 @@
     <Content Include="Residente\Template\AsideResidente.html" />
     <Content Include="Residente\Template\HeaderResidente.html" />
     <Content Include="Residente\Visitas.aspx" />
-    <Content Include="tables.aspx" />
     <Content Include="Administrador\Template\HeaderAdministrador.html" />
     <Content Include="Web.config" />
     <Content Include="WebFormError.aspx" />
@@ -301,6 +287,13 @@
     </Compile>
     <Compile Include="Administrador\Calendario.aspx.designer.cs">
       <DependentUpon>Calendario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\DetalleGastoComun.aspx.cs">
+      <DependentUpon>DetalleGastoComun.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\DetalleGastoComun.aspx.designer.cs">
+      <DependentUpon>DetalleGastoComun.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrador\EditarEspacioComun.aspx.cs">
       <DependentUpon>EditarEspacioComun.aspx</DependentUpon>
@@ -407,33 +400,12 @@
     <Compile Include="Administrador\Visitas.aspx.designer.cs">
       <DependentUpon>Visitas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="buttons.aspx.cs">
-      <DependentUpon>buttons.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="buttons.aspx.designer.cs">
-      <DependentUpon>buttons.aspx</DependentUpon>
-    </Compile>
     <Compile Include="CambiarClave.aspx.cs">
       <DependentUpon>CambiarClave.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CambiarClave.aspx.designer.cs">
       <DependentUpon>CambiarClave.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="cards.aspx.cs">
-      <DependentUpon>cards.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="cards.aspx.designer.cs">
-      <DependentUpon>cards.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="charts.aspx.cs">
-      <DependentUpon>charts.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="charts.aspx.designer.cs">
-      <DependentUpon>charts.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrador\dashboard.aspx.cs">
       <DependentUpon>dashboard.aspx</DependentUpon>
@@ -462,13 +434,6 @@
     </Compile>
     <Compile Include="Guardia\Encomiendas.aspx.designer.cs">
       <DependentUpon>Encomiendas.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="forms.aspx.cs">
-      <DependentUpon>forms.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="forms.aspx.designer.cs">
-      <DependentUpon>forms.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrador\foro.aspx.cs">
       <DependentUpon>foro.aspx</DependentUpon>
@@ -547,19 +512,12 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LogOut.aspx.cs">
-      <DependentUpon>LogOut.aspx</DependentUpon>
+    <Compile Include="Pag404.aspx.cs">
+      <DependentUpon>Pag404.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LogOut.aspx.designer.cs">
-      <DependentUpon>LogOut.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="modals.aspx.cs">
-      <DependentUpon>modals.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="modals.aspx.designer.cs">
-      <DependentUpon>modals.aspx</DependentUpon>
+    <Compile Include="Pag404.aspx.designer.cs">
+      <DependentUpon>Pag404.aspx</DependentUpon>
     </Compile>
     <Compile Include="PagarGastosComunes.aspx.cs">
       <DependentUpon>PagarGastosComunes.aspx</DependentUpon>
@@ -709,13 +667,6 @@
     <Compile Include="Residente\Visitas.aspx.designer.cs">
       <DependentUpon>Visitas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="tables.aspx.cs">
-      <DependentUpon>tables.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="tables.aspx.designer.cs">
-      <DependentUpon>tables.aspx</DependentUpon>
-    </Compile>
     <Compile Include="WebFormError.aspx.cs">
       <DependentUpon>WebFormError.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -781,9 +732,7 @@
       <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('packages\IronPdf.Native.Chrome.Windows.2022.11.10299\build\IronPdf.Native.Chrome.Windows.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\IronPdf.Native.Chrome.Windows.2022.11.10299\build\IronPdf.Native.Chrome.Windows.targets'))" />
   </Target>
-  <Import Project="packages\IronPdf.Native.Chrome.Windows.2022.11.10299\build\IronPdf.Native.Chrome.Windows.targets" Condition="Exists('packages\IronPdf.Native.Chrome.Windows.2022.11.10299\build\IronPdf.Native.Chrome.Windows.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

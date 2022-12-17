@@ -311,6 +311,20 @@
                       <span id="mensajeEstado" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                   </div>
               </div>
+              <div class="grid gap-6 mb-8 md:grid-cols-2">
+                  <div>
+                      <span class="text-gray-700 dark:text-gray-400">Documento de cobro</span>
+                      <label class="block text-sm">
+                          <input id="FileUploadCobro" accept="image/*,.pdf,.xlsx,.docx" type="file" runat="server" name="oFile">
+                      </label>
+                  </div>
+                  <div>
+                      <span class="text-gray-700 dark:text-gray-400">Documento de pago</span>
+                      <label class="block text-sm">
+                          <input id="FileUploadComprobante" accept="image/*,.pdf,.xlsx,.docx" type="file" runat="server" name="oFile">
+                      </label>
+                  </div>
+              </div>
           </div>
           <footer class="flex flex-col items-center justify-end px-6 py-3 -mx-6 -mb-4 space-y-4 sm:space-y-0 sm:space-x-6 sm:flex-row bg-gray-50 dark:bg-gray-800">
               <asp:Button ID="ButtonModificar" OnClientClick="return validarFormulario()" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purplee" runat="server" data-id="0" OnClick="ButtonModificar_Click" Text="Modificar" />                                 
@@ -345,19 +359,19 @@
         </div>
     </div>
       <script>
-          var letras = /^[a-zA-Z]+$/;
+          var letras = /^[a-zA-Z ]+$/;
           var numeros = /^[0-9]+$/;
 
           $('#TextBoxMontoModal').on('keyup', function () {
               if (!numeros.test($('#TextBoxMontoModal').val())) {
-                  $('#mensajeMonto').html('Ingrese monto de manera correcta').css('color', 'red');
+                  $('#mensajeMonto').html('Ingrese monto valido').css('color', 'red');
 
               } else
                   $('#mensajeMonto').html('').css('color', 'green');
           });
           $('#TextBoxDescModal').on('keyup', function () {
               if (!letras.test($('#TextBoxDescModal').val())) {
-                  $('#mensajeDesc').html('Ingrese descripcion de manera correcta').css('color', 'red');
+                  $('#mensajeDesc').html('Ingrese descripcion valida').css('color', 'red');
 
               } else
                   $('#mensajeDesc').html('').css('color', 'green');
@@ -387,7 +401,7 @@
                   $('#mensajeFecha').html('').css('color', 'green');
               }
               if (!numeros.test($('#TextBoxMontoModal').val())) {
-                  $('#mensajeMonto').html('Ingrese monto de manera correcta').css('color', 'red');
+                  $('#mensajeMonto').html('Ingrese monto').css('color', 'red');
                   return false;
               } else {
               }
@@ -399,7 +413,7 @@
                   $('#mensajeEstado').html('').css('color', 'green');
               }
               if (!letras.test($('#TextBoxDescModal').val())) {
-                  $('#mensajeDesc').html('Ingrese descripcion de manera correcta').css('color', 'red');
+                  $('#mensajeDesc').html('Ingrese descripcion').css('color', 'red');
                   return false;
               } else {
                   return true;
@@ -454,10 +468,7 @@
 
                   let idE = filaE.querySelector('.btnEliminar').getAttribute('data-id')
                   document.querySelector('#TextBoxIdEliminar').value = idE;
-
-
               })
-
           })
       </script>
       <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>

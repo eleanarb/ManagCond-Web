@@ -280,7 +280,7 @@ namespace Dao
 
             string sCnn;
 
-            if (nombre != null && descripcion != null && monto != 0 && multa != 0 && idCond != 0)
+            if (nombre != null && descripcion != null && multa != 0 && idCond != 0)
             {
                 try
                 {
@@ -311,7 +311,7 @@ namespace Dao
 
             string sCnn;
 
-            if (nombre != null && descripcion != null && monto != 0 && multa != 0 && id != 0)
+            if (nombre != null && descripcion != null && multa != 0 && id != 0)
             {
                 try
                 {

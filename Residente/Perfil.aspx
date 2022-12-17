@@ -73,24 +73,6 @@
                                     id="tabs-profile-tabFill" data-bs-toggle="pill" data-bs-target="#tabs-profileFill" role="tab"
                                     aria-controls="tabs-profileFill" aria-selected="false">Contraseña</a>
                             </li>
-                            <li class="nav-item flex-auto text-center" role="presentation">
-                                <a href="#tabs-messagesFill" class="
-                          nav-link
-                          w-full
-                          block
-                          font-medium
-                          text-xs
-                          leading-tight
-                          uppercase
-                          border-x-0 border-t-0 border-b-2 border-transparent
-                          px-6
-                          py-3
-                          my-2
-                          hover:border-transparent hover:bg-gray-100
-                          focus:border-transparent"
-                                    id="tabs-messages-tabFill" data-bs-toggle="pill" data-bs-target="#tabs-messagesFill" role="tab"
-                                    aria-controls="tabs-messagesFill" aria-selected="false">Preferencias</a>
-                            </li>
                         </ul>
                         <div class="tab-content" id="tabs-tabContentFill">
                             <div class="tab-pane fade show active" id="tabs-homeFill" role="tabpanel" aria-labelledby="tabs-home-tabFill">
@@ -183,9 +165,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="tab-pane fade" id="tabs-messagesFill" role="tabpanel" aria-labelledby="tabs-profile-tabFill">
-                                Tab 3 content fill
                             </div>
                         </div>
                         <%--mensaje error--%>

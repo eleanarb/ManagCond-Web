@@ -330,26 +330,26 @@
         </div>
     </div>
     <script>
-        var letras = /[a-záéíóúñA-ZÁÉÍÓÚÑ ]+$/;
+        var letras = /[a-zA-Z ]+$/;
         var numeros = /^[0-9]+$/;
 
         $('#TextBoxNombre').on('keyup', function () {
             if (!letras.test($('#TextBoxNombre').val())) {
-                $('#mensajeNombre').html('Ingrese nombre de manera correcta').css('color', 'red');
+                $('#mensajeNombre').html('Ingrese nombre valido').css('color', 'red');
 
             } else
                 $('#mensajeNombre').html('').css('color', 'green');
         });
         $('#TextBoxComentario').on('keyup', function () {
             if (!letras.test($('#TextBoxComentario').val())) {
-                $('#mensajeComentario').html('Ingrese comentario de manera correcta').css('color', 'red');
+                $('#mensajeComentario').html('Ingrese comentario valido').css('color', 'red');
 
             } else
                 $('#mensajeComentario').html('').css('color', 'green');
         });
         $('#inputMonto').on('keyup', function () {
             if (!numeros.test($('#inputMonto').val())) {
-                $('#mensajeMonto').html('Ingrese monto de manera correcta').css('color', 'red');
+                $('#mensajeMonto').html('Ingrese monto valido').css('color', 'red');
 
             } else
                 $('#mensajeMonto').html('').css('color', 'green');
@@ -358,17 +358,17 @@
     <script>
         function validarFormulario(evento) {
             if (!letras.test($('#TextBoxNombre').val())) {
-                $('#mensajeNombre').html('Ingrese nombre de manera correcta').css('color', 'red');
+                $('#mensajeNombre').html('Ingrese nombre').css('color', 'red');
                 return false;
             } else {
             }
             if (!letras.test($('#TextBoxComentario').val())) {
-                $('#mensajeComentario').html('Ingrese comentario de manera correcta').css('color', 'red');
+                $('#mensajeComentario').html('Ingrese comentario').css('color', 'red');
                 return false;
             } else {
             }
             if (!numeros.test($('#inputMonto').val())) {
-                $('#mensajeMonto').html('Ingrese monto de manera correcta').css('color', 'red');
+                $('#mensajeMonto').html('Ingrese monto').css('color', 'red');
                 return false;
             } else {
             }

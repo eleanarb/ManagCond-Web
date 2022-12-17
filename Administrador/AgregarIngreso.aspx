@@ -98,7 +98,7 @@
                                             <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                                         </div>
-                                        <input datepicker datepicker-autohide datepicker-format="dd-mm-yyyy" id="inputFecha" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Seleccione fecha" runat="server" />
+                                        <input datepicker datepicker-autohide datepicker-format="dd-mm-yyyy" id="inputFecha" type="noi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Seleccione fecha" runat="server" />
                                     </div>
                                     <span id="mensajeFecha" class="mt-2 text-sm text-red-600 dark:text-red-500"></span>
                                 </div>
@@ -122,26 +122,36 @@
     </div>
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
     <script>
+
+        const datePicker = document.getElementById('inputFecha');
+
+        const today = new Date();
+        const minDate = today.toISOString().split('T')[0];
+
+        datePicker.attr('min', minDate);
+
+
+
         var letras = /[a-zA-Z ]+$/;
         var numeros = /^[0-9]+$/;
 
         $('#TextBoxNombre').on('keyup', function () {
             if (!letras.test($('#TextBoxNombre').val())) {
-                $('#mensajeNombre').html('Ingrese nombre de manera correcta').css('color', 'red');
+                $('#mensajeNombre').html('Ingrese nombre valido').css('color', 'red');
 
             } else
                 $('#mensajeNombre').html('').css('color', 'green');
         });
         $('#TextBoxComentario').on('keyup', function () {
             if (!letras.test($('#TextBoxComentario').val())) {
-                $('#mensajeComentario').html('Ingrese comentario de manera correcta').css('color', 'red');
+                $('#mensajeComentario').html('Ingrese comentario valido').css('color', 'red');
 
             } else
                 $('#mensajeComentario').html('').css('color', 'green');
         });
         $('#TextBoxMonto').on('keyup', function () {
             if (!numeros.test($('#TextBoxMonto').val())) {
-                $('#mensajeMonto').html('Ingrese monto de manera correcta').css('color', 'red');
+                $('#mensajeMonto').html('Ingrese monto valido').css('color', 'red');
 
             } else
                 $('#mensajeMonto').html('').css('color', 'green');
@@ -150,17 +160,17 @@
     <script>
         function validarFormulario(evento) {
             if (!letras.test($('#TextBoxNombre').val())) {
-                $('#mensajeNombre').html('Ingrese nombre de manera correcta').css('color', 'red');
+                $('#mensajeNombre').html('Ingrese nombre').css('color', 'red');
                 return false;
             } else {
             }
             if (!letras.test($('#TextBoxComentario').val())) {
-                $('#mensajeComentario').html('Ingrese comentario de manera correcta').css('color', 'red');
+                $('#mensajeComentario').html('Ingrese comentario').css('color', 'red');
                 return false;
             } else {
             }
             if (!numeros.test($('#TextBoxMonto').val())) {
-                $('#mensajeMonto').html('Ingrese monto de manera correcta').css('color', 'red');
+                $('#mensajeMonto').html('Ingrese monto').css('color', 'red');
                 return false;
             } else {
             }

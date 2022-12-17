@@ -68,8 +68,8 @@
                                         </asp:DropDownList>
                                     </div>
                                     <div></div>
-                                    <div class="col-end-4 ">
-                                        <asp:Button ID="ButtonGenerarPdf" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" runat="server" OnClick="ButtonGenerarPdf_Click" Text="Generar Pdf" />
+                                    <div class="col-end-4 align-middle">
+                                        <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" href="DetalleGastoComun.aspx">Descargar Colillas</a>
                                     </div>
                                     <div class="col-end-4 ">
                                         <asp:Button ID="ButtonAgregar" class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" runat="server" OnClick="ButtonAgregar_Click" Text="Generar Gasto Comun" />

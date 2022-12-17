@@ -60,11 +60,26 @@ namespace ManagCond.Administrador
                  fileNameBD = FileUploadDocumento.Value;
                  fileName = año + "/" + mes + "/" + fileNameBD;
                  filestream = FileUploadDocumento.PostedFile.InputStream;
+
+                if (IngresosDao.BuscarDocumento(fileNameBD, idCond))
+                {
+                    int counter = 1;
+                    string tempfileName = "(" + counter.ToString() + ") " + fileNameBD;
+                    while (IngresosDao.BuscarDocumento(tempfileName, idCond))
+                    {
+
+                        tempfileName = "(" + counter.ToString() + ") " + fileNameBD;
+                        counter++;
+                    }
+
+                    fileNameBD = tempfileName;
+                    fileName = año + "/" + mes + "/" + fileNameBD;
+                }
+
             }
             if (FileUploadDocumento.Value == "")
             {
-                int idCondF = int.Parse(Session["idCondominio"].ToString());
-                Ingreso ingreso = IngresosDao.BuscarIngreso(id, idCondF);
+                Ingreso ingreso = IngresosDao.BuscarIngreso(id, idCond);
                 fileNameBD = ingreso.Documento;
             }
 
@@ -73,12 +88,8 @@ namespace ManagCond.Administrador
                 if (FileUploadDocumento.Value != "")
                 {
                     _ = UploadBlop(fileName, filestream);
-                    Response.Redirect("Ingresos.aspx");
                 }
-                if (FileUploadDocumento.Value == "")
-                {
-                    Response.Redirect("Ingresos.aspx");
-                }
+                Response.Redirect("Ingresos.aspx");
             }
             else
             {

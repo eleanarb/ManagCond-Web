@@ -122,14 +122,14 @@
 
         $('#TextBoxMontoModal').on('keyup', function () {
             if (!numeros.test($('#TextBoxMontoModal').val())) {
-                $('#mensajeMonto').html('Ingrese monto de manera correcta').css('color', 'red');
+                $('#mensajeMonto').html('Ingrese monto valido').css('color', 'red');
 
             } else
                 $('#mensajeMonto').html('').css('color', 'green');
         });
         $('#TextBoxDescModal').on('keyup', function () {
             if (!letras.test($('#TextBoxDescModal').val())) {
-                $('#mensajeDesc').html('Ingrese descripcion de manera correcta').css('color', 'red');
+                $('#mensajeDesc').html('Ingrese descripcion valida').css('color', 'red');
 
             } else
                 $('#mensajeDesc').html('').css('color', 'green');
@@ -159,7 +159,7 @@
                 $('#mensajeFecha').html('').css('color', 'green');
             }
             if (!numeros.test($('#TextBoxMontoModal').val())) {
-                $('#mensajeMonto').html('Ingrese monto de manera correcta').css('color', 'red');
+                $('#mensajeMonto').html('Ingrese monto').css('color', 'red');
                 return false;
             } else {
             }
@@ -171,7 +171,7 @@
                 $('#mensajeEstado').html('').css('color', 'green');
             }
             if (!letras.test($('#TextBoxDescModal').val())) {
-                $('#mensajeDesc').html('Ingrese descripcion de manera correcta').css('color', 'red');
+                $('#mensajeDesc').html('Ingrese descripcion').css('color', 'red');
                 return false;
             } else {
                 return true;

@@ -70,11 +70,11 @@
         </div>
     </div>
     <script>
-        var letras = /[a-záéíóúñA-ZÁÉÍÓÚÑ ]+$/;
+        var letras = /[a-zA-Z ]+$/;
 
         $('#TextBoxDestinatario').on('keyup', function () {
             if (!letras.test($('#TextBoxDestinatario').val())) {
-                $('#mensajeDestinatario').html('Ingrese destinatario de manera correcta').css('color', 'red');
+                $('#mensajeDestinatario').html('Ingrese destinatario valido').css('color', 'red');
 
             } else
                 $('#mensajeDestinatario').html('').css('color', 'green');
@@ -90,7 +90,7 @@
                 $('#mensajeDepto').html('').css('color', 'green');
             }
             if (!letras.test($('#TextBoxDestinatario').val())) {
-                $('#mensajeDestinatario').html('Ingrese destinatario de manera correcta').css('color', 'red');
+                $('#mensajeDestinatario').html('Ingrese destinatario').css('color', 'red');
                 return false;
             } else {
                 return true;
