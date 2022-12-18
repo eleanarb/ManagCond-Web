@@ -31,7 +31,7 @@
                     <div class="container grid px-6 mx-auto">
                         <br />
                         <div class="grid gap-6 mb-8 md:grid-cols-3">
-
+                        <%=""%>
                         <div class="">
                             <%
                                 int idCondominio = (int)Session["idCond"];
@@ -72,9 +72,8 @@
                                     <h1 class="text-4xl font-extrabold dark:text-white"><strong>$ <%=gc.TotalPagar.ToString("N0") %></strong></h1>
                                     <p class="mb-4 text-gray-600 dark:text-gray-400"><%=mes %> - <%=gc.AñoCobro %></p>
 
-                                    <p class="mb-4 text-gray-600 dark:text-gray-400">Vence el <%=gc.FechaVencimiento.ToString("dd-MM-yyyy") %></p> 
-                                    
-                                    <a class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center" href="PagarGastoComun.aspx?id=<%=gc.Id %>">Pagar</a>
+                                    <p class="mb-4 text-gray-600 dark:text-gray-400">Vence el <%=gc.FechaVencimiento.ToString("dd-MM-yyyy") %></p>                         
+                                    <a class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center" href="PagarGastoComun.aspx?id=<%=Encrypt(gc.Id.ToString())%>">Pagar</a>
                                     <br />
                                 </div>
                                 <br />
@@ -116,8 +115,8 @@
                             </div>
                             <div class="col-span-2">
                                 <h2 class="my-6 text-lg font-semibold text-gray-700 dark:text-gray-200">Gastos Comunes Por Pagar</h2>
+                                                        
                                 <div class="overflow-x-auto relative shadow-md sm:rounded-lg" aria-labelledby="">
-                                    
                                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                                         <thead class="text-xs text-gray-700 uppercase bg-red-50 dark:bg-red-700 dark:text-gray-300">
                                             <tr>
@@ -166,10 +165,10 @@
                                                 <td class="py-4 px-6">$<%=gcV.TotalPagar.ToString("N0") %>
                                                 </td>
                                                 <td class="py-4 px-6 md:grid-cols-2">
-                                                    <a class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" href="PagarGastoComun.aspx?id=<%=gcV.Id %>">
+                                                    <a class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" href="PagarGastoComun.aspx?id=<%=Encrypt(gcV.Id.ToString())%>">
                                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                                     </a>
-                                                    <a class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800" href="DetalleGastoComun.aspx?id=<%= gcV.Id %>">
+                                                    <a class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800" href="DetalleGastoComun.aspx?id=<%=Encrypt(gcV.Id.ToString())%>">
                                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                                     </a>
                                                 </td>

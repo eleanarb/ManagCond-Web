@@ -8,12 +8,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Model;
 using Dao;
+using System.Security.Cryptography;
+using System.IO;
+using System.Text;
 
 namespace ManagCond.Residente
 {
     public partial class EditarReserva : System.Web.UI.Page
     {
-        private string id;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -21,8 +23,7 @@ namespace ManagCond.Residente
                 LlenarDropDownListDpto();
                 LlenarDropDownListDpto();
                 LlenarDropDownListEspaciComun();
-
-                id = Request.QueryString["id"];
+                string id = Decrypt(HttpUtility.UrlDecode(Request.QueryString["id"]));
                 int idCond = int.Parse(Session["idCond"].ToString());
                 Reserva reserva = ReservaDao.BuscarReserva(int.Parse(id), idCond);
 
@@ -43,9 +44,31 @@ namespace ManagCond.Residente
                 }
             }
         }
+        protected string Decrypt(string cipherText)
+        {
+            string EncryptionKey = "MAKV2SPBNI99212";
+            cipherText = cipherText.Replace(" ", "+");
+            byte[] cipherBytes = Convert.FromBase64String(cipherText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(cipherBytes, 0, cipherBytes.Length);
+                        cs.Close();
+                    }
+                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
+                }
+            }
+            return cipherText;
+        }
         protected void ButtonEditar_Click(object sender, EventArgs e)
         {
-            int id = int.Parse(Request.QueryString["id"]);
+            string id = Decrypt(HttpUtility.UrlDecode(Request.QueryString["id"]));
             int numDpto = int.Parse(DropDownListDpto.SelectedValue);
             DateTime fecha = DateTime.Parse(inputFecha.Value);
             string fecha2 = fecha.ToString("yyyy-MM-dd");
@@ -55,7 +78,7 @@ namespace ManagCond.Residente
             int idCond = int.Parse(Session["idCond"].ToString());
 
 
-            if (ReservaDao.ModificarReservaR(id, numDpto, fecha2, rangoFecha, espacioComun, solicitante, idCond))
+            if (ReservaDao.ModificarReservaR(int.Parse(id), numDpto, fecha2, rangoFecha, espacioComun, solicitante, idCond))
             {
                 Response.Redirect("Reservas.aspx");
             }

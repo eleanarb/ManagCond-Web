@@ -44,8 +44,8 @@
                     <% 
                         int idCondominio = (int)Session["idCond"];
                         Condominio cond = CondominioDao.ObtenerDatosCondominio(idCondominio);
-                        int id = int.Parse(Request.QueryString["id"]);
-                        GastosComunes gc = GastosComunesDao.ObtenerDatosGastoComun(idCondominio, id);
+                        %><% string id = Decrypt(HttpUtility.UrlDecode(Request.QueryString["id"])); %><%
+                        GastosComunes gc = GastosComunesDao.ObtenerDatosGastoComun(idCondominio, int.Parse(id));
                         string mes = "";
                         if( gc.MesCobro == 1){mes = "Enero"; } if( gc.MesCobro == 2){mes = "Febrero"; } if( gc.MesCobro == 3){mes = "Marzo"; } if( gc.MesCobro == 4){mes = "Abril"; } if( gc.MesCobro == 5){mes = "Mayo"; } if( gc.MesCobro == 6){mes = "Junio"; } if( gc.MesCobro == 7){mes = "Julio"; } if( gc.MesCobro == 8){mes = "Agosto"; } if( gc.MesCobro == 9){mes = "Septiembre"; } if( gc.MesCobro == 10){mes = "Octubre"; } if( gc.MesCobro == 11){mes = "Noviembre"; } if( gc.MesCobro == 12){mes = "Diciembre"; }
                     %>

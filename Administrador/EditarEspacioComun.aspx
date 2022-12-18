@@ -187,8 +187,8 @@
                                         idCondominio = (int)Session["idCondominio"];
 
                                         int totalRangoHorario = 0;
-                                        int id = int.Parse(Request.QueryString["id"]);
-                                        totalRangoHorario = EspacioComunDao.ObtenerTotalRangoHorario(id, idCondominio);
+                                        string id = Decrypt(HttpUtility.UrlDecode(Request.QueryString["id"]));
+                                        totalRangoHorario = EspacioComunDao.ObtenerTotalRangoHorario(int.Parse(id), idCondominio);
 
                                         if (totalRangoHorario == 0)
                                         {
@@ -201,7 +201,7 @@
                                         }
                                         else
                                         {
-                                            foreach (RangoHorario obj in EspacioComunDao.GetAlRangoHorario(id, idCondominio))
+                                            foreach (RangoHorario obj in EspacioComunDao.GetAlRangoHorario(int.Parse(id), idCondominio))
                                             {
                                                 string[] rangoHorario = obj.RangoHora.Split('-');
                                                 string horaInicio = rangoHorario[0];

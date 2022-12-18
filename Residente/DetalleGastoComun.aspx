@@ -34,13 +34,13 @@
             <img style="width:100%" src="../assets/img/logo.png" />
         </div>
         <%
-            int id = int.Parse(Request.QueryString["id"]);
+            %><% string id = Decrypt(HttpUtility.UrlDecode(Request.QueryString["id"])); %><%
             int idCondominio = (int)Session["idCond"];
             int idDpto = int.Parse((string)Session["numDpto"]);   
             Usuario usuario = (Usuario)Session["usuario"];
             Condominio cond = CondominioDao.ObtenerDatosCondominio(idCondominio);
             Departamento dpto = DepartamentoDao.ObtenerDatosDepartamento(idDpto);
-            GastosComunes gc = GastosComunesDao.ObtenerDatosGastoComun(idCondominio, id);
+            GastosComunes gc = GastosComunesDao.ObtenerDatosGastoComun(idCondominio, int.Parse(id));
 
             int vMes = gc.MesCobro;
             int vAño = gc.AñoCobro;

@@ -6,20 +6,22 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Model;
 using Dao;
+using System.Security.Cryptography;
+using System.IO;
+using System.Text;
 
 namespace ManagCond.Administrador
 {
     public partial class EditarEspacioComun : System.Web.UI.Page
     {
-        private int id;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                id = int.Parse(Request.QueryString["id"]);
+                string id = Decrypt(HttpUtility.UrlDecode(Request.QueryString["id"]));
                 int idCond = int.Parse(Session["idCondominio"].ToString());
 
-                EspacioComun espacioComun = EspacioComunDao.BuscarEspacioComun(id, idCond);
+                EspacioComun espacioComun = EspacioComunDao.BuscarEspacioComun(int.Parse(id), idCond);
                 TextBoxNombre.Text = espacioComun.Nombre;
                 TextBoxDesc.Text = espacioComun.Descripcion;
                 TextBoxMonto.Text = espacioComun.Monto.ToString();
@@ -37,16 +39,38 @@ namespace ManagCond.Administrador
                 }
             }
         }
+        protected string Decrypt(string cipherText)
+        {
+            string EncryptionKey = "MAKV2SPBNI99212";
+            cipherText = cipherText.Replace(" ", "+");
+            byte[] cipherBytes = Convert.FromBase64String(cipherText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(cipherBytes, 0, cipherBytes.Length);
+                        cs.Close();
+                    }
+                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
+                }
+            }
+            return cipherText;
+        }
         protected void ButtonModificar_Click(object sender, EventArgs e)
         {
-            id = int.Parse(Request.QueryString["id"]);
+            string id = Decrypt(HttpUtility.UrlDecode(Request.QueryString["id"]));
             string nombre = TextBoxNombre.Text;
             string descripcion = TextBoxDesc.Text;
             int monto = int.Parse(TextBoxMonto.Text);
             int idCond = int.Parse(Session["idCondominio"].ToString());
 
 
-            if (EspacioComunDao.ModificarEspacioComun(id, nombre, descripcion, monto, idCond))
+            if (EspacioComunDao.ModificarEspacioComun(int.Parse(id), nombre, descripcion, monto, idCond))
             {
                 Response.Redirect("GestionarEspaciosComunes.aspx");
             }
@@ -57,10 +81,10 @@ namespace ManagCond.Administrador
         }
         protected void ButtonAgregar_Click(object sender, EventArgs e)
         {
-            int idEspacioComun = id = int.Parse(Request.QueryString["id"]);
+            string idEspacioComun =  Decrypt(HttpUtility.UrlDecode(Request.QueryString["id"]));
             string rangoHorario = DropDownListHoraIncio.SelectedValue +"-"+ DropDownListHoraFin.SelectedValue;
 
-            if (EspacioComunDao.AgregarRangoHorario(idEspacioComun, rangoHorario))
+            if (EspacioComunDao.AgregarRangoHorario(int.Parse(idEspacioComun), rangoHorario))
             {
                 Response.Redirect("EditarEspacioComun.aspx?id="+ idEspacioComun + "");
             }

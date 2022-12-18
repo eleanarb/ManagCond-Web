@@ -6,6 +6,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Model;
 using Dao;
+using System.Security.Cryptography;
+using System.IO;
+using System.Text;
 
 namespace ManagCond.Residente
 {
@@ -25,10 +28,32 @@ namespace ManagCond.Residente
                 }
             }
         }
+        protected string Decrypt(string cipherText)
+        {
+            string EncryptionKey = "MAKV2SPBNI99212";
+            cipherText = cipherText.Replace(" ", "+");
+            byte[] cipherBytes = Convert.FromBase64String(cipherText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(cipherBytes, 0, cipherBytes.Length);
+                        cs.Close();
+                    }
+                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
+                }
+            }
+            return cipherText;
+        }
 
         protected void ButtonAgregar_Click(object sender, EventArgs e)
         {
-            int idForo = int.Parse(Request.QueryString["id"]);
+            string idForo = Decrypt(HttpUtility.UrlDecode(Request.QueryString["id"]));
 
             Usuario usuario = new Usuario();
             usuario = (Usuario)Session["usuario"];
@@ -37,7 +62,7 @@ namespace ManagCond.Residente
             string mensaje = TextBoxMensaje.Value;
             string imagen = "";
 
-            if (ForoDao.AgregarRespuestaForo(idForo, mensaje, rut, imagen))
+            if (ForoDao.AgregarRespuestaForo(int.Parse(idForo), mensaje, rut, imagen))
             {
                 Response.Redirect("publicacionForo.aspx?id=" + idForo);
             }

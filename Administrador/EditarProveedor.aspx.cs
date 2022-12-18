@@ -8,20 +8,22 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Model;
+using System.Security.Cryptography;
+using System.IO;
+using System.Text;
 
 namespace ManagCond.Administrador
 {
     public partial class EditarProveedor : System.Web.UI.Page
     {
-        private int id;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 LlenarDropDownRegion();
 
-                id = int.Parse(Request.QueryString["id"]);
-                Proveedor proveedor = ProveedorDao.ObtenerDatosProveedor(id);
+                string id = Decrypt(HttpUtility.UrlDecode(Request.QueryString["id"]));
+                Proveedor proveedor = ProveedorDao.ObtenerDatosProveedor(int.Parse(id));
 
                 TextBoxNombre.Value = proveedor.Nombre;
                 TextBoxTelefono.Value = proveedor.Telefono;
@@ -51,13 +53,33 @@ namespace ManagCond.Administrador
                 }
             }
         }
-
-
+        protected string Decrypt(string cipherText)
+        {
+            string EncryptionKey = "MAKV2SPBNI99212";
+            cipherText = cipherText.Replace(" ", "+");
+            byte[] cipherBytes = Convert.FromBase64String(cipherText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(cipherBytes, 0, cipherBytes.Length);
+                        cs.Close();
+                    }
+                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
+                }
+            }
+            return cipherText;
+        }
         protected void ButtonModificar_Click(object sender, EventArgs e)
         {
-            int id = int.Parse(Request.QueryString["id"]); 
-            int idPago = int.Parse(Request.QueryString["idPago"]);
-            int idDireccion = int.Parse(Request.QueryString["idDireccion"]);
+            string id = Decrypt(HttpUtility.UrlDecode(Request.QueryString["id"]));
+            string idPago = Decrypt(HttpUtility.UrlDecode(Request.QueryString["idPago"]));
+            string idDireccion = Decrypt(HttpUtility.UrlDecode(Request.QueryString["idDireccion"]));
             
             string nombre = TextBoxNombre.Value;
             string telefono = TextBoxTelefono.Value;
@@ -71,7 +93,7 @@ namespace ManagCond.Administrador
             string tipoPago = DropDownListPago.SelectedValue;
             string numCuenta = TextBoxNumero.Value;
 
-            if (ProveedorDao.ModificarProveedor(id, nombre, telefono, correo, direccion, idDireccion, idComuna, idPago, nombrePago, rut, banco, tipoCuenta, tipoPago, numCuenta))
+            if (ProveedorDao.ModificarProveedor(int.Parse(id), nombre, telefono, correo, direccion, int.Parse(idDireccion), idComuna, int.Parse(idPago), nombrePago, rut, banco, tipoCuenta, tipoPago, numCuenta))
             {
                 Response.Redirect("GestionProveedores.aspx");
             }

@@ -14,12 +14,13 @@ using Microsoft.WindowsAzure.Storage;
 using System.Configuration;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace ManagCond.Guardia
 {
     public partial class EditarEncomienda : System.Web.UI.Page
     {
-        private String id;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -27,7 +28,7 @@ namespace ManagCond.Guardia
                 LlenarDropDownList();
                 LlenarDropDownListEstado();
 
-                id = Request.QueryString["id"];
+                string id = Decrypt(HttpUtility.UrlDecode(Request.QueryString["id"]));
                 int idCond = int.Parse(Session["idCond"].ToString());
                 Encomienda encomienda = EncomiendaDao.BuscarEncomienda(int.Parse(id), idCond);
                 int index = 0;
@@ -54,9 +55,31 @@ namespace ManagCond.Guardia
                 }
             }
         }
+        protected string Decrypt(string cipherText)
+        {
+            string EncryptionKey = "MAKV2SPBNI99212";
+            cipherText = cipherText.Replace(" ", "+");
+            byte[] cipherBytes = Convert.FromBase64String(cipherText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(cipherBytes, 0, cipherBytes.Length);
+                        cs.Close();
+                    }
+                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
+                }
+            }
+            return cipherText;
+        }
         protected void ButtonAceptar_Click(object sender, EventArgs e)
         {
-            string idE = Request.QueryString["id"];
+            string idE = Decrypt(HttpUtility.UrlDecode(Request.QueryString["id"]));
             int idCond = int.Parse(Session["idCond"].ToString());
             String numDpto = DropDownList.SelectedValue;
             String destinatario = TextBoxDestinatario.Text;
@@ -88,7 +111,7 @@ namespace ManagCond.Guardia
             }
             if (FileUploadEncomienda.Value == "")
             {
-                string idF = Request.QueryString["id"];
+                string idF = Decrypt(HttpUtility.UrlDecode(Request.QueryString["id"]));
                 int idCondF = int.Parse(Session["idCond"].ToString());
                 Encomienda encomienda = EncomiendaDao.BuscarEncomienda(int.Parse(idF), idCondF);
                 fileNameBD = encomienda.Imagen;

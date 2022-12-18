@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -51,12 +52,17 @@ namespace ManagCond.Administrador
             int año = int.Parse(DateTime.Now.ToString("yyyy"));
             int idCond = int.Parse(Session["idCondominio"].ToString());
 
+            int mesN = int.Parse(DateTime.Now.ToString("MM")) -1;
+
+            DateTimeFormatInfo formatoFecha = CultureInfo.CurrentCulture.DateTimeFormat;
+            string nombreMes = formatoFecha.GetMonthName(mesN);
+
             if (GastosComunesDao.GenerarGastoComun(mes, año, idCond))
             {
 
                 foreach (Model.Residente residente in ResidenteDao.GetAlObtenerDatosResidente(idCond))
                 {
-                    Notificacion(residente.CorreoResidente);
+                    Notificacion(residente.CorreoResidente, residente.NombresResidente,nombreMes, año);
                 }
                 Response.Redirect("GastosComunes.aspx");
             }
@@ -65,33 +71,15 @@ namespace ManagCond.Administrador
                 Response.Redirect("GastosComune.aspx");
             }
         }
-
-        protected void ButtonGenerarPdf_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("DetalleGastoComun.aspx");
-
-        }
-        protected void Notificacion(string EmailDestino)
+        protected void Notificacion(string EmailDestino, string nombre,string mes, int año)
         {
             string EmailOrigen = "managcond@outlook.com";
             string Contraseña = "Trompeta45@";
-            string body = @"<h2>Se restableció la contraseña de su cuenta registrada en ManagCond </h2>
 
-                            <p>Estimado/a, Fulano:</p>
+            string fecha = DateTime.Now.ToString("dd MMMM yyyy");
+            string link = string.Format("https://managcond.azurewebsites.net/Residente/Visitas.aspx");
 
-                            <p> El 27 de noviembre se restableció la contraseña de su cuenta registrada en ManagCond </p>
-                            <p> Si no realizaste esta modificación o si cree que alguien ha accedido a su cuenta sin autorización, visita wwww.hola.com para restablecer su contraseña inmediatamente </p>
-
-                            <p> Si necesita ayuda adicional, comunícate con Soporte técnico de ManagCond.</p>
-
-                            <p>Atentamente,</p>
-                            <p>Soporte técnico de ManagCond</p>
-
-                            <br>
-
-                            <div style='text - align: center;'>
-                            <img style = 'width: 100px' src = '..\assets\img\logo.png' />
-                            </div> ";
+            string body = @"<h2>Gastos Comunes</h2><p>Estimado/a,  " + nombre + ":</p><p> Hoy " + fecha + " se acaba de emitir el gasto común del periodo correspondiente a "+mes+" "+ año + "</p><p> Atentamente,</p><p> Administración </p><br><div style = 'text-align: center;'><img style='width: 100px' src = 'https://managcondstorage.blob.core.windows.net/fotos/2022/11/3/logo.png?sp=r&st=2022-10-29T04:27:40Z&se=2023-01-31T12:27:40Z&spr=https&sv=2021-06-08&sr=c&sig=D9P23%2FM2m24SojVnKloNP3KCNGM5j%2B1NiTTVZqsHd6I%3D' /> </div> ";
 
             SmtpClient oSmtpCliente = new SmtpClient("smtp.office365.com")
             {

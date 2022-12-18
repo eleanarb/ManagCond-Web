@@ -29,8 +29,9 @@
             <main class="h-full pb-16 overflow-y-auto">
                 <div class="container grid px-6 mx-auto">
                     <% 
-                        int idForo = int.Parse(Request.QueryString["id"]);
-                        Foro foro = ForoDao.ObtenerDatosPublicacion(idForo);
+                        
+                        %><% string idForo = Decrypt(HttpUtility.UrlDecode(Request.QueryString["id"])); %><%
+                        Foro foro = ForoDao.ObtenerDatosPublicacion(int.Parse(idForo));
                         string fechaF = foro.Fecha.ToString("ddd dd  MMMM  yyyy");
                         string horaF = foro.Hora.ToString("hh':'mm''");
                     %>
@@ -120,7 +121,7 @@
                         <div class="p-5 bg-gray-50 rounded-lg border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
                             <time class="text-lg font-semibold text-gray-900 dark:text-white">Comentarios</time>
                             <% 
-                                int respuestas = ForoDao.ObtenerTotalRespuestas(idForo);
+                                int respuestas = ForoDao.ObtenerTotalRespuestas(int.Parse(idForo));
                                 if (respuestas == 0)
                                 {
                             %>
@@ -134,7 +135,7 @@
                                 { %>
                             <ol class="mt-3 divide-y divider-gray-200 dark:divide-gray-700">
                                 <%
-                                    foreach (RespuestaForo obj in ForoDao.GetAlRespuestasForo(idForo))
+                                    foreach (RespuestaForo obj in ForoDao.GetAlRespuestasForo(int.Parse(idForo)))
                                     {
                                         string fechaR = obj.Fecha.ToString("ddd dd  MMMM  yyyy");
                                         string horaR = obj.Hora.ToString("hh':'mm''");
