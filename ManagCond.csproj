@@ -228,6 +228,7 @@
     <Content Include="Residente\Template\HeaderResidente.html" />
     <Content Include="Residente\Visitas.aspx" />
     <Content Include="Administrador\Template\HeaderAdministrador.html" />
+    <Content Include="Terminos.aspx" />
     <Content Include="Web.config" />
     <Content Include="WebFormError.aspx" />
   </ItemGroup>
@@ -666,6 +667,13 @@
     </Compile>
     <Compile Include="Residente\Visitas.aspx.designer.cs">
       <DependentUpon>Visitas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Terminos.aspx.cs">
+      <DependentUpon>Terminos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Terminos.aspx.designer.cs">
+      <DependentUpon>Terminos.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebFormError.aspx.cs">
       <DependentUpon>WebFormError.aspx</DependentUpon>
