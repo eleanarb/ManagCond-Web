@@ -8,6 +8,9 @@ using Model;
 using Dao;
 using System.Net.Mail;
 using System.Net;
+using System.Security.Cryptography;
+using System.IO;
+using System.Text;
 
 namespace ManagCond.Administrador
 {
@@ -106,14 +109,36 @@ namespace ManagCond.Administrador
 
 
         }
+        protected string Encrypt(string clearText)
+        {
+            string EncryptionKey = "MAKV2SPBNI99212";
+            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(clearBytes, 0, clearBytes.Length);
+                        cs.Close();
+                    }
+                    clearText = Convert.ToBase64String(ms.ToArray());
+                }
+            }
+            return clearText;
+        }
+
         protected void ButtonClave_Click(object sender, EventArgs e)
         {
             Usuario usuario = new Usuario();
             usuario = (Usuario)Session["usuario"];
             string rut = usuario.Rut;
             string clave1 = TextBoxClave1.Value;
-            string clave2 = TextBoxClave2.Value;
-            string clave3 = TextBoxClave3.Value;
+            string clave2 = Encrypt(TextBoxClave2.Value);
+            string clave3 = Encrypt(TextBoxClave3.Value);
 
             int resul = 0;
             resul = UsuarioDao.VerificarClave(rut, clave1);
