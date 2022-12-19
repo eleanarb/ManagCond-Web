@@ -11,7 +11,7 @@ namespace Dao
     {
         public string Conectar()
         {
-            return "Server=tcp:managcondserver.database.windows.net,1433;Initial Catalog=managcond;Persist Security Info=False;User ID=Pegazus;Password=Bala7821@#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            return "Server=tcp:servermagcond.database.windows.net,1433;Initial Catalog=ManagCond;Persist Security Info=False;User ID=Pegazus;Password=Bala7821@#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         }
         public static SqlConnection Open()
         {
