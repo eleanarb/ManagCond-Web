@@ -129,10 +129,9 @@ namespace ManagCond.Guardia
         {
             Usuario usuario = (Usuario)Session["usuario"];
             string rut = usuario.Rut;
-            string clave1 = TextBoxClave1.Value;
+            string clave1 = Encrypt(TextBoxClave1.Value).Substring(0, 20);
             string clave2 = Encrypt(TextBoxClave2.Value);
             string clave3 = Encrypt(TextBoxClave3.Value);
-            Console.WriteLine(clave3);
 
             int resul = 0;
             resul = UsuarioDao.VerificarClave(rut, clave1);

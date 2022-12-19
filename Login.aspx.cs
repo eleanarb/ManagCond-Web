@@ -66,7 +66,7 @@ namespace ManagCond
         {
 
             String correo = TextBoxUsuario.Text;
-            String clave = TextBoxClave.Text;
+            String clave = Encrypt(TextBoxClave.Text).Substring(0, 20);
 
 
             Usuario usuario = UsuarioDao.Login(correo, clave);
