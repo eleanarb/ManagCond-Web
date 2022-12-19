@@ -145,13 +145,13 @@ namespace ManagCond
         }
         protected void Notificacion(string emailDestino, string nombre, string destinatario)
         {
-            string EmailOrigen = "managcond@outlook.com";
+            string EmailOrigen = "managcond2@hotmail.com";
             string Contraseña = "Trompeta45@";
             string fecha = DateTime.Now.ToString("dd MMMM yyyy");
 
             string link = string.Format("https://managcond.azurewebsites.net/Residente/Visitas.aspx");
 
-            string body = @"<h2>Encomienda</h2><p>Estimado/a,  " + nombre + ":</p><p> Hoy " + fecha + " Ha recibido una encomienda a nombre de "+ destinatario + " para obtener mas informacion ingrese al apartado de encomiendas de la pagina de managcond </p><a href=" + link + ">Mas Info</a><p> Atentamente,</p><p> Administración </p><br><div style = 'text-align: center;'><img style='width: 100px' src = 'https://managcondstorage.blob.core.windows.net/fotos/2022/11/3/logo.png?sp=r&st=2022-10-29T04:27:40Z&se=2023-01-31T12:27:40Z&spr=https&sv=2021-06-08&sr=c&sig=D9P23%2FM2m24SojVnKloNP3KCNGM5j%2B1NiTTVZqsHd6I%3D' /> </div> ";
+            string body = @"<h2>Encomienda</h2><p>Estimado/a,  " + nombre + ":</p><p> Hoy " + fecha + " Ha recibido una encomienda a nombre de "+ destinatario + " para obtener mas informacion ingrese al apartado de encomiendas de la pagina de managcond </p><a href=" + link + ">Mas Info</a><p> Atentamente,</p><p> Administración </p><br><div style = 'text-align: center;'><img style='width: 100px' src = 'https://managcondstorages.blob.core.windows.net/fotos/2022/12/1/logo.png?sp=r&st=2022-12-19T04:30:41Z&se=2023-03-16T12:30:41Z&spr=https&sv=2021-06-08&sr=c&sig=XBx4%2BRHL6Cu9RJzFZjQo%2BhaUYsaFImM8y00Uv9npTqg%3D' /> </div> ";
 
             SmtpClient oSmtpCliente = new SmtpClient("smtp.office365.com")
             {

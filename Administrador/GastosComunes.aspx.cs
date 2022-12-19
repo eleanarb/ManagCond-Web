@@ -73,13 +73,13 @@ namespace ManagCond.Administrador
         }
         protected void Notificacion(string EmailDestino, string nombre,string mes, int año)
         {
-            string EmailOrigen = "managcond@outlook.com";
+            string EmailOrigen = "managcond2@hotmail.com";
             string Contraseña = "Trompeta45@";
 
             string fecha = DateTime.Now.ToString("dd MMMM yyyy");
             string link = string.Format("https://managcond.azurewebsites.net/Residente/Visitas.aspx");
 
-            string body = @"<h2>Gastos Comunes</h2><p>Estimado/a,  " + nombre + ":</p><p> Hoy " + fecha + " se acaba de emitir el gasto común del periodo correspondiente a "+mes+" "+ año + "</p><p> Atentamente,</p><p> Administración </p><br><div style = 'text-align: center;'><img style='width: 100px' src = 'https://managcondstorage.blob.core.windows.net/fotos/2022/11/3/logo.png?sp=r&st=2022-10-29T04:27:40Z&se=2023-01-31T12:27:40Z&spr=https&sv=2021-06-08&sr=c&sig=D9P23%2FM2m24SojVnKloNP3KCNGM5j%2B1NiTTVZqsHd6I%3D' /> </div> ";
+            string body = @"<h2>Gastos Comunes</h2><p>Estimado/a,  " + nombre + ":</p><p> Hoy " + fecha + " se acaba de emitir el gasto común del periodo correspondiente a "+mes+" "+ año + "</p><p> Atentamente,</p><p> Administración </p><br><div style = 'text-align: center;'><img style='width: 100px' src = 'https://managcondstorages.blob.core.windows.net/fotos/2022/12/1/logo.png?sp=r&st=2022-12-19T04:30:41Z&se=2023-03-16T12:30:41Z&spr=https&sv=2021-06-08&sr=c&sig=XBx4%2BRHL6Cu9RJzFZjQo%2BhaUYsaFImM8y00Uv9npTqg%3D' /> </div> ";
 
             SmtpClient oSmtpCliente = new SmtpClient("smtp.office365.com")
             {

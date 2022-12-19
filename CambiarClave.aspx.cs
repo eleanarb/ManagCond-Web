@@ -138,12 +138,12 @@ namespace ManagCond
 
         protected void Notificacion(string EmailDestino, string nombre)
         {
-            string EmailOrigen = "managcond@outlook.com";
+            string EmailOrigen = "managcond2@hotmail.com";
             string Contraseña = "Trompeta45@";
             string fecha = DateTime.Now.ToString("dd MMMM");
 
             string body = @"<h2>Se restableció la contraseña de su cuenta registrada en ManagCond </h2>
-                            <p>Estimado/a, " + nombre + ":</p><p> El " + fecha + " se restableció la contraseña de su cuenta registrada en ManagCond </p><p> Si no realizaste esta modificación o si cree que alguien ha accedido a su cuenta sin autorización, visita <a href='https://managcond.azurewebsites.net/CambiarClave.aspx?correo=" + EmailDestino + "'> ManagCond </a> para restablecer su contraseña inmediatamente </p><p> Si necesita ayuda adicional, comunícate con Soporte técnico de ManagCond.</p><p>Atentamente,</p><p>Soporte técnico de ManagCond</p><br><div style='text-align: center;'><img style = 'width: 100px' src ='https://managcondstorage.blob.core.windows.net/fotos/2022/11/3/logo.png?sp=r&st=2022-10-29T04:27:40Z&se=2023-01-31T12:27:40Z&spr=https&sv=2021-06-08&sr=c&sig=D9P23%2FM2m24SojVnKloNP3KCNGM5j%2B1NiTTVZqsHd6I%3D' /></div> ";
+                            <p>Estimado/a, " + nombre + ":</p><p> El " + fecha + " se restableció la contraseña de su cuenta registrada en ManagCond </p><p> Si no realizaste esta modificación o si cree que alguien ha accedido a su cuenta sin autorización, visita <a href='https://managcondstorages.blob.core.windows.net/fotos/2022/12/1/logo.png?sp=r&st=2022-12-19T04:30:41Z&se=2023-03-16T12:30:41Z&spr=https&sv=2021-06-08&sr=c&sig=XBx4%2BRHL6Cu9RJzFZjQo%2BhaUYsaFImM8y00Uv9npTqg%3D' /></div> ";
 
             SmtpClient oSmtpCliente = new SmtpClient("smtp.office365.com")
             {
