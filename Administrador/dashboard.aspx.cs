@@ -33,7 +33,7 @@ namespace ManagCond
             int añoActual = fechaActual.Year;
             int idCond = int.Parse(Session["idCondominio"].ToString());
 
-            SqlConnection conexionSQL = new SqlConnection("Server=tcp:managcondserver.database.windows.net,1433;Initial Catalog=managcond;Persist Security Info=False;User ID=Pegazus;Password=Bala7821@#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            SqlConnection conexionSQL = new SqlConnection("Server=tcp:servermagcond.database.windows.net,1433;Initial Catalog=ManagCond;Persist Security Info=False;User ID=Pegazus;Password=Bala7821@#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = "EXEC sp_obtener_total_gastos @idCond = " + idCond + ", @mes = " + mesActual + ", @año = " + añoActual + " ";
@@ -74,7 +74,7 @@ namespace ManagCond
 
             int idCond = int.Parse(Session["idCondominio"].ToString());
 
-            SqlConnection conexionSQL = new SqlConnection("Server=tcp:managcondserver.database.windows.net,1433;Initial Catalog=managcond;Persist Security Info=False;User ID=Pegazus;Password=Bala7821@#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            SqlConnection conexionSQL = new SqlConnection("Server=tcp:servermagcond.database.windows.net,1433;Initial Catalog=ManagCond;Persist Security Info=False;User ID=Pegazus;Password=Bala7821@#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = "EXEC sp_obtener_todos_balance @idCond = " + idCond + " ";
