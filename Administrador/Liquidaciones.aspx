@@ -105,7 +105,6 @@
                                         <th scope="col" class="py-3 px-6">Dias No Trabajados</th>
                                         <th scope="col" class="py-3 px-6">Descuentos Dias No Trabajados</th>
                                         <th scope="col" class="py-3 px-6">Saldo Liquido</th>
-                                        <th scope="col" class="py-3 px-6">Acciones</th>
                                     </tr>
                                 </thead>
 
@@ -158,10 +157,6 @@
                                         <td class="py-4 px-6">$<%=obj.DiasNoTrabajados.ToString("N0")%></td>
                                         <td class="py-4 px-6">$<%=obj.DescuentosDiasNoTrabajados.ToString("N0")%></td>
                                         <td class="py-4 px-6">$<%=obj.SaldoLiquido.ToString("N0")%></td>
-                                        <td class="py-4 px-6">
-                                            <button type="button" data-id="<%=obj.Id %>" @click="openModal" class="btnEditar block w-full px-4 py-2 mt-4 text-sm text-center font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">Editar</button>
-                                            <a href="EliminarIngreso.aspx?id=<%=obj.Id %>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Elimnar</a>
-                                        </td>
                                     </tr>
                                     <%}
                                         }%>
